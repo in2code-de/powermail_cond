@@ -40,28 +40,57 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @return	void
 	 */
 	public function getFieldname(&$params, $pObj) {
-		$where = '1 AND pid = ' . intval($params['row']['pid']) . ' AND hidden = 0 AND deleted = 0';
-		$where = '';
-		if (isset($params['config']['itemsProcFuncValue'])) { // additional where clause
-			$where = 'formtype IN (' . $params['config']['itemsProcFuncValue'] . ')';
-		}
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$select = 'uid, title',
-			$from = 'tx_powermail_domain_model_fields',
-			$where,
-			$groupBy = '',
-			$orderBy = 'sorting',
-			$limit = ''
-		);
-		if ($res) {
-			$params['items'][] = array('powermail Fields', '--div--');
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-				$params['items'][] = array($pObj->sL($row['title']) . ' (' . $row['uid'] . ')', $row['uid']);
-			}
+		// settings
+		$formUid = intval($params['row']['form']);
+		if (!empty($params['row']['conditions'])) {
+			$formUid = $this->getFormUidFromCondition($params['row']['conditions']);
 		}
 
-		if (isset($params['config']['itemsProcFunc_addFieldsets'])) { // add fieldsets to selection
-			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($params['row']['pid'])); // add some fieldsets
+		// query
+		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title, tx_powermail_domain_model_fields.marker';
+		$from = '
+			tx_powermail_domain_model_fields
+			left join tx_powermail_domain_model_pages on tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
+			left join tx_powermail_domain_model_forms on tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
+		';
+		$where = 'tx_powermail_domain_model_fields.hidden = 0 AND tx_powermail_domain_model_fields.deleted = 0';
+		if ($formUid > 0) {
+			$where .= ' AND tx_powermail_domain_model_forms.uid = ' . $formUid;
+		}
+		$groupBy = '';
+		$orderBy = 'tx_powermail_domain_model_fields.sorting';
+		$limit = 10000;
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			// Title for optgroup
+			$params['items'][] = array('powermail Fields', '--div--');
+
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+				$params['items'][] = array(
+					$pObj->sL($row['title']) . ', {' . $row['marker'] . '}, uid' . $row['uid'],
+					$row['uid']
+				);
+			}
+		}
+	}
+
+	/**
+	 * Get Form Uid from Rule
+	 *
+	 * @param int $conditionUid
+	 * @return int formUid
+	 */
+	private function getFormUidFromCondition($conditionUid) {
+		$select = 'form';
+		$from = 'tx_powermailcond_domain_model_condition';
+		$where = 'uid = ' . intval($conditionUid) . ' AND hidden = 0 AND deleted = 0';
+		$groupBy = '';
+		$orderBy = '';
+		$limit = 1;
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+			return $row['form'];
 		}
 	}
 
@@ -103,7 +132,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @param	integer	$pid: Page ID
 	 * @return	array	$arr: all fieldsets with its name and the fieldset uid
 	 */
-	public function getFieldsets($pid) {
+	public function oldGetFieldsets($pid) {
 		$arr = array();
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			$select = 'uid, title',
@@ -129,7 +158,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @param	object	$pObj: Parent Object
 	 * @return	void
 	 */
-	public function valuesFromPowermailSelectbox(&$params, $pObj) {
+	public function oldValuesFromPowermailSelectbox(&$params, $pObj) {
 		// Get targetField UID
 		$gParams = t3lib_div::_GET('edit');
 		$gParams2 = $gParams['tx_powermailcond_conditions'];

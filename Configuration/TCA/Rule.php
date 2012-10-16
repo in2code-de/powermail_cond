@@ -40,7 +40,7 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 				'items' => Array (
 					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.startField.I.0', '0'),
 				),
-				'itemsProcFunc' => 'tx_powermailcond_fields_be->fieldname',
+				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->getFieldname',
 				'itemsProcFuncValue' => '"text","textarea","select","radio","check"', // allow only this types of fields in selector
 				'size' => 1,
 				'maxitems' => 1,

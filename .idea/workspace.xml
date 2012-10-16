@@ -2,27 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\Configuration\TCA\Conditions.php" afterPath="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\Configuration\TCA\Rules.php" afterPath="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files\js\powermail_cond.js" afterPath="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files\static\constants.txt" afterPath="$PROJECT_DIR$/oldFiles/static/constants.txt" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files\static\setup.txt" afterPath="$PROJECT_DIR$/oldFiles/static/setup.txt" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib\class.tx_powermailcond_ajaxFieldList_eid.php" afterPath="$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib\class.tx_powermailcond_ajaxWriteInSession_eid.php" afterPath="$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxWriteInSession_eid.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib\class.tx_powermailcond_div.php" afterPath="$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib\class.tx_powermailcond_fields_be.php" afterPath="$PROJECT_DIR$/oldLib/class.tx_powermailcond_fields_be.php" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib\class.tx_powermailcond_pidContainer.php" afterPath="$PROJECT_DIR$/oldLib/class.tx_powermailcond_pidContainer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" afterPath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Private/Language/locallang_db.xml" afterPath="$PROJECT_DIR$/Resources/Private/Language/locallang_db.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_tables.php" afterPath="$PROJECT_DIR$/ext_tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_tables.sql" afterPath="$PROJECT_DIR$/ext_tables.sql" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\doc\manual.sxw" afterPath="$PROJECT_DIR$/oldDoc/manual.sxw" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\doc" afterPath="$PROJECT_DIR$/oldDoc" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files\js" afterPath="$PROJECT_DIR$/oldFiles/js" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files\static" afterPath="$PROJECT_DIR$/oldFiles/static" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\files" afterPath="$PROJECT_DIR$/oldFiles" />
-      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\lib" afterPath="$PROJECT_DIR$/oldLib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Configuration/TCA/Rule.php" afterPath="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +25,37 @@
     <favorites_list name="powermail_cond@powermailt347.in2code.de" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="FieldlistingBackend.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.70614034">
+              <folding>
+                <element signature="e#987#1189#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ext_tables.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ext_tables.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rule.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="-18.307692">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -61,12 +73,12 @@
         <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Rules.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Conditions.php" />
-        <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
-        <option value="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
         <option value="$PROJECT_DIR$/ext_tables.sql" />
         <option value="$PROJECT_DIR$/ext_tables.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
         <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_db.xml" />
+        <option value="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
       </list>
     </option>
   </component>
@@ -141,65 +153,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Private" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Private" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Language" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Configuration" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="TCA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utility" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -384,12 +360,16 @@
       <created>1350398340012</created>
       <updated>1350398340012</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Working Copy">
+      <created>1350401058102</created>
+      <updated>1350401058102</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-262" width="1936" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -402,7 +382,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20917822" sideWeight="0.67082036" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20917822" sideWeight="0.67082036" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -505,33 +485,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="18" selection-start="1538" selection-end="1538" vertical-scroll-proportion="0.39144737">
-          <folding>
-            <element signature="n#getFieldsets#0;n#Tx_PowermailCond_Utility_FieldlistingBackend#0;n#!!top" expanded="false" />
-            <element signature="n#valuesFromPowermailSelectbox#0;n#Tx_PowermailCond_Utility_FieldlistingBackend#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/ext_tables.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="61" selection-start="2799" selection-end="2831" vertical-scroll-proportion="0.5618337">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/SVN/powermail@forge/Configuration/TCA/Answers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ext_tables.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="8" selection-start="850" selection-end="850" vertical-scroll-proportion="0.45309168">
           <folding />
         </state>
       </provider>
@@ -571,17 +527,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="-0.0567297">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Configuration/TCA/Condition.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="100" column="139" selection-start="3240" selection-end="3240" vertical-scroll-proportion="0.6429366">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/SVN/powermail@forge/ext_tables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="44" selection-start="79" selection-end="110" vertical-scroll-proportion="-0.054371003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="-18.307692">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_tables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.70614034">
+          <folding>
+            <element signature="e#987#1189#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
