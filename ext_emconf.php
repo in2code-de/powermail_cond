@@ -12,10 +12,10 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Powermail Conditions',
-	'description' => 'Add conditions via AJAX to powermail forms (fields and fieldsets). This extension uses jQuery.',
+	'description' => 'Add conditions via AJAX to powermail 2.x forms (fields and fieldsets). This extension uses jQuery as JavaScript Library.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '1.0.2',
+	'version' => '2.0.0alpha',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
