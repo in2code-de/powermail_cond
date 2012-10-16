@@ -8,6 +8,8 @@
 		<languageKey index="default" type="array">
 			<label index="tx_powermailcond_conditions">Conditions</label>
 			<label index="tx_powermailcond_conditions.title">Title</label>
+			<label index="tx_powermailcond_conditions.form">Form</label>
+			<label index="tx_powermailcond_conditions.form.pleaseChoose">Please choose...</label>
 			<label index="tx_powermailcond_conditions.targetField">Which field is affected (target field)?</label>
 			<label index="tx_powermailcond_conditions.targetField.I.0">Please choose...</label>
 			<label index="tx_powermailcond_conditions.action">What should happen to the chosen field?</label>
@@ -46,6 +48,8 @@
 		<languageKey index="de" type="array">
 			<label index="tx_powermailcond_conditions">Bedingungen</label>
 			<label index="tx_powermailcond_conditions.title">Bezeichnung</label>
+			<label index="tx_powermailcond_conditions.form">Formular</label>
+			<label index="tx_powermailcond_conditions.form.pleaseChoose">Bitte wählen...</label>
 			<label index="tx_powermailcond_conditions.targetField">Welches Feld ist betroffen (Zielfeld)?</label>
 			<label index="tx_powermailcond_conditions.targetField.I.0">Bitte wählen...</label>
 			<label index="tx_powermailcond_conditions.action">Was soll mit dem gewählten Feld passieren?</label>

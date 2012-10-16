@@ -3,8 +3,8 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_powermailcond_rules'] = array (
-	'ctrl' => $TCA['tx_powermailcond_rules']['ctrl'],
+$TCA['tx_powermailcond_domain_model_rule'] = array (
+	'ctrl' => $TCA['tx_powermailcond_domain_model_rule']['ctrl'],
 	'interface' => array (
 		'showRecordFieldList' => 'hidden,startField,ops,condstring,equalField'
 	),
@@ -15,7 +15,6 @@ $TCA['tx_powermailcond_rules'] = array (
 		'1' => array('showitem' => 'title, hidden'),
 		'2' => array('showitem' => 'ops,condstring,equalField')
 	),
-	'feInterface' => $TCA['tx_powermailcond_rules']['feInterface'],
 	'columns' => array (
 		'hidden' => array (
 			'exclude' => 1,

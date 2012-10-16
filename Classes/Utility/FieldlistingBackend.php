@@ -39,7 +39,40 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @param	object	$pObj: Parent Object
 	 * @return	void
 	 */
-	public function fieldname(&$params, $pObj) {
+	public function getFieldname(&$params, $pObj) {
+		$where = '1 AND pid = ' . intval($params['row']['pid']) . ' AND hidden = 0 AND deleted = 0';
+		$where = '';
+		if (isset($params['config']['itemsProcFuncValue'])) { // additional where clause
+			$where = 'formtype IN (' . $params['config']['itemsProcFuncValue'] . ')';
+		}
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			$select = 'uid, title',
+			$from = 'tx_powermail_domain_model_fields',
+			$where,
+			$groupBy = '',
+			$orderBy = 'sorting',
+			$limit = ''
+		);
+		if ($res) {
+			$params['items'][] = array('powermail Fields', '--div--');
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+				$params['items'][] = array($pObj->sL($row['title']) . ' (' . $row['uid'] . ')', $row['uid']);
+			}
+		}
+
+		if (isset($params['config']['itemsProcFunc_addFieldsets'])) { // add fieldsets to selection
+			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($params['row']['pid'])); // add some fieldsets
+		}
+	}
+
+	/**
+	 * show all fields in the backend
+	 *
+	 * @param	array	$params: Params
+	 * @param	object	$pObj: Parent Object
+	 * @return	void
+	 */
+	public function oldFieldname(&$params, $pObj) {
 		$where = '1';
 		if (isset($params['config']['itemsProcFuncValue'])) { // additional where clause
 			$where = 'formtype IN (' . $params['config']['itemsProcFuncValue'] . ')';

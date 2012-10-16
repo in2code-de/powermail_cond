@@ -3,19 +3,19 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_powermailcond_conditions'] = array (
-	'ctrl' => $TCA['tx_powermailcond_conditions']['ctrl'],
+$TCA['tx_powermailcond_domain_model_condition'] = array (
+	'ctrl' => $TCA['tx_powermailcond_domain_model_condition']['ctrl'],
 	'interface' => array (
-		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,title,targetField,actions,filterSelectField,rules,conjunction'
+		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,title,targetField,actions,filterSelectField,rules,conjunction,form'
 	),
 	'types' => array (
-		'0' => array('showitem' => '--palette--;;1, targetField, --palette--;;2, rules, conjunction, sys_language_uid, l18n_parent, l18n_diffsource')
+		'1' => array('showitem' => '--palette--;x;1, form, targetField, --palette--;x;2, rules, conjunction')
 	),
 	'palettes' => array (
-		'1' => array('showitem' => 'title, starttime, endtime, hidden'),
-		'2' => array('showitem' => 'actions, filterSelectField')
+		'1' => array('showitem' => 'title, hidden'),
+		'2' => array('showitem' => 'actions, filterSelectField'),
+		'canNotCollapse' => '1'
 	),
-	'feInterface' => $TCA['tx_powermailcond_conditions']['feInterface'],
 	'columns' => array (
 		'sys_language_uid' => array (
 			'exclude' => 1,
@@ -92,6 +92,22 @@ $TCA['tx_powermailcond_conditions'] = array (
 				'size' => '30',
 			)
 		),
+		'form' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.form',
+			'config' => Array (
+				'type' => 'select',
+				'items' => Array (
+					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.form.pleaseChoose', '')
+				),
+				'maxitems' => '1',
+				'size' => '1',
+				'minitems' => 1,
+				'requestUpdate' => 1,
+				'foreign_table' => 'tx_powermail_domain_model_forms',
+				'foreign_table_where' => 'AND tx_powermail_domain_model_forms.deleted = 0 AND tx_powermail_domain_model_forms.hidden = 0 AND tx_powermail_domain_model_forms.sys_language_uid = 0 order by tx_powermail_domain_model_forms.title'
+			)
+		),
 		'targetField' => Array (
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.targetField',
@@ -100,12 +116,13 @@ $TCA['tx_powermailcond_conditions'] = array (
 				'items' => Array (
 					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.targetField.I.0', '0'),
 				),
-				'itemsProcFunc' => 'tx_powermailcond_fields_be->fieldname',
+				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->getFieldname',
 				'itemsProcFunc_addFieldsets' => 1, // add fieldsets
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required'
-			)
+			),
+			'displayCond' => 'FIELD:form:>:0'
 		),
 		'actions' => Array (
 			'exclude' => 1,
@@ -121,7 +138,8 @@ $TCA['tx_powermailcond_conditions'] = array (
 				),
 				'size' => 1,
 				'maxitems' => 1,
-			)
+			),
+			'displayCond' => 'FIELD:form:>:0'
 		),
 		'filterSelectField' => Array (
 			'exclude' => 1,
@@ -134,15 +152,15 @@ $TCA['tx_powermailcond_conditions'] = array (
 				'size' => 4,
 				'maxitems' => 1000
 			),
-			'displayCond' => 'FIELD:actions:IN:2' // show only if ops value is greater than 1
+			'displayCond' => 'FIELD:actions:IN:2,FIELD:form:>:0' // show only if ops value is greater than 1
 		),
 		'rules' => Array (
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.rules',
 			'config' => Array (
 				'type' => 'inline',
-				'foreign_table' => 'tx_powermailcond_rules',
-				'foreign_table_where' => 'AND tx_powermailcond_rules.pid=###CURRENT_PID### ORDER BY tx_powermailcond_rules.uid',
+				'foreign_table' => 'tx_powermailcond_domain_model_rule',
+				'foreign_table_where' => 'AND tx_powermailcond_domain_model_rule.pid=###CURRENT_PID### ORDER BY tx_powermailcond_domain_model_rule.sorting',
 				'foreign_field' => 'conditions',
 				'maxitems' => 99,
 				'appearance' => array(
@@ -152,7 +170,8 @@ $TCA['tx_powermailcond_conditions'] = array (
 					'newRecordLinkAddTitle' => 1,
 					'newRecordLinkPosition' => 'both',
 				),
-			)
+			),
+			'displayCond' => 'FIELD:form:>:0'
 		),
 		'conjunction' => Array (
 			'exclude' => 1,
@@ -165,7 +184,8 @@ $TCA['tx_powermailcond_conditions'] = array (
 				),
 				'size' => 1,
 				'maxitems' => 1,
-			)
+			),
+			'displayCond' => 'FIELD:form:>:0'
 		),
 	),
 );

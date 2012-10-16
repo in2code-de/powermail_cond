@@ -12,9 +12,9 @@ if (TYPO3_MODE == 'BE') {
 t3lib_extMgm::addStaticFile($_EXTKEY, 'files/static/', 'Main TypoScript');
 
 // Configuration for Conditions
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_forms', 'EXT:powermail_cond/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermailcond_conditions');
-$TCA['tx_powermailcond_conditions'] = array (
+t3lib_extMgm::addLLrefForTCAdescr('tx_powermailcond_domain_model_condition', 'EXT:powermail_cond/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml');
+t3lib_extMgm::allowTableOnStandardPages('tx_powermailcond_domain_model_condition');
+$TCA['tx_powermailcond_domain_model_condition'] = array (
 	'ctrl' => array (
 		'title'     => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions',
 		'label'     => 'title',
@@ -31,19 +31,16 @@ $TCA['tx_powermailcond_conditions'] = array (
 			'starttime' => 'starttime',
 			'endtime' => 'endtime'
 		),
-		'requestUpdate' => 'actions',
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Conditions.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . '/Resources/Public/Icons/icon_tx_powermailcond_conditions.gif'
+		'requestUpdate' => 'actions,form',
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Condition.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . '/Resources/Public/Icons/icon_tx_powermailcond_conditions.gif',
 	),
-	'feInterface' => array (
-		'fe_admin_fieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,title,targetField,actions,rules,conjunction',
-	)
 );
 
 // Configuration for Rules
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_forms', 'EXT:powermail_cond/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermailcond_rules');
-$TCA['tx_powermailcond_rules'] = array (
+t3lib_extMgm::addLLrefForTCAdescr('tx_powermailcond_domain_model_rule', 'EXT:powermail_cond/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml');
+t3lib_extMgm::allowTableOnStandardPages('tx_powermailcond_domain_model_rule');
+$TCA['tx_powermailcond_domain_model_rule'] = array (
 	'ctrl' => array (
 		'title'     => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules',
 		'label'     => 'title',
@@ -56,12 +53,9 @@ $TCA['tx_powermailcond_rules'] = array (
 			'disabled' => 'hidden'
 		),
 		'requestUpdate' => 'ops',
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Rules.php',
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Rule.php',
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . '/Resources/Public/Icons/icon_tx_powermailcond_rules.gif'
 	),
-	'feInterface' => array (
-		'fe_admin_fieldList' => 'hidden,startField,ops,condstring'
-	)
 );
 
 ?>
