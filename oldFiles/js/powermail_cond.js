@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function() {
 	var fieldsOnChange = '.powermail_text, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_check'; // all fields with events
 	if ($('form.tx_powermail_pi1_form').length > 0) { // only if the powermail form is on the page (not for confirmation page)
 		checkConditions(0); // check if something should be changed

@@ -9,7 +9,7 @@ if (TYPO3_MODE == 'BE') {
 }
 
 // Add TypoScript Static Template
-t3lib_extMgm::addStaticFile($_EXTKEY, 'files/static/', 'Main TypoScript');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'Main TypoScript');
 
 // Configuration for Conditions
 t3lib_extMgm::addLLrefForTCAdescr('tx_powermailcond_domain_model_condition', 'EXT:powermail_cond/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml');

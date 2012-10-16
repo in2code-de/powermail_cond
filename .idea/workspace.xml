@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Configuration/TypoScript" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/Public/Js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Configuration/TypoScript/setup.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" afterPath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Configuration/TCA/Rule.php" afterPath="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_localconf.php" afterPath="$PROJECT_DIR$/ext_localconf.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_tables.php" afterPath="$PROJECT_DIR$/ext_tables.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" afterPath="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oldFiles/static/setup.txt" afterPath="$PROJECT_DIR$/oldFiles/static/setup.txt" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,30 +32,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FieldlistingBackend.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
+      <file leaf-file-name="class.tx_powermailcond_ajaxFieldList_eid.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.70614034">
-              <folding>
-                <element signature="e#987#1189#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ext_tables.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ext_tables.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rule.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
+      <file leaf-file-name="class.tx_powermailcond_div.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="-18.307692">
+            <state line="33" column="51" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.2269188">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ext_localconf.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ext_localconf.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PowermailCond.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="60" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -65,20 +78,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ext_localconf.php" />
-        <option value="$PROJECT_DIR$/ext_emconf.php" />
-        <option value="$PROJECT_DIR$/tca.php" />
-        <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_condition.xml" />
         <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml" />
         <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Rules.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Conditions.php" />
         <option value="$PROJECT_DIR$/ext_tables.sql" />
-        <option value="$PROJECT_DIR$/ext_tables.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
         <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_db.xml" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Rule.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
+        <option value="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" />
+        <option value="$PROJECT_DIR$/Configuration/TypoScript/PowermailCond.js" />
+        <option value="$PROJECT_DIR$/oldFiles/static/setup.txt" />
+        <option value="$PROJECT_DIR$/ext_tables.php" />
+        <option value="$PROJECT_DIR$/Configuration/TypoScript/setup.txt" />
+        <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
+        <option value="$PROJECT_DIR$/ext_localconf.php" />
       </list>
     </option>
   </component>
@@ -140,6 +155,132 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Icons" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oldLib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oldFiles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oldFiles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Configuration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TypoScript" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -273,6 +414,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\Resources\Public\Js" />
       <recent name="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\Resources\Public\Icons" />
       <recent name="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\Resources\Private" />
     </key>
@@ -364,7 +506,11 @@
       <created>1350401058102</created>
       <updated>1350401058102</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Working Copy">
+      <created>1350402759102</created>
+      <updated>1350402759102</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -450,69 +596,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/SVN/powermail@forge/Configuration/TCA/Pages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="0" selection-end="992" vertical-scroll-proportion="0.21748401">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/Resources/Private/Language/locallang_db.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="41" selection-start="0" selection-end="26641" vertical-scroll-proportion="0.18123667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="91" selection-start="0" selection-end="628" vertical-scroll-proportion="0.21748401">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="87" selection-start="556" selection-end="556" vertical-scroll-proportion="0.21748401">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/Configuration/TCA/Answers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/Configuration/FlexForms/flexform_pi1.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="251" selection-start="735" selection-end="933" vertical-scroll-proportion="0.45945945">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ext_tables.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="6" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.5997807">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/SVN/powermail@forge/ext_tables.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="10" selection-start="5883" selection-end="5930" vertical-scroll-proportion="0.74561405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/SVN/powermail@forge/Configuration/TCA/Fields.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="199" column="14" selection-start="7056" selection-end="7106" vertical-scroll-proportion="0.567297">
@@ -541,26 +624,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="-18.307692">
-          <folding />
+        <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.7083333">
+          <folding>
+            <element signature="e#987#1189#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ext_tables.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.0">
+        <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.054371003">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
+    <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.70614034">
-          <folding>
-            <element signature="e#987#1189#0" expanded="false" />
-          </folding>
+        <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="0.5294772">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_pidContainer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configuration/TypoScript/setup.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="93" selection-start="300" selection-end="300" vertical-scroll-proportion="0.13456464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oldFiles/static/setup.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="39" selection-start="0" selection-end="300" vertical-scroll-proportion="0.089709766">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_tables.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="63" selection-start="318" selection-end="318" vertical-scroll-proportion="0.26008344">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oldFiles/js/powermail_cond.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="27" selection-start="2261" selection-end="2261" vertical-scroll-proportion="-0.108742006">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="60" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_localconf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="51" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.2269188">
+          <folding />
         </state>
       </provider>
     </entry>
