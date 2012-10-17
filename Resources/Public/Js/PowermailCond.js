@@ -4,18 +4,29 @@ jQuery(document).ready(function() {
 		checkConditions(0); // check if something should be changed
 	}
 
+	// read values from session
+	var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
+	var url = base + '/index.php?eID=powermailcond_readSession&tx_powermailcond_pi1[form]=' + formUid;
+	$.ajax({
+		url: url, // send to this url
+		cache: false, // disable cache (for ie)
+		success: function(data) { // return values
+			if (data) { // if there is a response
+				$('form.powermail_form').append(data);
+			}
+		}
+	});
+
 	// save values via ajax to session
 	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').change(function() {
 		$this = $(this); // caching
-		var pid = 5; // TODO
+		var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 		var url = base + '/index.php';
 		var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
 		var value = $this.val(); // current value
 		var uid = $this.closest('.powermail_fieldwrap').attr('id').substr(20); // current field uid (without "uid")
 		var name = $this.attr('name');
-		var params = 'eID=' + 'powermailcond_saveToSession' + '&id=' + pid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
-
-		/*
+		var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + formUid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
 
 		$.ajax({
 			type: 'GET', // type
@@ -24,13 +35,11 @@ jQuery(document).ready(function() {
 			cache: false, // disable cache (for ie)
 			success: function(data) { // return values
 				if (data != '') { // if there is a response
-					//alert(data); // alert the response
-					$('form.tx_powermail_pi1_form').append('Error in powermail_cond.js in change function:' + data);
+					$('form.powermail_form').append('Error in powermail_cond.js in change function:' + data);
 				}
 				checkConditions(uid); // check if something should be changed
 			}
 		});
-		*/
 	});
 });
 

@@ -47,61 +47,48 @@ class Tx_PowermailCond_Utility_Div {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * Write values to session
+	 * Save value to session and respect old entries
 	 *
-	 * @param	array	$array: Array for session store
-	 * @param	string	$sesName: Session name
-	 * @return	void
+	 * @param string $value		Value to store
+	 * @param int $form			Form uid
+	 * @param int $field		Field uid
+	 * @return void
 	 */
-	public function saveInSession($array, $sesName) {
-		// get current stored values from session
-		$oldArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $sesName);
+	public function saveValueToSession($value, $form, $field) {
+		// get old session
+		$oldArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 
-		// merge old with new values
-		$array = array_merge((array) $oldArray, (array) $array);
+		// merge old and new
+		$array = array(
+			'form_' . $form => array(
+				'field_' . $field => $value
+			)
+		);
+		$array['form_' . $form] = array_merge((array) $oldArray['form_' . $form], (array) $array['form_' . $form]);
 
-		// store new session
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $sesName, $array); // Generate Session with piVars array
+		// save new array
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array); // Generate Session with piVars array
 		$GLOBALS['TSFE']->storeSessionData(); // Save session
 	}
 
 	/**
 	 * Return all values from the session (could be used for debugging, etc..)
 	 *
-	 * @param	string	$sesName: Session name
-	 * @return	array	$array: with session values
+	 * @param int $form			Form Uid
+	 * @return array $array		with session values
 	 */
-	public function getAllSessionValues($sesName) {
+	public function getAllSessionValuesFromForm($form = null) {
 		// get current stored values from session
-		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $sesName);
+		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
+
+		if (isset($array['form_' . $form])) {
+			return $array['form_' . $form];
+		}
 		return $array;
 	}
 
 	/**
-	 * Get tt_content UID from field UID
-	 *
-	 * @param	integer	$fuid: UID of tx_powermail_fields
-	 * @return	integer	$uid: tt_content UID
-	 */
-	public function getTtcontentUid($fuid) {
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery ( // DB query
-			'tt_content.uid',
-			'tx_powermail_fieldsets LEFT JOIN tx_powermail_fields ON tx_powermail_fieldsets.uid = tx_powermail_fields.fieldset LEFT JOIN tt_content ON tx_powermail_fieldsets.tt_content = tt_content.uid',
-			'tx_powermail_fields.uid = ' . intval($fuid),
-			'',
-			'',
-			1
-		);
-		if (!$res) { // If there is a result
-			return false;
-		}
-
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-		return $row['uid'];
-	}
-
-	/**
-	 * Write values to session
+	 * Get Startfields
 	 *
 	 * @param	array	$conf: Configuration Array
 	 * @return	array	$array: With all Startfields

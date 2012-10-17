@@ -29,13 +29,13 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('powermail_cond') . 'Classes/Utility/Div.php');
 
 /**
- * This class is for storing values to the session on every fieldchange (via AJAX)
+ * This class is for reading values from session
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	tx_powermailcond_ajaxWriteInSession_eid
+ * @subpackage	Tx_PowermailCond_Utility_EidReadSession
  */
-class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
+class Tx_PowermailCond_Utility_EidReadSession extends tslib_pibase {
 
 	/**
 	 * The extension key
@@ -52,36 +52,21 @@ class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * Debug mode
-	 *
-	 * @var bool
-	 */
-	private $debug = false;
-
-	/**
-	 * Write values to session - main method called via AJAX
+	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
 	 *
 	 * @return	void
 	 */
 	public function main() {
 		// config
 		$this->getCObj(); // enable TSFE globals
-		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
 		$piVars = t3lib_div::_GP($this->prefixId); // GET param
+		$array = $this->div->getAllSessionValuesFromForm($piVars['form']);
 
-		$uid = intval($piVars['uid']); // uid of current field
-		$form = intval($piVars['form']); // uid of current field
-		$value = htmlspecialchars($piVars['value']); // value from current field
-
-		// start
-		if ($uid === 0 || $form === 0) {
-			return false;
+		$content = '';
+		foreach ((array) $array as $key => $value) {
+			$content .= str_replace('field_', '', $key) . ':' . $value . ';';
 		}
-		$this->div->saveValueToSession($value, $form, $uid); // save single value in session
-
-		if ($this->debug) {
-			t3lib_utility_Debug::debug($arr, 'powermail_' . $form);
-		}
+		return $content;
 	}
 
 	/**
@@ -108,6 +93,6 @@ class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
 
 }
 
-$SOBE = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidSaveInSession'); // make instance
+$SOBE = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidReadSession'); // make instance
 echo $SOBE->main(); // print content
 ?>
