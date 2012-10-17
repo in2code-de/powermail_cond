@@ -296,9 +296,9 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 		}
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery (
-			'tx_powermail_fields.uid',
-			'tx_powermail_fieldsets LEFT JOIN tx_powermail_fields ON tx_powermail_fieldsets.uid = tx_powermail_fields.fieldset',
-			$where = 'tx_powermail_fieldsets.uid = ' . intval(str_replace('fieldset:', '', $uid)),
+			'tx_powermail_domain_model_fields.uid',
+			'tx_powermail_domain_model_pages LEFT JOIN tx_powermail_domain_model_fields ON tx_powermail_domain_model_pages.uid = tx_powermail_domain_model_fields.pages',
+			$where = 'tx_powermail_domain_model_pages.uid = ' . intval(str_replace('fieldset:', '', $uid)),
 			$groupBy = '',
 			$orderBy = '',
 			$limit = '1000'

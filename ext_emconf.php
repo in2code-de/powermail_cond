@@ -34,7 +34,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'powermail' => '1.5.0-0.0.0',
+			'powermail' => '2.0.3-0.0.0',
 		),
 		'conflicts' => array(
 		),
