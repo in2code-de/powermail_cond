@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	base = $('base').attr('href');
+	base = getBaseUrl();
 	if ($('form.powermail_form').length > 0) { // only if the powermail form is on the page (not for confirmation page)
 		checkConditions(0); // check if something should be changed
 	}
@@ -20,7 +20,7 @@ function checkConditions(uid) {
 	$.ajax({
 		type: 'GET', // type
 		url: url, // send to this url
-		data: 'eID=' + 'powermailcond_getFieldStatus' + params, // add params
+		data: 'eID=' + 'powermailcond_getFieldStatus' + params + '&tx_powermailcond_pi1[formUid]=' + $('input[name="tx_powermail_pi1[form]"]').val(), // add params
 		cache: false, // disable cache (for ie)
 		beforeSend: function() {
 			document.body.style.cursor = 'progress'; // change cursor to busy
@@ -29,6 +29,7 @@ function checkConditions(uid) {
 			document.body.style.cursor = 'auto'; // normal cursor
 		},
 		success: function(data) { // return values
+			$('form.powermail_form').append(data);
 //			if (data != 'nochange') {
 //				$('.powermail_select option').show(); // show all options at the beginning
 //				$('.powermail_select option').removeAttr('disabled'); // enable all options at the beginning
@@ -46,4 +47,17 @@ function checkConditions(uid) {
 			$('form.powermail_form').append('Error in PowermailCond.js in checkCondtions function by opening the given url');
 		}
 	});
+}
+
+/**
+ * Read BaseUrl
+ *
+ * @return string	BaseUrl from Tag in DOM
+ */
+function getBaseUrl() {
+	var base = $('base').attr('href');
+	if (!base || base == undefined) {
+		base = '';
+	}
+	return base;
 }

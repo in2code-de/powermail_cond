@@ -16,7 +16,7 @@ $TYPO3_CONF_VARS['EXTCONF']['cms']['db_layout']['addTables']['tx_powermailcond_c
 //$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_saveToSession'] = 'EXT:powermail_cond/lib/class.tx_powermailcond_ajaxWriteInSession_eid.php';
 
 // EID for telling jQuery which values are allowed and which not (via AJAX)
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_getFieldStatus'] = 'EXT:powermail_cond/lib/class.tx_powermailcond_ajaxFieldList_eid.php';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_getFieldStatus'] = 'EXT:powermail_cond/Classes/Utility/EidGetFieldlist.php';
 
 // Hook to add a pid container
 //$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['powermail']['PM_FormWrapMarkerHook'][] = 'EXT:powermail_cond/lib/class.tx_powermailcond_pidContainer.php:tx_powermailcond_pidContainer';

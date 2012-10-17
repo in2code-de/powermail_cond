@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Configuration/TypoScript" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/Public/Js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Configuration/TypoScript/setup.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/Div.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" afterPath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_localconf.php" afterPath="$PROJECT_DIR$/ext_localconf.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_tables.php" afterPath="$PROJECT_DIR$/ext_tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" afterPath="$PROJECT_DIR$/oldFiles/js/powermail_cond.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oldFiles/static/setup.txt" afterPath="$PROJECT_DIR$/oldFiles/static/setup.txt" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,19 +28,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="class.tx_powermailcond_ajaxFieldList_eid.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php">
+      <file leaf-file-name="EidGetFieldlist.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="78" column="0" selection-start="2731" selection-end="2731" vertical-scroll-proportion="0.2836485">
+              <folding>
+                <element signature="e#6#984#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Div.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="34" selection-start="1188" selection-end="1216" vertical-scroll-proportion="-13.076923">
+              <folding>
+                <element signature="e#6#984#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class.tx_powermailcond_div.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="106" column="5" selection-start="1219" selection-end="3352" vertical-scroll-proportion="-26.576923">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="class.tx_powermailcond_div.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
+      <file leaf-file-name="ext_tables.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ext_tables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="51" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.2269188">
+            <state line="33" column="63" selection-start="957" selection-end="991" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -53,7 +71,7 @@
       <file leaf-file-name="ext_localconf.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ext_localconf.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615">
+            <state line="18" column="134" selection-start="689" selection-end="689" vertical-scroll-proportion="-11.769231">
               <folding />
             </state>
           </provider>
@@ -62,7 +80,7 @@
       <file leaf-file-name="PowermailCond.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="60" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
+            <state line="22" column="96" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -78,8 +96,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml" />
-        <option value="$PROJECT_DIR$/Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Rules.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Conditions.php" />
         <option value="$PROJECT_DIR$/ext_tables.sql" />
@@ -92,8 +108,10 @@
         <option value="$PROJECT_DIR$/oldFiles/static/setup.txt" />
         <option value="$PROJECT_DIR$/ext_tables.php" />
         <option value="$PROJECT_DIR$/Configuration/TypoScript/setup.txt" />
-        <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
         <option value="$PROJECT_DIR$/ext_localconf.php" />
+        <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
+        <option value="$PROJECT_DIR$/Classes/Utility/Div.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" />
       </list>
     </option>
   </component>
@@ -328,8 +346,8 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="options.lastSelected" value="reference.settings.deploy.options" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="in2code" serverId="3ca6b370-8a73-4525-bbbd-e6d3cdda1d7f" autoUpload="true" autoUploadExternalChanges="true">
     <servers>
@@ -433,12 +451,12 @@
     </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
       <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" />
+        <option name="engineId" value="embedded" />
         <option name="fileUrl" />
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="3ca6b370-8a73-4525-bbbd-e6d3cdda1d7f" server_name="in2code">
       <method>
         <option name="FtpUpload" enabled="false">
           <server_id />
@@ -510,30 +528,34 @@
       <created>1350402759102</created>
       <updated>1350402759102</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Working Copy">
+      <created>1350404233102</created>
+      <updated>1350404233102</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-262" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20917822" sideWeight="0.67082036" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1755603" sideWeight="0.67082036" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -596,117 +618,105 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/SVN/powermail@forge/Configuration/TCA/Fields.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="14" selection-start="7056" selection-end="7106" vertical-scroll-proportion="0.567297">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Private/Language/locallang_db.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="85" selection-start="3753" selection-end="3753" vertical-scroll-proportion="0.22068231">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Configuration/TCA/Condition.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="139" selection-start="3240" selection-end="3240" vertical-scroll-proportion="0.6429366">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/SVN/powermail@forge/ext_tables.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="44" selection-start="79" selection-end="110" vertical-scroll-proportion="-0.054371003">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="32" selection-start="2522" selection-end="2522" vertical-scroll-proportion="0.7083333">
-          <folding>
-            <element signature="e#987#1189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ext_tables.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="52" selection-start="87" selection-end="126" vertical-scroll-proportion="0.054371003">
-          <folding />
-        </state>
+        <state line="3" column="44" selection-start="79" selection-end="110" vertical-scroll-proportion="-0.054371003" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Configuration/TCA/Rule.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="0.5294772">
-          <folding />
-        </state>
+        <state line="43" column="35" selection-start="1404" selection-end="1422" vertical-scroll-proportion="0.5294772" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_pidContainer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Configuration/TypoScript/setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="93" selection-start="300" selection-end="300" vertical-scroll-proportion="0.13456464">
-          <folding />
-        </state>
+        <state line="6" column="93" selection-start="300" selection-end="300" vertical-scroll-proportion="0.13456464" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oldFiles/static/setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="39" selection-start="0" selection-end="300" vertical-scroll-proportion="0.089709766">
-          <folding />
-        </state>
+        <state line="4" column="39" selection-start="0" selection-end="300" vertical-scroll-proportion="0.089709766" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ext_tables.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="63" selection-start="318" selection-end="318" vertical-scroll-proportion="0.26008344">
-          <folding />
-        </state>
+        <state line="11" column="63" selection-start="318" selection-end="318" vertical-scroll-proportion="0.26008344" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oldFiles/js/powermail_cond.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="27" selection-start="2261" selection-end="2261" vertical-scroll-proportion="-0.108742006">
-          <folding />
-        </state>
+        <state line="54" column="27" selection-start="2261" selection-end="2261" vertical-scroll-proportion="-0.108742006" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="60" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ext_localconf.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615">
+        <state line="32" column="50" selection-start="1196" selection-end="1240" vertical-scroll-proportion="0.114035085">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="12383" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_localconf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="134" selection-start="689" selection-end="689" vertical-scroll-proportion="-11.769231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="96" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_tables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="63" selection-start="957" selection-end="991" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/SVN/powermail@forge/Classes/Utility/Div.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="30724" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="51" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.2269188">
+        <state line="106" column="5" selection-start="1219" selection-end="3352" vertical-scroll-proportion="-26.576923">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="34" selection-start="1188" selection-end="1216" vertical-scroll-proportion="-13.076923">
+          <folding>
+            <element signature="e#6#984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="0" selection-start="2731" selection-end="2731" vertical-scroll-proportion="0.2836485">
+          <folding>
+            <element signature="e#6#984#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
