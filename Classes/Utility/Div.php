@@ -104,5 +104,40 @@ class Tx_PowermailCond_Utility_Div {
 		}
 		return $array;
 	}
+
+	/**
+	 * Get all fields in a commaseparated list from a fieldset uid
+	 *
+	 * @param	integer	$uid: Fieldset UID
+	 * @param	integer	$formUid: UID of related form
+	 * @param	boolean	$clearSession: Clear cache of each of this fields
+	 * @return	string	$list: Commaseparated List with field uids
+	 */
+	public function getFieldsFromFieldset($uid, $formUid, $clearSession = 0) {
+		if (is_numeric($uid)) { // if this uid don't contains fs (for fs123)
+			return $uid;
+		}
+
+		$select = 'tx_powermail_domain_model_fields.uid';
+		$from = '
+			tx_powermail_domain_model_pages
+			LEFT JOIN tx_powermail_domain_model_fields ON tx_powermail_domain_model_pages.uid = tx_powermail_domain_model_fields.pages
+		';
+		$where = 'tx_powermail_domain_model_pages.uid = ' . intval(str_replace('fieldset:', '', $uid));
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery ($select, $from, $where, '', '', 1000);
+		if ($res) { // If there is a result
+			$uids = '';
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) { // One loop for every field
+				$uids .= $row['uid'] . ';';
+				$this->saveValueToSession('', $formUid, $row['uid']); // remove value from session of this field
+			}
+		}
+
+		if (!isset($uids)) {
+			return $uid;
+		}
+
+		return $uid . ':' . substr($uids, 0, -1); // return without last ;
+	}
 }
 ?>
