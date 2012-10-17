@@ -13,6 +13,11 @@ jQuery(document).ready(function() {
 		success: function(data) { // return values
 			if (data) { // if there is a response
 				$('form.powermail_form').append(data);
+				var sets = data.split(';');
+				for (var i=0; i < sets.length; i++) { // for each field which should be filled
+					var tmp_value = sets[i].split(':');
+					fieldValue(tmp_value[0], tmp_value[1]);
+				}
 			}
 		}
 	});
@@ -42,6 +47,21 @@ jQuery(document).ready(function() {
 		});
 	});
 });
+
+/**
+ * Fill a field with a value
+ *
+ * @param int fieldUid		Field Uid
+ * @param int fieldValue		Field Value
+ */
+function fieldValue(fieldUid, fieldValue) {
+	$('.powermail_field[name="tx_powermail_pi1[field][' + fieldUid + ']"]').val(fieldValue); // select, input, textarea
+	$('.powermail_radio[name="tx_powermail_pi1[field][' + fieldUid + ']"], .powermail_checkbox_' + fieldUid).each(function() { // radio, check
+		if ($(this).attr('value') == fieldValue) {
+			$(this).attr('checked', 'checked');
+		}
+	})
+}
 
 /**
  * Main function to check conditions and do something (if necessary)
@@ -197,16 +217,15 @@ function getBaseUrl() {
 
 /**
  * Clear session of a uid
- * TODO
  *
  * @param	integer	uid: uid of the element
  * @return	void
  */
 function clearSession(uid) {
-	var pid = 5;
 	var url = base + '/index.php';
+	var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 	var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
-	var params = 'eID=' + 'powermailcond_saveToSession' + '&id=' + pid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=&ts=' + timestamp;
+	var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + formUid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=&ts=' + timestamp;
 
 	$.ajax({
 		type: 'GET', // type
@@ -215,8 +234,7 @@ function clearSession(uid) {
 		cache: false, // disable cache (for ie)
 		success: function(data) { // return values
 			if (data != '') { // if there is a response
-				//alert(data); // alert the response
-				$('form.tx_powermail_pi1_form').append('Error in powermail_cond.js in clearSession function:' + data);
+				$('form.powermail_form').append('Error in powermail_cond.js in clearSession function:' + data);
 			}
 			checkConditions(uid); // check if something should be changed
 		}

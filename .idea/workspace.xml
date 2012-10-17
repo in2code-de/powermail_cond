@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldFiles\js\powermail_cond.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldFiles\static\constants.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldFiles\static\setup.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldLib\class.tx_powermailcond_ajaxFieldList_eid.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldLib\class.tx_powermailcond_ajaxWriteInSession_eid.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldLib\class.tx_powermailcond_div.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldLib\class.tx_powermailcond_fields_be.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldLib\class.tx_powermailcond_pidContainer.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldFiles\js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldFiles\static" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/Div.php" afterPath="$PROJECT_DIR$/Classes/Utility/Div.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" afterPath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_localconf.php" afterPath="$PROJECT_DIR$/ext_localconf.php" />
+      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldDoc\manual.sxw" afterPath="$PROJECT_DIR$/doc/manual.sxw" />
+      <change type="MOVED" beforePath="C:\Users\einpraegsam\PhpstormProjects\powermail_cond@powermailt347.in2code.de\oldDoc" afterPath="$PROJECT_DIR$/doc" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +41,7 @@
       <file leaf-file-name="PowermailCond.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="12" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
+            <state line="219" column="2" selection-start="7653" selection-end="7653" vertical-scroll-proportion="-148.92">
               <folding />
             </state>
           </provider>
@@ -41,7 +50,7 @@
       <file leaf-file-name="EidSaveInSession.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="65" selection-start="2082" selection-end="2140" vertical-scroll-proportion="-8.269231">
+            <state line="61" column="33" selection-start="1888" selection-end="1888" vertical-scroll-proportion="-3.6923077">
               <folding>
                 <element signature="e#1285#1516#0" expanded="false" />
               </folding>
@@ -49,19 +58,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EidReadSession.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EidReadSession.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Classes/Utility/EidReadSession.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="0" selection-start="2074" selection-end="2074" vertical-scroll-proportion="0.57127196">
+            <state line="73" column="6" selection-start="2262" selection-end="2262" vertical-scroll-proportion="-25.26923">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Div.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Div.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="9" selection-start="2563" selection-end="2563" vertical-scroll-proportion="-22.0">
+            <state line="25" column="0" selection-start="986" selection-end="986" vertical-scroll-proportion="0.64705884">
               <folding>
                 <element signature="e#6#984#0" expanded="true" />
               </folding>
@@ -92,9 +101,9 @@
         <option value="$PROJECT_DIR$/ext_emconf.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
         <option value="$PROJECT_DIR$/ext_localconf.php" />
-        <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
         <option value="$PROJECT_DIR$/Classes/Utility/Div.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
+        <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
       </list>
     </option>
   </component>
@@ -169,43 +178,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="oldFiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oldFiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utility" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -411,7 +384,11 @@
       <created>1350471950102</created>
       <updated>1350471950102</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Working Copy">
+      <created>1350476011103</created>
+      <updated>1350476011103</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -427,7 +404,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14727855" sideWeight="0.67082036" order="0" side_tool="false" content_ui="combo" />
@@ -497,21 +474,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ext_tables.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="63" selection-start="318" selection-end="318" vertical-scroll-proportion="0.26008344" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="50" selection-start="1196" selection-end="1240" vertical-scroll-proportion="0.114035085" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxFieldList_eid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="12383" vertical-scroll-proportion="-0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ext_tables.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="63" selection-start="957" selection-end="991" vertical-scroll-proportion="0.0" />
@@ -522,11 +484,6 @@
         <state line="0" column="0" selection-start="0" selection-end="30724" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_div.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="5" selection-start="1219" selection-end="3352" vertical-scroll-proportion="0.7576754" />
-      </provider>
-    </entry>
     <entry file="file://D:/SVN/powermail@forge/ext_tables.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="44" selection-start="1420" selection-end="1451" vertical-scroll-proportion="0.090618335" />
@@ -535,20 +492,6 @@
     <entry file="file://$PROJECT_DIR$/ext_emconf.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="33" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.5294772">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oldLib/class.tx_powermailcond_ajaxWriteInSession_eid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="5031" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oldFiles/js/powermail_cond.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -569,35 +512,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidReadSession.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="12" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
+        <state line="73" column="6" selection-start="2262" selection-end="2262" vertical-scroll-proportion="-25.26923">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="65" selection-start="2082" selection-end="2140" vertical-scroll-proportion="-8.269231">
+        <state line="61" column="33" selection-start="1888" selection-end="1888" vertical-scroll-proportion="-3.6923077">
           <folding>
             <element signature="e#1285#1516#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
+    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="9" selection-start="2563" selection-end="2563" vertical-scroll-proportion="-22.0">
-          <folding>
-            <element signature="e#6#984#0" expanded="true" />
-          </folding>
+        <state line="219" column="2" selection-start="7653" selection-end="7653" vertical-scroll-proportion="-148.92">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidReadSession.php">
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="2074" selection-end="2074" vertical-scroll-proportion="0.57127196">
-          <folding />
+        <state line="25" column="0" selection-start="986" selection-end="986" vertical-scroll-proportion="0.64705884">
+          <folding>
+            <element signature="e#6#984#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
