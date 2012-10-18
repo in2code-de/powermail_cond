@@ -54,6 +54,9 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 			left join tx_powermail_domain_model_forms on tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
 		';
 		$where = 'tx_powermail_domain_model_fields.hidden = 0 AND tx_powermail_domain_model_fields.deleted = 0';
+		if (isset($params['config']['itemsProcFuncValue'])) { // we want only some fields for starting fields
+			$where .= ' and tx_powermail_domain_model_fields.type in ("input", "textarea", "select", "radio", "check")';
+		}
 		if ($formUid > 0) {
 			$where .= ' AND tx_powermail_domain_model_forms.uid = ' . $formUid;
 		}

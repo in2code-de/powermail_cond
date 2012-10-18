@@ -23,7 +23,7 @@ jQuery(document).ready(function() {
 	});
 
 	// save values via ajax to session
-	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').bind('change, keyup', function() {
+	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').bind('change', function() {
 		$this = $(this); // caching
 		var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 		var url = base + '/index.php';
@@ -136,7 +136,7 @@ function doAction(list) {
  * @return	void
  */
 function hideField(uid) {
-	$('.powermail_fieldwrap_' + uid).fadeOut('fast'); // hide current field
+	$('.powermail_fieldwrap_' + uid).hide(); // hide current field
 	if ($('.powermail_fieldwrap_' + uid + ' .powermail_field').val() != '') { // only if value is not yet empty
 		clearValue('.powermail_fieldwrap_' + uid + ' .powermail_field'); // clear value of current field
 		clearSession(uid); // clear value of current field
@@ -152,7 +152,7 @@ function hideField(uid) {
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('powermail_fieldset_' + params[1]).fadeOut('fast'); // hide current fieldset
+	$('powermail_fieldset_' + params[1]).hide(); // hide current fieldset
 	for (var k=0; k < values.length; k++) { // one loop for every field inside the fieldset
 		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field'); // clear value of current field
 	}
@@ -185,7 +185,7 @@ function filterSelection(string) {
  * @return void
  */
 function showAll() {
-	$('.powermail_fieldwrap, .powermail_fieldset').fadeIn('fast'); // show all fields and fieldsets
+	$('.powermail_fieldwrap, .powermail_fieldset').show(); // show all fields and fieldsets
 }
 
 /**
