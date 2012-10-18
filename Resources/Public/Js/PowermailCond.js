@@ -152,7 +152,7 @@ function hideField(uid) {
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('powermail_fieldset_' + params[1]).hide(); // hide current fieldset
+	$('.powermail_fieldset_' + params[1]).hide(); // hide current fieldset
 	for (var k=0; k < values.length; k++) { // one loop for every field inside the fieldset
 		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field'); // clear value of current field
 	}

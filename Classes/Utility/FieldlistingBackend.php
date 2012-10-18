@@ -75,6 +75,34 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 				);
 			}
 		}
+
+		if (isset($params['config']['itemsProcFunc_addFieldsets'])) { // add fieldsets to selection
+			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($formUid)); // add some fieldsets
+		}
+	}
+
+	/**
+	 * give me all fieldsets in an array
+	 *
+	 * @param int $formUid			Form Uid
+	 * @return	array	$arr: all fieldsets with its name and the fieldset uid
+	 */
+	private function getFieldsets($formUid) {
+		$arr = array();
+		$select = 'uid, title';
+		$from = 'tx_powermail_domain_model_pages';
+		$where .= 'forms = ' . intval($formUid) . ' AND hidden = 0 AND deleted = 0';
+		$groupBy = '';
+		$orderBy = 'sorting';
+		$limit = '';
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			$arr[] = array('powermail Fieldsets', '--div--');
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+				$arr[] = array($row['title'] . ' (' . $row['uid'] . ')', 'fieldset:' . $row['uid']);
+			}
+		}
+		return $arr;
 	}
 
 	/**
