@@ -141,5 +141,22 @@ class Tx_PowermailCond_Utility_Div {
 
 		return $uid . ':' . substr($uids, 0, -1); // return without last ;
 	}
+
+	/**
+	 * Get all fields in a commaseparated list from a fieldset uid
+	 *
+	 * @param int $formUid			UID of related form
+	 * @return void
+	 */
+	public function cleanfullSession($formUid = null) {
+		if (intval($formUid) > 0) {
+			$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
+			$array['form_' . $formUid] = array();
+		} else {
+			$array = array();
+		}
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array); // Generate Session with piVars array
+		$GLOBALS['TSFE']->storeSessionData(); // Save session
+	}
 }
 ?>

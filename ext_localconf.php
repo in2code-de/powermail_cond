@@ -21,4 +21,7 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_saveToSession'] 
 // EID for reading existing values from session (via AJAX)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_readSession'] = 'EXT:powermail_cond/Classes/Utility/EidReadSession.php';
 
+// EID to clean session to a form completely (via AJAX)
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_clearSession'] = 'EXT:powermail_cond/Classes/Utility/EidClearSession.php';
+
 ?>

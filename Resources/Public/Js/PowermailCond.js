@@ -1,5 +1,6 @@
 jQuery(document).ready(function() {
 	base = getBaseUrl();
+	clearFullSession();
 	if ($('form.powermail_form').length > 0) { // only if the powermail form is on the page (not for confirmation page)
 		checkConditions(0); // check if something should be changed
 	}
@@ -80,12 +81,6 @@ function checkConditions(uid) {
 		url: url, // send to this url
 		data: 'eID=' + 'powermailcond_getFieldStatus' + params + '&tx_powermailcond_pi1[formUid]=' + $('input[name="tx_powermail_pi1[form]"]').val(), // add params
 		cache: false, // disable cache (for ie)
-//		beforeSend: function() {
-//			document.body.style.cursor = 'progress'; // change cursor to busy
-//		},
-//		complete: function() {
-//			document.body.style.cursor = 'auto'; // normal cursor
-//		},
 		success: function(data) { // return values
 			if (data != 'nochange') {
 				$('.powermail_fieldwrap select option').show(); // show all options at the beginning
@@ -240,3 +235,18 @@ function clearSession(uid) {
 		}
 	});
 };
+
+/**
+ * Clear session values if form is submitted
+ *
+ * @return void
+ */
+function clearFullSession() {
+	if ($('.powermail_create').length) {
+		var url = base + '/index.php?eID=powermailcond_clearSession';
+		$.ajax({
+			url: url, // send to this url
+			cache: false
+		});
+	}
+}

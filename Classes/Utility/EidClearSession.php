@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2010 Alexander Kellner <alexander.kellner@in2code.de>, in2code.
+ *  (c) 2012 Alexander Kellner <alexander.kellner@in2code.de>, in2code.
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,13 +29,13 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('powermail_cond') . 'Classes/Utility/Div.php');
 
 /**
- * This class is for storing values to the session on every fieldchange (via AJAX)
+ * This class cleans the full session
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidSaveInSession
+ * @subpackage	Tx_PowermailCond_Utility_EidClearSession
  */
-class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
+class Tx_PowermailCond_Utility_EidClearSession extends tslib_pibase {
 
 	/**
 	 * The extension key
@@ -52,13 +52,6 @@ class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * Debug mode
-	 *
-	 * @var bool
-	 */
-	private $debug = false;
-
-	/**
 	 * Write values to session - main method called via AJAX
 	 *
 	 * @return	void
@@ -68,20 +61,8 @@ class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
 		$this->getCObj(); // enable TSFE globals
 		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
 		$piVars = t3lib_div::_GP($this->prefixId); // GET param
-
-		$uid = intval($piVars['uid']); // uid of current field
 		$form = intval($piVars['form']); // uid of current field
-		$value = htmlspecialchars($piVars['value']); // value from current field
-
-		// start
-		if ($uid === 0 || $form === 0) {
-			return false;
-		}
-		$this->div->saveValueToSession($value, $form, $uid); // save single value in session
-
-		if ($this->debug) {
-			t3lib_utility_Debug::debug($arr, 'powermail_' . $form);
-		}
+		$this->div->cleanfullSession($form);
 	}
 
 	/**
@@ -108,6 +89,6 @@ class Tx_PowermailCond_Utility_EidSaveInSession extends tslib_pibase {
 
 }
 
-$SOBE = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidSaveInSession'); // make instance
+$SOBE = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidClearSession'); // make instance
 echo $SOBE->main(); // print content
 ?>
