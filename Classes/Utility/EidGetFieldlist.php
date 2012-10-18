@@ -217,7 +217,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 		switch ($conf['actions']) {
 			case 0: // hide
 				$this->div->saveValueToSession('', $this->piVars['formUid'], $conf['targetField']); // remove value from session of this field
-				$content .= $this->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']) . ','; // hide this field
+				$content .= $this->div->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']) . ','; // hide this field
 				break;
 
 			case 1: // show
