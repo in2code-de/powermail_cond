@@ -30,6 +30,9 @@ jQuery(document).ready(function() {
 		var url = base + '/index.php';
 		var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
 		var value = $this.val(); // current value
+		if ($(this).hasClass('powermail_checkbox') && !$(this).is(':checked')) { // clean value if checkbox was dechecked
+			value = '';
+		}
 		var uid = $this.closest('.powermail_fieldwrap').attr('id').substr(20); // current field uid (without "uid")
 		var name = $this.attr('name');
 		var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + formUid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
