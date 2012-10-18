@@ -148,10 +148,12 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 				'type' => 'select',
 				'items' => Array (
 				),
-				'itemsProcFunc' => 'tx_powermailcond_fields_be->valuesFromPowermailSelectbox',
+				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->valuesFromPowermailSelectbox',
 				'size' => 4,
-				'maxitems' => 1000
+				'maxitems' => 1000,
+				'allowNonIdValues' => '1'
 			),
+			'allowNonIdValues' => '1',
 			'displayCond' => 'FIELD:actions:IN:2,FIELD:form:>:0' // show only if ops value is greater than 1
 		),
 		'rules' => Array (

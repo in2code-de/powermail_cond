@@ -91,7 +91,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		$arr = array();
 		$select = 'uid, title';
 		$from = 'tx_powermail_domain_model_pages';
-		$where .= 'forms = ' . intval($formUid) . ' AND hidden = 0 AND deleted = 0';
+		$where = 'forms = ' . intval($formUid) . ' AND hidden = 0 AND deleted = 0';
 		$groupBy = '';
 		$orderBy = 'sorting';
 		$limit = '';
@@ -126,82 +126,25 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	}
 
 	/**
-	 * show all fields in the backend
-	 *
-	 * @param	array	$params: Params
-	 * @param	object	$pObj: Parent Object
-	 * @return	void
-	 */
-	public function oldFieldname(&$params, $pObj) {
-		$where = '1';
-		if (isset($params['config']['itemsProcFuncValue'])) { // additional where clause
-			$where = 'formtype IN (' . $params['config']['itemsProcFuncValue'] . ')';
-		}
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$select = 'uid, title',
-			$from = 'tx_powermail_fields',
-			$where .= ' AND pid = ' . intval($params['row']['pid']) . ' AND hidden = 0 AND deleted = 0',
-			$groupBy = '',
-			$orderBy = 'sorting',
-			$limit = ''
-		);
-		if ($res) {
-			$params['items'][] = array('powermail Fields', '--div--');
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-				$params['items'][] = array($pObj->sL($row['title']) . ' (' . $row['uid'] . ')', $row['uid']);
-			}
-		}
-
-		if (isset($params['config']['itemsProcFunc_addFieldsets'])) { // add fieldsets to selection
-			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($params['row']['pid'])); // add some fieldsets
-		}
-	}
-
-	/**
-	 * give me all fieldsets in an array
-	 *
-	 * @param	integer	$pid: Page ID
-	 * @return	array	$arr: all fieldsets with its name and the fieldset uid
-	 */
-	public function oldGetFieldsets($pid) {
-		$arr = array();
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$select = 'uid, title',
-			$from = 'tx_powermail_fieldsets',
-			$where .= 'pid = ' . intval($pid) . ' AND hidden = 0 AND deleted = 0',
-			$groupBy = '',
-			$orderBy = 'sorting',
-			$limit = ''
-		);
-		if ($res) {
-			$arr[] = array('powermail Fieldsets', '--div--');
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-				$arr[] = array($row['title'] . ' (' . $row['uid'] . ')', 'fieldset:' . $row['uid']);
-			}
-		}
-		return $arr;
-	}
-
-	/**
 	 * List values of a powermail selectorbox
 	 *
 	 * @param	array	$params: Params
 	 * @param	object	$pObj: Parent Object
 	 * @return	void
 	 */
-	public function oldValuesFromPowermailSelectbox(&$params, $pObj) {
+	public function valuesFromPowermailSelectbox(&$params, $pObj) {
 		// Get targetField UID
 		$gParams = t3lib_div::_GET('edit');
-		$gParams2 = $gParams['tx_powermailcond_conditions'];
+		$gParams2 = $gParams['tx_powermailcond_domain_model_condition'];
 		foreach ((array) $gParams2 as $uid => $actions) {
 			$thisConditionsUid = $uid;
 		}
-		$targetField = $pObj->cachedTSconfig['tx_powermailcond_conditions:' . $thisConditionsUid]['_THIS_ROW']['targetField'];
+		$targetField = $pObj->cachedTSconfig['tx_powermailcond_domain_model_condition:' . $thisConditionsUid]['_THIS_ROW']['targetField'];
 
 		// Read values from powermail
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			$select = 'flexform',
-			$from = 'tx_powermail_fields',
+			$select = 'settings',
+			$from = 'tx_powermail_domain_model_fields',
 			$where = 'uid = ' . intval($targetField),
 			$groupBy = '',
 			$orderBy = '',
@@ -210,15 +153,14 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		if ($res) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
-
-		// Change xml to a readable format
-		$arr = (array) t3lib_div::xml2array($row['flexform']);
-		$optionlist = $arr['data']['sDEF']['lDEF']['options']['vDEF'];
-		$options = t3lib_div::trimExplode("\n", $optionlist, 1);
+		$options = t3lib_div::trimExplode("\n", $row['settings'], 1);
 
 		// write params
 		foreach ((array) $options as $option) {
-			$params['items'][] = array(htmlspecialchars($option), htmlspecialchars($option));
+			$params['items'][] = array(
+				htmlspecialchars($option),
+				htmlspecialchars($option)
+			);
 		}
 	}
 }
