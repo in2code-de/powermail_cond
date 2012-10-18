@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 // Show Tables in Page View
-$TYPO3_CONF_VARS['EXTCONF']['cms']['db_layout']['addTables']['tx_powermailcond_conditions'][0] = array(
+$TYPO3_CONF_VARS['EXTCONF']['cms']['db_layout']['addTables']['tx_powermailcond_domain_model_condition'][0] = array(
 	'fList' => 'title',
 	'icon' => TRUE,
 );

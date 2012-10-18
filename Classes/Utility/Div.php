@@ -55,6 +55,8 @@ class Tx_PowermailCond_Utility_Div {
 	 * @return void
 	 */
 	public function saveValueToSession($value, $form, $field) {
+		$form = intval($form);
+
 		// get old session
 		$oldArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 
@@ -113,7 +115,7 @@ class Tx_PowermailCond_Utility_Div {
 	 * @param	boolean	$clearSession: Clear cache of each of this fields
 	 * @return	string	$list: Commaseparated List with field uids
 	 */
-	public function getFieldsFromFieldset($uid, $formUid, $clearSession = 0) {
+	public function getFieldsFromFieldset($uid, $formUid) {
 		if (is_numeric($uid)) { // if this uid don't contains fs (for fs123)
 			return $uid;
 		}

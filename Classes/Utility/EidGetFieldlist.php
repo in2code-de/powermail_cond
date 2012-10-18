@@ -61,6 +61,13 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 	public $piVars;
 
 	/**
+	 * Session Vars
+	 *
+	 * @var array
+	 */
+	public $session;
+
+	/**
 	 * Return list with fields which are not allowed (should be hidden)
 	 *
 	 * @return	string	$content: 	commaseparated field list (1,2,3)
@@ -101,16 +108,15 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 		}
 
 		foreach ((array) $conf as $key => $subconf) { // one loop for every rule of current target field
-			$ttcontentUid = $this->div->getTtcontentUid($conf[$key]['startField']);
 
 			// special case: hide a field from the beginning
 			if ($conf[$key]['actions'] == 1) { // show
-				$content .= $this->getFieldsFromFieldset($conf[$key]['targetField'], $ttcontentUid) . ',';
+				$content .= $this->div->getFieldsFromFieldset($conf[$key]['targetField'], $this->piVars['formUid']) . ',';
 			}
 
 			// operations
 			$act = 0;
-			$startFieldSession = $GLOBALS['TSFE']->fe_user->sesData['powermail_' . $ttcontentUid]['uid' . $conf[$key]['startField']]; // get startfield value from session
+			$startFieldSession = $this->session['field_' . $conf[$key]['startField']];
 			if (is_array($startFieldSession)) { // if second level
 				$startFieldSession = implode(',', $startFieldSession); // get all values in a commaseparated list
 			}
@@ -172,7 +178,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 					break;
 
 				case 8: // "contains value from field"
-					$comparisonFieldSession = $GLOBALS['TSFE']->fe_user->sesData['powermail_' . $ttcontentUid]['uid' . $conf[$key]['equalField']]; // get comparisonfield value from session
+					$comparisonFieldSession = $this->session['field_' . $conf[$key]['equalField']]; // get comparisonfield value from session
 					if (stristr($comparisonFieldSession, $startFieldSession)) {
 						$act = 1;
 						$tmp_conf = $conf[$key];
@@ -180,7 +186,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 					break;
 
 				case 9: // "contains not value from field"
-					$comparisonFieldSession = $GLOBALS['TSFE']->fe_user->sesData['powermail_' . $ttcontentUid]['uid' . $conf[$key]['equalField']]; // get comparisonfield value from session
+					$comparisonFieldSession = $this->session['field_' . $conf[$key]['equalField']]; // get comparisonfield value from session
 					if (!stristr($comparisonFieldSession, $startFieldSession)) {
 						$act = 1;
 						$tmp_conf = $conf[$key];
@@ -191,7 +197,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 			$do = $this->setDo(($act ? 1 : 0), $do, $conf[$key]['conjunction']); // $do = 1;
 		}
 
-		$content = $this->doAction($do, $content, $ttcontentUid, $tmp_conf); // add new field if needed
+		$content = $this->doAction($do, $content, $tmp_conf); // add new field if needed
 		return rtrim($content, ','); // return commaseparated list
 	}
 
@@ -200,23 +206,22 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 	 *
 	 * @param	boolean	$do: If something should be done or not
 	 * @param	string	$content: List with all fields which should be hidden
-	 * @param	integer	$ttcontentUid: UID of this tt_content
 	 * @param	array	$conf: Configuration of current field
 	 * @return	string list
 	 */
-	public function doAction($do, $content, $ttcontentUid, $conf) {
+	public function doAction($do, $content, $conf) {
 		if (!$do) {
 			return $content;
 		}
 
 		switch ($conf['actions']) {
 			case 0: // hide
-				$this->div->saveInSession(array('uid' . $conf['targetField'] => ''), 'powermail_' . $ttcontentUid); // remove value from session of this field
-				$content .= $this->getFieldsFromFieldset($conf['targetField'], $ttcontentUid, 1) . ','; // hide this field
+				$this->div->saveValueToSession('', $this->piVars['formUid'], $conf['targetField']); // remove value from session of this field
+				$content .= $this->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']) . ','; // hide this field
 				break;
 
 			case 1: // show
-				$content = t3lib_div::rmFromList($this->getFieldsFromFieldset($conf['targetField'], $ttcontentUid), $content); // remove from hidelist (show this field)
+				$content = t3lib_div::rmFromList($this->div->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']), $content); // remove from hidelist (show this field)
 				break;
 
 			case 2: // filter from selectbox
@@ -289,7 +294,6 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 	 */
 	private function getCObj() {
 		$this->piVars = t3lib_div::_GET($this->prefixId);
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div'); // Create new instance for div class
 		$userObj = tslib_eidtools::initFeUser();
 		$temp_TSFEclassName = t3lib_div::makeInstance('tslib_fe');
 		$GLOBALS['TSFE'] = new $temp_TSFEclassName($TYPO3_CONF_VARS, 0, 0, true);
@@ -301,6 +305,9 @@ class Tx_PowermailCond_Utility_EidGetFieldlist extends tslib_pibase {
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
+
+		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div'); // Create new instance for div class
+		$this->session = $this->div->getAllSessionValuesFromForm($this->piVars['formUid']);
 
 		return t3lib_div::makeInstance('tslib_cObj');
 	}

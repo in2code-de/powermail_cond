@@ -12,18 +12,18 @@ jQuery(document).ready(function() {
 		cache: false, // disable cache (for ie)
 		success: function(data) { // return values
 			if (data) { // if there is a response
-				$('form.powermail_form').append(data);
 				var sets = data.split(';');
 				for (var i=0; i < sets.length; i++) { // for each field which should be filled
 					var tmp_value = sets[i].split(':');
 					fieldValue(tmp_value[0], tmp_value[1]);
 				}
 			}
+			$('form.powermail_form').fadeTo('fast', 1);
 		}
 	});
 
 	// save values via ajax to session
-	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').change(function() {
+	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').bind('change, keyup', function() {
 		$this = $(this); // caching
 		var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 		var url = base + '/index.php';
@@ -189,7 +189,7 @@ function showAll() {
 }
 
 /**
- * Clear value of an inputfield, set selectedIndex to 0 for selection and so on
+ * Clear value of an inputfield, set selectedIndex to 0 for selection, don't clear value of submit buttons
  *
  * @param	string	selection: selection for jQuery (e.g. input.powermail)
  * @return	void
@@ -198,7 +198,7 @@ function clearValue(selection) {
 	if ($(selection).attr('type') == 'radio' || $(selection).attr('type') == 'checkbox') {
 		$(selection).attr('checked', false);
 	} else {
-		$(selection).val('');
+		$(selection).not(':submit').val('');
 	}
 }
 

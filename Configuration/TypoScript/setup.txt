@@ -5,3 +5,4 @@ page.headerData.3131.value (
 	<meta http-equiv="pragma" content="no-cache" />
 )
 page.includeJSFooter.powermail_cond = EXT:powermail_cond/Resources/Public/Js/PowermailCond.js
+page.includeCSS.powermail_cond = EXT:powermail_cond/Resources/Public/Css/PowermailCond.css
