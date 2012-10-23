@@ -242,7 +242,7 @@ function clearSession(uid) {
  * @return void
  */
 function clearFullSession() {
-	if ($('.powermail_create').length) {
+	if ($('.powermail_create').length || $('.powermail_frontend').length) { // if submitted Pi1 OR any Pi2
 		var url = base + '/index.php?eID=powermailcond_clearSession';
 		$.ajax({
 			url: url, // send to this url
