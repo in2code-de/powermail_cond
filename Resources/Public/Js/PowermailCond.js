@@ -6,8 +6,7 @@ jQuery(document).ready(function() {
 	}
 
 	// read values from session
-	var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
-	var url = base + '/index.php?eID=powermailcond_readSession&tx_powermailcond_pi1[form]=' + formUid;
+	var url = base + '/index.php?eID=powermailcond_readSession&tx_powermailcond_pi1[form]=' + getFormUid();
 	$.ajax({
 		url: url, // send to this url
 		cache: false, // disable cache (for ie)
@@ -26,7 +25,6 @@ jQuery(document).ready(function() {
 	// save values via ajax to session
 	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').bind('change', function() {
 		$this = $(this); // caching
-		var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 		var url = base + '/index.php';
 		var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
 		var value = $this.val(); // current value
@@ -35,7 +33,7 @@ jQuery(document).ready(function() {
 		}
 		var uid = $this.closest('.powermail_fieldwrap').attr('id').substr(20); // current field uid (without "uid")
 		var name = $this.attr('name');
-		var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + formUid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
+		var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + getFormUid() + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
 
 		$.ajax({
 			type: 'GET', // type
@@ -82,7 +80,7 @@ function checkConditions(uid) {
 	$.ajax({
 		type: 'GET', // type
 		url: url, // send to this url
-		data: 'eID=' + 'powermailcond_getFieldStatus' + params + '&tx_powermailcond_pi1[formUid]=' + $('input[name="tx_powermail_pi1[form]"]').val(), // add params
+		data: 'eID=' + 'powermailcond_getFieldStatus' + params + '&tx_powermailcond_pi1[formUid]=' + getFormUid(), // add params
 		cache: false, // disable cache (for ie)
 		success: function(data) { // return values
 			if (data != 'nochange') {
@@ -221,9 +219,8 @@ function getBaseUrl() {
  */
 function clearSession(uid) {
 	var url = base + '/index.php';
-	var formUid = $('input[name="tx_powermail_pi1[form]"]').val(); // form uid
 	var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
-	var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + formUid + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=&ts=' + timestamp;
+	var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + getFormUid() + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=&ts=' + timestamp;
 
 	$.ajax({
 		type: 'GET', // type
@@ -252,4 +249,21 @@ function clearFullSession() {
 			cache: false
 		});
 	}
+}
+
+/**
+ * Read From uid from DOM
+ *
+ * @return int		Form uid
+ */
+function getFormUid() {
+	var classes = $('.powermail_form:first').attr('class').split(' ');
+	for (var i=0; i < classes.length; i++) {
+		if (classes[i].indexOf('powermail_form_') !== -1) {
+			var currentClass = classes[i];
+		}
+	}
+
+	var formUid = currentClass.substr(15);
+	return formUid;
 }
