@@ -4,3 +4,6 @@ form.powermail_form {
 	opacity: 0.1;
 	filter: alpha(opacity=10);
 }
+.hide {
+	display: none;
+}

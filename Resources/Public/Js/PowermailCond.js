@@ -84,7 +84,7 @@ function checkConditions(uid) {
 		cache: false, // disable cache (for ie)
 		success: function(data) { // return values
 			if (data != 'nochange') {
-				$('.powermail_fieldwrap select option').show(); // show all options at the beginning
+				$('.powermail_fieldwrap select option').removeClass('hide'); // show all options at the beginning
 				$('.powermail_fieldwrap select option').removeAttr('disabled'); // enable all options at the beginning
 				if (data != '') { // if there is a response
 					if (data.length < 1000) { // stop if wrong result (maybe complete t3 page)
@@ -132,7 +132,7 @@ function doAction(list) {
  * @return	void
  */
 function hideField(uid) {
-	$('.powermail_fieldwrap_' + uid).hide(); // hide current field
+	$('.powermail_fieldwrap_' + uid).addClass('hide'); // hide current field
 	if ($('.powermail_fieldwrap_' + uid + ' .powermail_field').val() != '') { // only if value is not yet empty
 		clearValue('.powermail_fieldwrap_' + uid + ' .powermail_field'); // clear value of current field
 		clearSession(uid); // clear value of current field
@@ -148,7 +148,7 @@ function hideField(uid) {
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('.powermail_fieldset_' + params[1]).hide(); // hide current fieldset
+	$('.powermail_fieldset_' + params[1]).addClass('hide'); // hide current fieldset
 	for (var k=0; k < values.length; k++) { // one loop for every field inside the fieldset
 		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field'); // clear value of current field
 	}
@@ -163,10 +163,10 @@ function hideFieldset(string) {
 function filterSelection(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option').hide().attr('disabled', 'disabled'); // disable all options
+	$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option').addClass('hide').attr('disabled', 'disabled'); // disable all options
 
 	for (var j=0; j < values.length; j++) { // one loop for every option in select field
-		$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:contains(' + values[j] + ')').show().removeAttr('disabled'); // show this option
+		$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:contains(' + values[j] + ')').removeClass('hide').removeAttr('disabled'); // show this option
 	}
 
 	var valueSelected = $('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:selected').val(); // give me the value of the selected option
@@ -181,7 +181,7 @@ function filterSelection(string) {
  * @return void
  */
 function showAll() {
-	$('.powermail_fieldwrap, .powermail_fieldset').show(); // show all fields and fieldsets
+	$('.powermail_fieldwrap, .powermail_fieldset').removeClass('hide'); // show all fields and fieldsets
 }
 
 /**
