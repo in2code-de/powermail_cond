@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css" afterPath="$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" afterPath="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_emconf.php" afterPath="$PROJECT_DIR$/ext_emconf.php" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
@@ -27,19 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PowermailCond.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+      <file leaf-file-name="ext_emconf.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ext_emconf.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="248" column="24" selection-start="8747" selection-end="8747" vertical-scroll-proportion="0.3861111">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PowermailCond.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="1" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
+            <state line="17" column="23" selection-start="670" selection-end="670" vertical-scroll-proportion="0.20862308">
               <folding />
             </state>
           </provider>
@@ -68,9 +57,9 @@
         <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" />
-        <option value="$PROJECT_DIR$/ext_emconf.php" />
         <option value="$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css" />
         <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
+        <option value="$PROJECT_DIR$/ext_emconf.php" />
       </list>
     </option>
   </component>
@@ -107,6 +96,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -125,124 +124,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Configuration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="powermail_cond@powermailt347.in2code.de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utility" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -251,8 +132,8 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="options.lastSelected" value="web.server" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="in2code" serverId="3ca6b370-8a73-4525-bbbd-e6d3cdda1d7f" autoUpload="true" autoUploadExternalChanges="true">
     <servers>
@@ -522,7 +403,11 @@
       <created>1350996236102</created>
       <updated>1350996236102</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Working Copy">
+      <created>1351170396102</created>
+      <updated>1351170396102</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -535,7 +420,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15894467" sideWeight="0.3448276" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16473617" sideWeight="0.6730524" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17052767" sideWeight="0.6730524" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -623,11 +508,6 @@
         <state line="73" column="6" selection-start="2262" selection-end="2262" vertical-scroll-proportion="0.72039473" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Configuration/TypoScript/setup.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="51" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ext_localconf.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="76" selection-start="993" selection-end="1019" vertical-scroll-proportion="0.4473684" />
@@ -668,23 +548,24 @@
         <state line="31" column="19" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.023224045" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ext_emconf.php">
+    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="670" selection-end="670" vertical-scroll-proportion="0.20862308">
-          <folding />
-        </state>
+        <state line="248" column="24" selection-start="8747" selection-end="8747" vertical-scroll-proportion="0.4067114" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="8" column="1" selection-start="135" selection-end="135" vertical-scroll-proportion="0.17941953" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js">
+    <entry file="file://$PROJECT_DIR$/Configuration/TypoScript/setup.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="24" selection-start="8747" selection-end="8747" vertical-scroll-proportion="0.3861111">
+        <state line="0" column="0" selection-start="0" selection-end="391" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_emconf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="23" selection-start="670" selection-end="670" vertical-scroll-proportion="0.20862308">
           <folding />
         </state>
       </provider>

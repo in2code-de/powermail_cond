@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "powermail_cond".
 #
-# Auto generated 16-10-2012 15:32
+# Auto generated 29-10-2012 13:53
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -15,8 +15,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Add conditions via AJAX to powermail 2.x forms (fields and fieldsets). This extension uses jQuery as JavaScript Library.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '1.9.9',
-	'dependencies' => '',
+	'version' => '2.0.0',
+	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
 	'loadOrder' => '',
@@ -41,7 +41,9 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:17:{s:12:"ext_icon.gif";s:4:"014a";s:17:"ext_localconf.php";s:4:"8fd8";s:14:"ext_tables.php";s:4:"7b13";s:14:"ext_tables.sql";s:4:"0755";s:36:"icon_tx_powermailcond_conditions.gif";s:4:"bd1e";s:31:"icon_tx_powermailcond_rules.gif";s:4:"a2f9";s:16:"locallang_db.xml";s:4:"3438";s:7:"tca.php";s:4:"9a53";s:14:"doc/manual.sxw";s:4:"9c63";s:26:"files/js/powermail_cond.js";s:4:"5c2c";s:26:"files/static/constants.txt";s:4:"bfff";s:22:"files/static/setup.txt";s:4:"75c5";s:48:"lib/class.tx_powermailcond_ajaxFieldList_eid.php";s:4:"3f0f";s:53:"lib/class.tx_powermailcond_ajaxWriteInSession_eid.php";s:4:"cd8f";s:34:"lib/class.tx_powermailcond_div.php";s:4:"0352";s:40:"lib/class.tx_powermailcond_fields_be.php";s:4:"38f8";s:43:"lib/class.tx_powermailcond_pidContainer.php";s:4:"edfc";}',
+	'_md5_values_when_last_written' => 'a:21:{s:12:"ext_icon.gif";s:4:"014a";s:17:"ext_localconf.php";s:4:"82ca";s:14:"ext_tables.php";s:4:"7580";s:14:"ext_tables.sql";s:4:"1691";s:23:"Classes/Utility/Div.php";s:4:"bf92";s:35:"Classes/Utility/EidClearSession.php";s:4:"d4b5";s:35:"Classes/Utility/EidGetFieldlist.php";s:4:"c60a";s:34:"Classes/Utility/EidReadSession.php";s:4:"e2e5";s:36:"Classes/Utility/EidSaveInSession.php";s:4:"507b";s:39:"Classes/Utility/FieldlistingBackend.php";s:4:"98aa";s:31:"Configuration/TCA/Condition.php";s:4:"c5cf";s:26:"Configuration/TCA/Rule.php";s:4:"ce4b";s:34:"Configuration/TypoScript/setup.txt";s:4:"8313";s:84:"Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_condition.xml";s:4:"d97c";s:79:"Resources/Private/Language/locallang_csh_tx_powermailcond_domain_model_rule.xml";s:4:"bb3b";s:43:"Resources/Private/Language/locallang_db.xml";s:4:"2461";s:38:"Resources/Public/Css/PowermailCond.css";s:4:"c51b";s:59:"Resources/Public/Icons/icon_tx_powermailcond_conditions.gif";s:4:"bd1e";s:54:"Resources/Public/Icons/icon_tx_powermailcond_rules.gif";s:4:"a2f9";s:36:"Resources/Public/Js/PowermailCond.js";s:4:"d612";s:14:"doc/manual.sxw";s:4:"f97a";}',
+	'suggests' => array(
+	),
 );
 
 ?>
