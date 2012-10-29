@@ -1,0 +1,9 @@
+form.powermail_form {
+	-moz-opacity: 0.1;
+	-webkit-opacity: 0.1;
+	opacity: 0.1;
+	filter: alpha(opacity=10);
+}
+.hide {
+	display: none;
+}
