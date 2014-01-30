@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/Div.php" afterPath="$PROJECT_DIR$/Classes/Utility/Div.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" afterPath="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\phpstormprojects\powermailCond\Classes\Utility\OldEidReadSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,8 +44,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Classes/Utility/Div.php" />
-        <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
         <option value="$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css" />
         <option value="$PROJECT_DIR$/Resources/Public/Js/PowermailCond.js" />
@@ -62,6 +58,8 @@
         <option value="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/OldEidSaveInSession.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/Div.php" />
       </list>
     </option>
   </component>
@@ -155,7 +153,7 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.lastSelected" value="web.server" />
     <property name="last_opened_file_path" value="D:/typo3_src/typo3_src-4.7.14" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -178,7 +176,7 @@
       <server id="3ca6b370-8a73-4525-bbbd-e6d3cdda1d7f">
         <serverdata>
           <mappings>
-            <mapping deploy="/projekte/powermail_t347/typo3conf/ext/powermail_cond" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/projekte/powermail/extensions/powermail_cond" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </server>
@@ -367,7 +365,11 @@
       <created>1391092574461</created>
       <updated>1391092574461</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Refactoring">
+      <created>1391092985439</created>
+      <updated>1391092985439</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -434,16 +436,6 @@
         <state line="163" column="55" selection-start="6170" selection-end="6170" vertical-scroll-proportion="0.6407119" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="42" selection-start="5616" selection-end="5616" vertical-scroll-proportion="0.90679824" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="6" selection-start="1188" selection-end="1188" vertical-scroll-proportion="0.023224045" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="1" selection-start="135" selection-end="135" vertical-scroll-proportion="0.17941953" vertical-offset="0" max-vertical-offset="0" />
@@ -505,16 +497,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/OldEidSaveInSession.php">
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="28" selection-start="1972" selection-end="2578" vertical-scroll-proportion="-10.346154" vertical-offset="479" max-vertical-offset="1649">
+        <state line="163" column="1" selection-start="4634" selection-end="4634" vertical-scroll-proportion="0.8885246" vertical-offset="1584" max-vertical-offset="2499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="1" selection-start="5754" selection-end="5754" vertical-scroll-proportion="0.8885246" vertical-offset="1771" max-vertical-offset="2686">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="2013" selection-end="2013" vertical-scroll-proportion="0.44262296" vertical-offset="445" max-vertical-offset="1360">
+        <state line="72" column="0" selection-start="2013" selection-end="2013" vertical-scroll-proportion="0.47103825" vertical-offset="419" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext_tables.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1088">
           <folding />
         </state>
       </provider>
