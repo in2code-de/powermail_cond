@@ -190,5 +190,3 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 		),
 	),
 );
-
-?>
