@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Add conditions via AJAX to powermail 2.x forms (fields and fieldsets). This extension uses jQuery as JavaScript Library.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.0.0',
+	'version' => '2.0.1',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
@@ -34,7 +34,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'powermail' => '2.0.4-0.0.0',
+			'powermail' => '2.0.4-2.0.99',
+			'extbase' => '4.7.0-6.1.99',
+			'fluid' => '4.7.0-6.1.99',
+			'typo3' => '4.7.0-6.1.99',
 		),
 		'conflicts' => array(
 		),
