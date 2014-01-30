@@ -47,6 +47,11 @@ class Tx_PowermailCond_Utility_EidReadSession {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
+	 * @var Tx_PowermailCond_Utility_Div
+	 */
+	protected $div;
+
+	/**
 	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
 	 *
 	 * @return string
@@ -77,9 +82,7 @@ class Tx_PowermailCond_Utility_EidReadSession {
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
 
-		$this->piVars = t3lib_div::_GET($this->prefixId);
 		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
-		$this->session = $this->div->getAllSessionValuesFromForm($this->piVars['formUid']);
 	}
 }
 

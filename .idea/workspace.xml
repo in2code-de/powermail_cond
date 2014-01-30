@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="Working Copy">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/OldEidReadSession.php" />
-      <change type="DELETED" beforePath="D:\phpstormprojects\powermailCond\Classes\Utility\OldEidGetFieldlist.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" />
+    <list default="true" readonly="true" id="500e5988-e13b-4ba1-8a60-e63a97f737a1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext_localconf.php" afterPath="$PROJECT_DIR$/ext_localconf.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/powermail_cond@powermailt347.in2code.de.iml" afterPath="$PROJECT_DIR$/.idea/powermail_cond@powermailt347.in2code.de.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\phpstormprojects\powermailCond\Classes\Utility\OldEidReadSession.php" afterPath="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
     </list>
     <ignored path="powermail_cond@powermailt347.in2code.de.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,46 +28,7 @@
     <favorites_list name="powermail_cond@powermailt347.in2code.de" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="OldEidReadSession.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/Utility/OldEidReadSession.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="34" selection-start="1517" selection-end="1517" vertical-scroll-proportion="-3.8076923" vertical-offset="173" max-vertical-offset="1394">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EidReadSession.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Classes/Utility/EidReadSession.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="6" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.39016393" vertical-offset="0" max-vertical-offset="1190">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ext_localconf.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ext_localconf.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="4" selection-start="892" selection-end="892" vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="612">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EidGetFieldlist.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="11.769231" vertical-offset="306" max-vertical-offset="5882">
-              <folding>
-                <element signature="e#6#984#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -87,10 +46,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ext_tables.php" />
-        <option value="$PROJECT_DIR$/Configuration/TypoScript/setup.txt" />
-        <option value="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
-        <option value="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/Div.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/FieldlistingBackend.php" />
         <option value="$PROJECT_DIR$/Configuration/TCA/Condition.php" />
@@ -102,7 +57,11 @@
         <option value="$PROJECT_DIR$/ext_localconf.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/OldEidReadSession.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/OldEidClearSession.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/EidClearSession.php" />
         <option value="$PROJECT_DIR$/Classes/Utility/EidReadSession.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/OldEidSaveInSession.php" />
+        <option value="$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php" />
       </list>
     </option>
   </component>
@@ -404,12 +363,16 @@
       <created>1391090666900</created>
       <updated>1391090666900</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Refactoring">
+      <created>1391092574461</created>
+      <updated>1391092574461</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-262" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -423,7 +386,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15894467" sideWeight="0.3448276" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14461046" sideWeight="0.67344344" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14461046" sideWeight="0.67344344" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -447,7 +410,8 @@
     <MESSAGE value="Working Copy" />
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Cleaning EidGetFieldlist" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaning EidGetFieldlist" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -458,11 +422,6 @@
         <state line="17" column="23" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="782">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidClearSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="64" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.50328946" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ext_tables.sql">
@@ -483,11 +442,6 @@
     <entry file="file://$PROJECT_DIR$/Classes/Utility/Div.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="6" selection-start="1188" selection-end="1188" vertical-scroll-proportion="0.023224045" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="19" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.023224045" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Resources/Public/Css/PowermailCond.css">
@@ -521,32 +475,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="11.769231" vertical-offset="306" max-vertical-offset="5882">
-          <folding>
-            <element signature="e#6#984#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Classes/Utility/OldEidReadSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="34" selection-start="1517" selection-end="1517" vertical-scroll-proportion="-3.8076923" vertical-offset="173" max-vertical-offset="1394">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ext_localconf.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="4" selection-start="892" selection-end="892" vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="612">
+        <state line="28" column="4" selection-start="892" selection-end="892" vertical-scroll-proportion="0.52021855" vertical-offset="0" max-vertical-offset="915">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classes/Utility/EidReadSession.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="6" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.39016393" vertical-offset="0" max-vertical-offset="1190">
+        <state line="85" column="5" selection-start="2479" selection-end="2479" vertical-scroll-proportion="0.8142077" vertical-offset="326" max-vertical-offset="1241">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidGetFieldlist.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="340" column="18" selection-start="9891" selection-end="9891" vertical-scroll-proportion="2.2262294" vertical-offset="3743" max-vertical-offset="5882">
+          <folding>
+            <element signature="e#6#984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidClearSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="46" selection-start="1410" selection-end="1476" vertical-scroll-proportion="0.16393442" vertical-offset="258" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/OldEidSaveInSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="28" selection-start="1972" selection-end="2578" vertical-scroll-proportion="-10.346154" vertical-offset="479" max-vertical-offset="1649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/Utility/EidSaveInSession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="0" selection-start="2013" selection-end="2013" vertical-scroll-proportion="0.44262296" vertical-offset="445" max-vertical-offset="1360">
           <folding />
         </state>
       </provider>
