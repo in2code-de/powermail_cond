@@ -57,5 +57,3 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . '/Resources/Public/Icons/icon_tx_powermailcond_rules.gif'
 	),
 );
-
-?>
