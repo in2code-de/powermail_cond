@@ -97,7 +97,6 @@ function checkConditions(uid) {
 
 			// Form validation
 			if ($.fn.validationEngine) {
-				console.log('validateAgain');
 				$('.powermail_form').validationEngine('detach');
 			}
 		},

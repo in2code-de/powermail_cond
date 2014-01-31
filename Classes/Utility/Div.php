@@ -47,50 +47,6 @@ class Tx_PowermailCond_Utility_Div {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * Save value to session and respect old entries
-	 *
-	 * @param string $value		Value to store
-	 * @param int $form			Form uid
-	 * @param int $field		Field uid
-	 * @return void
-	 */
-	public function saveValueToSession($value, $form, $field) {
-		$form = intval($form);
-
-		// get old session
-		$oldArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-
-		// merge old and new
-		$array = array(
-			'form_' . $form => array(
-				'field_' . $field => $value
-			)
-		);
-		$array['form_' . $form] = array_merge((array) $oldArray['form_' . $form], (array) $array['form_' . $form]);
-
-		// save new array
-		// Generate Session with piVars array
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
-		$GLOBALS['TSFE']->storeSessionData();
-	}
-
-	/**
-	 * Return all values from the session (could be used for debugging, etc..)
-	 *
-	 * @param int $form			Form Uid
-	 * @return array $array		with session values
-	 */
-	public function getAllSessionValuesFromForm($form = NULL) {
-		// get current stored values from session
-		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-
-		if (isset($array['form_' . $form])) {
-			return $array['form_' . $form];
-		}
-		return $array;
-	}
-
-	/**
 	 * Get Startfields
 	 *
 	 * @param	array	$conf: Configuration Array
@@ -149,16 +105,66 @@ class Tx_PowermailCond_Utility_Div {
 	 * Get all fields in a commaseparated list from a fieldset uid
 	 *
 	 * @param int $formUid UID of related form
+	 * @param string $prefix Prefix for session
 	 * @return void
 	 */
-	public function cleanfullSession($formUid = NULL) {
+	public function cleanfullSession($formUid = NULL, $prefix = 'fieldSession') {
 		if (intval($formUid) > 0) {
 			$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-			$array['form_' . $formUid] = array();
+			$array[$prefix]['form_' . $formUid] = array();
 		} else {
-			$array = array();
+			$array[$prefix] = array();
 		}
 		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
 		$GLOBALS['TSFE']->storeSessionData();
+	}
+
+	/**
+	 * Save value to session and respect old entries
+	 *
+	 * @param string $value Value to store
+	 * @param int $form Form uid
+	 * @param int $field Field uid
+	 * @param string $prefix Prefix for session
+	 * @return void
+	 */
+	public function saveValueToSession($value, $form, $field, $prefix = 'fieldSession') {
+		$form = intval($form);
+
+		// get old session
+		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
+		$oldArray = $session[$prefix];
+
+		// merge old and new
+		$array = array(
+			$prefix = array(
+				'form_' . $form => array(
+					'field_' . $field => $value
+				)
+			)
+		);
+		$array[$prefix]['form_' . $form] = array_merge((array) $oldArray[$prefix]['form_' . $form], (array) $array[$prefix]['form_' . $form]);
+
+		// save new array
+		// Generate Session with piVars array
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
+		$GLOBALS['TSFE']->storeSessionData();
+	}
+
+	/**
+	 * Return all values from the session (could be used for debugging, etc..)
+	 *
+	 * @param int $form Form Uid
+	 * @param string $prefix Prefix for session
+	 * @return array $array with session values
+	 */
+	public function getAllSessionValuesFromForm($form = NULL, $prefix = 'fieldSession') {
+		// get current stored values from session
+		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
+
+		if (isset($array[$prefix]['form_' . $form])) {
+			return $array[$prefix]['form_' . $form];
+		}
+		return $array[$prefix];
 	}
 }
