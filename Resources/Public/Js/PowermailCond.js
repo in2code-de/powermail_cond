@@ -139,7 +139,7 @@ function doAction(list) {
  */
 function hideField(uid) {
 	$('.powermail_fieldwrap_' + uid).addClass('hide'); // hide current field
-	deRequired(uid);
+	deRequiredField(uid);
 	if ($('.powermail_fieldwrap_' + uid + ' .powermail_field').val() != '') { // only if value is not yet empty
 		clearValue('.powermail_fieldwrap_' + uid + ' .powermail_field'); // clear value of current field
 		clearSession(uid); // clear value of current field
@@ -188,7 +188,7 @@ function filterSelection(string) {
  * @return void
  */
 function showAll() {
-	reRequired();
+	reRequiredAll();
 	$('.powermail_fieldwrap, .powermail_fieldset').removeClass('hide');
 }
 
@@ -198,7 +198,7 @@ function showAll() {
  * @param	integer	uid: uid of the element
  * @return	void
  */
-function deRequired(uid) {
+function deRequiredField(uid) {
 	// replace validate[required] with [_required_]
 	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
 	var classValue = element.attr('class');
@@ -214,7 +214,7 @@ function deRequired(uid) {
  *
  * @return void
  */
-function reRequired() {
+function reRequiredAll() {
 	$('.powermail_field').each(function() {
 		var element = $(this);
 		var classValue = $(this).attr('class');
