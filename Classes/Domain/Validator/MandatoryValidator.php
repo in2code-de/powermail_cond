@@ -35,10 +35,10 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 
 				// set error
 				if (is_array($params[$field->getUid()])) {
-					$empty = 1;
+					$empty = TRUE;
 					foreach ($params[$field->getUid()] as $value) {
 						if (strlen($value)) {
-							$empty = 0;
+							$empty = FALSE;
 							break;
 						}
 					}
