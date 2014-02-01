@@ -29,3 +29,7 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_readSession'] =
 // eID to clean session to a form completely (via AJAX)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_clearSession'] =
 	'EXT:powermail_cond/Classes/Utility/EidClearSession.php';
+
+// eID to clean session to a form completely (via AJAX)
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_deRequiredField'] =
+	'EXT:powermail_cond/Classes/Utility/EidDeRequiredField.php';

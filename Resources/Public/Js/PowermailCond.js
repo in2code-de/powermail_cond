@@ -208,6 +208,13 @@ function deRequiredField(uid) {
 		// remove required="required"
 		element.attr('required', false);
 	}
+
+	// save this field in session so it's no mandatory field any more
+	$.ajax({
+		url: '/index.php',
+		data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
+		cache: false
+	});
 }
 
 /**

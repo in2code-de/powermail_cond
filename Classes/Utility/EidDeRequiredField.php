@@ -24,13 +24,13 @@
  ***************************************************************/
 
 /**
- * This class is for reading values from session
+ * Store fields in session which should not be mandatory any more
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
  * @subpackage	Tx_PowermailCond_Utility_EidReadSession
  */
-class Tx_PowermailCond_Utility_EidClearSession {
+class Tx_PowermailCond_Utility_EidDeRequiredField {
 
 	/**
 	 * The extension key
@@ -52,16 +52,24 @@ class Tx_PowermailCond_Utility_EidClearSession {
 	protected $div;
 
 	/**
-	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
+	 * save field in session to be stored for non-mandatory fields
 	 *
-	 * @return void
+	 * @return bool
 	 */
 	public function main() {
-		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
 		$piVars = t3lib_div::_GP($this->prefixId);
-		$form = intval($piVars['form']);
-		$this->div->cleanfullSession($form, 'fieldSession');
-		$this->div->cleanfullSession($form, 'deRequiredFields');
+		$formUid = intval($piVars['formUid']);
+		$fieldUid = intval($piVars['fieldUid']);
+
+		// start
+		if ($formUid === 0 || $fieldUid === 0) {
+			return FALSE;
+		}
+
+		// save single value in session
+		$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
+
+		return TRUE;
 	}
 
 	/**
@@ -83,5 +91,5 @@ class Tx_PowermailCond_Utility_EidClearSession {
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidClearSession', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDeRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();

@@ -21,17 +21,12 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 
 		/* @var $divCond Tx_PowermailCond_Utility_Div */
 		$divCond = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
-		$sessionValues = $divCond->getAllSessionValuesFromForm($formUid);
-		t3lib_utility_Debug::debug($sessionValues, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+		$sessionValues = $divCond->getAllSessionValuesFromForm($formUid, 'deRequiredFields');
 
-		/* @var $getFieldList Tx_PowermailCond_Utility_EidGetFieldlist */
-		$getFieldList = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidGetFieldlist');
-		t3lib_utility_Debug::debug($getFieldList->main(), 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
-
-		return TRUE;
-
-		foreach ($form->getPages() as $page) { // every page in current form
-			foreach ($page->getFields() as $field) { // every field in current page
+		// every page in current form
+		foreach ($form->getPages() as $page) {
+			// every field in current page
+			foreach ($page->getFields() as $field) {
 
 				// if not a mandatory field
 				if (!$field->getMandatory()) {
@@ -49,12 +44,13 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 					}
 					if ($empty) {
 						$this->addError('mandatory', $field->getUid());
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 				} else {
-					if (!strlen($params[$field->getUid()])) {
+					// extend this line for powermail_cond
+					if (!strlen($params[$field->getUid()]) && !isset($sessionValues['field_' . $field->getUid()])) {
 						$this->addError('mandatory', $field->getUid());
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 				}
 			}
