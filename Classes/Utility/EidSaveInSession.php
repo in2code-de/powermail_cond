@@ -75,7 +75,7 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	}
 
 	/**
-	 * Initialize Extbase
+	 * Initialize eID
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$userObj = tslib_eidtools::initFeUser();

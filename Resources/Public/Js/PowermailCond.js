@@ -198,14 +198,16 @@ function showAll() {
  * @return	void
  */
 function deRequiredField(uid) {
-	// replace validate[required] with [_required_]
 	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
 	var classValue = element.attr('class');
-	classValue = classValue.replace('required', '_required_');
-	element.attr('class', classValue);
+	if (classValue && classValue.indexOf('required') !== -1) {
+		// replace validate[required] with [_required_]
+		classValue = classValue.replace('required', '_required_');
+		element.attr('class', classValue);
 
-	// remove required="required"
-	element.attr('required', false);
+		// remove required="required"
+		element.attr('required', false);
+	}
 }
 
 /**

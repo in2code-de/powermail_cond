@@ -12,7 +12,6 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 	 * @return bool
 	 */
 	public function isValid($params) {
-		return TRUE;
 		$gp = t3lib_div::_GP('tx_powermail_pi1');
 		$formUid = $gp['form'];
 		$form = $this->formsRepository->findByUid($formUid);
@@ -24,6 +23,12 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 		$divCond = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
 		$sessionValues = $divCond->getAllSessionValuesFromForm($formUid);
 		t3lib_utility_Debug::debug($sessionValues, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+
+		/* @var $getFieldList Tx_PowermailCond_Utility_EidGetFieldlist */
+		$getFieldList = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidGetFieldlist');
+		t3lib_utility_Debug::debug($getFieldList->main(), 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+
+		return TRUE;
 
 		foreach ($form->getPages() as $page) { // every page in current form
 			foreach ($page->getFields() as $field) { // every field in current page
