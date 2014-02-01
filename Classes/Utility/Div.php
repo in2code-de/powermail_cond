@@ -137,7 +137,7 @@ class Tx_PowermailCond_Utility_Div {
 
 		// merge old and new
 		$array = array(
-			$prefix = array(
+			$prefix => array(
 				'form_' . $form => array(
 					'field_' . $field => $value
 				)
