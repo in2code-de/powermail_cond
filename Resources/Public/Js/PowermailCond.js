@@ -154,9 +154,10 @@ function hideField(uid) {
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('.powermail_fieldset_' + params[1]).addClass('hide'); // hide current fieldset
-	for (var k=0; k < values.length; k++) { // one loop for every field inside the fieldset
-		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field'); // clear value of current field
+	$('.powermail_fieldset_' + params[1]).addClass('hide');
+	for (var k=0; k < values.length; k++) {
+		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field');
+		deRequiredField(values[k]);
 	}
 }
 
@@ -207,14 +208,14 @@ function deRequiredField(uid) {
 
 		// remove required="required"
 		element.attr('required', false);
-	}
 
-	// save this field in session so it's no mandatory field any more
-	$.ajax({
-		url: '/index.php',
-		data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
-		cache: false
-	});
+		// save this field in session so it's no mandatory field any more
+		$.ajax({
+			url: '/index.php',
+			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
+			cache: false
+		});
+	}
 }
 
 /**
