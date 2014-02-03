@@ -54,22 +54,28 @@ class Tx_PowermailCond_Utility_EidDeRequiredField {
 	/**
 	 * save field in session to be stored for non-mandatory fields
 	 *
-	 * @return bool
+	 * @return int Field Uid which was disabled
 	 */
 	public function main() {
+		$cObj = t3lib_div::makeInstance('tslib_cObj');
 		$piVars = t3lib_div::_GP($this->prefixId);
 		$formUid = intval($piVars['formUid']);
 		$fieldUid = intval($piVars['fieldUid']);
+		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $cObj);
 
 		// start
 		if ($formUid === 0 || $fieldUid === 0) {
-			return FALSE;
+			return 0;
 		}
 
-		// save single value in session
-		$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
+		// only if this field was defined as targetField in conditions
+		if (array_key_exists($fieldUid, $conditions)) {
+			// save single value in session
+			$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
+			return $fieldUid;
+		}
 
-		return TRUE;
+		return 0;
 	}
 
 	/**

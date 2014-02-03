@@ -65,6 +65,42 @@ class Tx_PowermailCond_Utility_Div {
 	}
 
 	/**
+	 * get condition as array from current page
+	 *
+	 * @param int $formUid
+	 * @param tslib_cObj $cObj
+	 * @return array $arr: Array with all conditions of the current page
+	 */
+	public function getConditionsFromForm($formUid, $cObj) {
+		$arr = array();
+		$select = '
+				tx_powermailcond_domain_model_condition.targetField, tx_powermailcond_domain_model_condition.actions,
+				tx_powermailcond_domain_model_condition.conjunction,
+				tx_powermailcond_domain_model_condition.filterSelectField, tx_powermailcond_domain_model_rule.startField,
+				tx_powermailcond_domain_model_rule.ops,
+				tx_powermailcond_domain_model_rule.condstring, tx_powermailcond_domain_model_rule.equalField
+		';
+		$from = '
+			tx_powermailcond_domain_model_condition
+			LEFT JOIN tx_powermailcond_domain_model_rule ON
+			tx_powermailcond_domain_model_condition.uid = tx_powermailcond_domain_model_rule.conditions
+		';
+		$where = (intval($formUid) ? 'tx_powermailcond_domain_model_condition.form = ' . intval($formUid) : '1');
+		$where .= $cObj->enableFields('tx_powermailcond_domain_model_condition');
+		$where .= $cObj->enableFields('tx_powermailcond_domain_model_rule');
+		$groupBy = 'tx_powermailcond_domain_model_rule.uid';
+		$orderBy = '';
+		$limit = 1000;
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+				$arr[$row['targetField']][] = $row;
+			}
+		}
+		return $arr;
+	}
+
+	/**
 	 * Get all fields in a commaseparated list from a fieldset uid
 	 *
 	 * @param integer $uid: Fieldset UID
@@ -133,17 +169,17 @@ class Tx_PowermailCond_Utility_Div {
 
 		// get old session
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		$oldArray = $session[$prefix];
+		if (isset($session[$prefix]['form_' . $form])) {
+			$oldArray = $session[$prefix]['form_' . $form];
+		} else {
+			$oldArray = array();
+		}
 
 		// merge old and new
 		$array = array(
-			$prefix => array(
-				'form_' . $form => array(
-					'field_' . $field => $value
-				)
-			)
+			'field_' . $field => $value
 		);
-		$array[$prefix]['form_' . $form] = array_merge((array) $oldArray[$prefix]['form_' . $form], (array) $array[$prefix]['form_' . $form]);
+		$array[$prefix]['form_' . $form] = array_merge($oldArray, $array);
 
 		// save new array
 		// Generate Session with piVars array
