@@ -225,6 +225,7 @@ function deRequiredField(uid) {
 function reRequiredAll() {
 	$('.powermail_field').each(function() {
 		var element = $(this);
+		var uid = element.closest('.powermail_fieldwrap').attr('id').substr(20);
 		var classValue = $(this).attr('class');
 		if (classValue.indexOf('_required_') !== -1) {
 			// replace validate[_required_] with [required]
@@ -235,6 +236,12 @@ function reRequiredAll() {
 			if (element.attr('type') == 'text') {
 				element.attr('required', 'required');
 			}
+
+			$.ajax({
+				url: '/index.php',
+				data: 'eID=' + 'powermailcond_requiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
+				cache: false
+			});
 		}
 	});
 }
@@ -312,6 +319,9 @@ function clearFullSession() {
  * @return int		Form uid
  */
 function getFormUid() {
+	if ($('.powermail_form').length === 0) {
+		return 0;
+	}
 	var classes = $('.powermail_form:first').attr('class').split(' ');
 	for (var i=0; i < classes.length; i++) {
 		if (classes[i].indexOf('powermail_form_') !== -1) {

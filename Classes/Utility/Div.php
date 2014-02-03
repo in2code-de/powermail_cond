@@ -188,6 +188,29 @@ class Tx_PowermailCond_Utility_Div {
 	}
 
 	/**
+	 * Save value to session and respect old entries
+	 *
+	 * @param int $form Form uid
+	 * @param int $field Field uid
+	 * @param string $prefix Prefix for session
+	 * @return void
+	 */
+	public function removeValueFromSession($form, $field, $prefix = 'fieldSession') {
+		$form = intval($form);
+		$field = intval($field);
+
+		// get old session
+		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
+		if (isset($session[$prefix]['form_' . $form]['field_' . $field])) {
+			unset($session[$prefix]['form_' . $form]['field_' . $field]);
+
+			// save again
+			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
+			$GLOBALS['TSFE']->storeSessionData();
+		}
+	}
+
+	/**
 	 * Return all values from the session (could be used for debugging, etc..)
 	 *
 	 * @param int $form Form Uid

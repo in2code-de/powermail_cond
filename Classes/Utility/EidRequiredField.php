@@ -24,13 +24,13 @@
  ***************************************************************/
 
 /**
- * Store fields in session which should not be mandatory any more
+ * Remove fields from session which should be mandatory again
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidDeRequiredField
+ * @subpackage	Tx_PowermailCond_Utility_EidRequiredField
  */
-class Tx_PowermailCond_Utility_EidDeRequiredField {
+class Tx_PowermailCond_Utility_EidRequiredField {
 
 	/**
 	 * Prefix Id
@@ -50,25 +50,18 @@ class Tx_PowermailCond_Utility_EidDeRequiredField {
 	 * @return int Field Uid which was disabled
 	 */
 	public function main() {
-		$cObj = t3lib_div::makeInstance('tslib_cObj');
 		$piVars = t3lib_div::_GP($this->prefixId);
 		$formUid = intval($piVars['formUid']);
 		$fieldUid = intval($piVars['fieldUid']);
-		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $cObj);
 
 		// start
 		if ($formUid === 0 || $fieldUid === 0) {
 			return 0;
 		}
 
-		// only if this field was defined as targetField in conditions
-		if (array_key_exists($fieldUid, $conditions)) {
-			// save single value in session
-			$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
-			return $fieldUid;
-		}
-
-		return 0;
+		// removee single value from session
+		$this->div->removeValueFromSession($formUid, $fieldUid, 'deRequiredFields');
+		return $fieldUid;
 	}
 
 	/**
@@ -90,5 +83,5 @@ class Tx_PowermailCond_Utility_EidDeRequiredField {
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDeRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();
