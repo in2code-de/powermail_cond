@@ -182,7 +182,6 @@ class Tx_PowermailCond_Utility_Div {
 		$array[$prefix]['form_' . $form] = array_merge($oldArray, $array);
 
 		// save new array
-		// Generate Session with piVars array
 		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
 		$GLOBALS['TSFE']->storeSessionData();
 	}

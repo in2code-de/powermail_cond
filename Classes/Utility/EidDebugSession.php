@@ -24,46 +24,36 @@
  ***************************************************************/
 
 /**
- * Store fields in session which should not be mandatory any more
+ * Debug Session values
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidDeRequiredField
+ * @subpackage	Tx_PowermailCond_Utility_EidDebugSession
  */
-class Tx_PowermailCond_Utility_EidDeRequiredField {
+class Tx_PowermailCond_Utility_EidDebugSession {
 
 	/**
-	 * Prefix Id
+	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
 	 *
-	 * @var string
-	 */
-	public $prefixId = 'tx_powermailcond_pi1';
-
-	/**
-	 * @var Tx_PowermailCond_Utility_Div
-	 */
-	protected $div;
-
-	/**
-	 * save field in session to be stored for non-mandatory fields
-	 *
-	 * @return int Field Uid which was disabled
+	 * @return bool
 	 */
 	public function main() {
-		$cObj = t3lib_div::makeInstance('tslib_cObj');
-		$piVars = t3lib_div::_GP($this->prefixId);
-		$formUid = intval($piVars['formUid']);
-		$fieldUid = intval($piVars['fieldUid']);
-		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $cObj);
-
-		// only if this field was defined as targetField in conditions
-		if (array_key_exists($fieldUid, $conditions)) {
-			// save single value in session
-			$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
-			return $fieldUid;
+		if (empty($GLOBALS['BE_USER']->user['uid'])) {
+			return 'Please login into backend';
 		}
 
-		return 0;
+		/* @var $div Tx_PowermailCond_Utility_Div */
+		$div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$piVars = t3lib_div::_GP('tx_powermailcond_pi1');
+		if (empty($piVars['formUid'])) {
+			return 'tx_powermailcond_pi1[formUid] is missing';
+		}
+
+		$sessionForm = $div->getAllSessionValuesFromForm($piVars['formUid']);
+		$sessionDeRequiredFields = $div->getAllSessionValuesFromForm($piVars['formUid'], 'deRequiredFields');
+
+		t3lib_utility_Debug::debug($sessionForm, 'Values in Session');
+		t3lib_utility_Debug::debug($sessionDeRequiredFields, 'Disabled Required Fields');
 	}
 
 	/**
@@ -80,10 +70,11 @@ class Tx_PowermailCond_Utility_EidDeRequiredField {
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
-
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');
+		$GLOBALS['BE_USER']->start();
+		$GLOBALS['BE_USER']->backendCheckLogin();
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDeRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDebugSession', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();
