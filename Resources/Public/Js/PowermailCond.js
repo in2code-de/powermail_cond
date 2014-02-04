@@ -155,10 +155,19 @@ function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
 	$('.powermail_fieldset_' + params[1]).addClass('hide');
+	var fields = [];
 	for (var k=0; k < values.length; k++) {
 		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field');
-		deRequiredField(values[k]);
+		deRequiredField(values[k], true);
+		fields.push(values[k]);
 	}
+
+	// save this field in session so it's no mandatory field any more
+	$.ajax({
+		url: '/index.php',
+		data: 'eID=' + 'powermailcond_deRequiredFields&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUids]=' + fields.join() + '&no_cache=1',
+		cache: false
+	});
 }
 
 /**
@@ -195,10 +204,11 @@ function showAll() {
 /**
  * Remove required class in Field
  *
- * @param	integer	uid: uid of the element
- * @return	void
+ * @param integer uid of the element
+ * @param bool disableAjaxRequest
+ * @return void
  */
-function deRequiredField(uid) {
+function deRequiredField(uid, disableAjaxRequest) {
 	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
 	var classValue = element.attr('class');
 	if (classValue && classValue.indexOf('required') !== -1) {
@@ -210,11 +220,13 @@ function deRequiredField(uid) {
 		element.attr('required', false);
 
 		// save this field in session so it's no mandatory field any more
-		$.ajax({
-			url: '/index.php',
-			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
-			cache: false
-		});
+		if (disableAjaxRequest == undefined && disableAjaxRequest === true) {
+			$.ajax({
+				url: '/index.php',
+				data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
+				cache: false
+			});
+		}
 	}
 }
 

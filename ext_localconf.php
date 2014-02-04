@@ -34,6 +34,10 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_clearSession'] =
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_deRequiredField'] =
 	'EXT:powermail_cond/Classes/Utility/EidDeRequiredField.php';
 
+// eID to save some fields in a separate session to select a field to be non-mandatory
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_deRequiredFields'] =
+	'EXT:powermail_cond/Classes/Utility/EidDeRequiredFields.php';
+
 // eID to remove a field from session to select a field to be mandatory again
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_requiredField'] =
 	'EXT:powermail_cond/Classes/Utility/EidRequiredField.php';
