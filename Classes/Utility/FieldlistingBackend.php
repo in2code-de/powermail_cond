@@ -28,7 +28,8 @@
  * List powermail fields in Backend for powermail_cond rules
  *
  * @package powermail_cond
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class Tx_PowermailCond_Utility_FieldlistingBackend {
 
@@ -47,14 +48,16 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		}
 
 		// query
-		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title, tx_powermail_domain_model_fields.marker';
+		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title,
+			tx_powermail_domain_model_fields.marker';
 		$from = '
 			tx_powermail_domain_model_fields
 			left join tx_powermail_domain_model_pages on tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
 			left join tx_powermail_domain_model_forms on tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
 		';
 		$where = 'tx_powermail_domain_model_fields.hidden = 0 AND tx_powermail_domain_model_fields.deleted = 0';
-		if (isset($params['config']['itemsProcFuncValue'])) { // we want only some fields for starting fields
+		// we want only some fields for starting fields
+		if (isset($params['config']['itemsProcFuncValue'])) {
 			$where .= ' and tx_powermail_domain_model_fields.type in ("input", "textarea", "select", "radio", "check")';
 		}
 		if ($formUid > 0) {
@@ -68,7 +71,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 			// Title for optgroup
 			$params['items'][] = array('powermail Fields', '--div--');
 
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$params['items'][] = array(
 					$pObj->sL($row['title']) . ', {' . $row['marker'] . '}, uid' . $row['uid'],
 					$row['uid']
@@ -76,8 +79,10 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 			}
 		}
 
-		if (isset($params['config']['itemsProcFunc_addFieldsets'])) { // add fieldsets to selection
-			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($formUid)); // add some fieldsets
+		// add fieldsets to selection
+		if (isset($params['config']['itemsProcFunc_addFieldsets'])) {
+			// add some fieldsets
+			$params['items'] = array_merge((array) $params['items'], $this->getFieldsets($formUid));
 		}
 	}
 
@@ -98,7 +103,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
 			$arr[] = array('powermail Fieldsets', '--div--');
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$arr[] = array($row['title'] . ' (' . $row['uid'] . ')', 'fieldset:' . $row['uid']);
 			}
 		}
@@ -123,6 +128,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 			return $row['form'];
 		}
+		return 0;
 	}
 
 	/**
@@ -136,10 +142,13 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		// Get targetField UID
 		$gParams = t3lib_div::_GET('edit');
 		$gParams2 = $gParams['tx_powermailcond_domain_model_condition'];
+		$thisConditionsUid = 0;
 		foreach ((array) $gParams2 as $uid => $actions) {
+			unset($actions);
 			$thisConditionsUid = $uid;
 		}
-		$targetField = $pObj->cachedTSconfig['tx_powermailcond_domain_model_condition:' . $thisConditionsUid]['_THIS_ROW']['targetField'];
+		$key = 'tx_powermailcond_domain_model_condition:' . $thisConditionsUid;
+		$targetField = $pObj->cachedTSconfig[$key]['_THIS_ROW']['targetField'];
 
 		// Read values from powermail
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(

@@ -69,8 +69,9 @@ class Tx_PowermailCond_Utility_Div {
 		$array['form_' . $form] = array_merge((array) $oldArray['form_' . $form], (array) $array['form_' . $form]);
 
 		// save new array
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array); // Generate Session with piVars array
-		$GLOBALS['TSFE']->storeSessionData(); // Save session
+		// Generate Session with piVars array
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
+		$GLOBALS['TSFE']->storeSessionData();
 	}
 
 	/**
@@ -79,7 +80,7 @@ class Tx_PowermailCond_Utility_Div {
 	 * @param int $form			Form Uid
 	 * @return array $array		with session values
 	 */
-	public function getAllSessionValuesFromForm($form = null) {
+	public function getAllSessionValuesFromForm($form = NULL) {
 		// get current stored values from session
 		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 
@@ -110,13 +111,13 @@ class Tx_PowermailCond_Utility_Div {
 	/**
 	 * Get all fields in a commaseparated list from a fieldset uid
 	 *
-	 * @param	integer	$uid: Fieldset UID
-	 * @param	integer	$formUid: UID of related form
-	 * @param	boolean	$clearSession: Clear cache of each of this fields
-	 * @return	string	$list: Commaseparated List with field uids
+	 * @param integer $uid: Fieldset UID
+	 * @param integer $formUid: UID of related form
+	 * @return string $list: Commaseparated List with field uids
 	 */
 	public function getFieldsFromFieldset($uid, $formUid) {
-		if (is_numeric($uid)) { // if this uid don't contains fs (for fs123)
+		// if this uid don't contains fs (for fs123)
+		if (is_numeric($uid)) {
 			return $uid;
 		}
 
@@ -127,11 +128,12 @@ class Tx_PowermailCond_Utility_Div {
 		';
 		$where = 'tx_powermail_domain_model_pages.uid = ' . intval(str_replace('fieldset:', '', $uid));
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery ($select, $from, $where, '', '', 1000);
-		if ($res) { // If there is a result
+		if ($res) {
 			$uids = '';
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) { // One loop for every field
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$uids .= $row['uid'] . ';';
-				$this->saveValueToSession('', $formUid, $row['uid']); // remove value from session of this field
+				// remove value from session of this field
+				$this->saveValueToSession('', $formUid, $row['uid']);
 			}
 		}
 
@@ -139,24 +141,24 @@ class Tx_PowermailCond_Utility_Div {
 			return $uid;
 		}
 
-		return $uid . ':' . substr($uids, 0, -1); // return without last ;
+		// return without last ;
+		return $uid . ':' . substr($uids, 0, -1);
 	}
 
 	/**
 	 * Get all fields in a commaseparated list from a fieldset uid
 	 *
-	 * @param int $formUid			UID of related form
+	 * @param int $formUid UID of related form
 	 * @return void
 	 */
-	public function cleanfullSession($formUid = null) {
+	public function cleanfullSession($formUid = NULL) {
 		if (intval($formUid) > 0) {
 			$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 			$array['form_' . $formUid] = array();
 		} else {
 			$array = array();
 		}
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array); // Generate Session with piVars array
-		$GLOBALS['TSFE']->storeSessionData(); // Save session
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
+		$GLOBALS['TSFE']->storeSessionData();
 	}
 }
-?>

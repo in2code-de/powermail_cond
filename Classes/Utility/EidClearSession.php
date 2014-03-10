@@ -2,13 +2,14 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Alexander Kellner <alexander.kellner@in2code.de>, in2code.
+ *  (c) 2014 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -22,27 +23,21 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-require_once(PATH_t3lib . 'stddb/tables.php');
-require_once(t3lib_extMgm::extPath('cms', 'ext_tables.php'));
-require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('powermail_cond') . 'Classes/Utility/Div.php');
-
 /**
- * This class cleans the full session
+ * This class is for reading values from session
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidClearSession
+ * @subpackage	Tx_PowermailCond_Utility_EidReadSession
  */
-class Tx_PowermailCond_Utility_EidClearSession extends tslib_pibase {
+class Tx_PowermailCond_Utility_EidClearSession {
 
 	/**
 	 * The extension key
 	 *
 	 * @var string
 	 */
-	public $extKey = 'powermail_cond'; // Extension key
+	public $extKey = 'powermail_cond';
 
 	/**
 	 * Prefix Id
@@ -52,29 +47,28 @@ class Tx_PowermailCond_Utility_EidClearSession extends tslib_pibase {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * Write values to session - main method called via AJAX
+	 * @var Tx_PowermailCond_Utility_Div
+	 */
+	protected $div;
+
+	/**
+	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
 	 *
-	 * @return	void
+	 * @return void
 	 */
 	public function main() {
-		// config
-		$this->getCObj(); // enable TSFE globals
 		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
-		$piVars = t3lib_div::_GP($this->prefixId); // GET param
-		$form = intval($piVars['form']); // uid of current field
+		$piVars = t3lib_div::_GP($this->prefixId);
+		$form = intval($piVars['form']);
 		$this->div->cleanfullSession($form);
 	}
 
 	/**
-	 * Initialize cObj and TSFE Globals
-	 *
-	 * @return	object	cObj
+	 * Initialize Extbase
 	 */
-	private function getCObj() {
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div'); // Create new instance for div class
+	public function __construct($TYPO3_CONF_VARS) {
 		$userObj = tslib_eidtools::initFeUser();
-		$temp_TSFEclassName = t3lib_div::makeInstance('tslib_fe');
-		$GLOBALS['TSFE'] = new $temp_TSFEclassName($TYPO3_CONF_VARS, 32, 0, true);
+		$GLOBALS['TSFE'] = t3lib_div::makeInstance('tslib_fe', $TYPO3_CONF_VARS, 32, 0, TRUE);
 		$GLOBALS['TSFE']->connectToDB();
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = t3lib_div::_GET('id');
@@ -84,11 +78,9 @@ class Tx_PowermailCond_Utility_EidClearSession extends tslib_pibase {
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
 
-		return t3lib_div::makeInstance('tslib_cObj');
+		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
 	}
-
 }
 
-$SOBE = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidClearSession'); // make instance
-echo $SOBE->main(); // print content
-?>
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidClearSession', $GLOBALS['TYPO3_CONF_VARS']);
+echo $eid->main();
