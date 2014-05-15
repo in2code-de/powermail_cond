@@ -191,19 +191,19 @@ class Div {
 	/**
 	 * Save value to session and respect old entries
 	 *
-	 * @param int $form Form uid
-	 * @param int $field Field uid
+	 * @param int $formUid Form uid
+	 * @param int $fieldUid Field uid
 	 * @param string $prefix Prefix for session
 	 * @return void
 	 */
-	public function removeValueFromSession($form, $field, $prefix = 'fieldSession') {
-		$form = intval($form);
-		$field = intval($field);
+	public function removeValueFromSession($formUid, $fieldUid, $prefix = 'fieldSession') {
+		$formUid = intval($formUid);
+		$fieldUid = intval($fieldUid);
 
 		// get old session
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		if (isset($session[$prefix]['form_' . $form]['field_' . $field])) {
-			unset($session[$prefix]['form_' . $form]['field_' . $field]);
+		if (isset($session[$prefix]['form_' . $formUid]['field_' . $fieldUid])) {
+			unset($session[$prefix]['form_' . $formUid]['field_' . $fieldUid]);
 
 			// save again
 			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);

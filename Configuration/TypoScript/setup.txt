@@ -7,8 +7,8 @@ page.headerData.313131.value (
 page.includeJSFooter.powermail_cond = EXT:powermail_cond/Resources/Public/Js/PowermailCond.js
 page.includeCSS.powermail_cond = EXT:powermail_cond/Resources/Public/Css/PowermailCond.css
 
-config.tx_extbase{
+config.tx_extbase {
 	objects {
-		In2code\Powermail\Domain\Validator\StringValidator.className = In2code\PowermailCond\Domain\Model\Validator\StringValidator
+		In2code\Powermail\Domain\Validator\InputValidator.className = In2code\PowermailCond\Domain\Validator\InputValidator
 	}
 }

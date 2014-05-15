@@ -53,8 +53,8 @@ jQuery(document).ready(function() {
 /**
  * Fill a field with a value
  *
- * @param int fieldUid		Field Uid
- * @param int fieldValue		Field Value
+ * @param {int} fieldUid - Field Uid
+ * @param {int} fieldValue - Field Value
  */
 function fieldValue(fieldUid, fieldValue) {
 	var fieldWrap = $('#powermail_fieldwrap_' + fieldUid);
@@ -205,30 +205,33 @@ function showAll() {
 /**
  * Remove required class in Field
  *
- * @param integer uid of the element
- * @param bool disableAjaxRequest
+ * @param {int} uid of the element
+ * @param {bool} disableAjaxRequest
  * @return void
  */
 function deRequiredField(uid, disableAjaxRequest) {
-	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
+	var element = $('#powermail_fieldwrap_' + uid).find('input');
 	var classValue = element.prop('class');
-	if (classValue && classValue.indexOf('required') !== -1) {
-		// replace validate[required] with [_required_]
-		classValue = classValue.replace('required', '_required_');
-		element.prop('class', classValue);
 
-		// remove required="required"
-		element.prop('required', false);
-
-		// save this field in session so it's no mandatory field any more
-		if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
-			$.ajax({
-				url: '/index.php',
-				data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
-				cache: false
-			});
-		}
+	// save this field in session so it's no mandatory field any more
+	if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
+		$.ajax({
+			url: '/index.php',
+			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
+			cache: false
+		});
 	}
+
+
+
+//	if (classValue && classValue.indexOf('required') !== -1) {
+//		// replace validate[required] with [_required_]
+//		classValue = classValue.replace('required', '_required_');
+//		element.prop('class', classValue);
+//
+//		// remove required="required"
+//		element.prop('required', false);
+//	}
 }
 
 /**
