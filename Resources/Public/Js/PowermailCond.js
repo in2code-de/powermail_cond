@@ -28,11 +28,11 @@ jQuery(document).ready(function() {
 		var url = base + '/index.php';
 		var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
 		var value = $this.val(); // current value
-		if ($(this).hasClass('powermail_checkbox') && !$(this).is(':checked')) { // clean value if checkbox was dechecked
+		if ($this.hasClass('powermail_checkbox') && !$this.is(':checked')) { // clean value if checkbox was dechecked
 			value = '';
 		}
 		var uid = $this.closest('.powermail_fieldwrap').attr('id').substr(20); // current field uid (without "uid")
-		var name = $this.attr('name');
+		var name = $this.prop('name');
 		var params = 'eID=' + 'powermailcond_saveToSession' + '&tx_powermailcond_pi1[form]=' + getFormUid() + '&tx_powermailcond_pi1[uid]=' + uid + '&tx_powermailcond_pi1[value]=' + value + '&ts=' + timestamp;
 
 		$.ajax({
@@ -57,10 +57,11 @@ jQuery(document).ready(function() {
  * @param int fieldValue		Field Value
  */
 function fieldValue(fieldUid, fieldValue) {
-	$('.powermail_field[name="tx_powermail_pi1[field][' + fieldUid + ']"]').val(fieldValue); // select, input, textarea
-	$('.powermail_radio[name="tx_powermail_pi1[field][' + fieldUid + ']"], .powermail_checkbox_' + fieldUid).each(function() { // radio, check
-		if ($(this).attr('value') == fieldValue) {
-			$(this).attr('checked', 'checked');
+	var fieldWrap = $('#powermail_fieldwrap_' + fieldUid);
+	fieldWrap.find('input').not('[type="checkbox"]').val(fieldValue);
+	fieldWrap.find('input[type="checkbox"]').each(function() {
+		if ($(this).prop('value') == fieldValue) {
+			$(this).prop('checked', 'checked');
 		}
 	})
 }
@@ -85,7 +86,7 @@ function checkConditions(uid) {
 		success: function(data) {
 			if (data != 'nochange') {
 				$('.powermail_fieldwrap select option').removeClass('hide'); // show all options at the beginning
-				$('.powermail_fieldwrap select option').removeAttr('disabled'); // enable all options at the beginning
+				$('.powermail_fieldwrap select option').removeProp('disabled'); // enable all options at the beginning
 				if (data != '') { // if there is a response
 					if (data.length < 1000) { // stop if wrong result (maybe complete t3 page)
 						doAction(data); // hide all given fields
@@ -179,10 +180,10 @@ function hideFieldset(string) {
 function filterSelection(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option').addClass('hide').attr('disabled', 'disabled'); // disable all options
+	$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option').addClass('hide').prop('disabled', 'disabled'); // disable all options
 
 	for (var j=0; j < values.length; j++) { // one loop for every option in select field
-		$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:contains(' + values[j] + ')').removeClass('hide').removeAttr('disabled'); // show this option
+		$('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:contains(' + values[j] + ')').removeClass('hide').removeProp('disabled'); // show this option
 	}
 
 	var valueSelected = $('.powermail_fieldwrap_' + params[1] + ' .powermail_field > option:selected').val(); // give me the value of the selected option
@@ -210,14 +211,14 @@ function showAll() {
  */
 function deRequiredField(uid, disableAjaxRequest) {
 	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
-	var classValue = element.attr('class');
+	var classValue = element.prop('class');
 	if (classValue && classValue.indexOf('required') !== -1) {
 		// replace validate[required] with [_required_]
 		classValue = classValue.replace('required', '_required_');
-		element.attr('class', classValue);
+		element.prop('class', classValue);
 
 		// remove required="required"
-		element.attr('required', false);
+		element.prop('required', false);
 
 		// save this field in session so it's no mandatory field any more
 		if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
@@ -238,16 +239,16 @@ function deRequiredField(uid, disableAjaxRequest) {
 function reRequiredAll() {
 	$('.powermail_field').each(function() {
 		var element = $(this);
-		var uid = element.closest('.powermail_fieldwrap').attr('id').substr(20);
-		var classValue = $(this).attr('class');
+		var uid = element.closest('.powermail_fieldwrap').prop('id').substr(20);
+		var classValue = $(this).prop('class');
 		if (classValue.indexOf('_required_') !== -1) {
 			// replace validate[_required_] with [required]
 			classValue = classValue.replace('_required_', 'required');
-			element.attr('class', classValue);
+			element.prop('class', classValue);
 
 			// add required="required"
-			if (element.attr('type') == 'text') {
-				element.attr('required', 'required');
+			if (element.prop('type') == 'text') {
+				element.prop('required', 'required');
 			}
 
 			$.ajax({
@@ -266,8 +267,8 @@ function reRequiredAll() {
  * @return	void
  */
 function clearValue(selection) {
-	if ($(selection).attr('type') == 'radio' || $(selection).attr('type') == 'checkbox') {
-		$(selection).attr('checked', false);
+	if ($(selection).prop('type') == 'radio' || $(selection).prop('type') == 'checkbox') {
+		$(selection).prop('checked', false);
 	} else {
 		$(selection).not(':submit').val('');
 	}
@@ -279,7 +280,7 @@ function clearValue(selection) {
  * @return string	BaseUrl from Tag in DOM
  */
 function getBaseUrl() {
-	var base = $('base').attr('href');
+	var base = $('base').prop('href');
 	if (!base || base == undefined) {
 		base = '';
 	}
@@ -332,16 +333,9 @@ function clearFullSession() {
  * @return int		Form uid
  */
 function getFormUid() {
-	if ($('.powermail_form').length === 0) {
+	var formField = $('input[name="tx_powermail_pi1[mail][form]"]');
+	if (formField.length === 0) {
 		return 0;
 	}
-	var classes = $('.powermail_form:first').attr('class').split(' ');
-	for (var i=0; i < classes.length; i++) {
-		if (classes[i].indexOf('powermail_form_') !== -1) {
-			var currentClass = classes[i];
-		}
-	}
-
-	var formUid = currentClass.substr(15);
-	return formUid;
+	return formField.val();
 }

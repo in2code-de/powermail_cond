@@ -1,9 +1,24 @@
 <?php
+namespace In2code\PowermailCond\Domain\Model\Validator;
 
 /**
- * Class Tx_PowermailCond_Domain_Validator_MandatoryValidator
+ * Class StringValidator
  */
-class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_Domain_Validator_MandatoryValidator {
+class StringValidator extends \In2code\Powermail\Domain\Validator\StringValidator {
+
+	/**
+	 * Mandatory Check
+	 *
+	 * @param \mixed $value Fieldvalue from user
+	 * @return bool
+	 */
+	protected function validateMandatory($value) {
+		// stop mandatory check
+		if (1) {
+			return TRUE;
+		}
+		return parent::validateMandatory($value);
+	}
 
 	/**
 	 * Validation of given Params
@@ -12,15 +27,15 @@ class Tx_PowermailCond_Domain_Validator_MandatoryValidator extends Tx_Powermail_
 	 * @return bool
 	 */
 	public function isValid($params) {
-		$gp = t3lib_div::_GP('tx_powermail_pi1');
+		$gp = GeneralUtility::_GP('tx_powermail_pi1');
 		$formUid = $gp['form'];
 		$form = $this->formsRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
 			return $this->isValid;
 		}
 
-		/* @var $divCond Tx_PowermailCond_Utility_Div */
-		$divCond = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		/* @var $divCond \In2code\PowermailCond\Utility\Div */
+		$divCond = GeneralUtility::makeInstance('\In2code\PowermailCond\Utility\Div');
 		$sessionValues = $divCond->getAllSessionValuesFromForm($formUid, 'deRequiredFields');
 
 		// every page in current form

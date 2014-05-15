@@ -1,4 +1,6 @@
 <?php
+namespace In2code\PowermailCond\Utility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,14 +25,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  * Div is a class for a collection of misc functions
  *
  * @package powermail_cond
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_PowermailCond_Utility_Div {
+class Div {
 
 	/**
 	 * Extension Key
@@ -68,7 +70,7 @@ class Tx_PowermailCond_Utility_Div {
 	 * get condition as array from current page
 	 *
 	 * @param int $formUid
-	 * @param tslib_cObj $cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
 	 * @return array $arr: Array with all conditions of the current page
 	 */
 	public function getConditionsFromForm($formUid, $cObj) {

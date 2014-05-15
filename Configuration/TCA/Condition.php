@@ -6,7 +6,9 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_powermailcond_domain_model_condition'] = array (
 	'ctrl' => $TCA['tx_powermailcond_domain_model_condition']['ctrl'],
 	'interface' => array (
-		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,title,targetField,actions,filterSelectField,rules,conjunction,form'
+		'showRecordFieldList' =>
+			'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
+			endtime,title,targetField,actions,filterSelectField,rules,conjunction,form'
 	),
 	'types' => array (
 		'1' => array('showitem' => '--palette--;x;1, form, targetField, --palette--;x;2, rules, conjunction')
@@ -40,7 +42,8 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 					array('', 0),
 				),
 				'foreign_table'       => 'tx_powermailcond_conditions',
-				'foreign_table_where' => 'AND tx_powermailcond_conditions.pid=###CURRENT_PID### AND tx_powermailcond_conditions.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermailcond_conditions.pid=###CURRENT_PID### AND tx_powermailcond_conditions.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (
@@ -80,7 +83,7 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 				'default'  => '0',
 				'range'    => array (
 					'upper' => mktime(0, 0, 0, 12, 31, 2020),
-					'lower' => mktime(0, 0, 0, date('m')-1, date('d'), date('Y'))
+					'lower' => mktime(0, 0, 0, date('m') - 1, date('d'), date('Y'))
 				)
 			)
 		),
@@ -105,7 +108,12 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 				'minitems' => 1,
 				'requestUpdate' => 1,
 				'foreign_table' => 'tx_powermail_domain_model_forms',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_forms.deleted = 0 AND tx_powermail_domain_model_forms.hidden = 0 AND tx_powermail_domain_model_forms.sys_language_uid = 0 order by tx_powermail_domain_model_forms.title'
+				'foreign_table_where' => '
+					AND tx_powermail_domain_model_forms.deleted = 0
+					AND tx_powermail_domain_model_forms.hidden = 0
+					AND tx_powermail_domain_model_forms.sys_language_uid = 0
+					order by tx_powermail_domain_model_forms.title
+				'
 			)
 		),
 		'targetField' => Array (
@@ -116,8 +124,8 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 				'items' => Array (
 					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.targetField.I.0', '0'),
 				),
-				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->getFieldname',
-				'itemsProcFunc_addFieldsets' => 1, // add fieldsets
+				'itemsProcFunc' => '\In2code\PowermailCond\Utility\Tca\FieldlistingBackend->getFieldname',
+				'itemsProcFunc_addFieldsets' => 1,
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required'
@@ -130,11 +138,35 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 			'config' => Array (
 				'type' => 'select',
 				'items' => Array (
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.main', '--div--'), // title main
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.0', '0'), // hide
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.1', '1'), // unhide
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.additional', '--div--'), // title additional
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.2', '2'), // filter selectbox
+					// title main
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.main',
+						'--div--'
+					),
+
+					// hide
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.0',
+						'0'
+					),
+
+					// unhide
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.1',
+						'1'
+					),
+
+					// title additional
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.additional',
+						'--div--'
+					),
+
+					// filter selectbox
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.2',
+						'2'
+					),
 				),
 				'size' => 1,
 				'maxitems' => 1,
@@ -148,12 +180,13 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 				'type' => 'select',
 				'items' => Array (
 				),
-				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->valuesFromPowermailSelectbox',
+				'itemsProcFunc' => '\In2code\PowermailCond\Utility\Tca\FieldlistingBackend->valuesFromPowermailSelectbox',
 				'size' => 4,
 				'maxitems' => 1000,
 				'allowNonIdValues' => 1
 			),
-			'displayCond' => 'FIELD:actions:IN:2,FIELD:form:>:0' // show only if ops value is greater than 1
+			// show only if ops value is greater than 1
+			'displayCond' => 'FIELD:actions:IN:2,FIELD:form:>:0'
 		),
 		'rules' => Array (
 			'exclude' => 1,
@@ -161,7 +194,8 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 			'config' => Array (
 				'type' => 'inline',
 				'foreign_table' => 'tx_powermailcond_domain_model_rule',
-				'foreign_table_where' => 'AND tx_powermailcond_domain_model_rule.pid=###CURRENT_PID### ORDER BY tx_powermailcond_domain_model_rule.sorting',
+				'foreign_table_where' =>
+					'AND tx_powermailcond_domain_model_rule.pid=###CURRENT_PID### ORDER BY tx_powermailcond_domain_model_rule.sorting',
 				'foreign_field' => 'conditions',
 				'maxitems' => 99,
 				'appearance' => array(
@@ -180,8 +214,17 @@ $TCA['tx_powermailcond_domain_model_condition'] = array (
 			'config' => Array (
 				'type' => 'select',
 				'items' => Array (
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.1', 'OR'), // OR
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.0', 'AND'), // AND
+					// OR
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.1',
+						'OR'
+					),
+
+					// AND
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.0',
+						'AND'
+					),
 				),
 				'size' => 1,
 				'maxitems' => 1,
