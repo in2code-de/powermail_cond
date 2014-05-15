@@ -138,7 +138,7 @@ function doAction(list) {
  */
 function hideField(uid) {
 	$('.powermail_fieldwrap_' + uid).addClass('hide'); // hide current field
-	deRequiredField(uid);
+	deRequiredField(uid, true);
 	if ($('.powermail_fieldwrap_' + uid + ' .powermail_field').val() != '') { // only if value is not yet empty
 		clearValue('.powermail_fieldwrap_' + uid + ' .powermail_field'); // clear value of current field
 		clearSession(uid); // clear value of current field
@@ -220,7 +220,7 @@ function deRequiredField(uid, disableAjaxRequest) {
 		element.attr('required', false);
 
 		// save this field in session so it's no mandatory field any more
-		if (disableAjaxRequest == undefined && disableAjaxRequest === true) {
+		if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
 			$.ajax({
 				url: '/index.php',
 				data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
