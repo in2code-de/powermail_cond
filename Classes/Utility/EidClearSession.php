@@ -60,11 +60,12 @@ class Tx_PowermailCond_Utility_EidClearSession {
 		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
 		$piVars = t3lib_div::_GP($this->prefixId);
 		$form = intval($piVars['form']);
-		$this->div->cleanfullSession($form);
+		$this->div->cleanfullSession($form, 'fieldSession');
+		$this->div->cleanfullSession($form, 'deRequiredFields');
 	}
 
 	/**
-	 * Initialize Extbase
+	 * Initialize eID
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$userObj = tslib_eidtools::initFeUser();

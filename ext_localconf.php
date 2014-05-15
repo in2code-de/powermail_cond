@@ -29,3 +29,19 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_readSession'] =
 // eID to clean session to a form completely (via AJAX)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_clearSession'] =
 	'EXT:powermail_cond/Classes/Utility/EidClearSession.php';
+
+// eID to save a field in a separate session to select a field to be non-mandatory
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_deRequiredField'] =
+	'EXT:powermail_cond/Classes/Utility/EidDeRequiredField.php';
+
+// eID to save some fields in a separate session to select a field to be non-mandatory
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_deRequiredFields'] =
+	'EXT:powermail_cond/Classes/Utility/EidDeRequiredFields.php';
+
+// eID to remove a field from session to select a field to be mandatory again
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_requiredField'] =
+	'EXT:powermail_cond/Classes/Utility/EidRequiredField.php';
+
+// eID to read all session values for debugging (only if logged in into Backend)
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_debugSession'] =
+	'EXT:powermail_cond/Classes/Utility/EidDebugSession.php';

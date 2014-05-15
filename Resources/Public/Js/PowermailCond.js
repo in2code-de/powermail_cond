@@ -82,7 +82,7 @@ function checkConditions(uid) {
 		url: url, // send to this url
 		data: 'eID=' + 'powermailcond_getFieldStatus' + params + '&tx_powermailcond_pi1[formUid]=' + getFormUid(), // add params
 		cache: false, // disable cache (for ie)
-		success: function(data) { // return values
+		success: function(data) {
 			if (data != 'nochange') {
 				$('.powermail_fieldwrap select option').removeClass('hide'); // show all options at the beginning
 				$('.powermail_fieldwrap select option').removeAttr('disabled'); // enable all options at the beginning
@@ -93,6 +93,11 @@ function checkConditions(uid) {
 				} else { // if there is no response
 					showAll(); // show all fields and fieldsets at the beginning
 				}
+			}
+
+			// Form validation
+			if ($.fn.validationEngine) {
+				$('.powermail_form').validationEngine('detach');
 			}
 		},
 		error: function() {
@@ -108,7 +113,7 @@ function checkConditions(uid) {
  * @return void
  */
 function doAction(list) {
-	showAll(); // show all fields and fieldsets at the beginning
+	showAll();
 
 	var uid = list.split(',');
 	if (uid.length < 1) {
@@ -133,6 +138,7 @@ function doAction(list) {
  */
 function hideField(uid) {
 	$('.powermail_fieldwrap_' + uid).addClass('hide'); // hide current field
+	deRequiredField(uid, true);
 	if ($('.powermail_fieldwrap_' + uid + ' .powermail_field').val() != '') { // only if value is not yet empty
 		clearValue('.powermail_fieldwrap_' + uid + ' .powermail_field'); // clear value of current field
 		clearSession(uid); // clear value of current field
@@ -148,10 +154,20 @@ function hideField(uid) {
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
 	var values = params[2].split(';'); // value1 / value2 / value3
-	$('.powermail_fieldset_' + params[1]).addClass('hide'); // hide current fieldset
-	for (var k=0; k < values.length; k++) { // one loop for every field inside the fieldset
-		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field'); // clear value of current field
+	$('.powermail_fieldset_' + params[1]).addClass('hide');
+	var fields = [];
+	for (var k=0; k < values.length; k++) {
+		clearValue('.powermail_fieldwrap_' + values[k] + ' .powermail_field');
+		deRequiredField(values[k], true);
+		fields.push(values[k]);
 	}
+
+	// save this field in session so it's no mandatory field any more
+	$.ajax({
+		url: '/index.php',
+		data: 'eID=' + 'powermailcond_deRequiredFields&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUids]=' + fields.join() + '&no_cache=1',
+		cache: false
+	});
 }
 
 /**
@@ -181,7 +197,66 @@ function filterSelection(string) {
  * @return void
  */
 function showAll() {
-	$('.powermail_fieldwrap, .powermail_fieldset').removeClass('hide'); // show all fields and fieldsets
+	reRequiredAll();
+	$('.powermail_fieldwrap, .powermail_fieldset').removeClass('hide');
+}
+
+/**
+ * Remove required class in Field
+ *
+ * @param integer uid of the element
+ * @param bool disableAjaxRequest
+ * @return void
+ */
+function deRequiredField(uid, disableAjaxRequest) {
+	var element = $('*[name="tx_powermail_pi1[field][' + uid +']"]');
+	var classValue = element.attr('class');
+	if (classValue && classValue.indexOf('required') !== -1) {
+		// replace validate[required] with [_required_]
+		classValue = classValue.replace('required', '_required_');
+		element.attr('class', classValue);
+
+		// remove required="required"
+		element.attr('required', false);
+
+		// save this field in session so it's no mandatory field any more
+		if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
+			$.ajax({
+				url: '/index.php',
+				data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
+				cache: false
+			});
+		}
+	}
+}
+
+/**
+ * Re required Fields for JS-Validation
+ *
+ * @return void
+ */
+function reRequiredAll() {
+	$('.powermail_field').each(function() {
+		var element = $(this);
+		var uid = element.closest('.powermail_fieldwrap').attr('id').substr(20);
+		var classValue = $(this).attr('class');
+		if (classValue.indexOf('_required_') !== -1) {
+			// replace validate[_required_] with [required]
+			classValue = classValue.replace('_required_', 'required');
+			element.attr('class', classValue);
+
+			// add required="required"
+			if (element.attr('type') == 'text') {
+				element.attr('required', 'required');
+			}
+
+			$.ajax({
+				url: '/index.php',
+				data: 'eID=' + 'powermailcond_requiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
+				cache: false
+			});
+		}
+	});
 }
 
 /**
@@ -257,6 +332,9 @@ function clearFullSession() {
  * @return int		Form uid
  */
 function getFormUid() {
+	if ($('.powermail_form').length === 0) {
+		return 0;
+	}
 	var classes = $('.powermail_form:first').attr('class').split(' ');
 	for (var i=0; i < classes.length; i++) {
 		if (classes[i].indexOf('powermail_form_') !== -1) {

@@ -24,20 +24,13 @@
  ***************************************************************/
 
 /**
- * This class is for storing values to session on every fieldchange (via AJAX)
+ * Remove fields from session which should be mandatory again
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidReadSession
+ * @subpackage	Tx_PowermailCond_Utility_EidRequiredField
  */
-class Tx_PowermailCond_Utility_EidSaveInSession {
-
-	/**
-	 * The extension key
-	 *
-	 * @var string
-	 */
-	public $extKey = 'powermail_cond';
+class Tx_PowermailCond_Utility_EidRequiredField {
 
 	/**
 	 * Prefix Id
@@ -52,26 +45,23 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	protected $div;
 
 	/**
-	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
+	 * save field in session to be stored for non-mandatory fields
 	 *
-	 * @return bool
+	 * @return int Field Uid which was disabled
 	 */
 	public function main() {
-		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
 		$piVars = t3lib_div::_GP($this->prefixId);
-
-		$uid = intval($piVars['uid']);
-		$form = intval($piVars['form']);
-		$value = htmlspecialchars($piVars['value']);
+		$formUid = intval($piVars['formUid']);
+		$fieldUid = intval($piVars['fieldUid']);
 
 		// start
-		if ($uid === 0 || $form === 0) {
-			return FALSE;
+		if ($formUid === 0 || $fieldUid === 0) {
+			return 0;
 		}
-		// save single value in session
-		$this->div->saveValueToSession($value, $form, $uid);
 
-		return FALSE;
+		// removee single value from session
+		$this->div->removeValueFromSession($formUid, $fieldUid, 'deRequiredFields');
+		return $fieldUid;
 	}
 
 	/**
@@ -93,5 +83,5 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidSaveInSession', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();

@@ -24,32 +24,13 @@
  ***************************************************************/
 
 /**
- * This class is for storing values to session on every fieldchange (via AJAX)
+ * Debug Session values
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidReadSession
+ * @subpackage	Tx_PowermailCond_Utility_EidDebugSession
  */
-class Tx_PowermailCond_Utility_EidSaveInSession {
-
-	/**
-	 * The extension key
-	 *
-	 * @var string
-	 */
-	public $extKey = 'powermail_cond';
-
-	/**
-	 * Prefix Id
-	 *
-	 * @var string
-	 */
-	public $prefixId = 'tx_powermailcond_pi1';
-
-	/**
-	 * @var Tx_PowermailCond_Utility_Div
-	 */
-	protected $div;
+class Tx_PowermailCond_Utility_EidDebugSession {
 
 	/**
 	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
@@ -57,21 +38,22 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	 * @return bool
 	 */
 	public function main() {
-		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
-		$piVars = t3lib_div::_GP($this->prefixId);
-
-		$uid = intval($piVars['uid']);
-		$form = intval($piVars['form']);
-		$value = htmlspecialchars($piVars['value']);
-
-		// start
-		if ($uid === 0 || $form === 0) {
-			return FALSE;
+		if (empty($GLOBALS['BE_USER']->user['uid'])) {
+			return 'Please login into backend';
 		}
-		// save single value in session
-		$this->div->saveValueToSession($value, $form, $uid);
 
-		return FALSE;
+		/* @var $div Tx_PowermailCond_Utility_Div */
+		$div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$piVars = t3lib_div::_GP('tx_powermailcond_pi1');
+		if (empty($piVars['formUid'])) {
+			return 'tx_powermailcond_pi1[formUid] is missing';
+		}
+
+		$sessionForm = $div->getAllSessionValuesFromForm($piVars['formUid']);
+		$sessionDeRequiredFields = $div->getAllSessionValuesFromForm($piVars['formUid'], 'deRequiredFields');
+
+		t3lib_utility_Debug::debug($sessionForm, 'Values in Session');
+		t3lib_utility_Debug::debug($sessionDeRequiredFields, 'Disabled Required Fields');
 	}
 
 	/**
@@ -88,10 +70,11 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
-
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');
+		$GLOBALS['BE_USER']->start();
+		$GLOBALS['BE_USER']->backendCheckLogin();
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidSaveInSession', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDebugSession', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();

@@ -24,20 +24,13 @@
  ***************************************************************/
 
 /**
- * This class is for storing values to session on every fieldchange (via AJAX)
+ * Store fields in session which should not be mandatory any more
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidReadSession
+ * @subpackage	Tx_PowermailCond_Utility_EidDeRequiredField
  */
-class Tx_PowermailCond_Utility_EidSaveInSession {
-
-	/**
-	 * The extension key
-	 *
-	 * @var string
-	 */
-	public $extKey = 'powermail_cond';
+class Tx_PowermailCond_Utility_EidDeRequiredField {
 
 	/**
 	 * Prefix Id
@@ -52,26 +45,25 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	protected $div;
 
 	/**
-	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
+	 * save field in session to be stored for non-mandatory fields
 	 *
-	 * @return bool
+	 * @return int Field Uid which was disabled
 	 */
 	public function main() {
-		$GLOBALS['TSFE']->sesData = tslib_eidtools::initFeUser();
+		$cObj = t3lib_div::makeInstance('tslib_cObj');
 		$piVars = t3lib_div::_GP($this->prefixId);
+		$formUid = intval($piVars['formUid']);
+		$fieldUid = intval($piVars['fieldUid']);
+		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $cObj);
 
-		$uid = intval($piVars['uid']);
-		$form = intval($piVars['form']);
-		$value = htmlspecialchars($piVars['value']);
-
-		// start
-		if ($uid === 0 || $form === 0) {
-			return FALSE;
+		// only if this field was defined as targetField in conditions
+		if (array_key_exists($fieldUid, $conditions)) {
+			// save single value in session
+			$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
+			return $fieldUid;
 		}
-		// save single value in session
-		$this->div->saveValueToSession($value, $form, $uid);
 
-		return FALSE;
+		return 0;
 	}
 
 	/**
@@ -93,5 +85,5 @@ class Tx_PowermailCond_Utility_EidSaveInSession {
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidSaveInSession', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDeRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();

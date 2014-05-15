@@ -56,7 +56,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	 */
 	public function main() {
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
-		$conditions = $this->getConditionsFromForm($this->piVars['formUid']);
+		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $this->cObj);
 		$targetFields = $this->div->getStartFields($conditions);
 		if ($this->piVars['uid'] > 0 && !in_array($this->piVars['uid'], $targetFields)) {
 			return 'nochange';
@@ -282,42 +282,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	}
 
 	/**
-	 * get condition as array from current page
-	 *
-	 * @param int $formUid
-	 * @return array $arr: Array with all conditions of the current page
-	 */
-	protected function getConditionsFromForm($formUid) {
-		$arr = array();
-		$select = '
-				tx_powermailcond_domain_model_condition.targetField, tx_powermailcond_domain_model_condition.actions,
-				tx_powermailcond_domain_model_condition.conjunction,
-				tx_powermailcond_domain_model_condition.filterSelectField, tx_powermailcond_domain_model_rule.startField,
-				tx_powermailcond_domain_model_rule.ops,
-				tx_powermailcond_domain_model_rule.condstring, tx_powermailcond_domain_model_rule.equalField
-		';
-		$from = '
-			tx_powermailcond_domain_model_condition
-			LEFT JOIN tx_powermailcond_domain_model_rule ON
-			tx_powermailcond_domain_model_condition.uid = tx_powermailcond_domain_model_rule.conditions
-		';
-		$where = (intval($formUid) ? 'tx_powermailcond_domain_model_condition.form = ' . intval($formUid) : '1');
-		$where .= $this->cObj->enableFields('tx_powermailcond_domain_model_condition');
-		$where .= $this->cObj->enableFields('tx_powermailcond_domain_model_rule');
-		$groupBy = 'tx_powermailcond_domain_model_rule.uid';
-		$orderBy = '';
-		$limit = 1000;
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-		if ($res) {
-			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-				$arr[$row['targetField']][] = $row;
-			}
-		}
-		return $arr;
-	}
-
-	/**
-	 * Initialize Extbase
+	 * Initialize eID
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$userObj = tslib_eidtools::initFeUser();
