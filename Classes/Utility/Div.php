@@ -161,30 +161,17 @@ class Div {
 	 * Save value to session and respect old entries
 	 *
 	 * @param string $value Value to store
-	 * @param int $form Form uid
-	 * @param int $field Field uid
+	 * @param int $formUid Form uid
+	 * @param int $fieldUid Field uid
 	 * @param string $prefix Prefix for session
 	 * @return void
 	 */
-	public function saveValueToSession($value, $form, $field, $prefix = 'fieldSession') {
-		$form = intval($form);
-
-		// get old session
+	public function saveValueToSession($value, $formUid, $fieldUid, $prefix = 'fieldSession') {
+		$formKey = 'form_' . intval($formUid);
+		$fieldKey = 'field_' . intval($fieldUid);
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		if (isset($session[$prefix]['form_' . $form])) {
-			$oldArray = $session[$prefix]['form_' . $form];
-		} else {
-			$oldArray = array();
-		}
-
-		// merge old and new
-		$array = array(
-			'field_' . $field => $value
-		);
-		$array[$prefix]['form_' . $form] = array_merge($oldArray, $array);
-
-		// save new array
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
+		$session[$prefix][$formKey][$fieldKey] = $value;
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
 		$GLOBALS['TSFE']->storeSessionData();
 	}
 
@@ -197,13 +184,13 @@ class Div {
 	 * @return void
 	 */
 	public function removeValueFromSession($formUid, $fieldUid, $prefix = 'fieldSession') {
-		$formUid = intval($formUid);
-		$fieldUid = intval($fieldUid);
+		$formKey = 'form_' . intval($formUid);
+		$fieldKey = 'field_' . intval($fieldUid);
 
 		// get old session
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		if (isset($session[$prefix]['form_' . $formUid]['field_' . $fieldUid])) {
-			unset($session[$prefix]['form_' . $formUid]['field_' . $fieldUid]);
+		if (isset($session[$prefix][$formKey][$fieldKey])) {
+			unset($session[$prefix][$formKey][$fieldKey]);
 
 			// save again
 			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
@@ -214,16 +201,16 @@ class Div {
 	/**
 	 * Return all values from the session (could be used for debugging, etc..)
 	 *
-	 * @param int $form Form Uid
+	 * @param int $formUid Form Uid
 	 * @param string $prefix Prefix for session
 	 * @return array $array with session values
 	 */
-	public function getAllSessionValuesFromForm($form = NULL, $prefix = 'fieldSession') {
-		// get current stored values from session
+	public function getAllSessionValuesFromForm($formUid = NULL, $prefix = 'fieldSession') {
+		$formKey = 'form_' . intval($formUid);
 		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 
-		if (isset($array[$prefix]['form_' . $form])) {
-			return $array[$prefix]['form_' . $form];
+		if (isset($array[$prefix][$formKey])) {
+			return $array[$prefix][$formKey];
 		}
 		return $array[$prefix];
 	}

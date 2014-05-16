@@ -39,8 +39,8 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\InputValidator 
 		/* @var $div \In2code\PowermailCond\Utility\Div */
 		$div = GeneralUtility::makeInstance('\In2code\PowermailCond\Utility\Div');
 		$sessionValues = $div->getAllSessionValuesFromForm($this->formUid, 'deRequiredFields');
-		// stop process if this field is disabled
-		if (array_key_exists('field_' . $field->getUid(), $sessionValues)) {
+		if (array_key_exists('field_' . $field->getUid(), (array) $sessionValues)) {
+			// stop process if this field is disabled
 			return;
 		}
 

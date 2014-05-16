@@ -69,8 +69,8 @@ function fieldValue(fieldUid, fieldValue) {
 /**
  * Main function to check conditions and do something (if necessary)
  *
- * @param	integer	uid: Field uid (if available)
- * @return	void
+ * @param {integer} uid: Field uid (if available)
+ * @return void
  */
 function checkConditions(uid) {
 	var url = base + '/index.php';
@@ -96,6 +96,7 @@ function checkConditions(uid) {
 				}
 			}
 
+			// TODO Detach Parsley
 			// Form validation
 			if ($.fn.validationEngine) {
 				$('.powermail_form').validationEngine('detach');
@@ -110,7 +111,7 @@ function checkConditions(uid) {
 /**
  * Do some actions (hide and/or filter)
  *
- * @param string	list: commaseparated list with uids (1,2,3)
+ * @param {string} list commaseparated list with uids (1,2,3)
  * @return void
  */
 function doAction(list) {
@@ -134,8 +135,8 @@ function doAction(list) {
 /**
  * Hide a field and clear its value
  *
- * @param	integer	uid: uid of the element
- * @return	void
+ * @param {integer} uid uid of the element
+ * @return void
  */
 function hideField(uid) {
 	$('.powermail_fieldwrap_' + uid).addClass('hide'); // hide current field
@@ -149,8 +150,8 @@ function hideField(uid) {
 /**
  * Hide some fields, which are bundled in a fieldset and clear there value
  *
- * @param	string	string: mix of uid and values (fieldset:5:12;13;14)
- * @return	void
+ * @param {string} string mix of uid and values (fieldset:5:12;13;14)
+ * @return void
  */
 function hideFieldset(string) {
 	var params = string.split(':'); // filter / uid / values
@@ -174,8 +175,8 @@ function hideFieldset(string) {
 /**
  * Hide some fields and clear there value
  *
- * @param	string	string: mix of uid and values (filter:123:Value1;Value2;Value3)
- * @return	void
+ * @param {string} string mix of uid and values (filter:123:Value1;Value2;Value3)
+ * @return void
  */
 function filterSelection(string) {
 	var params = string.split(':'); // filter / uid / values
@@ -211,14 +212,17 @@ function showAll() {
  */
 function deRequiredField(uid, disableAjaxRequest) {
 	var element = $('#powermail_fieldwrap_' + uid).find('input');
-	var classValue = element.prop('class');
+//	var classValue = element.prop('class');
 
 	// save this field in session so it's no mandatory field any more
 	if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
 		$.ajax({
 			url: '/index.php',
 			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
-			cache: false
+			cache: false,
+			success: function(data) {
+				console.log(data);
+			}
 		});
 	}
 
@@ -266,8 +270,8 @@ function reRequiredAll() {
 /**
  * Clear value of an inputfield, set selectedIndex to 0 for selection, don't clear value of submit buttons
  *
- * @param	string	selection: selection for jQuery (e.g. input.powermail)
- * @return	void
+ * @param {string} selection selection for jQuery (e.g. "input.powermail")
+ * @return void
  */
 function clearValue(selection) {
 	if ($(selection).prop('type') == 'radio' || $(selection).prop('type') == 'checkbox') {
@@ -280,7 +284,7 @@ function clearValue(selection) {
 /**
  * Read BaseUrl
  *
- * @return string	BaseUrl from Tag in DOM
+ * @return {string} BaseUrl from Tag in DOM
  */
 function getBaseUrl() {
 	var base = $('base').prop('href');
@@ -293,8 +297,8 @@ function getBaseUrl() {
 /**
  * Clear session of a uid
  *
- * @param	integer	uid: uid of the element
- * @return	void
+ * @param {integer} uid of the element
+ * @return void
  */
 function clearSession(uid) {
 	var url = base + '/index.php';
@@ -313,7 +317,7 @@ function clearSession(uid) {
 			checkConditions(uid); // check if something should be changed
 		}
 	});
-};
+}
 
 /**
  * Clear session values if form is submitted
@@ -331,9 +335,9 @@ function clearFullSession() {
 }
 
 /**
- * Read From uid from DOM
+ * Read Form uid from DOM
  *
- * @return int		Form uid
+ * @return {int} Form uid
  */
 function getFormUid() {
 	var formField = $('input[name="tx_powermail_pi1[mail][form]"]');
