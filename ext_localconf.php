@@ -44,3 +44,7 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_requiredField'] 
 // eID to read all session values for debugging (only if logged in into Backend)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_debugSession'] =
 	'EXT:powermail_cond/Classes/Utility/Eid/DebugSessionEid.php';
+
+// eID to clean the deRequired Fields session
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailcond_requiredFields'] =
+	'EXT:powermail_cond/Classes/Utility/Eid/RequiredFieldsEid.php';

@@ -244,27 +244,29 @@ function deRequiredField(uid, disableAjaxRequest) {
  * @return void
  */
 function reRequiredAll() {
-	$('.powermail_field').each(function() {
-		var element = $(this);
-		var uid = element.closest('.powermail_fieldwrap').prop('id').substr(20);
-		var classValue = $(this).prop('class');
-		if (classValue.indexOf('_required_') !== -1) {
-			// replace validate[_required_] with [required]
-			classValue = classValue.replace('_required_', 'required');
-			element.prop('class', classValue);
-
-			// add required="required"
-			if (element.prop('type') == 'text') {
-				element.prop('required', 'required');
-			}
-
-			$.ajax({
-				url: '/index.php',
-				data: 'eID=' + 'powermailcond_requiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid,
-				cache: false
-			});
-		}
+	// Required Fields all
+	$.ajax({
+		url: '/index.php',
+		data: 'eID=' + 'powermailcond_requiredFields&tx_powermailcond_pi1[formUid]=' + getFormUid(),
+		cache: false
 	});
+
+	// TODO JS
+//	$('.powermail_field').each(function() {
+//		var element = $(this);
+//		var uid = element.closest('.powermail_fieldwrap').prop('id').substr(20);
+//		var classValue = $(this).prop('class');
+//		if (classValue.indexOf('_required_') !== -1) {
+//			// replace validate[_required_] with [required]
+//			classValue = classValue.replace('_required_', 'required');
+//			element.prop('class', classValue);
+//
+//			// add required="required"
+//			if (element.prop('type') == 'text') {
+//				element.prop('required', 'required');
+//			}
+//		}
+//	});
 }
 
 /**
