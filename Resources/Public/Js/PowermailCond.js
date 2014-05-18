@@ -95,12 +95,6 @@ function checkConditions(uid) {
 					showAll(); // show all fields and fieldsets at the beginning
 				}
 			}
-
-			// TODO Detach Parsley
-			// Form validation
-			if ($.fn.validationEngine) {
-				$('.powermail_form').validationEngine('detach');
-			}
 		},
 		error: function() {
 			$('form.powermail_form').append('Error in PowermailCond.js in checkCondtions function by opening the given url');
@@ -228,6 +222,12 @@ function deRequiredField(uid, disableAjaxRequest) {
 		element.removeProp('required'); // remove required attribute
 		element.removeProp('data-parsley-required'); // remove parsley-required attribute
 		element.data('powermailcond-required', 'required'); // add own data required attribute
+	}
+	if (isParsleyValidationActivated()) {
+		// reinit parsley seems only to work with required="required" and not with data-parslay attributes :(
+		var form = $('form.powermail_form_'+ getFormUid());
+		form.parsley().destroy(); // turn off parsley
+		form.parsley(); // turn on parsley again
 	}
 }
 
