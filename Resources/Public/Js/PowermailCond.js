@@ -1,5 +1,6 @@
 jQuery(document).ready(function() {
 	base = getBaseUrl();
+	validationFieldClasses = '.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox';
 	clearFullSession();
 	if ($('form.powermail_form').length > 0) { // only if the powermail form is on the page (not for confirmation page)
 		checkConditions(0); // check if something should be changed
@@ -23,7 +24,7 @@ jQuery(document).ready(function() {
 	});
 
 	// save values via ajax to session
-	$('.powermail_input, .powermail_textarea, .powermail_select, .powermail_radio, .powermail_checkbox').bind('change', function() {
+	$(validationFieldClasses).bind('change', function() {
 		$this = $(this); // caching
 		var url = base + '/index.php';
 		var timestamp = Number(new Date()); // timestamp is needed for a internet explorer workarround (always change a parameter)
@@ -211,31 +212,22 @@ function showAll() {
  * @return void
  */
 function deRequiredField(uid, disableAjaxRequest) {
-	var element = $('#powermail_fieldwrap_' + uid).find('input');
-//	var classValue = element.prop('class');
-
 	// save this field in session so it's no mandatory field any more
 	if (disableAjaxRequest !== undefined && disableAjaxRequest === true) {
 		$.ajax({
 			url: '/index.php',
 			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
-			cache: false,
-			success: function(data) {
-				console.log(data);
-			}
+			cache: false
 		});
 	}
 
-
-
-//	if (classValue && classValue.indexOf('required') !== -1) {
-//		// replace validate[required] with [_required_]
-//		classValue = classValue.replace('required', '_required_');
-//		element.prop('class', classValue);
-//
-//		// remove required="required"
-//		element.prop('required', false);
-//	}
+	// rewrite required attributes
+	var element = $('#powermail_fieldwrap_' + uid).find('input');
+	if (element.prop('required') || element.data('parsley-required')) {
+		element.removeProp('required'); // remove required attribute
+		element.removeProp('data-parsley-required'); // remove parsley-required attribute
+		element.data('powermailcond-required', 'required'); // add own data required attribute
+	}
 }
 
 /**
@@ -251,22 +243,17 @@ function reRequiredAll() {
 		cache: false
 	});
 
-	// TODO JS
-//	$('.powermail_field').each(function() {
-//		var element = $(this);
-//		var uid = element.closest('.powermail_fieldwrap').prop('id').substr(20);
-//		var classValue = $(this).prop('class');
-//		if (classValue.indexOf('_required_') !== -1) {
-//			// replace validate[_required_] with [required]
-//			classValue = classValue.replace('_required_', 'required');
-//			element.prop('class', classValue);
-//
-//			// add required="required"
-//			if (element.prop('type') == 'text') {
-//				element.prop('required', 'required');
-//			}
-//		}
-//	});
+	$(validationFieldClasses).each(function() {
+		var $this = $(this);
+		$this.removeProp('powermailcond-required');
+		if ($this.data('powermailcond-required') === 'required') {
+			if (isHtml5ValidationActivated()) {
+				$this.prop('required', 'required');
+			} else if (isParsleyValidationActivated()) {
+				$this.prop('required', 'required');
+			}
+		}
+	});
 }
 
 /**
@@ -347,4 +334,28 @@ function getFormUid() {
 		return 0;
 	}
 	return formField.val();
+}
+
+/**
+ * Check if Parsley is activated
+ *
+ * @return bool
+ */
+function isParsleyValidationActivated() {
+	if ($('form.powermail_form_'+ getFormUid()).data('parsley-validate') === 'data-parsley-validate') {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Check if HTML5 Validation is activated
+ *
+ * @return bool
+ */
+function isHtml5ValidationActivated() {
+	if ($('form.powermail_form_'+ getFormUid()).data('validate') === 'html5') {
+		return true;
+	}
+	return false;
 }
