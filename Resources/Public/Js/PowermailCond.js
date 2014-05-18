@@ -86,8 +86,7 @@ function checkConditions(uid) {
 		cache: false, // disable cache (for ie)
 		success: function(data) {
 			if (data != 'nochange') {
-				$('.powermail_fieldwrap select option').removeClass('hide'); // show all options at the beginning
-				$('.powermail_fieldwrap select option').removeProp('disabled'); // enable all options at the beginning
+				$('.powermail_fieldwrap select option').removeClass('hide').removeProp('disabled');
 				if (data != '') { // if there is a response
 					if (data.length < 1000) { // stop if wrong result (maybe complete t3 page)
 						doAction(data); // hide all given fields
@@ -169,7 +168,8 @@ function hideFieldset(string) {
 	$.ajax({
 		url: '/index.php',
 		data: 'eID=' + 'powermailcond_deRequiredFields&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUids]=' + fields.join() + '&no_cache=1',
-		cache: false
+		cache: false,
+		async: false
 	});
 }
 
@@ -217,7 +217,8 @@ function deRequiredField(uid, disableAjaxRequest) {
 		$.ajax({
 			url: '/index.php',
 			data: 'eID=' + 'powermailcond_deRequiredField&tx_powermailcond_pi1[formUid]=' + getFormUid() + '&tx_powermailcond_pi1[fieldUid]=' + uid + '&no_cache=1',
-			cache: false
+			cache: false,
+			async: false
 		});
 	}
 
@@ -240,7 +241,8 @@ function reRequiredAll() {
 	$.ajax({
 		url: '/index.php',
 		data: 'eID=' + 'powermailcond_requiredFields&tx_powermailcond_pi1[formUid]=' + getFormUid(),
-		cache: false
+		cache: false,
+		async: false
 	});
 
 	$(validationFieldClasses).each(function() {
@@ -299,6 +301,7 @@ function clearSession(uid) {
 		url: url, // send to this url
 		data: params, // add params
 		cache: false, // disable cache (for ie)
+		async: false,
 		success: function(data) { // return values
 			if (data != '') { // if there is a response
 				$('form.powermail_form').append('Error in powermail_cond.js in clearSession function:' + data);
@@ -318,7 +321,8 @@ function clearFullSession() {
 		var url = base + '/index.php?eID=powermailcond_clearSession';
 		$.ajax({
 			url: url, // send to this url
-			cache: false
+			cache: false,
+			async: false
 		});
 	}
 }
