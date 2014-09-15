@@ -1,4 +1,6 @@
 <?php
+namespace In2code\PowermailCond\Utility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,14 +25,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  * Div is a class for a collection of misc functions
  *
  * @package powermail_cond
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_PowermailCond_Utility_Div {
+class Div {
 
 	/**
 	 * Extension Key
@@ -68,7 +70,7 @@ class Tx_PowermailCond_Utility_Div {
 	 * get condition as array from current page
 	 *
 	 * @param int $formUid
-	 * @param tslib_cObj $cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
 	 * @return array $arr: Array with all conditions of the current page
 	 */
 	public function getConditionsFromForm($formUid, $cObj) {
@@ -159,49 +161,36 @@ class Tx_PowermailCond_Utility_Div {
 	 * Save value to session and respect old entries
 	 *
 	 * @param string $value Value to store
-	 * @param int $form Form uid
-	 * @param int $field Field uid
+	 * @param int $formUid Form uid
+	 * @param int $fieldUid Field uid
 	 * @param string $prefix Prefix for session
 	 * @return void
 	 */
-	public function saveValueToSession($value, $form, $field, $prefix = 'fieldSession') {
-		$form = intval($form);
-
-		// get old session
+	public function saveValueToSession($value, $formUid, $fieldUid, $prefix = 'fieldSession') {
+		$formKey = 'form_' . intval($formUid);
+		$fieldKey = 'field_' . intval($fieldUid);
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		if (isset($session[$prefix]['form_' . $form])) {
-			$oldArray = $session[$prefix]['form_' . $form];
-		} else {
-			$oldArray = array();
-		}
-
-		// merge old and new
-		$array = array(
-			'field_' . $field => $value
-		);
-		$array[$prefix]['form_' . $form] = array_merge($oldArray, $array);
-
-		// save new array
-		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $array);
+		$session[$prefix][$formKey][$fieldKey] = $value;
+		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
 		$GLOBALS['TSFE']->storeSessionData();
 	}
 
 	/**
 	 * Save value to session and respect old entries
 	 *
-	 * @param int $form Form uid
-	 * @param int $field Field uid
+	 * @param int $formUid Form uid
+	 * @param int $fieldUid Field uid
 	 * @param string $prefix Prefix for session
 	 * @return void
 	 */
-	public function removeValueFromSession($form, $field, $prefix = 'fieldSession') {
-		$form = intval($form);
-		$field = intval($field);
+	public function removeValueFromSession($formUid, $fieldUid, $prefix = 'fieldSession') {
+		$formKey = 'form_' . intval($formUid);
+		$fieldKey = 'field_' . intval($fieldUid);
 
 		// get old session
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		if (isset($session[$prefix]['form_' . $form]['field_' . $field])) {
-			unset($session[$prefix]['form_' . $form]['field_' . $field]);
+		if (isset($session[$prefix][$formKey][$fieldKey])) {
+			unset($session[$prefix][$formKey][$fieldKey]);
 
 			// save again
 			$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
@@ -212,16 +201,16 @@ class Tx_PowermailCond_Utility_Div {
 	/**
 	 * Return all values from the session (could be used for debugging, etc..)
 	 *
-	 * @param int $form Form Uid
+	 * @param int $formUid Form Uid
 	 * @param string $prefix Prefix for session
 	 * @return array $array with session values
 	 */
-	public function getAllSessionValuesFromForm($form = NULL, $prefix = 'fieldSession') {
-		// get current stored values from session
+	public function getAllSessionValuesFromForm($formUid = NULL, $prefix = 'fieldSession') {
+		$formKey = 'form_' . intval($formUid);
 		$array = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
 
-		if (isset($array[$prefix]['form_' . $form])) {
-			return $array[$prefix]['form_' . $form];
+		if (isset($array[$prefix][$formKey])) {
+			return $array[$prefix][$formKey];
 		}
 		return $array[$prefix];
 	}

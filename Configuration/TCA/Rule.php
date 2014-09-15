@@ -40,8 +40,9 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 				'items' => Array (
 					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.startField.I.0', '0'),
 				),
-				'itemsProcFunc' => 'Tx_PowermailCond_Utility_FieldlistingBackend->getFieldname',
-				'itemsProcFuncValue' => '"text","textarea","select","radio","check"', // allow only this types of fields in selector
+				'itemsProcFunc' => '\In2code\PowermailCond\Utility\Tca\FieldlistingBackend->getFieldname',
+				// allow only this types of fields in selector
+				'itemsProcFuncValue' => '"text","textarea","select","radio","check"',
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required'
@@ -53,20 +54,83 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 			'config' => Array (
 				'type' => 'select',
 				'items' => Array (
-					//Array('', ''), // empty
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operators', '--div--'), // title operators
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.0', '0'), // is set
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.1', '1'), // is not set
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonValue', '--div--'), // title operatorsComparisonValue
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.2', '2'), // contains
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.3', '3'), // contains not
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.4', '4'), // is
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.5', '5'), // is not
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.6', '6'), // is greater than
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.7', '7'), // is less than
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonField', '--div--'), // title operatorsComparisonField
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.8', '8'), // contains value from field
-					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.9', '9'), // contains not value from field
+					// title operators
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operators',
+						'--div--'
+					),
+
+					// is set
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.0',
+						'0'
+					),
+
+					// is not set
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.1',
+						'1'
+					),
+
+					// title operatorsComparisonValue
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonValue',
+						'--div--'
+					),
+
+					// contains
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.2',
+						'2'
+					),
+
+					// contains not
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.3',
+						'3'
+					),
+
+					// is
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.4',
+						'4'
+					),
+
+					// is not
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.5',
+						'5'
+					),
+
+					// is greater than
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.6',
+						'6'
+					),
+
+					// is less than
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.7',
+						'7'
+					),
+
+					// title operatorsComparisonField
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonField',
+						'--div--'
+					),
+
+					// contains value from field
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.8',
+						'8'
+					),
+
+					// contains not value from field
+					Array(
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.9',
+						'9'
+					),
 				),
 				'size' => 1,
 				'maxitems' => 1
@@ -80,7 +144,8 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 				'cols' => '30',
 				'rows' => '2',
 			),
-			'displayCond' => 'FIELD:ops:IN:2,3,4,5,6,7' // show only if ops value is greater than 1
+			// show only if ops value is greater than 1
+			'displayCond' => 'FIELD:ops:IN:2,3,4,5,6,7'
 		),
 		'equalField' => Array (
 			'exclude' => 1,
@@ -91,11 +156,12 @@ $TCA['tx_powermailcond_domain_model_rule'] = array (
 					Array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.equalField.I.0', '0'),
 				),
 				'itemsProcFunc' => 'tx_powermailcond_fields_be->fieldname',
-				'itemsProcFuncValue' => '"text","textarea","select","radio"', // allow only this types of fields in selector
+				// allow only this types of fields in selector
+				'itemsProcFuncValue' => '"text","textarea","select","radio"',
 				'size' => 1,
 				'maxitems' => 1
 			),
-			'displayCond' => 'FIELD:ops:IN:8,9' // show only if ops value is greater than 1
+			'displayCond' => 'FIELD:ops:IN:8,9'
 		),
 	),
 );

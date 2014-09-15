@@ -21,7 +21,7 @@ CREATE TABLE tx_powermailcond_domain_model_condition (
 	title tinytext NOT NULL,
 	targetField tinytext NOT NULL,
 	actions tinytext NOT NULL,
-	filterSelectField tinytext NOT NULL,
+	filterSelectField text NOT NULL,
 	conjunction tinytext NOT NULL,
 	form int(11) DEFAULT '0' NOT NULL,
 	

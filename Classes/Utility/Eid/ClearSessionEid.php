@@ -1,4 +1,8 @@
 <?php
+namespace In2code\PowermailCond\Utility\Eid;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,13 +28,20 @@
  ***************************************************************/
 
 /**
- * Store fields in session which should not be mandatory any more
+ * This class is for reading values from session
  *
- * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
- * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidDeRequiredField
+ * @author Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ * @package TYPO3
+ * @subpackage EidClearSession
  */
-class Tx_PowermailCond_Utility_EidDeRequiredField {
+class ClearSessionEid {
+
+	/**
+	 * The extension key
+	 *
+	 * @var string
+	 */
+	public $extKey = 'powermail_cond';
 
 	/**
 	 * Prefix Id
@@ -40,50 +51,46 @@ class Tx_PowermailCond_Utility_EidDeRequiredField {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * @var Tx_PowermailCond_Utility_Div
+	 * @var \In2code\PowermailCond\Utility\Div
 	 */
 	protected $div;
 
 	/**
-	 * save field in session to be stored for non-mandatory fields
+	 * Read values from session - example: 18:braun;17:rot;12:xd;11:fc;
 	 *
-	 * @return int Field Uid which was disabled
+	 * @return void
 	 */
 	public function main() {
-		$cObj = t3lib_div::makeInstance('tslib_cObj');
-		$piVars = t3lib_div::_GP($this->prefixId);
-		$formUid = intval($piVars['formUid']);
-		$fieldUid = intval($piVars['fieldUid']);
-		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $cObj);
-
-		// only if this field was defined as targetField in conditions
-		if (array_key_exists($fieldUid, $conditions)) {
-			// save single value in session
-			$this->div->saveValueToSession('', $formUid, $fieldUid, 'deRequiredFields');
-			return $fieldUid;
-		}
-
-		return 0;
+		$GLOBALS['TSFE']->sesData = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$piVars = GeneralUtility::_GP($this->prefixId);
+		$form = intval($piVars['form']);
+		$this->div->cleanfullSession($form, 'fieldSession');
+		$this->div->cleanfullSession($form, 'deRequiredFields');
 	}
 
 	/**
 	 * Initialize eID
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
-		$userObj = tslib_eidtools::initFeUser();
-		$GLOBALS['TSFE'] = t3lib_div::makeInstance('tslib_fe', $TYPO3_CONF_VARS, 32, 0, TRUE);
+		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+			'\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
+			$TYPO3_CONF_VARS,
+			32,
+			0,
+			TRUE
+		);
 		$GLOBALS['TSFE']->connectToDB();
 		$GLOBALS['TSFE']->fe_user = $userObj;
-		$GLOBALS['TSFE']->id = t3lib_div::_GET('id');
+		$GLOBALS['TSFE']->id = GeneralUtility::_GET('id');
 		$GLOBALS['TSFE']->determineId();
 		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
 
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$this->div = GeneralUtility::makeInstance('\In2code\PowermailCond\Utility\Div');
 	}
 }
-
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidDeRequiredField', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\PowermailCond\Utility\Eid\ClearSessionEid', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();

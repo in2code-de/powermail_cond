@@ -12,10 +12,10 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Powermail Conditions',
-	'description' => 'Add conditions via AJAX to powermail 2.x forms (fields and fieldsets). This extension uses jQuery as JavaScript Library.',
+	'description' => 'Add conditions via AJAX to powermail 2.1 forms (for fields and pages).',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.0.3',
+	'version' => '2.1.0',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
@@ -29,15 +29,15 @@ $EM_CONF[$_EXTKEY] = array(
 	'lockType' => '',
 	'author' => 'Alex Kellner',
 	'author_email' => 'alexander.kellner@in2code.de',
-	'author_company' => 'in2code.',
+	'author_company' => 'in2code.de',
 	'CGLcompliance' => '',
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'powermail' => '2.0.4-2.0.99',
-			'extbase' => '4.7.0-6.2.99',
-			'fluid' => '4.7.0-6.2.99',
-			'typo3' => '4.7.0-6.2.99',
+			'powermail' => '2.1.0-2.1.99',
+			'extbase' => '6.2.0-6.2.99',
+			'fluid' => '6.2.0-6.2.99',
+			'typo3' => '6.2.0-6.2.99',
 		),
 		'conflicts' => array(
 		),

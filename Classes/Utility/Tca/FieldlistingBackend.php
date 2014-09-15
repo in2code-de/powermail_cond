@@ -1,4 +1,6 @@
 <?php
+namespace In2code\PowermailCond\Utility\Tca;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -22,7 +24,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * List powermail fields in Backend for powermail_cond rules
@@ -31,7 +33,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html
  * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_PowermailCond_Utility_FieldlistingBackend {
+class FieldlistingBackend {
 
 	/**
 	 * show all fields in the backend
@@ -92,7 +94,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @param int $formUid			Form Uid
 	 * @return	array	$arr: all fieldsets with its name and the fieldset uid
 	 */
-	private function getFieldsets($formUid) {
+	protected function getFieldsets($formUid) {
 		$arr = array();
 		$select = 'uid, title';
 		$from = 'tx_powermail_domain_model_pages';
@@ -116,7 +118,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 * @param int $conditionUid
 	 * @return int formUid
 	 */
-	private function getFormUidFromCondition($conditionUid) {
+	protected function getFormUidFromCondition($conditionUid) {
 		$select = 'form';
 		$from = 'tx_powermailcond_domain_model_condition';
 		$where = 'uid = ' . intval($conditionUid) . ' AND hidden = 0 AND deleted = 0';
@@ -140,7 +142,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 	 */
 	public function valuesFromPowermailSelectbox(&$params, $pObj) {
 		// Get targetField UID
-		$gParams = t3lib_div::_GET('edit');
+		$gParams = GeneralUtility::_GET('edit');
 		$gParams2 = $gParams['tx_powermailcond_domain_model_condition'];
 		$thisConditionsUid = 0;
 		foreach ((array) $gParams2 as $uid => $actions) {
@@ -162,7 +164,7 @@ class Tx_PowermailCond_Utility_FieldlistingBackend {
 		if ($res) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		}
-		$options = t3lib_div::trimExplode("\n", $row['settings'], 1);
+		$options = GeneralUtility::trimExplode("\n", $row['settings'], 1);
 
 		// write params
 		foreach ((array) $options as $option) {

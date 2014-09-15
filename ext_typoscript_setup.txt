@@ -1,5 +1,0 @@
-config.tx_extbase{
-	objects {
-		Tx_Powermail_Domain_Validator_MandatoryValidator.className = Tx_PowermailCond_Domain_Validator_MandatoryValidator
-	}
-}

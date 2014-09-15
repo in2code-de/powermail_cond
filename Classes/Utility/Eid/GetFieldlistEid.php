@@ -1,4 +1,8 @@
 <?php
+namespace In2code\PowermailCond\Utility\Eid;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -26,11 +30,11 @@
 /**
  * This class tells jQuery which field are allowed in which are not allowed
  *
- * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
- * @package	TYPO3
- * @subpackage	Tx_PowermailCond_Utility_EidGetFieldlist
+ * @author Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ * @package TYPO3
+ * @subpackage GetFieldlistEid
  */
-class Tx_PowermailCond_Utility_EidGetFieldlist {
+class GetFieldlistEid {
 
 	/**
 	 * Prefix ID for Plugin Vars
@@ -40,22 +44,22 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	public $prefixId = 'tx_powermailcond_pi1';
 
 	/**
-	 * @var tslib_cObj
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
 	/**
-	 * @var Tx_PowermailCond_Utility_Div
+	 * @var \In2code\PowermailCond\Utility\Div
 	 */
 	protected $div;
 
 	/**
 	 * Generates the output
 	 *
-	 * @return string		from action
+	 * @return string
 	 */
 	public function main() {
-		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+		$this->cObj = GeneralUtility::makeInstance('\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
 		$conditions = $this->div->getConditionsFromForm($this->piVars['formUid'], $this->cObj);
 		$targetFields = $this->div->getStartFields($conditions);
 		if ($this->piVars['uid'] > 0 && !in_array($this->piVars['uid'], $targetFields)) {
@@ -70,7 +74,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 		// remove last ,
 		$content = rtrim($content, ',');
 		// remove double values
-		$content = t3lib_div::uniqueList($content);
+		$content = GeneralUtility::uniqueList($content);
 
 		return $content;
 	}
@@ -79,10 +83,10 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	 * Preflight function checks the rules
 	 * 		if there should be an action (show/hide) or not
 	 *
-	 * @param	array	$conf: Configuration of current field
-	 * @return	boolean true:hide false:show(nothing)
+	 * @param array $conf Configuration of current field
+	 * @return boolean true:hide false:show(nothing)
 	 */
-	public function checkRules($conf) {
+	protected function checkRules($conf) {
 		// start with 0
 		$do = 0;
 		$content = '';
@@ -224,7 +228,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	 * @param string $conjunction: AND or OR
 	 * @return boolean
 	 */
-	private function setDo($newStatus, $oldStatus = FALSE, $conjunction = 'OR') {
+	protected function setDo($newStatus, $oldStatus = FALSE, $conjunction = 'OR') {
 		if ($conjunction == 'OR') {
 			if ($newStatus || $oldStatus) {
 				return TRUE;
@@ -250,7 +254,7 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	 * @param array $conf: Configuration of current field
 	 * @return string list
 	 */
-	public function doAction($do, $content, $conf) {
+	protected function doAction($do, $content, $conf) {
 		if (!$do) {
 			return $content;
 		}
@@ -267,7 +271,10 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 			// show
 			case 1:
 				// remove from hidelist (show this field)
-				$content = t3lib_div::rmFromList($this->div->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']), $content);
+				$content = GeneralUtility::rmFromList(
+					$this->div->getFieldsFromFieldset($conf['targetField'], $this->piVars['formUid']),
+					$content
+				);
 				break;
 
 			// filter from selectbox
@@ -285,22 +292,28 @@ class Tx_PowermailCond_Utility_EidGetFieldlist {
 	 * Initialize eID
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
-		$userObj = tslib_eidtools::initFeUser();
-		$GLOBALS['TSFE'] = t3lib_div::makeInstance('tslib_fe', $TYPO3_CONF_VARS, 32, 0, TRUE);
+		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+			'\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
+			$TYPO3_CONF_VARS,
+			32,
+			0,
+			TRUE
+		);
 		$GLOBALS['TSFE']->connectToDB();
 		$GLOBALS['TSFE']->fe_user = $userObj;
-		$GLOBALS['TSFE']->id = t3lib_div::_GET('id');
+		$GLOBALS['TSFE']->id = GeneralUtility::_GET('id');
 		$GLOBALS['TSFE']->determineId();
 		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
 		$GLOBALS['TSFE']->includeTCA();
 
-		$this->piVars = t3lib_div::_GET($this->prefixId);
-		$this->div = t3lib_div::makeInstance('Tx_PowermailCond_Utility_Div');
+		$this->piVars = GeneralUtility::_GET($this->prefixId);
+		$this->div = GeneralUtility::makeInstance('In2code\PowermailCond\Utility\Div');
 		$this->session = $this->div->getAllSessionValuesFromForm($this->piVars['formUid']);
 	}
 }
 
-$eid = t3lib_div::makeInstance('Tx_PowermailCond_Utility_EidGetFieldlist', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\PowermailCond\Utility\Eid\GetFieldlistEid', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->main();
