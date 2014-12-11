@@ -67,7 +67,7 @@ function fieldValue(fieldUid, fieldValue) {
 		.val(fieldValue);
 
 	// check checkboxes and radiobuttons
-	fieldWrap.find('input[type="checkbox"]').each(function() {
+	fieldWrap.find('input[type="checkbox"], input[type="radio"]').each(function() {
 		if ($(this).prop('value') == fieldValue) {
 			$(this).prop('checked', 'checked');
 		}
