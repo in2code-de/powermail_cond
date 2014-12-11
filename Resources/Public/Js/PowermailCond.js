@@ -59,7 +59,14 @@ jQuery(document).ready(function() {
  */
 function fieldValue(fieldUid, fieldValue) {
 	var fieldWrap = $('#powermail_fieldwrap_' + fieldUid);
-	fieldWrap.find('input').not('[type="checkbox"]').val(fieldValue);
+
+	// set value for all default fields
+	fieldWrap
+		.find('input.powermail_field')
+		.not('[type="checkbox"]')
+		.val(fieldValue);
+
+	// check checkboxes and radiobuttons
 	fieldWrap.find('input[type="checkbox"]').each(function() {
 		if ($(this).prop('value') == fieldValue) {
 			$(this).prop('checked', 'checked');

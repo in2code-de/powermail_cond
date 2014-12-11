@@ -170,7 +170,11 @@ class Div {
 		$formKey = 'form_' . intval($formUid);
 		$fieldKey = 'field_' . intval($fieldUid);
 		$session = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey);
-		$session[$prefix][$formKey][$fieldKey] = $value;
+		if (!empty($value)) {
+			$session[$prefix][$formKey][$fieldKey] = $value;
+		} else {
+			unset($session[$prefix][$formKey][$fieldKey]);
+		}
 		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey, $session);
 		$GLOBALS['TSFE']->storeSessionData();
 	}
