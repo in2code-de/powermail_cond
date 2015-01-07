@@ -63,7 +63,7 @@ function fieldValue(fieldUid, fieldValue) {
 	// set value for all default fields
 	fieldWrap
 		.find('input.powermail_field')
-		.not('[type="checkbox"]')
+		.not('[type="checkbox"], input[type="radio"]')
 		.val(fieldValue);
 
 	// check checkboxes and radiobuttons
