@@ -1,7 +1,9 @@
 <?php
 namespace In2code\PowermailCond\Utility\Eid;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Utility\EidUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /***************************************************************
  *  Copyright notice
@@ -61,7 +63,7 @@ class ClearSessionEid {
 	 * @return void
 	 */
 	public function main() {
-		$GLOBALS['TSFE']->sesData = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$GLOBALS['TSFE']->sesData = EidUtility::initFeUser();
 		$piVars = GeneralUtility::_GP($this->prefixId);
 		$form = intval($piVars['form']);
 		$this->div->cleanfullSession($form, 'fieldSession');
@@ -70,27 +72,27 @@ class ClearSessionEid {
 
 	/**
 	 * Initialize eID
+	 *
+	 * @param array $typo3ConfigurationVariables
 	 */
-	public function __construct($TYPO3_CONF_VARS) {
-		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+	public function __construct($typo3ConfigurationVariables) {
 		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
 			'\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
-			$TYPO3_CONF_VARS,
+			$typo3ConfigurationVariables,
 			32,
 			0,
 			TRUE
 		);
 		$GLOBALS['TSFE']->connectToDB();
-		$GLOBALS['TSFE']->fe_user = $userObj;
+		$GLOBALS['TSFE']->fe_user = EidUtility::initFeUser();
 		$GLOBALS['TSFE']->id = GeneralUtility::_GET('id');
 		$GLOBALS['TSFE']->determineId();
-		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
-		$GLOBALS['TSFE']->includeTCA();
 
 		$this->div = GeneralUtility::makeInstance('\In2code\PowermailCond\Utility\Div');
 	}
 }
+/** @var \In2code\PowermailCond\Utility\Eid\ClearSessionEid $eid */
 $eid = GeneralUtility::makeInstance('In2code\PowermailCond\Utility\Eid\ClearSessionEid', $GLOBALS['TYPO3_CONF_VARS']);
-echo $eid->main();
+$eid->main();

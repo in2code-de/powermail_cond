@@ -77,10 +77,8 @@ class DebugSessionEid {
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = GeneralUtility::_GET('id');
 		$GLOBALS['TSFE']->determineId();
-		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
-		$GLOBALS['TSFE']->includeTCA();
 		$GLOBALS['BE_USER'] = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Authentication\BackendUserAuthentication');
 		$GLOBALS['BE_USER']->start();
 		$GLOBALS['BE_USER']->backendCheckLogin();

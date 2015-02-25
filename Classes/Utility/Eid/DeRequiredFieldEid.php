@@ -87,10 +87,8 @@ class DeRequiredFieldEid {
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = GeneralUtility::_GET('id');
 		$GLOBALS['TSFE']->determineId();
-		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
-		$GLOBALS['TSFE']->includeTCA();
 
 		$this->div = GeneralUtility::makeInstance('\In2code\PowermailCond\Utility\Div');
 	}
