@@ -17,10 +17,8 @@
 			<label index="tx_powermailcond_conditions.action.I.additional">Additional Actions</label>
 			<label index="tx_powermailcond_conditions.action.I.0">hide</label>
 			<label index="tx_powermailcond_conditions.action.I.1">unhide</label>
-			<label index="tx_powermailcond_conditions.action.I.2">filter Selectbox (for fields only)</label>
-			<label index="tx_powermailcond_conditions.filterSelectField">Filter to these values</label>
 			<label index="tx_powermailcond_conditions.rules">Rules</label>
-			<label index="tx_powermailcond_conditions.conjunction">Conjunction of the rules</label>
+			<label index="tx_powermailcond_conditions.conjunction">Conjunction of the rules (if more than only 1)</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.0">AND</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.1">OR</label>
 			<label index="tx_powermailcond_rules">Rules</label>
@@ -57,10 +55,8 @@
 			<label index="tx_powermailcond_conditions.action.I.additional">Zusätzliche Aktionen</label>
 			<label index="tx_powermailcond_conditions.action.I.0">verberge</label>
 			<label index="tx_powermailcond_conditions.action.I.1">zeige</label>
-			<label index="tx_powermailcond_conditions.action.I.2">filter Auswahlbox (nur für Felder)</label>
-			<label index="tx_powermailcond_conditions.filterSelectField">Auf diese Werte begrenzen</label>
 			<label index="tx_powermailcond_conditions.rules">Regeln</label>
-			<label index="tx_powermailcond_conditions.conjunction">Logische Verknüpfung der Regeln</label>
+			<label index="tx_powermailcond_conditions.conjunction">Logische Verknüpfung der Regeln (wenn mehr als 1 Regel)</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.0">UND</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.1">ODER</label>
 			<label index="tx_powermailcond_rules">Regeln</label>
