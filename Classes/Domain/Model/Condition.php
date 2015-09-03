@@ -39,6 +39,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Condition extends AbstractEntity {
 
+	const CONJUNCTION_OR = 'OR';
+	const CONJUNCTION_AND = 'AND';
+
 	/**
 	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
 	 * @inject

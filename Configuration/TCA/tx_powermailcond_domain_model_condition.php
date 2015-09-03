@@ -163,13 +163,13 @@ return array(
 					// OR
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.1',
-						'OR'
+						\In2code\PowermailCond\Domain\Model\Condition::CONJUNCTION_OR
 					),
 
 					// AND
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conjunction.I.0',
-						'AND'
+						\In2code\PowermailCond\Domain\Model\Condition::CONJUNCTION_AND
 					),
 				),
 				'size' => 1,
