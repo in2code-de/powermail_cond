@@ -211,13 +211,13 @@ return array(
 					// hide
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.0',
-						'0'
+						\In2code\PowermailCond\Domain\Model\Condition::ACTION_HIDE
 					),
 
 					// unhide
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.action.I.1',
-						'1'
+						\In2code\PowermailCond\Domain\Model\Condition::ACTION_UN_HIDE
 					),
 
 					// title additional

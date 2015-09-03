@@ -41,6 +41,16 @@ class Condition extends AbstractEntity {
 
 	const CONJUNCTION_OR = 'OR';
 	const CONJUNCTION_AND = 'AND';
+	const ACTION_HIDE = 0;
+	const ACTION_UN_HIDE = 1;
+
+	/**
+	 * @var array
+	 */
+	protected $actionNumberMap = array(
+		self::ACTION_HIDE => 'hide',
+		self::ACTION_UN_HIDE => 'un_hide',
+	);
 
 	/**
 	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
