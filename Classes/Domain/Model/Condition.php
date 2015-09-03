@@ -256,16 +256,42 @@ class Condition extends AbstractEntity {
 	 * @return array
 	 */
 	public function apply(Form $form, array $arguments) {
-		/** @var Page $page */
-		foreach ($form->getPages() as $page) {
-			/** @var Field $field */
-			foreach ($page->getFields() as $field) {
-				if ($field->getUid() === (int) $this->targetField) {
-					$arguments['todo'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+		if (strpos($this->targetField, 'fieldset') !== FALSE) {
+			$pageUid = (int) substr($this->targetField, 9);
+			/** @var Page $page */
+			foreach ($form->getPages() as $page) {
+				if ($page->getUid() === $pageUid) {
+
+					/** @var Field $field */
+					foreach ($page->getFields() as $field) {
+						if ($field->getUid() === (int) $this->targetField) {
+							$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+								'action' => self::$actionNumberMap[$this->actions],
+								'matchingCondition' => $this->getUid(),
+							);
+							break;
+						}
+					}
+
+					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
 						'action' => self::$actionNumberMap[$this->actions],
 						'matchingCondition' => $this->getUid(),
 					);
 					break;
+				}
+			}
+		} else {
+			/** @var Page $page */
+			foreach ($form->getPages() as $page) {
+				/** @var Field $field */
+				foreach ($page->getFields() as $field) {
+					if ($field->getUid() === (int) $this->targetField) {
+						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+							'action' => self::$actionNumberMap[$this->actions],
+							'matchingCondition' => $this->getUid(),
+						);
+						break;
+					}
 				}
 			}
 		}
@@ -278,16 +304,43 @@ class Condition extends AbstractEntity {
 	 * @return array
 	 */
 	public function negate(Form $form, array $arguments) {
-		/** @var Page $page */
-		foreach ($form->getPages() as $page) {
-			/** @var Field $field */
-			foreach ($page->getFields() as $field) {
-				if ($field->getUid() === (int) $this->targetField) {
-					$arguments['todo'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+
+		if (strpos($this->targetField, 'fieldset') !== FALSE) {
+			$pageUid = (int) substr($this->targetField, 9);
+			/** @var Page $page */
+			foreach ($form->getPages() as $page) {
+				if ($page->getUid() === $pageUid) {
+
+					/** @var Field $field */
+					foreach ($page->getFields() as $field) {
+						if ($field->getUid() === (int) $this->targetField) {
+							$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+								'action' => $this->getNegatedActionString(),
+								'matchingCondition' => $this->getUid(),
+							);
+							break;
+						}
+					}
+
+					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
 						'action' => $this->getNegatedActionString(),
 						'matchingCondition' => $this->getUid(),
 					);
 					break;
+				}
+			}
+		} else {
+			/** @var Page $page */
+			foreach ($form->getPages() as $page) {
+				/** @var Field $field */
+				foreach ($page->getFields() as $field) {
+					if ($field->getUid() === (int) $this->targetField) {
+						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+							'action' => $this->getNegatedActionString(),
+							'matchingCondition' => $this->getUid(),
+						);
+						break;
+					}
 				}
 			}
 		}

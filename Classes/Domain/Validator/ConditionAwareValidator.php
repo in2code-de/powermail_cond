@@ -28,7 +28,10 @@ namespace In2code\PowermailCond\Domain\Validator;
  ***************************************************************/
 
 use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Validator\InputValidator;
+use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\PowermailCond\Domain\Model\Condition;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
@@ -50,14 +53,39 @@ class ConditionAwareValidator extends InputValidator {
 		$feUser = $GLOBALS['TSFE']->fe_user;
 		$arguments = $feUser->getSessionData('tx_powermail_cond');
 		$fieldMarker = $field->getMarker();
-		if (!empty($arguments['todo'][$fieldMarker])) {
-			if (!$arguments['todo'][$fieldMarker] === Condition::getActionNumberMap(Condition::ACTION_HIDE)) {
-				// Mandatory Check
-				if ($field->getMandatory()) {
-					if (!$this->validateMandatory($value)) {
-						$this->setErrorAndMessage($field, 'mandatory');
+
+
+		if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive()) {
+			$pages = $field->getPages();
+			/** @var Form $form */
+			foreach ($pages->getForms() as $form) {
+				/** @var Page $page */
+				foreach ($form->getPages() as $page) {
+					/** @var Field $field */
+					foreach ($page->getFields() as $field) {
+						if (!empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker]['action'])) {
+							if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker]['action'] === Condition::getActionNumberMap(Condition::ACTION_HIDE)) {
+								return;
+							}
+						}
 					}
 				}
+			}
+		} else {
+			$page = $field->getPages();
+			$form = $page->getForms()->getUid();
+			$page = $page->getUid();
+			if (!empty($arguments['todo_field'][$form][$page][$fieldMarker]['action'])) {
+				if ($arguments['todo_field'][$form][$page][$fieldMarker]['action'] === Condition::getActionNumberMap(Condition::ACTION_HIDE)) {
+					return;
+				}
+			}
+		}
+
+		// Mandatory Check
+		if ($field->getMandatory()) {
+			if (!$this->validateMandatory($value)) {
+				$this->setErrorAndMessage($field, 'mandatory');
 			}
 		}
 

@@ -46,18 +46,18 @@ function PowermailCondition($formElement) {
 			processData: false,
 			success: function(data) {
 				console.log(data);
-				if (data.todo !== undefined) {
-					for (var formUid in data.todo) {
+				if (data.todo_field !== undefined) {
+					for (var formUid in data.todo_field) {
 						var form = $('.powermail_form_' + formUid)
-						for (var pageUid in data.todo[formUid]) {
-							for (var fieldMarker in data.todo[formUid][pageUid]) {
+						for (var pageUid in data.todo_field[formUid]) {
+							for (var fieldMarker in data.todo_field[formUid][pageUid]) {
 								var input = form.find('#powermail_field_' + fieldMarker);
-								if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'hide') {
+								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'hide') {
 									input.val('');
 									input.prop('disabled', true);
 									input.closest('.powermail_fieldwrap').hide();
 								}
-								if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
+								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
 									input.prop('disabled', false);
 									input.closest('.powermail_fieldwrap').show();
 								}
@@ -65,6 +65,21 @@ function PowermailCondition($formElement) {
 						}
 					}
 				}
+				if (data.todo_page !== undefined) {
+					for (var formUid in data.todo_page) {
+						var form = $('.powermail_form_' + formUid)
+						for (var pageUid in data.todo_page[formUid]) {
+							var page = form.find('.powermail_fieldset_' + pageUid);
+							if (data.todo_page[formUid][pageUid]['action'] === 'hide') {
+								page.hide();
+							}
+							if (data.todo_page[formUid][pageUid]['action'] === 'un_hide') {
+								page.show();
+							}
+						}
+					}
+				}
+
 			}
 		});
 	};
@@ -76,7 +91,6 @@ function PowermailCondition($formElement) {
 	 */
 	function initialize() {
 		that.$formElement.css('background-color', 'red');
-		//that.sendFormValuesToPowermailCond();
 	}
 
 	// make global
