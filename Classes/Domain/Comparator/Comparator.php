@@ -87,6 +87,9 @@ class Comparator {
 	 * @return bool
 	 */
 	public function operationContainsValue($left, $right) {
+		if (is_array($left)) {
+			return in_array($right, $left);
+		}
 		return (strpos($left, $right) !== FALSE);
 	}
 
