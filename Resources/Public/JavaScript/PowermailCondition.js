@@ -46,6 +46,21 @@ function PowermailCondition($formElement) {
 			processData: false,
 			success: function(data) {
 				console.log(data);
+				if (data.todo !== undefined) {
+					var form = $('.powermail_form_' + data.mail.form)
+					for (var key in data.todo) {
+						var input = form.find('#powermail_field_' + key);
+						if (data.todo[key] === 'hide') {
+							input.val('');
+							input.prop('disabled', true);
+							input.closest('.powermail_fieldwrap').hide();
+						}
+						if (data.todo[key] === 'un_hide') {
+							input.prop('disabled', false);
+							input.closest('.powermail_fieldwrap').show();
+						}
+					}
+				}
 			}
 		});
 	};

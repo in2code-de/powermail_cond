@@ -7,6 +7,7 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /***************************************************************
  *  Copyright notice
@@ -73,8 +74,20 @@ class ConditionController extends ActionController {
 				}
 			}
 		}
+
 		$conditionContainer = new ConditionContainer($this->conditionRepository->findByForm($form));
 		$arguments = $conditionContainer->applyConditions($form, $arguments);
+
+		/** @var TypoScriptFrontendController $feUser */
+		$feUser = GeneralUtility::makeInstance(
+			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
+			$GLOBALS['TYPO3_CONF_VARS'],
+			0,
+			0
+		);
+		$feUser->initFEuser();
+		$feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
+
 		return json_encode($arguments);
 	}
 }

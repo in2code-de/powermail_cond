@@ -16,3 +16,7 @@ if (!defined ('TYPO3_MODE')) {
 		'Condition' => 'buildCondition'
 	)
 );
+
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['In2code\\Powermail\\Domain\\Validator\\InputValidator'] = array(
+	'className' => 'In2code\\PowermailCond\\Domain\\Validator\\ConditionAwareValidator',
+);

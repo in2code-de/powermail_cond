@@ -47,7 +47,7 @@ class Condition extends AbstractEntity {
 	/**
 	 * @var array
 	 */
-	protected $actionNumberMap = array(
+	protected static $actionNumberMap = array(
 		self::ACTION_HIDE => 'hide',
 		self::ACTION_UN_HIDE => 'un_hide',
 	);
@@ -266,9 +266,20 @@ class Condition extends AbstractEntity {
 			}
 		}
 		if ($affectedFieldMarker !== '') {
-			$arguments['todo'][$affectedFieldMarker] = $this->actionNumberMap[$this->actions];
+			$arguments['todo'][$affectedFieldMarker] = self::$actionNumberMap[$this->actions];
 		}
 		return $arguments;
+	}
+
+	/**
+	 * @param int|NULL $action
+	 * @return array
+	 */
+	static public function getActionNumberMap($action = NULL) {
+		if ($action !== NULL) {
+			return self::$actionNumberMap[$action];
+		}
+		return self::$actionNumberMap;
 	}
 
 }
