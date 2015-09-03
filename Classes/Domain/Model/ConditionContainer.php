@@ -1,6 +1,7 @@
 <?php
 namespace In2code\PowermailCond\Domain\Model;
 
+use In2code\Powermail\Domain\Model\Form;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /***************************************************************
@@ -37,10 +38,14 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 class ConditionContainer {
 
 	/**
+	 * @var int
+	 */
+	protected $loopCount = 0;
+
+	/**
 	 * @var Condition[]
 	 */
 	protected $conditions = array();
-
 
 	/**
 	 * @var bool
@@ -48,26 +53,32 @@ class ConditionContainer {
 	protected $somethingChanged = TRUE;
 
 	/**
-	 * @param array $conditions
+	 * @param QueryResult $conditions
 	 */
 	public function __construct(QueryResult $conditions) {
 		$this->conditions = $conditions;
 	}
 
 	/**
-	 * @param $form
+	 * @param Form $form
+	 * @param array $arguments
+	 * @return Form
 	 */
-	public function applyConditions($form) {
-		while ($this->somethingChanged && $this->loop < 100) {
+	public function applyConditions(Form $form, array $arguments) {
+		while ($this->somethingChanged && $this->loopCount < 100) {
 			$this->somethingChanged = FALSE;
-			$this->loop++;
+			$this->loopCount++;
 			foreach ($this->conditions as $condition) {
-				while ($condition->applies($form)) {
-					$this->somethingChanged = TRUE;
-					$condition->applyOnForm($form);
+				if ($condition->applies($form)) {
+					$newArguments = $condition->apply($form, $arguments);
+					if ($newArguments !== $arguments) {
+						$this->somethingChanged = TRUE;
+					}
+					$arguments = $newArguments;
 				}
 			}
 		}
+		return $arguments;
 	}
 
 }

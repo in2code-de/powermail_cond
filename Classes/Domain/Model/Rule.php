@@ -2,6 +2,9 @@
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
+use In2code\PowermailCond\Domain\Comparator\Comparator;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /***************************************************************
@@ -166,5 +169,26 @@ class Rule extends AbstractEntity {
 	public function setEqualField($equalField) {
 		$this->equalField = $equalField;
 		return $this;
+	}
+
+	/**
+	 * @param Form $form
+	 * @return bool
+	 */
+	public function applies(Form $form) {
+		$comparator = new Comparator();
+		/** @var Page $page */
+		foreach ($form->getPages() as $page) {
+			/** @var Field $field */
+			foreach ($page->getFields() as $field) {
+				if ($field === $this->startField) {
+					$comparison = $comparator->getCallbackForOperator($this->ops);
+					if ($comparison($field->getText(), $this->condString)) {
+						return TRUE;
+					}
+				}
+			}
+		}
+		return FALSE;
 	}
 }

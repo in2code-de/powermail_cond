@@ -1,7 +1,11 @@
 <?php
 namespace In2code\PowermailCond\Controller;
 
+use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
@@ -52,16 +56,25 @@ class ConditionController extends ActionController {
 	/**
 	 * Build Condition for AJAX call
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function buildConditionAction() {
-		$form = $this->formRepository->findByUid(154);
-		/** @var ConditionContainer $container */
-		$container = $this->objectManager->get(
-			'In2code\\PowermailCond\\Domain\\Model\\ConditionContainer',
-			$this->conditionRepository->findByForm($form)
-		);
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($container, 'in2code: ' . __CLASS__ . ':' . __LINE__);
-//		$container->applyConditions($form);
+		$arguments = GeneralUtility::_GP('tx_powermail_pi1');
+		/** @var Form $formObject */
+		$formObject = $this->formRepository->findByIdentifier($arguments['mail']['form']);
+		/** @var Page $page */
+		foreach ($formObject->getPages() as $page) {
+			/** @var Field $field */
+			foreach ($page->getFields() as $field) {
+				foreach ($arguments['field'] as $fieldName => $fieldValue) {
+					if ($field->getMarker() === $fieldName) {
+						$field->setText($fieldValue);
+					}
+				}
+			}
+		}
+		$conditionsContainer = new ConditionContainer($this->conditionRepository->findByForm($formObject));
+		$arguments = $conditionsContainer->applyConditions($formObject, $arguments);
+		return json_encode($arguments);
 	}
 }

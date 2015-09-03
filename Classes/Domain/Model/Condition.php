@@ -224,15 +224,51 @@ class Condition extends AbstractEntity {
 		return $this;
 	}
 
-//	public function applies($form) {
-//		foreach ($this->rules as $rule) {
-//			if ($rule->applies($form)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-//	public function applyOnForm($form) {
-//		$this->doStuff($form);
-//	}
+	/**
+	 * @param Form $form
+	 * @return bool
+	 */
+	public function applies(Form $form) {
+		if ($this->conjunction === self::CONJUNCTION_OR) {
+			/** @var Rule $rule */
+			foreach ($this->rules as $rule) {
+				if ($rule->applies($form)) {
+					return TRUE;
+				}
+			}
+		} elseif ($this->conjunction === self::CONJUNCTION_AND) {
+			/** @var Rule $rule */
+			foreach ($this->rules as $rule) {
+				if (!$rule->applies($form)) {
+					return FALSE;
+				}
+			}
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
+	 * @param Form $form
+	 * @param array $arguments
+	 * @return array
+	 */
+	public function apply(Form $form, array $arguments) {
+		$affectedFieldMarker = '';
+		/** @var Page $page */
+		foreach ($form->getPages() as $page) {
+			/** @var Field $field */
+			foreach ($page->getFields() as $field) {
+				if ($field->getUid() === (int) $this->targetField) {
+					$affectedFieldMarker = $field->getMarker();
+					break;
+				}
+			}
+		}
+		if ($affectedFieldMarker !== '') {
+			$arguments['todo'][$affectedFieldMarker] = $this->actionNumberMap[$this->actions];
+		}
+		return $arguments;
+	}
+
 }
