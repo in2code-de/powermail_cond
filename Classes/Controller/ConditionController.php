@@ -73,8 +73,8 @@ class ConditionController extends ActionController {
 				}
 			}
 		}
-		$conditionsContainer = new ConditionContainer($this->conditionRepository->findByForm($form));
-		$arguments = $conditionsContainer->applyConditions($form, $arguments);
+		$conditionContainer = new ConditionContainer($this->conditionRepository->findByForm($form));
+		$arguments = $conditionContainer->applyConditions($form, $arguments);
 		return json_encode($arguments);
 	}
 }
