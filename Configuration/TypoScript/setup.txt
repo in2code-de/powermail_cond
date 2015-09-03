@@ -7,7 +7,8 @@ powermailCondition {
 		disableAllHeaderCode = 1
 		xhtml_cleaning = 0
 		admPanel = 0
-		#additionalHeaders = Content-type: text/plain
+		metaCharset = UTF-8
+		additionalHeaders = Content-type: application/json
 		no_cache = 1
 		debug = 0
 	}
@@ -19,16 +20,5 @@ powermailCondition {
 		vendorName = In2code
 		controller = Condition
 		pluginName = Pi1
-		switchableControllerActions {
-			Condition {
-				1 = buildCondition
-			}
-		}
-		view {
-		}
-		persistence {
-		}
-		settings {
-		}
 	}
 }
