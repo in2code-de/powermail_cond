@@ -60,10 +60,10 @@ class ConditionController extends ActionController {
 	 */
 	public function buildConditionAction() {
 		$arguments = GeneralUtility::_GP('tx_powermail_pi1');
-		/** @var Form $formObject */
-		$formObject = $this->formRepository->findByIdentifier($arguments['mail']['form']);
+		/** @var Form $form */
+		$form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
 		/** @var Page $page */
-		foreach ($formObject->getPages() as $page) {
+		foreach ($form->getPages() as $page) {
 			/** @var Field $field */
 			foreach ($page->getFields() as $field) {
 				foreach ($arguments['field'] as $fieldName => $fieldValue) {
@@ -73,8 +73,8 @@ class ConditionController extends ActionController {
 				}
 			}
 		}
-		$conditionsContainer = new ConditionContainer($this->conditionRepository->findByForm($formObject));
-		$arguments = $conditionsContainer->applyConditions($formObject, $arguments);
+		$conditionsContainer = new ConditionContainer($this->conditionRepository->findByForm($form));
+		$arguments = $conditionsContainer->applyConditions($form, $arguments);
 		return json_encode($arguments);
 	}
 }
