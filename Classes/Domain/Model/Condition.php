@@ -264,13 +264,10 @@ class Condition extends AbstractEntity {
 
 					/** @var Field $field */
 					foreach ($page->getFields() as $field) {
-						if ($field->getUid() === (int) $this->targetField) {
-							$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-								'action' => self::$actionNumberMap[$this->actions],
-								'matchingCondition' => $this->getUid(),
-							);
-							break;
-						}
+						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+							'action' => self::$actionNumberMap[$this->actions],
+							'matchingCondition' => $this->getUid(),
+						);
 					}
 
 					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
@@ -313,13 +310,10 @@ class Condition extends AbstractEntity {
 
 					/** @var Field $field */
 					foreach ($page->getFields() as $field) {
-						if ($field->getUid() === (int) $this->targetField) {
-							$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-								'action' => $this->getNegatedActionString(),
-								'matchingCondition' => $this->getUid(),
-							);
-							break;
-						}
+						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+							'action' => $this->getNegatedActionString(),
+							'matchingCondition' => $this->getUid(),
+						);
 					}
 
 					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
@@ -353,7 +347,7 @@ class Condition extends AbstractEntity {
 	protected function getNegatedActionString() {
 		if ($this->actions === self::ACTION_HIDE) {
 			return self::getActionNumberMap(self::ACTION_UN_HIDE);
-		} elseif($this->actions === self::ACTION_UN_HIDE) {
+		} elseif ($this->actions === self::ACTION_UN_HIDE) {
 			return self::getActionNumberMap(self::ACTION_HIDE);
 		}
 	}
