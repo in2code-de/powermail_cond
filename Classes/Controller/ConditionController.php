@@ -61,6 +61,8 @@ class ConditionController extends ActionController {
 	 */
 	public function buildConditionAction() {
 		$arguments = GeneralUtility::_GP('tx_powermail_pi1');
+		unset($arguments['__referrer']);
+		unset($arguments['__trustedProperties']);
 		/** @var Form $form */
 		$form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
 		/** @var Page $page */

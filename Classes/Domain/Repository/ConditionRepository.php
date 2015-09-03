@@ -1,13 +1,13 @@
 <?php
 namespace In2code\PowermailCond\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
-use TYPO3\CMS\Extbase\Persistence\Repository;
-
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 in2code GmbH <info@in2code.de>
+ *  (c) 2015 in2code.de
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,12 +27,15 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * ConditionRepository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
- * 			GNU Lesser General Public License, version 3 or later
+ *            GNU Lesser General Public License, version 3 or later
  */
 class ConditionRepository extends Repository {
 

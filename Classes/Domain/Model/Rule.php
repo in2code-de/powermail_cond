@@ -1,16 +1,12 @@
 <?php
 namespace In2code\PowermailCond\Domain\Model;
 
-use In2code\Powermail\Domain\Model\Field;
-use In2code\Powermail\Domain\Model\Form;
-use In2code\Powermail\Domain\Model\Page;
-use In2code\PowermailCond\Domain\Comparator\Comparator;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *  (c) 2015 in2code.de
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
  *
  *  All rights reserved
  *
@@ -30,6 +26,12 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
+use In2code\PowermailCond\Domain\Comparator\Comparator;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Rule Model

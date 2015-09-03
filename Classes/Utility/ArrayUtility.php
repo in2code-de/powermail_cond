@@ -1,13 +1,12 @@
 <?php
 namespace In2code\PowermailCond\Utility;
 
-use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
-
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2015 in2code.de
- *  Alex Kellner <alexander.kellner@in2code.de>
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
  *
  *  All rights reserved
  *
@@ -27,6 +26,8 @@ use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
 
 /**
  * Class ArrayUtility

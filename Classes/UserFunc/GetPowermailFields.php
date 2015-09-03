@@ -1,14 +1,12 @@
 <?php
 namespace In2code\PowermailCond\UserFunc;
 
-use In2code\PowermailCond\Utility\ArrayUtility;
-use TYPO3\CMS\Backend\Form\FormEngine;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *  (c) 2015 in2code.de
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
  *
  *  All rights reserved
  *
@@ -28,6 +26,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use In2code\PowermailCond\Utility\ArrayUtility;
+use TYPO3\CMS\Backend\Form\FormEngine;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * List powermail fields in Backend for powermail_cond rules

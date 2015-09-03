@@ -1,15 +1,12 @@
 <?php
 namespace In2code\PowermailCond\Domain\Model;
 
-use In2code\Powermail\Domain\Model\Field;
-use In2code\Powermail\Domain\Model\Form;
-use In2code\Powermail\Domain\Model\Page;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *  (c) 2015 in2code.de
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
  *
  *  All rights reserved
  *
@@ -30,12 +27,17 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Condition Model
  *
  * @package powermail_cond
  * @license http://www.gnu.org/licenses/lgpl.html
- * 			GNU Lesser General Public License, version 3 or later
+ *            GNU Lesser General Public License, version 3 or later
  */
 class Condition extends AbstractEntity {
 
@@ -254,21 +256,53 @@ class Condition extends AbstractEntity {
 	 * @return array
 	 */
 	public function apply(Form $form, array $arguments) {
-		$affectedFieldMarker = '';
 		/** @var Page $page */
 		foreach ($form->getPages() as $page) {
 			/** @var Field $field */
 			foreach ($page->getFields() as $field) {
 				if ($field->getUid() === (int) $this->targetField) {
-					$affectedFieldMarker = $field->getMarker();
+					$arguments['todo'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+						'action' => self::$actionNumberMap[$this->actions],
+						'matchingCondition' => $this->getUid(),
+					);
 					break;
 				}
 			}
 		}
-		if ($affectedFieldMarker !== '') {
-			$arguments['todo'][$affectedFieldMarker] = self::$actionNumberMap[$this->actions];
+		return $arguments;
+	}
+
+	/**
+	 * @param Form $form
+	 * @param array $arguments
+	 * @return array
+	 */
+	public function negate(Form $form, array $arguments) {
+		/** @var Page $page */
+		foreach ($form->getPages() as $page) {
+			/** @var Field $field */
+			foreach ($page->getFields() as $field) {
+				if ($field->getUid() === (int) $this->targetField) {
+					$arguments['todo'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
+						'action' => $this->getNegatedActionString(),
+						'matchingCondition' => $this->getUid(),
+					);
+					break;
+				}
+			}
 		}
 		return $arguments;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getNegatedActionString() {
+		if ($this->actions === self::ACTION_HIDE) {
+			return self::getActionNumberMap(self::ACTION_UN_HIDE);
+		} elseif($this->actions === self::ACTION_UN_HIDE) {
+			return self::getActionNumberMap(self::ACTION_HIDE);
+		}
 	}
 
 	/**
@@ -281,5 +315,4 @@ class Condition extends AbstractEntity {
 		}
 		return self::$actionNumberMap;
 	}
-
 }
