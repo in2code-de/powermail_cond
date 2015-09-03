@@ -73,13 +73,13 @@ return array(
 					// is set
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.0',
-						'0'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_IS_SET
 					),
 
 					// is not set
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.1',
-						'1'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_NOT_IS_SET
 					),
 
 					// title operatorsComparisonValue
@@ -91,37 +91,37 @@ return array(
 					// contains
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.2',
-						'2'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_CONTAINS_VALUE
 					),
 
 					// contains not
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.3',
-						'3'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_NOT_CONTAINS_VALUE
 					),
 
 					// is
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.4',
-						'4'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_IS
 					),
 
 					// is not
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.5',
-						'5'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_NOT_IS
 					),
 
 					// is greater than
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.6',
-						'6'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_GREATER_THAN
 					),
 
 					// is less than
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.7',
-						'7'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_LESS_THAN
 					),
 
 					// title operatorsComparisonField
@@ -133,13 +133,13 @@ return array(
 					// contains value from field
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.8',
-						'8'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_CONTAINS_VALUE_FROM_FIELD
 					),
 
 					// contains not value from field
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.9',
-						'9'
+						\In2code\PowermailCond\Domain\Model\Rule::OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD
 					),
 				),
 				'size' => 1,

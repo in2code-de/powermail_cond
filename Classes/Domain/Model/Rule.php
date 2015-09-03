@@ -37,6 +37,17 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Rule extends AbstractEntity {
 
+	const OPERATOR_IS_SET = 0;
+	const OPERATOR_NOT_IS_SET = 1;
+	const OPERATOR_CONTAINS_VALUE = 2;
+	const OPERATOR_NOT_CONTAINS_VALUE = 3;
+	const OPERATOR_IS = 4;
+	const OPERATOR_NOT_IS = 5;
+	const OPERATOR_GREATER_THAN = 6;
+	const OPERATOR_LESS_THAN = 7;
+	const OPERATOR_CONTAINS_VALUE_FROM_FIELD = 8;
+	const OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD = 9;
+
 	/**
 	 * Internal title
 	 *
