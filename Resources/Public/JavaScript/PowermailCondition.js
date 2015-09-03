@@ -40,7 +40,7 @@ function PowermailCondition($formElement) {
 	this.sendFormValuesToPowermailCond = function() {
 		jQuery.ajax({
 			type: 'POST',
-			url: 'index.php',
+			url: 'index.php?type=3131',
 			data: new FormData(that.$formElement.get(0)),
 			contentType: false,
 			processData: false,
