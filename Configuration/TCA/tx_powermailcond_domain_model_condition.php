@@ -23,12 +23,10 @@ return array(
 			endtime,title,target_field,actions,filter_select_field,rules,conjunction,form',
 	),
 	'types' => array(
-		'1' => array('showitem' => '--palette--;x;1, form, rules, conjunction, target_field, --palette--;x;2'),
+		'1' => array('showitem' => 'title, form, target_field, actions, filter_select_field, conjunction, rules'),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'title, hidden'),
-		'2' => array('showitem' => 'actions, filter_select_field'),
-		'canNotCollapse' => '1'
+		'1' => array(),
 	),
 	'columns' => array(
 		'sys_language_uid' => array(

@@ -19,11 +19,10 @@ return array(
 		'showRecordFieldList' => 'hidden,start_field,ops,cond_string,equal_field',
 	),
 	'types' => array(
-		'0' => array('showitem' => '--palette--;;1,start_field,--palette--;;2')
+		'0' => array('showitem' => 'title,start_field,ops,cond_string,equal_field')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'title,hidden'),
-		'2' => array('showitem' => 'ops,cond_string,equal_field')
+		'1' => array(),
 	),
 	'columns' => array(
 		'hidden' => array(
