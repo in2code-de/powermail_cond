@@ -167,9 +167,9 @@ return array(
 						'0'
 					),
 				),
-				'itemsProcFunc' => 'tx_powermailcond_fields_be->fieldname',
+				'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
 				// allow only this types of fields in selector
-				'itemsProcFuncValue' => '"text","textarea","select","radio"',
+				'itemsProcFuncValue' => 'input,textarea,select,radio,check',
 				'size' => 1,
 				'maxitems' => 1
 			),
