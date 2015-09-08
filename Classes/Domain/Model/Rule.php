@@ -31,6 +31,7 @@ use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Comparator\Comparator;
+use In2code\PowermailCond\Domain\Comparator\Comparison;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -178,13 +179,16 @@ class Rule extends AbstractEntity {
 	 * @return bool
 	 */
 	public function applies(Form $form) {
-		$comparator = new Comparator();
+		$equalField = NULL;
 		/** @var Page $page */
-		foreach ($form->getPages() as $page) {
-			/** @var Field $field */
-			foreach ($page->getFields() as $field) {
-				if ($field->getUid() === (int) $this->equalField) {
-					$equalField = $field;break;
+		if (((int)$this->equalField) > 0 ) {
+			foreach ($form->getPages() as $page) {
+				/** @var Field $field */
+				foreach ($page->getFields() as $field) {
+					if ($field->getUid() === (int) $this->equalField) {
+						$equalField = $field;
+						break;
+					}
 				}
 			}
 		}
@@ -193,8 +197,8 @@ class Rule extends AbstractEntity {
 			/** @var Field $field */
 			foreach ($page->getFields() as $field) {
 				if ($field === $this->startField) {
-					$comparison = $comparator->getCallbackForOperator($this->ops);
-					if ($comparison($field->getText(), $this->condString, $equalField)) {
+					$comparison = new Comparison($this->ops);
+					if ($comparison->evaluate($field, $this->condString, $equalField)) {
 						return TRUE;
 					}
 				}
