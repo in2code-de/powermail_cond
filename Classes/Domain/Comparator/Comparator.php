@@ -87,6 +87,9 @@ class Comparator {
 	 * @return bool
 	 */
 	public function operationContainsValue($left, $right) {
+		if ($right === '') {
+			return FALSE;
+		}
 		if (is_array($left)) {
 			return in_array($right, $left);
 		}
@@ -139,11 +142,11 @@ class Comparator {
 	}
 
 
-	public function operationContainsValueFromField($left, $right) {
-		throw new \Exception('NOT YET IMPLEMENTED', 1441276049);
+	public function operationContainsValueFromField($left, $right, $field) {
+		return $this->operationContainsValue($left, $field->getText());
 	}
 
-	public function operationNotContainsValueFromField($left, $right) {
-		throw new \Exception('NOT YET IMPLEMENTED', 1441276053);
+	public function operationNotContainsValueFromField($left, $right, $field) {
+		return $this->operationNotContainsValue($left, $field->getText());
 	}
 }

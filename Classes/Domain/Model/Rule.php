@@ -183,9 +183,18 @@ class Rule extends AbstractEntity {
 		foreach ($form->getPages() as $page) {
 			/** @var Field $field */
 			foreach ($page->getFields() as $field) {
+				if ($field->getUid() === (int) $this->equalField) {
+					$equalField = $field;break;
+				}
+			}
+		}
+		/** @var Page $page */
+		foreach ($form->getPages() as $page) {
+			/** @var Field $field */
+			foreach ($page->getFields() as $field) {
 				if ($field === $this->startField) {
 					$comparison = $comparator->getCallbackForOperator($this->ops);
-					if ($comparison($field->getText(), $this->condString)) {
+					if ($comparison($field->getText(), $this->condString, $equalField)) {
 						return TRUE;
 					}
 				}
