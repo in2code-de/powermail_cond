@@ -51,15 +51,15 @@ function PowermailCondition($formElement) {
 						var form = $('.powermail_form_' + formUid)
 						for (var pageUid in data.todo_field[formUid]) {
 							for (var fieldMarker in data.todo_field[formUid][pageUid]) {
-								var input = form.find('#powermail_field_' + fieldMarker);
+								var fields = form.find('[id^=powermail_field_' + fieldMarker + ']');
 								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'hide') {
-									input.val('');
-									input.prop('disabled', true);
-									input.closest('.powermail_fieldwrap').hide();
+									fields.val('');
+									fields.prop('disabled', true);
+									fields.closest('.powermail_fieldwrap').hide();
 								}
 								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
-									input.prop('disabled', false);
-									input.closest('.powermail_fieldwrap').show();
+									fields.prop('disabled', false);
+									fields.closest('.powermail_fieldwrap').show();
 								}
 							}
 						}
