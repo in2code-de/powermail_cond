@@ -231,23 +231,23 @@ class Condition extends AbstractEntity {
 	 * @return bool
 	 */
 	public function applies(Form $form) {
-		if ($this->conjunction === self::CONJUNCTION_OR) {
-			/** @var Rule $rule */
-			foreach ($this->rules as $rule) {
-				if ($rule->applies($form)) {
+		// If conjunction is or set $isOr to TRUE
+		$isOr = ($this->conjunction === self::CONJUNCTION_OR);
+
+		/** @var Rule $rule */
+		foreach ($this->rules as $rule) {
+			if ($rule->applies($form)) {
+				if ($isOr === TRUE) {
+					// if it is
+					// the first matching rule in an OR conjunction return TRUE
 					return TRUE;
 				}
+			} elseif ($isOr === FALSE) {
+				// if it is the first NOT matching rule in an AND conjunction return FALSE
+				return FALSE;
 			}
-		} elseif ($this->conjunction === self::CONJUNCTION_AND) {
-			/** @var Rule $rule */
-			foreach ($this->rules as $rule) {
-				if (!$rule->applies($form)) {
-					return FALSE;
-				}
-			}
-			return TRUE;
 		}
-		return FALSE;
+		return ($isOr !== TRUE);
 	}
 
 	/**
