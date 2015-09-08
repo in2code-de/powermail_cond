@@ -238,15 +238,18 @@ class Condition extends AbstractEntity {
 		foreach ($this->rules as $rule) {
 			if ($rule->applies($form)) {
 				if ($isOr === TRUE) {
-					// if it is
-					// the first matching rule in an OR conjunction return TRUE
+
+					// if it is the first matching rule in an OR conjunction return TRUE
 					return TRUE;
 				}
 			} elseif ($isOr === FALSE) {
+
 				// if it is the first NOT matching rule in an AND conjunction return FALSE
 				return FALSE;
 			}
 		}
+		// if OR and no field matched return TRUE
+		// if AND and no field matched NOT return FALSE
 		return ($isOr !== TRUE);
 	}
 
