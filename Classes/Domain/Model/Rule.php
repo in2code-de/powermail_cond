@@ -190,6 +190,9 @@ class Rule extends AbstractEntity {
 						break;
 					}
 				}
+				if ($equalField !== NULL) {
+					break;
+				}
 			}
 		}
 		/** @var Page $page */

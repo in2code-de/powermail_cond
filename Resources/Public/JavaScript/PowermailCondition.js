@@ -38,10 +38,14 @@ function PowermailCondition($formElement) {
 	];
 
 	this.sendFormValuesToPowermailCond = function() {
+		var formToSend = $(that.$formElement.get(0));
+		var tempEnabledFields = formToSend.find(':disabled').removeProp('disabled');
+		var dataToSend = new FormData(that.$formElement.get(0));
+		tempEnabledFields.prop('disabled', true);
 		jQuery.ajax({
 			type: 'POST',
 			url: 'index.php?type=3131',
-			data: new FormData(that.$formElement.get(0)),
+			data: dataToSend,
 			contentType: false,
 			processData: false,
 			success: function(data) {
@@ -53,12 +57,11 @@ function PowermailCondition($formElement) {
 							for (var fieldMarker in data.todo_field[formUid][pageUid]) {
 								var fields = form.find('[id^=powermail_field_' + fieldMarker + ']');
 								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'hide') {
-									fields.val('');
 									fields.prop('disabled', true);
 									fields.closest('.powermail_fieldwrap').hide();
 								}
 								if (data.todo_field[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
-									fields.prop('disabled', false);
+									fields.removeProp('disabled');
 									fields.closest('.powermail_fieldwrap').show();
 								}
 							}

@@ -267,8 +267,17 @@ class Condition extends AbstractEntity {
 
 					/** @var Field $field */
 					foreach ($page->getFields() as $field) {
+						$action = self::$actionNumberMap[$this->actions];
+						if ($action === 'hide') {
+							$arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()] = $field->getText();
+							$field->setText('');
+						} elseif ($action === 'un_hide') {
+							if (!empty($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()])) {
+								$field->setText($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()]);
+							}
+						}
 						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => self::$actionNumberMap[$this->actions],
+							'action' => $action,
 							'matchingCondition' => $this->getUid(),
 						);
 					}
@@ -286,8 +295,17 @@ class Condition extends AbstractEntity {
 				/** @var Field $field */
 				foreach ($page->getFields() as $field) {
 					if ($field->getUid() === (int) $this->targetField) {
+						$action = self::$actionNumberMap[$this->actions];
+						if ($action === 'hide') {
+							$arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()] = $field->getText();
+							$field->setText('');
+						} elseif ($action === 'un_hide') {
+							if (!empty($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()])) {
+								$field->setText($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()]);
+							}
+						}
 						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => self::$actionNumberMap[$this->actions],
+							'action' => $action,
 							'matchingCondition' => $this->getUid(),
 						);
 						break;
