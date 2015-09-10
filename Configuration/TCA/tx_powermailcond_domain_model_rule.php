@@ -16,10 +16,10 @@ return array(
 			'Resources/Public/Icons/icon_tx_powermailcond_rules.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,start_field,ops,cond_string,equal_field',
+		'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title,start_field,ops,cond_string,equal_field')
+		'0' => array('showitem' => 'conditions,title,start_field,ops,cond_string,equal_field')
 	),
 	'palettes' => array(
 		'1' => array(),
@@ -174,6 +174,24 @@ return array(
 				'maxitems' => 1
 			),
 			'displayCond' => 'FIELD:ops:IN:8,9'
+		),
+		'conditions' => array(
+			'l10n_mode' => 'noCopy',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.condition',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array(
+						'',
+						0
+					),
+				),
+				'foreign_table' => 'tx_powermailcond_domain_model_condition',
+				'foreign_table_where' =>
+					'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID###
+					AND tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
+			),
 		),
 	),
 );

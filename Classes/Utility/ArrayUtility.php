@@ -39,6 +39,7 @@ class ArrayUtility extends ArrayUtilityExtbase {
 	/**
 	 * Get quoted list from array
 	 *
+	 * @param array $array
 	 * @return array
 	 */
 	public static function getQuotedList(array $array) {

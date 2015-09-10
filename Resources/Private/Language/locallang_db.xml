@@ -6,10 +6,13 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_powermailcond_conditions">Conditions</label>
+			<label index="tx_powermailcond_conditioncontainer">Condition container</label>
+			<label index="tx_powermailcond_conditioncontainer.title">Title</label>
+			<label index="tx_powermailcond_conditioncontainer.form">Form</label>
+			<label index="tx_powermailcond_conditioncontainer.form.pleaseChoose">Please choose...</label>
+			<label index="tx_powermailcond_conditioncontainer.conditions">Conditions</label>
+			<label index="tx_powermailcond_conditions">Condition</label>
 			<label index="tx_powermailcond_conditions.title">Title</label>
-			<label index="tx_powermailcond_conditions.form">Form</label>
-			<label index="tx_powermailcond_conditions.form.pleaseChoose">Please choose...</label>
 			<label index="tx_powermailcond_conditions.targetField">Which field is affected (target field)?</label>
 			<label index="tx_powermailcond_conditions.targetField.I.0">Please choose...</label>
 			<label index="tx_powermailcond_conditions.action">What should happen to the chosen field?</label>
@@ -21,7 +24,8 @@
 			<label index="tx_powermailcond_conditions.conjunction">Conjunction of the rules (if more than only 1)</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.0">AND</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.1">OR</label>
-			<label index="tx_powermailcond_rules">Rules</label>
+			<label index="tx_powermailcond_conditions.conditioncontainer">Condition container</label>
+			<label index="tx_powermailcond_rules">Rule</label>
 			<label index="tx_powermailcond_rules.title">Title</label>
 			<label index="tx_powermailcond_rules.startField">Which field starts the condition (start field)?</label>
 			<label index="tx_powermailcond_rules.startField.I.0">Please choose...</label>
@@ -42,12 +46,16 @@
 			<label index="tx_powermailcond_rules.condstring">Value</label>
 			<label index="tx_powermailcond_rules.equalField">Field for comparison</label>
 			<label index="tx_powermailcond_rules.equalField.I.0">Please choose...</label>
+			<label index="tx_powermailcond_rules.condition">Condition</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="tx_powermailcond_conditions">Bedingungen</label>
+			<label index="tx_powermailcond_conditioncontainer">Bedingungssammlung</label>
+			<label index="tx_powermailcond_conditioncontainer.title">Bezeichnung</label>
+			<label index="tx_powermailcond_conditioncontainer.form">Formular</label>
+			<label index="tx_powermailcond_conditioncontainer.form.pleaseChoose">Bitte wählen...</label>
+			<label index="tx_powermailcond_conditioncontainer.conditions">Bedingungen</label>
+			<label index="tx_powermailcond_conditions">Bedingung</label>
 			<label index="tx_powermailcond_conditions.title">Bezeichnung</label>
-			<label index="tx_powermailcond_conditions.form">Formular</label>
-			<label index="tx_powermailcond_conditions.form.pleaseChoose">Bitte wählen...</label>
 			<label index="tx_powermailcond_conditions.targetField">Welches Feld ist betroffen (Zielfeld)?</label>
 			<label index="tx_powermailcond_conditions.targetField.I.0">Bitte wählen...</label>
 			<label index="tx_powermailcond_conditions.action">Was soll mit dem gewählten Feld passieren?</label>
@@ -59,7 +67,8 @@
 			<label index="tx_powermailcond_conditions.conjunction">Logische Verknüpfung der Regeln (wenn mehr als 1 Regel)</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.0">UND</label>
 			<label index="tx_powermailcond_conditions.conjunction.I.1">ODER</label>
-			<label index="tx_powermailcond_rules">Regeln</label>
+			<label index="tx_powermailcond_conditions.conditioncontainer">Bedingungssammlung</label>
+			<label index="tx_powermailcond_rules">Regel</label>
 			<label index="tx_powermailcond_rules.title">Bezeichnung</label>
 			<label index="tx_powermailcond_rules.startField">Welches Feld löst die Bedingung aus (Startfeld)?</label>
 			<label index="tx_powermailcond_rules.startField.I.0">Bitte wählen...</label>
@@ -80,6 +89,7 @@
 			<label index="tx_powermailcond_rules.condstring">Wert</label>
 			<label index="tx_powermailcond_rules.equalField">Vergleichsfeld</label>
 			<label index="tx_powermailcond_rules.equalField.I.0">Bitte wählen...</label>
+			<label index="tx_powermailcond_rules.condition">Bedingung</label>
 		</languageKey>
 	</data>
 </T3locallang>

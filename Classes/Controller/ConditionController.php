@@ -49,10 +49,10 @@ class ConditionController extends ActionController {
 	protected $formRepository;
 
 	/**
-	 * @var \In2code\PowermailCond\Domain\Repository\ConditionRepository
+	 * @var \In2code\PowermailCond\Domain\Repository\ConditionContainerRepository
 	 * @inject
 	 */
-	protected $conditionRepository;
+	protected $conditionContainerRepository;
 
 	/**
 	 * Build Condition for AJAX call
@@ -77,7 +77,8 @@ class ConditionController extends ActionController {
 			}
 		}
 
-		$conditionContainer = new ConditionContainer($this->conditionRepository->findByForm($form));
+		/** @var ConditionContainer $conditionContainer */
+		$conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
 		$arguments = $conditionContainer->applyConditions($form, $arguments);
 
 		/** @var TypoScriptFrontendController $feUser */

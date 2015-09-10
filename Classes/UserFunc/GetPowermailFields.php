@@ -177,9 +177,31 @@ class GetPowermailFields {
 	 * @return int formUid
 	 */
 	protected function getFormUidFromCondition($conditionUid) {
-		$select = 'form';
-		$from = 'tx_powermailcond_domain_model_condition';
-		$where = 'uid = ' . (int) $conditionUid . ' AND hidden = 0 AND deleted = 0';
+		$select = 'cc.form';
+		$from = 'tx_powermailcond_domain_model_conditioncontainer cc
+			left join tx_powermailcond_domain_model_condition c on cc.uid = c.conditioncontainer';
+		$where = 'c.uid = ' . (int) $conditionUid . ' AND c.hidden = 0 AND c.deleted = 0';
+		$groupBy = '';
+		$orderBy = '';
+		$limit = 1;
+		$res = $this->databaseConnection->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			$row = $this->databaseConnection->sql_fetch_assoc($res);
+			return (int) $row['form'];
+		}
+		return 0;
+	}
+
+	/**
+	 * Get Form Uid from Condition Container
+	 *
+	 * @param int $conditionContainerUid
+	 * @return int formUid
+	 */
+	protected function getFormUidFromConditionContainer($conditionContainerUid) {
+		$select = 'cc.form';
+		$from = 'tx_powermailcond_domain_model_conditioncontainer cc';
+		$where = 'cc.uid = ' . (int) $conditionContainerUid . ' AND cc.hidden = 0 AND cc.deleted = 0';
 		$groupBy = '';
 		$orderBy = '';
 		$limit = 1;
@@ -220,6 +242,9 @@ class GetPowermailFields {
 	 */
 	public function setFormUid() {
 		$formUid = (int) $this->params['row']['form'];
+		if ($formUid === 0) {
+			$formUid = $this->getFormUidFromConditionContainer((int) $this->params['row']['conditioncontainer']);
+		}
 		if (!empty($this->params['row']['conditions'])) {
 			$formUid = $this->getFormUidFromCondition($this->params['row']['conditions']);
 		}

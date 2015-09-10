@@ -14,16 +14,15 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'requestUpdate' => 'form',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('powermail_cond') .
 			'Resources/Public/Icons/icon_tx_powermailcond_conditions.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
-			endtime,title,target_field,actions,filter_select_field,rules,conjunction,form',
+			endtime,conditioncontainer,title,target_field,actions,filter_select_field,rules,conjunction',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, form, target_field, actions, filter_select_field, conjunction, rules'),
+		'1' => array('showitem' => 'conditioncontainer, title, target_field, actions, filter_select_field, conjunction, rules'),
 	),
 	'palettes' => array(
 		'1' => array(),
@@ -108,30 +107,6 @@ return array(
 				'size' => '30',
 			)
 		),
-		'form' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.form',
-			'config' => array(
-				'type' => 'select',
-				'items' => array(
-					array(
-						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.form.pleaseChoose',
-						''
-					)
-				),
-				'maxitems' => 1,
-				'size' => 1,
-				'minitems' => 1,
-				'requestUpdate' => 1,
-				'foreign_table' => 'tx_powermail_domain_model_forms',
-				'foreign_table_where' => '
-					AND tx_powermail_domain_model_forms.deleted = 0
-					AND tx_powermail_domain_model_forms.hidden = 0
-					AND tx_powermail_domain_model_forms.sys_language_uid = 0
-					order by tx_powermail_domain_model_forms.title
-				'
-			)
-		),
 		'rules' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.rules',
@@ -150,7 +125,6 @@ return array(
 					'newRecordLinkPosition' => 'both',
 				),
 			),
-			'displayCond' => 'FIELD:form:>:0'
 		),
 		'conjunction' => array(
 			'exclude' => 1,
@@ -173,7 +147,6 @@ return array(
 				'size' => 1,
 				'maxitems' => 1,
 			),
-			'displayCond' => 'FIELD:form:>:0'
 		),
 		'target_field' => array(
 			'exclude' => 1,
@@ -192,7 +165,6 @@ return array(
 				'maxitems' => 1,
 				'eval' => 'required'
 			),
-			'displayCond' => 'FIELD:form:>:0'
 		),
 		'actions' => array(
 			'exclude' => 1,
@@ -227,7 +199,24 @@ return array(
 				'size' => 1,
 				'maxitems' => 1,
 			),
-			'displayCond' => 'FIELD:form:>:0'
+		),
+		'conditioncontainer' => array(
+			'l10n_mode' => 'noCopy',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditions.conditioncontainer',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array(
+						'',
+						0
+					),
+				),
+				'foreign_table' => 'tx_powermailcond_domain_model_conditioncontainer',
+				'foreign_table_where' =>
+					'AND tx_powermailcond_domain_model_conditioncontainer.pid=###CURRENT_PID###
+					AND tx_powermailcond_domain_model_conditioncontainer.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
+			),
 		),
 	),
 );

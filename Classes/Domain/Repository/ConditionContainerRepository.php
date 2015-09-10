@@ -31,13 +31,13 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * ConditionRepository
+ * ConditionContainerRepository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
  *            GNU Lesser General Public License, version 3 or later
  */
-class ConditionRepository extends Repository {
+class ConditionContainerRepository extends Repository {
 
 	/**
 	 * General settings
