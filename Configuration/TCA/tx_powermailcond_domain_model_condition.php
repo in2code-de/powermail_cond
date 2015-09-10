@@ -14,7 +14,7 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'requestUpdate' => 'actions,form',
+		'requestUpdate' => 'form',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('powermail_cond') .
 			'Resources/Public/Icons/icon_tx_powermailcond_conditions.gif'
 	),
