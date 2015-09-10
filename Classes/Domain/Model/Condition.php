@@ -257,9 +257,9 @@ class Condition extends AbstractEntity {
 	 */
 	public function apply(Form $form, array $arguments) {
 		if ($this->actions === self::ACTION_HIDE) {
-			$action =  self::ACTION_HIDE_STRING;
+			$action = self::ACTION_HIDE_STRING;
 		} elseif ($this->actions === self::ACTION_UN_HIDE) {
-			$action =  self::ACTION_UN_HIDE_STRING;
+			$action = self::ACTION_UN_HIDE_STRING;
 		} else {
 			return $arguments;
 		}
@@ -322,16 +322,28 @@ class Condition extends AbstractEntity {
 	 * @param Field $field
 	 * @param array $arguments
 	 * @param string $action
+	 * @param bool $weakRule A weak rule can not overrule a strong rule
+	 *        (e.g. a page get's shown [=weak] but another rule hides the field [=strong])
 	 * @return array
 	 */
-	protected function applyOnField($formUid, $pageUid, Field $field, array $arguments, $action) {
-		if ($action === self::ACTION_UN_HIDE && !empty($arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION])) {
-			if ($arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] === self::ACTION_HIDE_STRING) {
-				return $arguments;
+	protected function applyOnField($formUid, $pageUid, Field $field, array $arguments, $action, $weakRule = FALSE) {
+		// IF there's an action set for the containing page
+		if (!empty($arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION])) {
+			$pageAction = $arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION];
+			if ($pageAction === self::ACTION_HIDE_STRING) {
+				// IF the condition tries to show a field on a hidden page prevent it
+				if ($action === self::ACTION_UN_HIDE) {
+					return $arguments;
+				}
 			}
 		}
 		$fieldMarker = $field->getMarker();
 		$conditionUid = $this->getUid();
+		if (!empty($arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_ACTION])) {
+			if ($weakRule && $arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_ACTION] !== $action) {
+				return $arguments;
+			}
+		}
 		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_ACTION] = $action;
 		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_MATCHING_CONDITION][$conditionUid] = $conditionUid;
 		return $arguments;
@@ -347,7 +359,7 @@ class Condition extends AbstractEntity {
 	protected function applyOnPage($formUid, Page $page, array $arguments, $action) {
 		$pageUid = $page->getUid();
 		foreach ($page->getFields() as $field) {
-			$arguments = $this->applyOnField($formUid, $pageUid, $field, $arguments, $action);
+			$arguments = $this->applyOnField($formUid, $pageUid, $field, $arguments, $action, ($action === self::ACTION_UN_HIDE_STRING));
 		}
 		$conditionUid = $this->getUid();
 		$arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] = $action;
