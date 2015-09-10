@@ -124,7 +124,7 @@ class ConditionContainer {
 		}
 
 		// return the arguments with instructions for the JS in the frontend
+		$arguments['loops'] = $this->loopCount;
 		return $arguments;
 	}
-
 }
