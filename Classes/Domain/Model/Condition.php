@@ -45,14 +45,11 @@ class Condition extends AbstractEntity {
 	const CONJUNCTION_AND = 'AND';
 	const ACTION_HIDE = 0;
 	const ACTION_UN_HIDE = 1;
-
-	/**
-	 * @var array
-	 */
-	protected static $actionNumberMap = array(
-		self::ACTION_HIDE => 'hide',
-		self::ACTION_UN_HIDE => 'un_hide',
-	);
+	const ACTION_HIDE_STRING = 'hide';
+	const ACTION_UN_HIDE_STRING = 'un_hide';
+	const INDEX_TODO = 'todo';
+	const INDEX_ACTION = 'action';
+	const INDEX_MATCHING_CONDITION = 'matching_condition';
 
 	/**
 	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
@@ -248,8 +245,8 @@ class Condition extends AbstractEntity {
 				return FALSE;
 			}
 		}
-		// if OR and no field matched return TRUE
-		// if AND and no field matched NOT return FALSE
+		// if OR and no field matched: return TRUE
+		// if AND and no field matched NOT: return FALSE
 		return ($isOr !== TRUE);
 	}
 
@@ -259,61 +256,14 @@ class Condition extends AbstractEntity {
 	 * @return array
 	 */
 	public function apply(Form $form, array $arguments) {
-		if (strpos($this->targetField, 'fieldset') !== FALSE) {
-			$pageUid = (int) substr($this->targetField, 9);
-			/** @var Page $page */
-			foreach ($form->getPages() as $page) {
-				if ($page->getUid() === $pageUid) {
-
-					/** @var Field $field */
-					foreach ($page->getFields() as $field) {
-						$action = self::$actionNumberMap[$this->actions];
-						if ($action === 'hide') {
-							$arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()] = $field->getText();
-							$field->setText('');
-						} elseif ($action === 'un_hide') {
-							if (!empty($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()])) {
-								$field->setText($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()]);
-							}
-						}
-						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => $action,
-							'matchingCondition' => $this->getUid(),
-						);
-					}
-
-					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
-						'action' => self::$actionNumberMap[$this->actions],
-						'matchingCondition' => $this->getUid(),
-					);
-					break;
-				}
-			}
+		if ($this->actions === self::ACTION_HIDE) {
+			$action =  self::ACTION_HIDE_STRING;
+		} elseif ($this->actions === self::ACTION_UN_HIDE) {
+			$action =  self::ACTION_UN_HIDE_STRING;
 		} else {
-			/** @var Page $page */
-			foreach ($form->getPages() as $page) {
-				/** @var Field $field */
-				foreach ($page->getFields() as $field) {
-					if ($field->getUid() === (int) $this->targetField) {
-						$action = self::$actionNumberMap[$this->actions];
-						if ($action === 'hide') {
-							$arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()] = $field->getText();
-							$field->setText('');
-						} elseif ($action === 'un_hide') {
-							if (!empty($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()])) {
-								$field->setText($arguments['old_alues'][$form->getUid()][$page->getUid()][$field->getMarker()]);
-							}
-						}
-						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => $action,
-							'matchingCondition' => $this->getUid(),
-						);
-						break;
-					}
-				}
-			}
+			return $arguments;
 		}
-		return $arguments;
+		return $this->process($form, $arguments, $action);
 	}
 
 	/**
@@ -322,39 +272,41 @@ class Condition extends AbstractEntity {
 	 * @return array
 	 */
 	public function negate(Form $form, array $arguments) {
-
-		if (strpos($this->targetField, 'fieldset') !== FALSE) {
-			$pageUid = (int) substr($this->targetField, 9);
-			/** @var Page $page */
-			foreach ($form->getPages() as $page) {
-				if ($page->getUid() === $pageUid) {
-
-					/** @var Field $field */
-					foreach ($page->getFields() as $field) {
-						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => $this->getNegatedActionString(),
-							'matchingCondition' => $this->getUid(),
-						);
-					}
-
-					$arguments['todo_page'][$form->getUid()][$page->getUid()] = array(
-						'action' => $this->getNegatedActionString(),
-						'matchingCondition' => $this->getUid(),
-					);
-					break;
-				}
-			}
+		if ($this->actions === self::ACTION_HIDE) {
+			$action = self::ACTION_UN_HIDE_STRING;
+		} elseif ($this->actions === self::ACTION_UN_HIDE) {
+			$action = self::ACTION_HIDE_STRING;
 		} else {
-			/** @var Page $page */
-			foreach ($form->getPages() as $page) {
+			return $arguments;
+		}
+		return $this->process($form, $arguments, $action);
+	}
+
+	/**
+	 * @param Form $form
+	 * @param array $arguments
+	 * @param string $action
+	 * @return array
+	 */
+	protected function process(Form $form, array $arguments, $action) {
+		if (strpos($this->targetField, 'fieldset') !== FALSE) {
+			$targetPageUid = (int) substr($this->targetField, 9);
+		} else {
+			$this->targetField = (int) $this->targetField;
+			$targetPageUid = FALSE;
+		}
+
+		$formUid = $form->getUid();
+		/** @var Page $page */
+		foreach ($form->getPages() as $page) {
+			$pageUid = $page->getUid();
+			if ($targetPageUid && $pageUid === $targetPageUid) {
+				return $this->applyOnPage($formUid, $page, $arguments, $action);
+			} else {
 				/** @var Field $field */
 				foreach ($page->getFields() as $field) {
-					if ($field->getUid() === (int) $this->targetField) {
-						$arguments['todo_field'][$form->getUid()][$page->getUid()][$field->getMarker()] = array(
-							'action' => $this->getNegatedActionString(),
-							'matchingCondition' => $this->getUid(),
-						);
-						break;
+					if ($field->getUid() === $this->targetField) {
+						return $this->applyOnField($formUid, $pageUid, $field, $arguments, $action);
 					}
 				}
 			}
@@ -363,24 +315,43 @@ class Condition extends AbstractEntity {
 	}
 
 	/**
+	 * Show/Hide the Field if the Page is not hidden
+	 *
+	 * @param int $formUid
+	 * @param int $pageUid
+	 * @param Field $field
+	 * @param array $arguments
+	 * @param string $action
 	 * @return array
 	 */
-	protected function getNegatedActionString() {
-		if ($this->actions === self::ACTION_HIDE) {
-			return self::getActionNumberMap(self::ACTION_UN_HIDE);
-		} elseif ($this->actions === self::ACTION_UN_HIDE) {
-			return self::getActionNumberMap(self::ACTION_HIDE);
+	protected function applyOnField($formUid, $pageUid, Field $field, array $arguments, $action) {
+		if ($action === self::ACTION_UN_HIDE && !empty($arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION])) {
+			if ($arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] === self::ACTION_HIDE_STRING) {
+				return $arguments;
+			}
 		}
+		$fieldMarker = $field->getMarker();
+		$conditionUid = $this->getUid();
+		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_ACTION] = $action;
+		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_MATCHING_CONDITION][$conditionUid] = $conditionUid;
+		return $arguments;
 	}
 
 	/**
-	 * @param int|NULL $action
+	 * @param int $formUid
+	 * @param Page $page
+	 * @param array $arguments
+	 * @param string $action
 	 * @return array
 	 */
-	static public function getActionNumberMap($action = NULL) {
-		if ($action !== NULL) {
-			return self::$actionNumberMap[$action];
+	protected function applyOnPage($formUid, Page $page, array $arguments, $action) {
+		$pageUid = $page->getUid();
+		foreach ($page->getFields() as $field) {
+			$arguments = $this->applyOnField($formUid, $pageUid, $field, $arguments, $action);
 		}
-		return self::$actionNumberMap;
+		$conditionUid = $this->getUid();
+		$arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] = $action;
+		$arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_MATCHING_CONDITION][$conditionUid] = $conditionUid;
+		return $arguments;
 	}
 }

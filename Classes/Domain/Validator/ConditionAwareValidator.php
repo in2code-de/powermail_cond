@@ -63,8 +63,8 @@ class ConditionAwareValidator extends InputValidator {
 				foreach ($form->getPages() as $page) {
 					/** @var Field $field */
 					foreach ($page->getFields() as $field) {
-						if (!empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker]['action'])) {
-							if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker]['action'] === Condition::getActionNumberMap(Condition::ACTION_HIDE)) {
+						if (!empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION])) {
+							if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION] === Condition::ACTION_HIDE_STRING) {
 								return;
 							}
 						}
@@ -75,8 +75,8 @@ class ConditionAwareValidator extends InputValidator {
 			$page = $field->getPages();
 			$form = $page->getForms()->getUid();
 			$page = $page->getUid();
-			if (!empty($arguments['todo_field'][$form][$page][$fieldMarker]['action'])) {
-				if ($arguments['todo_field'][$form][$page][$fieldMarker]['action'] === Condition::getActionNumberMap(Condition::ACTION_HIDE)) {
+			if (!empty($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION])) {
+				if ($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION] === Condition::ACTION_HIDE_STRING) {
 					return;
 				}
 			}
