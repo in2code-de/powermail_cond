@@ -49,6 +49,7 @@ class Condition extends AbstractEntity {
 	const ACTION_UN_HIDE_STRING = 'un_hide';
 	const INDEX_TODO = 'todo';
 	const INDEX_ACTION = 'action';
+	const INDEX_BACKUP = 'backup';
 	const INDEX_MATCHING_CONDITION = 'matching_condition';
 
 	/**
@@ -345,7 +346,21 @@ class Condition extends AbstractEntity {
 			}
 		}
 		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_ACTION] = $action;
-		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_MATCHING_CONDITION][$conditionUid] = $conditionUid;
+		$arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_MATCHING_CONDITION][$conditionUid] =
+			$conditionUid;
+
+		// Backup field value if field gets hidden
+		if ($action === self::ACTION_HIDE_STRING) {
+			$arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = $field->getText();
+			$field->setText('');
+		} else {
+			// fill field with backup'd value if field gets enabled again
+			if ($action === self::ACTION_UN_HIDE_STRING) {
+				if (isset($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker])) {
+					$field->setText($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker]);
+				}
+			}
+		}
 		return $arguments;
 	}
 
@@ -359,7 +374,8 @@ class Condition extends AbstractEntity {
 	protected function applyOnPage($formUid, Page $page, array $arguments, $action) {
 		$pageUid = $page->getUid();
 		foreach ($page->getFields() as $field) {
-			$arguments = $this->applyOnField($formUid, $pageUid, $field, $arguments, $action, ($action === self::ACTION_UN_HIDE_STRING));
+			$arguments =
+				$this->applyOnField($formUid, $pageUid, $field, $arguments, $action, ($action === self::ACTION_UN_HIDE_STRING));
 		}
 		$conditionUid = $this->getUid();
 		$arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] = $action;

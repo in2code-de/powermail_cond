@@ -90,6 +90,9 @@ class ConditionController extends ActionController {
 		$feUser->initFEuser();
 		$feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
 
+		unset($arguments['backup']);
+		unset($arguments['field']);
+
 		return json_encode($arguments);
 	}
 }
