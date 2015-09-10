@@ -6,11 +6,7 @@
  * @constructor
  */
 function PowermailCondition($formElement) {
-
-	/**
-	 * @type {jQuery}
-	 */
-	this.$formElement = $formElement;
+	'use strict';
 
 	/**
 	 * This class
@@ -20,16 +16,11 @@ function PowermailCondition($formElement) {
 	var that = this;
 
 	/**
-	 * @type {null}
-	 */
-	var init = initialize();
-
-	/**
 	 * Classnames of all default fields
 	 *
 	 * @type {array}
 	 */
-	var defaultFieldClassNames = [
+	this.defaultFieldClassNames = [
 		'powermail_input',
 		'powermail_textarea',
 		'powermail_select',
@@ -37,6 +28,31 @@ function PowermailCondition($formElement) {
 		'powermail_checkbox'
 	];
 
+	/**
+	 * @type {jQuery}
+	 */
+	this.$formElement = $formElement;
+
+	/**
+	 * Listening for changes
+	 *
+	 * @returns {void}
+	 */
+	this.ajaxListener = function() {
+		// initially send form values
+		that.sendFormValuesToPowermailCond();
+
+		// send form values on a change
+		$(that.getDefaultFieldClassNamesList()).on('change', function() {
+			that.sendFormValuesToPowermailCond();
+		});
+	};
+
+	/**
+	 * Send form values
+	 *
+	 * @returns {void}
+	 */
 	this.sendFormValuesToPowermailCond = function() {
 		var formToSend = $(that.$formElement.get(0));
 		var tempEnabledFields = formToSend.find(':disabled').removeProp('disabled');
@@ -44,55 +60,155 @@ function PowermailCondition($formElement) {
 		tempEnabledFields.prop('disabled', true);
 		jQuery.ajax({
 			type: 'POST',
-			url: 'index.php?type=3131',
+			url: that.getAjaxUri(),
 			data: dataToSend,
 			contentType: false,
 			processData: false,
 			success: function(data) {
-				console.log(data);
 				if (data.loops === 100) {
-					console.log('DFAAFUQ');
+					that.log('100 loops reached by parsing conditions and rules. Maybe there are conflicting conditions.');
 				}
-				if (data.todo !== undefined) {
-					for (var formUid in data.todo) {
-						var form = $('.powermail_form_' + formUid)
-						for (var pageUid in data.todo[formUid]) {
-
-							var page = form.find('.powermail_fieldset_' + pageUid);
-							if (data.todo[formUid][pageUid]['action'] === 'hide') {
-								page.hide();
-							}
-							if (data.todo[formUid][pageUid]['action'] === 'un_hide') {
-								page.show();
-							}
-
-							for (var fieldMarker in data.todo[formUid][pageUid]) {
-								var fields = form.find('[id^=powermail_field_' + fieldMarker + ']');
-								if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'hide') {
-									fields.prop('disabled', true);
-									fields.closest('.powermail_fieldwrap').hide();
-								}
-								if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
-									fields.removeProp('disabled');
-									fields.closest('.powermail_fieldwrap').show();
-								}
-							}
-						}
-					}
-				}
-
+				that.processActions(data);
 			}
 		});
 	};
 
 	/**
-	 * Initialize
+	 * do actions with fields or fieldsets
 	 *
-	 * @returns {null}
+	 * @param {array} data
+	 * @returns {void}
 	 */
-	function initialize() {
-		that.$formElement.css('background-color', 'red');
-	}
+	this.processActions = function(data) {
+		if (data.todo !== undefined) {
+			for (var formUid in data.todo) {
+				var $form = $('.powermail_form_' + formUid)
+				for (var pageUid in data.todo[formUid]) {
+
+					// do actions with whole pages
+					var $page = $form.find('.powermail_fieldset_' + pageUid);
+					if (data.todo[formUid][pageUid]['action'] === 'hide') {
+						that.hidePage($page);
+					}
+					if (data.todo[formUid][pageUid]['action'] === 'un_hide') {
+						that.showPage($page);
+					}
+
+					// do actions with single fields
+					for (var fieldMarker in data.todo[formUid][pageUid]) {
+						var $field = $form.find('[id^=powermail_field_' + fieldMarker + ']');
+						if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'hide') {
+							that.hideField($field);
+						}
+						if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
+							that.showField($field);
+						}
+					}
+				}
+			}
+		}
+	};
+
+	/**
+	 * Show a powermail field
+	 *
+	 * @param {jQuery} $field
+	 * @returns {void}
+	 */
+	this.showField = function($field) {
+		$field.removeProp('disabled');
+		$field.closest('.powermail_fieldwrap').show();
+	};
+
+	/**
+	 * Hide a powermail field
+	 *
+	 * @param {jQuery} $field
+	 * @returns {void}
+	 */
+	this.hideField = function($field) {
+		$field.prop('disabled', true);
+		$field.closest('.powermail_fieldwrap').hide();
+	};
+
+	/**
+	 * Show a powermail page (fieldset)
+	 *
+	 * @param {jQuery} $page
+	 * @returns {void}
+	 */
+	this.showPage = function($page) {
+		$page.show();
+	};
+
+	/**
+	 * Hide a powermail page (fieldset)
+	 *
+	 * @param {jQuery} $page
+	 * @returns {void}
+	 */
+	this.hidePage = function($page) {
+		$page.hide();
+	};
+
+	/**
+	 * get page id
+	 *
+	 * @returns {int}
+	 */
+	this.getAjaxUri = function() {
+		var uri = $('*[data-condition-uri]').data('condition-uri');
+		if (uri === undefined) {
+			that.log('Tag with data-condition-uri not found. Maybe TypoScript was not included.');
+		}
+		return uri;
+	};
+
+	/**
+	 * get default field class names as string
+	 *
+	 * @returns {string}
+	 */
+	this.getDefaultFieldClassNamesList = function() {
+		return that.listFromArray(that.defaultFieldClassNames, '.');
+	};
+
+	/**
+	 * Convert array to a string list
+	 *
+	 * @param {array} array
+	 * @param {string} itemPrefix
+	 * @param {string} glue
+	 * @returns {string}
+	 */
+	this.listFromArray = function(array, itemPrefix, glue) {
+		itemPrefix = typeof itemPrefix !== 'undefined' ? itemPrefix : '';
+		glue = typeof glue !== 'undefined' ? glue : ',';
+
+		var string = '';
+		for (var i = 0; i < array.length; i++) {
+			if (i > 0) {
+				string += glue;
+			}
+			string += itemPrefix + array[i];
+		}
+		return string;
+	};
+
+	/**
+	 * write message to console
+	 *
+	 * @param {string|object} message
+	 * @return {void}
+	 */
+	this.log = function(message) {
+		if (typeof console == 'object') {
+			if (typeof message === 'string') {
+				message = 'powermail_cond: ' + message;
+			}
+			console.log(message);
+		}
+	};
 
 	// make global
 	window.PowermailCondition = PowermailCondition;
@@ -101,21 +217,6 @@ function PowermailCondition($formElement) {
 jQuery(document).ready(function() {
 	$('form.powermail_form').each(function() {
 		var PowermailCondition = new window.PowermailCondition($(this));
-		PowermailCondition.sendFormValuesToPowermailCond();
-		$(this).find('input').each(function() {
-			$(this).on('change', function() {
-				PowermailCondition.sendFormValuesToPowermailCond();
-			});
-		});
-		$(this).find('select').each(function() {
-			$(this).on('change', function() {
-				PowermailCondition.sendFormValuesToPowermailCond();
-			});
-		});
-		$(this).find('textarea').each(function() {
-			$(this).on('change', function() {
-				PowermailCondition.sendFormValuesToPowermailCond();
-			});
-		});
+		PowermailCondition.ajaxListener();
 	});
 });

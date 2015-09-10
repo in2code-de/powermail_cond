@@ -1,8 +1,27 @@
-page.includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.js
+page {
+	includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.js
+
+	3132 = COA
+	3132 {
+		wrap = <script id="powermail_conditions_container"|></script>
+
+		# Uri to send AJAX request
+		10 = TEXT
+		10 {
+			noTrimWrap = | data-condition-uri="|"|
+			typolink {
+				parameter.data = TSFE:id
+				additionalParams = &type=3132
+				returnLast = url
+				forceAbsoluteUrl = 1
+			}
+		}
+	}
+}
 
 powermailCondition = PAGE
 powermailCondition {
-	typeNum = 3131
+	typeNum = 3132
 	config {
 		disableAllHeaderCode = 1
 		xhtml_cleaning = 0
