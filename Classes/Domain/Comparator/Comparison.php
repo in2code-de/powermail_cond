@@ -3,6 +3,7 @@ namespace In2code\PowermailCond\Domain\Comparator;
 
 use In2code\Powermail\Domain\Model\Field;
 use In2code\PowermailCond\Domain\Model\Rule;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class Comparison
@@ -49,10 +50,14 @@ class Comparison {
 				$result = ($leftField->getText() !== $valueToMatch);
 				break;
 			case Rule::OPERATOR_GREATER_THAN:
-				$result = (((int) $leftField->getText()) > ((int) $valueToMatch));
+				if ($valueToMatch !== '') {
+					$result = (((int) $leftField->getText()) > ((int) $valueToMatch));
+				}
 				break;
 			case Rule::OPERATOR_LESS_THAN:
-				$result = (((int) $leftField->getText()) < ((int) $valueToMatch));
+				if ($valueToMatch !== '') {
+					$result = (((int) $leftField->getText()) < ((int) $valueToMatch));
+				}
 				break;
 			case Rule::OPERATOR_CONTAINS_VALUE_FROM_FIELD:
 				if ($rightField instanceof Field) {
@@ -78,11 +83,24 @@ class Comparison {
 
 	/**
 	 * @param string|array $haystack
-	 * @param string $needle
+	 * @param string|array $needle If array, all elements must be contained in $haystack (OR)
 	 * @return bool
 	 */
 	protected function operationContains($haystack, $needle) {
-		if (!$this->operationIsNotEmpty($needle)) {
+		if (!$this->operationIsNotEmpty($needle) || !$this->operationIsNotEmpty($haystack)) {
+			return FALSE;
+		}
+		if (strpos($needle, PHP_EOL)) {
+			$needle = GeneralUtility::trimExplode(PHP_EOL, $needle);
+		}
+		if (is_array($needle)) {
+			foreach ($needle as $needleString) {
+				if ($this->operationIsNotEmpty($needleString)) {
+					if (strpos($haystack, $needleString) !== FALSE) {
+						return TRUE;
+					}
+				}
+			}
 			return FALSE;
 		}
 		if (is_array($haystack)) {
