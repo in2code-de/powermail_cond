@@ -48,7 +48,7 @@ class Condition extends AbstractEntity {
 	const ACTION_HIDE_STRING = 'hide';
 	const ACTION_UN_HIDE_STRING = 'un_hide';
 	const INDEX_TODO = 'todo';
-	const INDEX_ACTION = 'action';
+	const INDEX_ACTION = '#action';
 	const INDEX_BACKUP = 'backup';
 	const INDEX_MATCHING_CONDITION = 'matching_condition';
 

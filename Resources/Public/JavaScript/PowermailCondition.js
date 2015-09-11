@@ -87,20 +87,20 @@ function PowermailCondition($formElement) {
 
 					// do actions with whole pages
 					var $page = $form.find('.powermail_fieldset_' + pageUid);
-					if (data.todo[formUid][pageUid]['action'] === 'hide') {
+					if (data.todo[formUid][pageUid]['#action'] === 'hide') {
 						that.hidePage($page);
 					}
-					if (data.todo[formUid][pageUid]['action'] === 'un_hide') {
+					if (data.todo[formUid][pageUid]['#action'] === 'un_hide') {
 						that.showPage($page);
 					}
 
 					// do actions with single fields
 					for (var fieldMarker in data.todo[formUid][pageUid]) {
 						var $field = $form.find('[id^=powermail_field_' + fieldMarker + ']');
-						if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'hide') {
+						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'hide') {
 							that.hideField($field);
 						}
-						if (data.todo[formUid][pageUid][fieldMarker]['action'] === 'un_hide') {
+						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'un_hide') {
 							that.showField($field);
 						}
 					}
@@ -118,6 +118,7 @@ function PowermailCondition($formElement) {
 	this.showField = function($field) {
 		$field.removeProp('disabled');
 		$field.closest('.powermail_fieldwrap').show();
+		that.rerequireField($field);
 	};
 
 	/**
@@ -129,6 +130,7 @@ function PowermailCondition($formElement) {
 	this.hideField = function($field) {
 		$field.prop('disabled', true);
 		$field.closest('.powermail_fieldwrap').hide();
+		that.derequireField($field);
 	};
 
 	/**
@@ -152,6 +154,39 @@ function PowermailCondition($formElement) {
 	};
 
 	/**
+	 * Make a required field to a non-required field
+	 *
+	 * @param {jQuery} $field
+	 * @returns {void}
+	 */
+	this.derequireField = function($field) {
+		if ($field.prop('required') || $field.data('parsley-required')) {
+			$field.removeProp('required');
+			$field.removeAttr('data-parsley-required');
+			$field.data('powermailcond-required', 'required');
+		}
+		that.reInitializeParsleyValidation();
+	};
+
+	/**
+	 * Make a inactive required field required again
+	 *
+	 * @param {jQuery} $field
+	 * @returns {void}
+	 */
+	this.rerequireField = function($field) {
+		if ($field.data('powermailcond-required') === 'required') {
+			if (that.isHtml5ValidationActivated()) {
+				$field.prop('required', 'required');
+			} else if (that.isParsleyValidationActivated()) {
+				$field.prop('required', 'required');
+			}
+		}
+		$field.removeData('powermailcond-required');
+		that.reInitializeParsleyValidation();
+	};
+
+	/**
 	 * get page id
 	 *
 	 * @returns {int}
@@ -171,6 +206,36 @@ function PowermailCondition($formElement) {
 	 */
 	this.getDefaultFieldClassNamesList = function() {
 		return that.listFromArray(that.defaultFieldClassNames, '.');
+	};
+
+	/**
+	 * Turn off and on parsley validation for a reinitialization
+	 *
+	 * @returns {void}
+	 */
+	this.reInitializeParsleyValidation = function() {
+		if (that.isParsleyValidationActivated()) {
+			that.$formElement.parsley().destroy();
+			that.$formElement.parsley();
+		}
+	};
+
+	/**
+	 * Check if parsley validation is activated
+	 *
+	 * @returns {boolean}
+	 */
+	this.isParsleyValidationActivated = function() {
+		return that.$formElement.data('parsley-validate') === 'data-parsley-validate';
+	};
+
+	/**
+	 * Check if html5 validation is activated
+	 *
+	 * @returns {boolean}
+	 */
+	this.isHtml5ValidationActivated = function() {
+		return that.$formElement.data('validate') === 'html5';
 	};
 
 	/**
