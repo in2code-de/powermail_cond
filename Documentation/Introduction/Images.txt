@@ -1,0 +1,23 @@
+.. |powermail_form_all|      image:: ../Images/powermail_form_all.png
+.. :align: left
+.. :border: 0
+.. :name: powermail form all
+.. :vspace: 50
+
+.. |powermail_form_hiddenfield|      image:: ../Images/powermail_form_hiddenfield.png
+.. :align: left
+.. :border: 0
+.. :name: powermail form hiddenfield
+.. :vspace: 50
+
+.. |powermail_form_validation|      image:: ../Images/powermail_form_validation.png
+.. :align: left
+.. :border: 0
+.. :name: powermail form validation
+.. :vspace: 50
+
+.. |backend_condition_container|      image:: ../Images/backend_condition_container.png
+.. :align: left
+.. :border: 0
+.. :name: backend condition container
+.. :vspace: 50
