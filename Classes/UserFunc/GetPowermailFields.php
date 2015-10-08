@@ -215,7 +215,7 @@ class GetPowermailFields {
 	 * @return string
 	 */
 	protected function getLabelFromFieldProperties(array $properties) {
-		return $properties['title'] . ' , {' . $properties['marker'] . '}, uid' . $properties['uid'];
+		return $properties['title'] . ', {' . $properties['marker'] . '}, uid' . $properties['uid'];
 	}
 
 	/**

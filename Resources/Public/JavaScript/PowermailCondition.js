@@ -55,7 +55,7 @@ function PowermailCondition($formElement) {
 	 */
 	this.sendFormValuesToPowermailCond = function() {
 		var formToSend = $(that.$formElement.get(0));
-		var tempEnabledFields = formToSend.find(':disabled').removeProp('disabled');
+		var tempEnabledFields = formToSend.find(':disabled').prop('disabled', false);
 		var dataToSend = new FormData(that.$formElement.get(0));
 		tempEnabledFields.prop('disabled', true);
 		jQuery.ajax({
@@ -116,7 +116,7 @@ function PowermailCondition($formElement) {
 	 * @returns {void}
 	 */
 	this.showField = function($field) {
-		$field.removeProp('disabled');
+		$field.prop('disabled', false);
 		$field.closest('.powermail_fieldwrap').show();
 		that.rerequireField($field);
 	};
@@ -161,7 +161,7 @@ function PowermailCondition($formElement) {
 	 */
 	this.derequireField = function($field) {
 		if ($field.prop('required') || $field.data('parsley-required')) {
-			$field.removeProp('required');
+			$field.prop('required', false);
 			$field.removeAttr('data-parsley-required');
 			$field.data('powermailcond-required', 'required');
 		}
