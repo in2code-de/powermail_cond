@@ -30,6 +30,7 @@ namespace In2code\PowermailCond\UserFunc;
 use In2code\PowermailCond\Utility\ArrayUtility;
 use TYPO3\CMS\Backend\Form\FormEngine;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * List powermail fields in Backend for powermail_cond rules
@@ -51,11 +52,6 @@ class GetPowermailFields {
 	protected $params = array();
 
 	/**
-	 * @var FormEngine
-	 */
-	protected $formEngine = NULL;
-
-	/**
 	 * @var int
 	 */
 	protected $formUid = 0;
@@ -75,11 +71,10 @@ class GetPowermailFields {
 	 * show all fields in the backend
 	 *
 	 * @param array $params
-	 * @param FormEngine $formEngine
 	 * @return void
 	 */
-	public function getFields(array &$params, FormEngine $formEngine) {
-		$this->initialize($params, $formEngine);
+	public function getFields(array &$params) {
+		$this->initialize($params);
 		$this->addFieldsToParams();
 		$this->addFieldsetsToParams();
 	}
@@ -220,18 +215,16 @@ class GetPowermailFields {
 	 * @return string
 	 */
 	protected function getLabelFromFieldProperties(array $properties) {
-		return $this->formEngine->sL($properties['title']) . ', {' . $properties['marker'] . '}, uid' . $properties['uid'];
+		return $properties['title'] . ' , {' . $properties['marker'] . '}, uid' . $properties['uid'];
 	}
 
 	/**
 	 * @param array $params
-	 * @param FormEngine $formEngine
 	 * @return void
 	 */
-	protected function initialize(array &$params, FormEngine $formEngine) {
+	protected function initialize(array &$params) {
 		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
 		$this->params = &$params;
-		$this->formEngine = $formEngine;
 		$this
 			->setFormUid()
 			->setDefaultFieldTypes();
