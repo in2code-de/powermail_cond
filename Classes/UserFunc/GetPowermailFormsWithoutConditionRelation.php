@@ -49,11 +49,6 @@ class GetPowermailFormsWithoutConditionRelation {
 	protected $params = array();
 
 	/**
-	 * @var FormEngine
-	 */
-	protected $formEngine = NULL;
-
-	/**
 	 * @var int
 	 */
 	protected $currentFormUid = 0;
@@ -62,11 +57,10 @@ class GetPowermailFormsWithoutConditionRelation {
 	 * remove forms that are already related to a condition container
 	 *
 	 * @param array $params
-	 * @param FormEngine $formEngine
 	 * @return void
 	 */
-	public function filterForms(array &$params, FormEngine $formEngine) {
-		$this->initialize($params, $formEngine);
+	public function filterForms(array &$params) {
+		$this->initialize($params);
 		foreach ((array) $this->params['items'] as $key => $form) {
 			if ($this->hasFormRelatedConditionContainers((int) $form[1]) && (int) $form[1] !== $this->currentFormUid) {
 				unset($this->params['items'][$key]);
@@ -93,13 +87,11 @@ class GetPowermailFormsWithoutConditionRelation {
 
 	/**
 	 * @param array $params
-	 * @param FormEngine $formEngine
 	 * @return void
 	 */
-	protected function initialize(array &$params, FormEngine $formEngine) {
+	protected function initialize(array &$params) {
 		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
 		$this->params = &$params;
-		$this->formEngine = $formEngine;
 		$this->currentFormUid = (int) $this->params['row']['form'];
 	}
 }
