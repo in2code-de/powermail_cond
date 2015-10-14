@@ -65,13 +65,15 @@ class ConditionController extends ActionController {
 		unset($arguments['__trustedProperties']);
 		/** @var Form $form */
 		$form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
-		/** @var Page $page */
-		foreach ($form->getPages() as $page) {
-			/** @var Field $field */
-			foreach ($page->getFields() as $field) {
-				foreach ($arguments['field'] as $fieldName => $fieldValue) {
-					if ($field->getMarker() === $fieldName) {
-						$field->setText($fieldValue);
+		if ($form !== NULL) {
+			/** @var Page $page */
+			foreach ($form->getPages() as $page) {
+				/** @var Field $field */
+				foreach ($page->getFields() as $field) {
+					foreach ($arguments['field'] as $fieldName => $fieldValue) {
+						if ($field->getMarker() === $fieldName) {
+							$field->setText($fieldValue);
+						}
 					}
 				}
 			}
