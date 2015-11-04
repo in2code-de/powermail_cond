@@ -96,7 +96,7 @@ function PowermailCondition($, $formElement) {
 
 					// do actions with single fields
 					for (var fieldMarker in data.todo[formUid][pageUid]) {
-						var $field = $form.find('[id^=powermail_field_' + fieldMarker + ']');
+						var $field = $form.find('[id=powermail_field_' + fieldMarker + ']');
 						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'hide') {
 							that.hideField($field);
 						}
