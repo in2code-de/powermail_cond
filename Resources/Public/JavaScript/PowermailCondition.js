@@ -5,7 +5,7 @@
  * @param {jQuery} $formElement powermail form
  * @constructor
  */
-function PowermailCondition($formElement) {
+function PowermailCondition($, $formElement) {
 	'use strict';
 
 	/**
@@ -96,7 +96,7 @@ function PowermailCondition($formElement) {
 
 					// do actions with single fields
 					for (var fieldMarker in data.todo[formUid][pageUid]) {
-						var $field = $form.find('[id^=powermail_field_' + fieldMarker + ']');
+						var $field = $form.find('[id=powermail_field_' + fieldMarker + ']');
 						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'hide') {
 							that.hideField($field);
 						}
@@ -280,8 +280,8 @@ function PowermailCondition($formElement) {
 }
 
 jQuery(document).ready(function() {
-	$('form.powermail_form').each(function() {
-		var PowermailCondition = new window.PowermailCondition($(this));
+	jQuery('form.powermail_form').each(function() {
+		var PowermailCondition = new window.PowermailCondition(jQuery, $(this));
 		PowermailCondition.ajaxListener();
 	});
 });

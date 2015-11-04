@@ -16,6 +16,15 @@ Changelog
       Release Description
 
  - :Version:
+      3.0.2
+   :Date:
+      2015-11-04
+   :Changes:
+
+      * Bugfix _`#71325`: https://forge.typo3.org/issues/71325 Condition applies to more than one field
+      * Bugfix _`#71150`: https://forge.typo3.org/issues/71150 Replace $ with jQuery in PowermailCondition.js
+
+ - :Version:
       3.0.1
    :Date:
       2015-10-08
