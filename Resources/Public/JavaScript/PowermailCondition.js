@@ -49,6 +49,10 @@ function PowermailCondition($, $formElement) {
 	};
 
 	/**
+	 * ************* Internal ***************
+	 */
+
+	/**
 	 * Send form values
 	 *
 	 * @returns {void}
@@ -88,20 +92,19 @@ function PowermailCondition($, $formElement) {
 					// do actions with whole pages
 					var $page = $form.find('.powermail_fieldset_' + pageUid);
 					if (data.todo[formUid][pageUid]['#action'] === 'hide') {
-						that.hidePage($page);
+						that.hidePage(that.getFieldsetByUid(pageUid, $form));
 					}
 					if (data.todo[formUid][pageUid]['#action'] === 'un_hide') {
-						that.showPage($page);
+						that.showPage(that.getFieldsetByUid(pageUid, $form));
 					}
 
 					// do actions with single fields
 					for (var fieldMarker in data.todo[formUid][pageUid]) {
-						var $field = $form.find('[id=powermail_field_' + fieldMarker + ']');
 						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'hide') {
-							that.hideField($field);
+							that.hideField(that.getFieldByMarker(fieldMarker, $form));
 						}
 						if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'un_hide') {
-							that.showField($field);
+							that.showField(that.getFieldByMarker(fieldMarker, $form));
 						}
 					}
 				}
@@ -197,6 +200,32 @@ function PowermailCondition($, $formElement) {
 			that.log('Tag with data-condition-uri not found. Maybe TypoScript was not included.');
 		}
 		return uri;
+	};
+
+	/**
+	 * Select a powermail field by its name
+	 * 		name="tx_powermail_pi1[field][fieldMarker]"
+	 * 		or
+	 * 		name="tx_powermail_pi1[field][fieldMarker][]"
+	 *
+	 * @param {string} fieldMarker
+	 * @param {jQuery} $form
+	 * @returns {jQuery}
+	 */
+	this.getFieldByMarker = function(fieldMarker, $form) {
+		return $form.find('[name^="tx_powermail_pi1[field][' + fieldMarker + ']"]');
+	};
+
+	/**
+	 * Select a powermail fieldset
+	 * 		class="powermail_fieldset_[pageUid]"
+	 *
+	 * @param {string} pageUid
+	 * @param {jQuery} $form
+	 * @returns {jQuery}
+	 */
+	this.getFieldsetByUid = function(pageUid, $form) {
+		return $form.find('.powermail_fieldset_' + pageUid);
 	};
 
 	/**

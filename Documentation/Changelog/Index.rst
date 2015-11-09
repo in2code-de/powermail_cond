@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.0.3
+   :Date:
+      2015-11-09
+   :Changes:
+
+      * Bugfix _`#71376`: https://forge.typo3.org/issues/71376 Hiding a field of checkboxes
+
+ - :Version:
       3.0.2
    :Date:
       2015-11-04
