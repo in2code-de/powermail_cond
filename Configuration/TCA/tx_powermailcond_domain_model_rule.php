@@ -1,4 +1,6 @@
 <?php
+use In2code\PowermailCond\Utility\ConfigurationUtility;
+
 return array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules',
@@ -12,7 +14,7 @@ return array(
 			'disabled' => 'hidden'
 		),
 		'requestUpdate' => 'ops',
-		'iconfile' => 'EXT:powermail_cond/Resources/Public/Icons/icon_tx_powermailcond_rules.gif'
+		'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_rules.gif')
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',

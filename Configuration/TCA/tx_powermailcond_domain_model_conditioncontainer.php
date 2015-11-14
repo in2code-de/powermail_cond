@@ -1,4 +1,6 @@
 <?php
+use In2code\PowermailCond\Utility\ConfigurationUtility;
+
 return array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditioncontainer',
@@ -15,7 +17,7 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'requestUpdate' => 'form',
-		'iconfile' => 'EXT:powermail_cond/Resources/Public/Icons/icon_tx_powermailcond_conditions.gif'
+		'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_conditions.gif')
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
