@@ -1,4 +1,6 @@
 <?php
+use In2code\PowermailCond\Utility\ConfigurationUtility;
+
 return array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditioncontainer',
@@ -15,8 +17,7 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'requestUpdate' => 'form',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('powermail_cond') .
-			'Resources/Public/Icons/icon_tx_powermailcond_conditions.gif'
+		'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_conditions.gif')
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
@@ -34,6 +35,7 @@ return array(
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
@@ -44,16 +46,17 @@ return array(
 		),
 		'l18n_parent' => array (
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude'     => 1,
-			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
-			'config'      => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
+			'config' => array (
 				'type'  => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array (
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermailcond_conditioncontainer',
-				'foreign_table_where' =>
-					'AND tx_powermailcond_conditioncontainer.pid=###CURRENT_PID### AND tx_powermailcond_conditioncontainer.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_powermailcond_conditioncontainer.pid=###CURRENT_PID### AND ' .
+					'tx_powermailcond_conditioncontainer.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (
@@ -113,6 +116,7 @@ return array(
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditioncontainer.form',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_conditioncontainer.form.pleaseChoose',

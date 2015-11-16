@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.0.4
+   :Date:
+      2015-11-16
+   :Changes:
+
+      * Bugfix _`#71601`: https://forge.typo3.org/issues/71601 Resolve warnings in deprecation log of TYPO3 7.6
+
+ - :Version:
       3.0.3
    :Date:
       2015-11-09

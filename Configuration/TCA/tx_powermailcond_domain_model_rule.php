@@ -1,4 +1,6 @@
 <?php
+use In2code\PowermailCond\Utility\ConfigurationUtility;
+
 return array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules',
@@ -12,8 +14,7 @@ return array(
 			'disabled' => 'hidden'
 		),
 		'requestUpdate' => 'ops',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('powermail_cond') .
-			'Resources/Public/Icons/icon_tx_powermailcond_rules.gif'
+		'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_rules.gif')
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',
@@ -46,6 +47,7 @@ return array(
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.startField',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					array('LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.startField.I.0', '0'),
 				),
@@ -62,6 +64,7 @@ return array(
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					// title operators
 					array(
@@ -83,7 +86,8 @@ return array(
 
 					// title operatorsComparisonValue
 					array(
-						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonValue',
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+							'tx_powermailcond_rules.operator.I.operatorsComparisonValue',
 						'--div--'
 					),
 
@@ -125,7 +129,8 @@ return array(
 
 					// title operatorsComparisonField
 					array(
-						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.operator.I.operatorsComparisonField',
+						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+							'tx_powermailcond_rules.operator.I.operatorsComparisonField',
 						'--div--'
 					),
 
@@ -161,6 +166,7 @@ return array(
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.equalField',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					array(
 						'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.equalField.I.0',
@@ -181,6 +187,7 @@ return array(
 			'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules.condition',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					array(
 						'',
