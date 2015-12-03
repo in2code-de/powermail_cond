@@ -1,5 +1,5 @@
 <?php
-namespace In2code\PowermailCond\Domain\Repository;
+namespace In2code\PowermailCond\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -27,30 +27,34 @@ namespace In2code\PowermailCond\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * ConditionContainerRepository
+ * Class SessionUtility
  *
- * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html
- *            GNU Lesser General Public License, version 3 or later
+ * @package In2code\In2publish\Utility
  */
-class ConditionContainerRepository extends Repository
+class SessionUtility
 {
 
     /**
-     * General settings
+     * Get quoted list from array
      *
-     * @return void
+     * @param array $array
+     * @return array
      */
-    public function initializeObject()
+    public static function setSession(array $array)
     {
-        /** @var Typo3QuerySettings $querySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-        $querySettings->setRespectStoragePage(false);
-        $querySettings->setRespectSysLanguage(false);
-        $this->setDefaultQuerySettings($querySettings);
+        $typoScriptFrontend = self::getTyposcriptFrontendController();
+        $typoScriptFrontend->initFEuser();
+        $typoScriptFrontend->fe_user->setAndSaveSessionData('tx_powermail_cond', $array);
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected static function getTyposcriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }

@@ -16,6 +16,16 @@ Changelog
       Release Description
 
  - :Version:
+      3.1.0
+   :Date:
+      2015-12-03
+   :Changes:
+
+      * Task PHP 5.5 required
+      * Task PSR-2 refactoring
+      * Bugfix _`#72007`: https://forge.typo3.org/issues/72007 Error 500 on ajax request if no condition is set for form
+
+ - :Version:
       3.0.4
    :Date:
       2015-11-16

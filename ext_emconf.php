@@ -10,39 +10,40 @@
 # writing. "version" and "dependencies" must not be touched!
 ########################################################################
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => 'Powermail Conditions',
-	'description' => 'Add conditions (via AJAX) to powermail (2.9 or newer) forms for fields and pages',
-	'category' => 'plugin',
-	'shy' => 0,
-	'version' => '3.0.4',
-	'dependencies' => 'powermail',
-	'conflicts' => '',
-	'priority' => '',
-	'loadOrder' => '',
-	'module' => '',
-	'state' => 'stable',
-	'uploadfolder' => 0,
-	'createDirs' => '',
-	'modify_tables' => '',
-	'clearcacheonload' => 1,
-	'lockType' => '',
-	'author' => 'Alex Kellner',
-	'author_email' => 'alexander.kellner@in2code.de',
-	'author_company' => 'in2code.de',
-	'CGLcompliance' => '',
-	'CGLcompliance_note' => '',
-	'constraints' => array(
-		'depends' => array(
-			'powermail' => '2.9.0-2.99.99',
-			'extbase' => '6.2.0-7.99.99',
-			'fluid' => '6.2.0-7.99.99',
-			'typo3' => '6.2.0-7.99.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-	'_md5_values_when_last_written' => '',
-);
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'Powermail Conditions',
+    'description' => 'Add conditions (via AJAX) to powermail (2.9 or newer) forms for fields and pages',
+    'category' => 'plugin',
+    'shy' => 0,
+    'version' => '3.1.0',
+    'dependencies' => 'powermail',
+    'conflicts' => '',
+    'priority' => '',
+    'loadOrder' => '',
+    'module' => '',
+    'state' => 'stable',
+    'uploadfolder' => 0,
+    'createDirs' => '',
+    'modify_tables' => '',
+    'clearcacheonload' => 1,
+    'lockType' => '',
+    'author' => 'Alex Kellner',
+    'author_email' => 'alexander.kellner@in2code.de',
+    'author_company' => 'in2code.de',
+    'CGLcompliance' => '',
+    'CGLcompliance_note' => '',
+    'constraints' => [
+        'depends' => [
+            'powermail' => '2.9.0-2.99.99',
+            'extbase' => '6.2.0-7.99.99',
+            'fluid' => '6.2.0-7.99.99',
+            'typo3' => '6.2.0-7.99.99',
+            'php' => '5.5.0-0.0.0'
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
+    '_md5_values_when_last_written' => '',
+];

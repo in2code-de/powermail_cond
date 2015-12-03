@@ -38,49 +38,55 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 /**
  * Class ConditionAwareValidator
  */
-class ConditionAwareValidator extends InputValidator {
+class ConditionAwareValidator extends InputValidator
+{
 
-	/**
-	 * Validate a single field
-	 *
-	 * @param Field $field
-	 * @param mixed $value
-	 * @return void
-	 */
-	protected function isValidField(Field $field, $value) {
+    /**
+     * Validate a single field
+     *
+     * @param Field $field
+     * @param mixed $value
+     * @return void
+     */
+    protected function isValidField(Field $field, $value)
+    {
 
-		/** @var FrontendUserAuthentication $feUser */
-		$feUser = $GLOBALS['TSFE']->fe_user;
-		$arguments = $feUser->getSessionData('tx_powermail_cond');
-		$fieldMarker = $field->getMarker();
+        /** @var FrontendUserAuthentication $feUser */
+        $feUser = $GLOBALS['TSFE']->fe_user;
+        $arguments = $feUser->getSessionData('tx_powermail_cond');
+        $fieldMarker = $field->getMarker();
 
 
-		if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive()) {
-			$pages = $field->getPages();
-			/** @var Form $form */
-			foreach ($pages->getForms() as $form) {
-				/** @var Page $page */
-				foreach ($form->getPages() as $page) {
-					/** @var Field $field */
-					foreach ($page->getFields() as $field) {
-						if (!empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION])) {
-							if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION] === Condition::ACTION_HIDE_STRING) {
-								return;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			$page = $field->getPages();
-			$form = $page->getForms()->getUid();
-			$page = $page->getUid();
-			if (!empty($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION])) {
-				if ($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION] === Condition::ACTION_HIDE_STRING) {
-					return;
-				}
-			}
-		}
-		parent::isValidField($field, $value);
-	}
+        if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive()) {
+            $pages = $field->getPages();
+            /** @var Form $form */
+            foreach ($pages->getForms() as $form) {
+                /** @var Page $page */
+                foreach ($form->getPages() as $page) {
+                    /** @var Field $field */
+                    foreach ($page->getFields() as $field) {
+                        if (
+                            !empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION])
+                        ) {
+                            if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION] ===
+                                Condition::ACTION_HIDE_STRING) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            $page = $field->getPages();
+            $form = $page->getForms()->getUid();
+            $page = $page->getUid();
+            if (!empty($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION])) {
+                if ($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION] ===
+                    Condition::ACTION_HIDE_STRING) {
+                    return;
+                }
+            }
+        }
+        parent::isValidField($field, $value);
+    }
 }
