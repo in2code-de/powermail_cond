@@ -27,14 +27,14 @@ namespace In2code\PowermailCond\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * Class ArrayUtility
+ * Class SessionUtility
  *
  * @package In2code\In2publish\Utility
  */
-class ArrayUtility extends ArrayUtilityExtbase
+class SessionUtility
 {
 
     /**
@@ -43,26 +43,18 @@ class ArrayUtility extends ArrayUtilityExtbase
      * @param array $array
      * @return array
      */
-    public static function getQuotedList(array $array)
+    public static function setSession(array $array)
     {
-        $list = '';
-        foreach ($array as $value) {
-            $list .= '"' . $value . '",';
-        }
-        return trim($list, ',');
+        $typoScriptFrontend = self::getTyposcriptFrontendController();
+        $typoScriptFrontend->initFEuser();
+        $typoScriptFrontend->fe_user->setAndSaveSessionData('tx_powermail_cond', $array);
     }
 
     /**
-     * Unset part of array by given keys
-     *
-     * @param array $array
-     * @param array $keys
-     * @return void
+     * @return TypoScriptFrontendController
      */
-    public static function unsetByKeys(array &$array, array $keys)
+    protected static function getTyposcriptFrontendController()
     {
-        foreach ($keys as $key) {
-            unset($array[$key]);
-        }
+        return $GLOBALS['TSFE'];
     }
 }

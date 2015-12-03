@@ -58,7 +58,7 @@ class ConditionContainer extends AbstractEntity
     /**
      * @param Form $form
      * @param array $arguments
-     * @return Form
+     * @return array
      */
     public function applyConditions(Form $form, array $arguments)
     {
@@ -71,6 +71,7 @@ class ConditionContainer extends AbstractEntity
             $this->loopCount++;
 
             // go through each condition
+            /** @var Condition $condition */
             foreach ($this->conditions as $condition) {
 
                 // if the rules match on the form

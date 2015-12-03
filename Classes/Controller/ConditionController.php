@@ -5,14 +5,17 @@ use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
+use In2code\PowermailCond\Utility\ArrayUtility;
+use In2code\PowermailCond\Utility\SessionUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *  (c) 2015 in2code.de
+ *  Alex Kellner <alexander.kellner@in2code.de>,
+ *  Oliver Eglseder <oliver.eglseder@in2code.de>
  *
  *  All rights reserved
  *
@@ -53,7 +56,22 @@ class ConditionController extends ActionController
      * @var \In2code\PowermailCond\Domain\Repository\ConditionContainerRepository
      * @inject
      */
-    protected $conditionContainerRepository;
+    protected $containerRepository;
+
+    /**
+     * @var array
+     */
+    protected $powermailArguments;
+
+    /**
+     * @return void
+     */
+    public function initializeBuildConditionAction()
+    {
+        $powermailArguments = (array) GeneralUtility::_GP('tx_powermail_pi1');
+        ArrayUtility::unsetByKeys($powermailArguments, ['__referrer', '__trustedProperties']);
+        $this->powermailArguments = $powermailArguments;
+    }
 
     /**
      * Build Condition for AJAX call
@@ -62,17 +80,33 @@ class ConditionController extends ActionController
      */
     public function buildConditionAction()
     {
-        $arguments = GeneralUtility::_GP('tx_powermail_pi1');
-        unset($arguments['__referrer']);
-        unset($arguments['__trustedProperties']);
         /** @var Form $form */
-        $form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
+        $form = $this->formRepository->findByIdentifier($this->powermailArguments['mail']['form']);
+        $this->setTextFields($form);
+
+        /** @var ConditionContainer $conditionContainer */
+        $conditionContainer = $this->containerRepository->findOneByForm($form);
+        if ($conditionContainer !== null) {
+            $arguments = $conditionContainer->applyConditions($form, $this->powermailArguments);
+            SessionUtility::setSession($arguments);
+            ArrayUtility::unsetByKeys($arguments, ['backup', 'field']);
+            return json_encode($arguments);
+        }
+        return null;
+    }
+
+    /**
+     * @param Form $form
+     * @return void
+     */
+    protected function setTextFields(Form $form)
+    {
         if ($form !== null) {
             /** @var Page $page */
             foreach ($form->getPages() as $page) {
                 /** @var Field $field */
                 foreach ($page->getFields() as $field) {
-                    foreach ($arguments['field'] as $fieldName => $fieldValue) {
+                    foreach ($this->powermailArguments['field'] as $fieldName => $fieldValue) {
                         if ($field->getMarker() === $fieldName) {
                             $field->setText($fieldValue);
                         }
@@ -80,27 +114,5 @@ class ConditionController extends ActionController
                 }
             }
         }
-
-        /** @var ConditionContainer $conditionContainer */
-        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
-        if ($conditionContainer !== null) {
-            $arguments = $conditionContainer->applyConditions($form, $arguments);
-
-            /** @var TypoScriptFrontendController $feUser */
-            $feUser = GeneralUtility::makeInstance(
-                'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-                $GLOBALS['TYPO3_CONF_VARS'],
-                0,
-                0
-            );
-            $feUser->initFEuser();
-            $feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
-
-            unset($arguments['backup']);
-            unset($arguments['field']);
-
-            return json_encode($arguments);
-        }
-        return null;
     }
 }
