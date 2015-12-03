@@ -34,19 +34,21 @@ use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
  *
  * @package In2code\In2publish\Utility
  */
-class ArrayUtility extends ArrayUtilityExtbase {
+class ArrayUtility extends ArrayUtilityExtbase
+{
 
-	/**
-	 * Get quoted list from array
-	 *
-	 * @param array $array
-	 * @return array
-	 */
-	public static function getQuotedList(array $array) {
-		$list = '';
-		foreach ($array as $value) {
-			$list .= '"' . $value . '",';
-		}
-		return trim($list, ',');
-	}
+    /**
+     * Get quoted list from array
+     *
+     * @param array $array
+     * @return array
+     */
+    public static function getQuotedList(array $array)
+    {
+        $list = '';
+        foreach ($array as $value) {
+            $list .= '"' . $value . '",';
+        }
+        return trim($list, ',');
+    }
 }

@@ -37,18 +37,20 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  * @license http://www.gnu.org/licenses/lgpl.html
  *            GNU Lesser General Public License, version 3 or later
  */
-class ConditionContainerRepository extends Repository {
+class ConditionContainerRepository extends Repository
+{
 
-	/**
-	 * General settings
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		/** @var Typo3QuerySettings $querySettings */
-		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-		$querySettings->setRespectStoragePage(FALSE);
-		$querySettings->setRespectSysLanguage(FALSE);
-		$this->setDefaultQuerySettings($querySettings);
-	}
+    /**
+     * General settings
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        /** @var Typo3QuerySettings $querySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings->setRespectStoragePage(false);
+        $querySettings->setRespectSysLanguage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

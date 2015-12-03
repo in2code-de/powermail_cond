@@ -35,65 +35,67 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  * @package powermail_cond
  * @license http://www.gnu.org/licenses/lgpl.html
- * 			GNU Lesser General Public License, version 3 or later
+ *            GNU Lesser General Public License, version 3 or later
  */
-class ConditionContainer extends AbstractEntity {
+class ConditionContainer extends AbstractEntity
+{
 
-	/**
-	 * @var int
-	 */
-	protected $loopCount = 0;
+    /**
+     * @var int
+     */
+    protected $loopCount = 0;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\PowermailCond\Domain\Model\Condition>
-	 */
-	protected $conditions = NULL;
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\PowermailCond\Domain\Model\Condition>
+     */
+    protected $conditions = null;
 
-	/**
-	 * @var bool
-	 */
-	protected $somethingChanged = TRUE;
+    /**
+     * @var bool
+     */
+    protected $somethingChanged = true;
 
-	/**
-	 * @param Form $form
-	 * @param array $arguments
-	 * @return Form
-	 */
-	public function applyConditions(Form $form, array $arguments) {
+    /**
+     * @param Form $form
+     * @param array $arguments
+     * @return Form
+     */
+    public function applyConditions(Form $form, array $arguments)
+    {
 
-		// run this loop if any condition changed something
-		// but stop after 100 rounds to prevent infinite loops (built by editors)
-		while ($this->somethingChanged && $this->loopCount < 100) {
+        // run this loop if any condition changed something
+        // but stop after 100 rounds to prevent infinite loops (built by editors)
+        while ($this->somethingChanged && $this->loopCount < 100) {
 
-			$this->somethingChanged = FALSE;
-			$this->loopCount++;
+            $this->somethingChanged = false;
+            $this->loopCount++;
 
-			// go through each condition
-			foreach ($this->conditions as $condition) {
+            // go through each condition
+            foreach ($this->conditions as $condition) {
 
-				// if the rules match on the form
-				if ($condition->applies($form)) {
+                // if the rules match on the form
+                if ($condition->applies($form)) {
 
-					// then apply the changes the condition would make
-					$newArguments = $condition->apply($form, $arguments);
-				} else {
+                    // then apply the changes the condition would make
+                    $newArguments = $condition->apply($form, $arguments);
+                } else {
 
-					// else "revert" the changes (un-hides previously hidden fields and vice versa)
-					$newArguments = $condition->negate($form, $arguments);
-				}
+                    // else "revert" the changes (un-hides previously hidden fields and vice versa)
+                    $newArguments = $condition->negate($form, $arguments);
+                }
 
-				// If there were changes in the arguments (e.g. a field is now hidden)
-				if ($newArguments !== $arguments) {
-					$this->somethingChanged = TRUE;
-				}
+                // If there were changes in the arguments (e.g. a field is now hidden)
+                if ($newArguments !== $arguments) {
+                    $this->somethingChanged = true;
+                }
 
-				// set the arguments for the next iteration
-				$arguments = $newArguments;
-			}
-		}
+                // set the arguments for the next iteration
+                $arguments = $newArguments;
+            }
+        }
 
-		// return the arguments with instructions for the JS in the frontend
-		$arguments['loops'] = $this->loopCount;
-		return $arguments;
-	}
+        // return the arguments with instructions for the JS in the frontend
+        $arguments['loops'] = $this->loopCount;
+        return $arguments;
+    }
 }

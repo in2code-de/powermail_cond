@@ -38,67 +38,69 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @package powermail_cond
  * @license http://www.gnu.org/licenses/lgpl.html
- * 			GNU Lesser General Public License, version 3 or later
+ *            GNU Lesser General Public License, version 3 or later
  */
-class ConditionController extends ActionController {
+class ConditionController extends ActionController
+{
 
-	/**
-	 * @var \In2code\Powermail\Domain\Repository\FormRepository
-	 * @inject
-	 */
-	protected $formRepository;
+    /**
+     * @var \In2code\Powermail\Domain\Repository\FormRepository
+     * @inject
+     */
+    protected $formRepository;
 
-	/**
-	 * @var \In2code\PowermailCond\Domain\Repository\ConditionContainerRepository
-	 * @inject
-	 */
-	protected $conditionContainerRepository;
+    /**
+     * @var \In2code\PowermailCond\Domain\Repository\ConditionContainerRepository
+     * @inject
+     */
+    protected $conditionContainerRepository;
 
-	/**
-	 * Build Condition for AJAX call
-	 *
-	 * @return string
-	 */
-	public function buildConditionAction() {
-		$arguments = GeneralUtility::_GP('tx_powermail_pi1');
-		unset($arguments['__referrer']);
-		unset($arguments['__trustedProperties']);
-		/** @var Form $form */
-		$form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
-		if ($form !== NULL) {
-			/** @var Page $page */
-			foreach ($form->getPages() as $page) {
-				/** @var Field $field */
-				foreach ($page->getFields() as $field) {
-					foreach ($arguments['field'] as $fieldName => $fieldValue) {
-						if ($field->getMarker() === $fieldName) {
-							$field->setText($fieldValue);
-						}
-					}
-				}
-			}
-		}
+    /**
+     * Build Condition for AJAX call
+     *
+     * @return string
+     */
+    public function buildConditionAction()
+    {
+        $arguments = GeneralUtility::_GP('tx_powermail_pi1');
+        unset($arguments['__referrer']);
+        unset($arguments['__trustedProperties']);
+        /** @var Form $form */
+        $form = $this->formRepository->findByIdentifier($arguments['mail']['form']);
+        if ($form !== null) {
+            /** @var Page $page */
+            foreach ($form->getPages() as $page) {
+                /** @var Field $field */
+                foreach ($page->getFields() as $field) {
+                    foreach ($arguments['field'] as $fieldName => $fieldValue) {
+                        if ($field->getMarker() === $fieldName) {
+                            $field->setText($fieldValue);
+                        }
+                    }
+                }
+            }
+        }
 
-		/** @var ConditionContainer $conditionContainer */
-		$conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
-		if ($conditionContainer !== NULL) {
-			$arguments = $conditionContainer->applyConditions($form, $arguments);
+        /** @var ConditionContainer $conditionContainer */
+        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
+        if ($conditionContainer !== null) {
+            $arguments = $conditionContainer->applyConditions($form, $arguments);
 
-			/** @var TypoScriptFrontendController $feUser */
-			$feUser = GeneralUtility::makeInstance(
-				'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-				$GLOBALS['TYPO3_CONF_VARS'],
-				0,
-				0
-			);
-			$feUser->initFEuser();
-			$feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
+            /** @var TypoScriptFrontendController $feUser */
+            $feUser = GeneralUtility::makeInstance(
+                'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
+                $GLOBALS['TYPO3_CONF_VARS'],
+                0,
+                0
+            );
+            $feUser->initFEuser();
+            $feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
 
-			unset($arguments['backup']);
-			unset($arguments['field']);
+            unset($arguments['backup']);
+            unset($arguments['field']);
 
-			return json_encode($arguments);
-		}
-		return NULL;
-	}
+            return json_encode($arguments);
+        }
+        return null;
+    }
 }

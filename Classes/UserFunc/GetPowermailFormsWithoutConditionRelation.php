@@ -34,64 +34,68 @@ use TYPO3\CMS\Backend\Form\FormEngine;
  *
  * @package powermail_cond
  * @license http://www.gnu.org/licenses/lgpl.html
- * 			GNU Lesser General Public License, version 3 or later
+ *            GNU Lesser General Public License, version 3 or later
  */
-class GetPowermailFormsWithoutConditionRelation {
+class GetPowermailFormsWithoutConditionRelation
+{
 
-	/**
-	 * @var \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	protected $databaseConnection = NULL;
+    /**
+     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    protected $databaseConnection = null;
 
-	/**
-	 * @var array
-	 */
-	protected $params = array();
+    /**
+     * @var array
+     */
+    protected $params = [];
 
-	/**
-	 * @var int
-	 */
-	protected $currentFormUid = 0;
+    /**
+     * @var int
+     */
+    protected $currentFormUid = 0;
 
-	/**
-	 * remove forms that are already related to a condition container
-	 *
-	 * @param array $params
-	 * @return void
-	 */
-	public function filterForms(array &$params) {
-		$this->initialize($params);
-		foreach ((array) $this->params['items'] as $key => $form) {
-			if ($this->hasFormRelatedConditionContainers((int) $form[1]) && (int) $form[1] !== $this->currentFormUid) {
-				unset($this->params['items'][$key]);
-			}
-		}
-	}
+    /**
+     * remove forms that are already related to a condition container
+     *
+     * @param array $params
+     * @return void
+     */
+    public function filterForms(array &$params)
+    {
+        $this->initialize($params);
+        foreach ((array) $this->params['items'] as $key => $form) {
+            if ($this->hasFormRelatedConditionContainers((int) $form[1]) && (int) $form[1] !== $this->currentFormUid) {
+                unset($this->params['items'][$key]);
+            }
+        }
+    }
 
-	/**
-	 * @param int $formUid
-	 * @return bool
-	 */
-	protected function hasFormRelatedConditionContainers($formUid) {
-		$select = 'cc.uid';
-		$from = 'tx_powermailcond_domain_model_conditioncontainer cc';
-		$where = 'cc.form = ' . (int) $formUid . ' and cc.deleted = 0';
-		$res = $this->databaseConnection->exec_SELECTquery($select, $from, $where);
-		if ($res) {
-			while (($row = $this->databaseConnection->sql_fetch_assoc($res))) {
-				return TRUE;
-			}
-		}
-		return FALSE;
-	}
+    /**
+     * @param int $formUid
+     * @return bool
+     */
+    protected function hasFormRelatedConditionContainers($formUid)
+    {
+        $select = 'cc.uid';
+        $from = 'tx_powermailcond_domain_model_conditioncontainer cc';
+        $where = 'cc.form = ' . (int) $formUid . ' and cc.deleted = 0';
+        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where);
+        if ($res) {
+            while ($this->databaseConnection->sql_fetch_assoc($res)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * @param array $params
-	 * @return void
-	 */
-	protected function initialize(array &$params) {
-		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
-		$this->params = &$params;
-		$this->currentFormUid = (int) $this->params['row']['form'];
-	}
+    /**
+     * @param array $params
+     * @return void
+     */
+    protected function initialize(array &$params)
+    {
+        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
+        $this->params = &$params;
+        $this->currentFormUid = (int) $this->params['row']['form'];
+    }
 }
