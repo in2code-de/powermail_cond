@@ -54,13 +54,6 @@ class ConditionContainer extends AbstractEntity {
 	 */
 	protected $somethingChanged = TRUE;
 
-//	/**
-//	 * @param QueryResult $conditions
-//	 */
-//	public function __construct(QueryResult $conditions) {
-//		$this->conditions = $conditions;
-//	}
-
 	/**
 	 * @param Form $form
 	 * @param array $arguments

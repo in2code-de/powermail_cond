@@ -81,21 +81,24 @@ class ConditionController extends ActionController {
 
 		/** @var ConditionContainer $conditionContainer */
 		$conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
-		$arguments = $conditionContainer->applyConditions($form, $arguments);
+		if ($conditionContainer !== NULL) {
+			$arguments = $conditionContainer->applyConditions($form, $arguments);
 
-		/** @var TypoScriptFrontendController $feUser */
-		$feUser = GeneralUtility::makeInstance(
-			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-			$GLOBALS['TYPO3_CONF_VARS'],
-			0,
-			0
-		);
-		$feUser->initFEuser();
-		$feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
+			/** @var TypoScriptFrontendController $feUser */
+			$feUser = GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
+				$GLOBALS['TYPO3_CONF_VARS'],
+				0,
+				0
+			);
+			$feUser->initFEuser();
+			$feUser->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
 
-		unset($arguments['backup']);
-		unset($arguments['field']);
+			unset($arguments['backup']);
+			unset($arguments['field']);
 
-		return json_encode($arguments);
+			return json_encode($arguments);
+		}
+		return NULL;
 	}
 }
