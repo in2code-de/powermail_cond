@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.1.1
+   :Date:
+      2016-01-25
+   :Changes:
+
+      * Bugfix _`#72486`: https://forge.typo3.org/issues/72486 Required fields are still required after applied rule
+
+ - :Version:
       3.1.0
    :Date:
       2015-12-03
