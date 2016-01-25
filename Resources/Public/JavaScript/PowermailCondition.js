@@ -213,7 +213,7 @@ function PowermailCondition($, $formElement) {
 	 * @returns {jQuery}
 	 */
 	this.getFieldByMarker = function(fieldMarker, $form) {
-		return $form.find('[name^="tx_powermail_pi1[field][' + fieldMarker + ']"]');
+		return $form.find('[name^="tx_powermail_pi1[field][' + fieldMarker + ']"]').not('[type="hidden"]');
 	};
 
 	/**
