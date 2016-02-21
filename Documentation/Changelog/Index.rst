@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.1.2
+   :Date:
+      2016-02-21
+   :Changes:
+
+      * Bugfix _`#73108`: https://forge.typo3.org/issues/73108 Improve PowermailCond.js to work with jQuery.noConflict()
+
+ - :Version:
       3.1.1
    :Date:
       2016-01-25
