@@ -30,7 +30,6 @@ namespace In2code\PowermailCond\UserFunc;
 use In2code\PowermailCond\Utility\ArrayUtility;
 use TYPO3\CMS\Backend\Form\FormEngine;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * List powermail fields in Backend for powermail_cond rules
@@ -207,7 +206,7 @@ class GetPowermailFields
     {
         $select = 'cc.form';
         $from = 'tx_powermailcond_domain_model_conditioncontainer cc';
-        $where = 'cc.uid = ' . (int) $conditionContainerUid . ' AND cc.hidden = 0 AND cc.deleted = 0';
+        $where = 'cc.uid = ' . (int) $conditionContainerUid . ' AND cc.deleted = 0';
         $groupBy = '';
         $orderBy = '';
         $limit = 1;
