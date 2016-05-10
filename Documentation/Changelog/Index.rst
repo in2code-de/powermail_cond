@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.1.3
+   :Date:
+      2016-05-10
+   :Changes:
+
+      * Bugfix _`#76032`: https://forge.typo3.org/issues/76032 Bugfix for "Elementbrowser replaces IRRE" setting in powermail
+
+ - :Version:
       3.1.2
    :Date:
       2016-02-21

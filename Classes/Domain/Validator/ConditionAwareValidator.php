@@ -28,7 +28,6 @@ namespace In2code\PowermailCond\Domain\Validator;
  ***************************************************************/
 
 use In2code\Powermail\Domain\Model\Field;
-use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Validator\InputValidator;
 use In2code\Powermail\Utility\ConfigurationUtility;
@@ -50,43 +49,45 @@ class ConditionAwareValidator extends InputValidator
      */
     protected function isValidField(Field $field, $value)
     {
-
-        /** @var FrontendUserAuthentication $feUser */
-        $feUser = $GLOBALS['TSFE']->fe_user;
-        $arguments = $feUser->getSessionData('tx_powermail_cond');
-        $fieldMarker = $field->getMarker();
-
-
+        $arguments = $this->getArgumentsFromSession();
+        $parentPage = $field->getPages();
+        $form = $parentPage->getForms();
+        $formUid = $form->getUid();
+        $pageUid = $parentPage->getUid();
+        $marker = $field->getMarker();
+        
         if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive()) {
-            $pages = $field->getPages();
-            /** @var Form $form */
-            foreach ($pages->getForms() as $form) {
-                /** @var Page $page */
-                foreach ($form->getPages() as $page) {
-                    /** @var Field $field */
-                    foreach ($page->getFields() as $field) {
-                        if (
-                            !empty($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION])
-                        ) {
-                            if ($arguments[$form->getUid()][$page->getUid()][$fieldMarker][Condition::INDEX_ACTION] ===
-                                Condition::ACTION_HIDE_STRING) {
-                                return;
-                            }
+            /** @var Page $page */
+            foreach ($form->getPages() as $page) {
+                /** @var Field $field */
+                foreach ($page->getFields() as $field) {
+                    if (!empty($arguments[$formUid][$pageUid][$marker][Condition::INDEX_ACTION])) {
+                        if ($arguments[$formUid][$pageUid][$marker][Condition::INDEX_ACTION] ===
+                            Condition::ACTION_HIDE_STRING) {
+                            return;
                         }
                     }
                 }
             }
         } else {
-            $page = $field->getPages();
-            $form = $page->getForms()->getUid();
-            $page = $page->getUid();
-            if (!empty($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION])) {
-                if ($arguments[Condition::INDEX_TODO][$form][$page][$fieldMarker][Condition::INDEX_ACTION] ===
+            if (!empty($arguments[Condition::INDEX_TODO][$formUid][$pageUid][$marker][Condition::INDEX_ACTION])) {
+                if ($arguments[Condition::INDEX_TODO][$formUid][$pageUid][$marker][Condition::INDEX_ACTION] ===
                     Condition::ACTION_HIDE_STRING) {
                     return;
                 }
             }
         }
         parent::isValidField($field, $value);
+    }
+
+    /**
+     * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    protected function getArgumentsFromSession()
+    {
+        /** @var FrontendUserAuthentication $feUser */
+        $feUser = $GLOBALS['TSFE']->fe_user;
+        return $feUser->getSessionData('tx_powermail_cond');
     }
 }
