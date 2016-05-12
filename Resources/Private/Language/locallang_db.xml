@@ -11,6 +11,8 @@
 			<label index="tx_powermailcond_conditioncontainer.form">Form</label>
 			<label index="tx_powermailcond_conditioncontainer.form.pleaseChoose">Please choose...</label>
 			<label index="tx_powermailcond_conditioncontainer.conditions">Conditions</label>
+			<label index="tx_powermailcond_conditioncontainer.note.title">Warning</label>
+			<label index="tx_powermailcond_conditioncontainer.note.description">The linked form contains more then 30 fields. That could cause performance issues in the frontend.</label>
 			<label index="tx_powermailcond_conditions">Condition</label>
 			<label index="tx_powermailcond_conditions.title">Title</label>
 			<label index="tx_powermailcond_conditions.targetField">Which field is affected (target field)?</label>
@@ -54,6 +56,8 @@
 			<label index="tx_powermailcond_conditioncontainer.form">Formular</label>
 			<label index="tx_powermailcond_conditioncontainer.form.pleaseChoose">Bitte wählen...</label>
 			<label index="tx_powermailcond_conditioncontainer.conditions">Bedingungen</label>
+			<label index="tx_powermailcond_conditioncontainer.note.title">Warnung</label>
+			<label index="tx_powermailcond_conditioncontainer.note.description">Das verlinkte Formular beinhalted mehr als 30 Felder. Hierbei kann es zu Performance-Problemen im Frontend kommen.</label>
 			<label index="tx_powermailcond_conditions">Bedingung</label>
 			<label index="tx_powermailcond_conditions.title">Bezeichnung</label>
 			<label index="tx_powermailcond_conditions.targetField">Welches Feld ist betroffen (Zielfeld)?</label>
