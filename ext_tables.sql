@@ -17,6 +17,7 @@ CREATE TABLE tx_powermailcond_domain_model_conditioncontainer (
 	endtime int(11) DEFAULT '0' NOT NULL,
 
 	conditions int(11) DEFAULT '0' NOT NULL,
+	note tinyint(4) DEFAULT '0' NOT NULL,
 
 	title tinytext NOT NULL,
 	form int(11) DEFAULT '0' NOT NULL,

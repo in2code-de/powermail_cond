@@ -25,7 +25,7 @@ return [
             'endtime,title,form,conditions',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, form, conditions'],
+        '1' => ['showitem' => 'title, form, conditions, note'],
     ],
     'palettes' => [
         '1' => [],
@@ -111,6 +111,13 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+            ],
+        ],
+        'note' => [
+            'exclude' => 1,
+            'config' => [
+                'type' => 'user',
+                'userFunc' => 'In2code\PowermailCond\Tca\Note->showNote'
             ],
         ],
         'title' => [
