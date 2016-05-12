@@ -16,6 +16,15 @@ Changelog
       Release Description
 
  - :Version:
+      3.2.0
+   :Date:
+      2016-05-12
+   :Changes:
+
+      * Task show a note if a form is in use that has more then 30 fields
+      * Bugfix _`#76143`: https://forge.typo3.org/issues/76143 Support for Powermail > 3.0
+
+ - :Version:
       3.1.3
    :Date:
       2016-05-10
