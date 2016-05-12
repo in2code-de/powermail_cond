@@ -143,11 +143,11 @@ return [
                 'size' => 1,
                 'minitems' => 1,
                 'requestUpdate' => 1,
-                'foreign_table' => 'tx_powermail_domain_model_forms',
-                'foreign_table_where' => 'AND tx_powermail_domain_model_forms.deleted = 0 ' .
-                    'AND tx_powermail_domain_model_forms.hidden = 0 ' .
-                    'AND tx_powermail_domain_model_forms.sys_language_uid = 0 ' .
-                    'order by tx_powermail_domain_model_forms.title'
+                'foreign_table' => \In2code\Powermail\Domain\Model\Form::TABLE_NAME,
+                'foreign_table_where' => 'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.deleted = 0 ' .
+                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.hidden = 0 ' .
+                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.sys_language_uid = 0 ' .
+                    'order by ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.title'
             ]
         ],
         'conditions' => [

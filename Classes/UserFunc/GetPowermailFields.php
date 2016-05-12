@@ -27,6 +27,9 @@ namespace In2code\PowermailCond\UserFunc;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Utility\ArrayUtility;
 use TYPO3\CMS\Backend\Form\FormEngine;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -131,9 +134,9 @@ class GetPowermailFields
     {
         $fields = [];
         $select = 'f.uid, f.title, f.marker';
-        $from = 'tx_powermail_domain_model_fields f ' .
-            'left join tx_powermail_domain_model_pages p on f.pages = p.uid ' .
-            'left join tx_powermail_domain_model_forms fo on p.forms = fo.uid';
+        $from = Field::TABLE_NAME . ' f ' .
+            'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
+            'left join ' . Form::TABLE_NAME . ' fo on p.forms = fo.uid';
         $where = 'f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
         if ($this->getFormUid() > 0) {
             $where .= ' and fo.uid = ' . $this->getFormUid();
@@ -159,7 +162,7 @@ class GetPowermailFields
     {
         $fieldsets = [];
         $select = 'uid, title';
-        $from = 'tx_powermail_domain_model_pages';
+        $from = Page::TABLE_NAME;
         $where = 'forms = ' . $this->getFormUid() . ' AND hidden = 0 AND deleted = 0';
         $groupBy = '';
         $orderBy = 'sorting';

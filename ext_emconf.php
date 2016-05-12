@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Powermail Conditions',
-    'description' => 'Add conditions (via AJAX) to powermail (2.9 or newer) forms for fields and pages',
+    'description' => 'Add conditions (via AJAX) to powermail forms for fields and pages',
     'category' => 'plugin',
     'shy' => 0,
     'version' => '3.1.3',
@@ -34,7 +34,7 @@ $EM_CONF[$_EXTKEY] = [
     'CGLcompliance_note' => '',
     'constraints' => [
         'depends' => [
-            'powermail' => '2.9.0-2.99.99',
+            'powermail' => '2.24.0-3.99.99',
             'extbase' => '6.2.0-7.99.99',
             'fluid' => '6.2.0-7.99.99',
             'typo3' => '6.2.0-7.99.99',
