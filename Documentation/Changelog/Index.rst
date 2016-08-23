@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.2.1
+   :Date:
+      2016-08-23
+   :Changes:
+
+      * Bugfix _`#77266`: https://forge.typo3.org/issues/77266 Extending powermail could break powermail_cond
+
+ - :Version:
       3.2.0
    :Date:
       2016-05-12
