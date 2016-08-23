@@ -211,7 +211,7 @@ class Rule extends AbstractEntity
         foreach ($form->getPages() as $page) {
             /** @var Field $field */
             foreach ($page->getFields() as $field) {
-                if ($field === $this->startField) {
+                if ($field !== null && $this->startField !== null && $field->getUid() === $this->startField->getUid()) {
                     $comparison = new Comparison($this->ops);
                     if ($comparison->evaluate($field, $this->condString, $equalField)) {
                         return true;
