@@ -65,12 +65,17 @@ class ConditionController extends ActionController
 
     /**
      * @return void
+     * @throws \Exception
      */
     public function initializeBuildConditionAction()
     {
-        $powermailArguments = (array) GeneralUtility::_GP('tx_powermail_pi1');
-        ArrayUtility::unsetByKeys($powermailArguments, ['__referrer', '__trustedProperties']);
-        $this->powermailArguments = $powermailArguments;
+        $powermailArguments = (array)GeneralUtility::_GP('tx_powermail_pi1');
+        if (!empty($powermailArguments)) {
+            ArrayUtility::unsetByKeys($powermailArguments, ['__referrer', '__trustedProperties']);
+            $this->powermailArguments = $powermailArguments;
+        } else {
+            throw new \Exception('No powermail parameters are given - e.g. &tx_powermail_pi1[mail][form]=123');
+        }
     }
 
     /**
