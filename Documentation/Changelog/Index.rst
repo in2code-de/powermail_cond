@@ -16,6 +16,15 @@ Changelog
       Release Description
 
  - :Version:
+      3.3.0
+   :Date:
+      2017-04-23
+   :Changes:
+
+      * Task Move extension to github
+      * Task Make extension fit for TYPO3 8.7 LTS
+
+ - :Version:
       3.2.1
    :Date:
       2016-08-23
