@@ -1,0 +1,30 @@
+{
+  "name": "in2code/powermail-cond",
+  "description": "Add conditions (via AJAX) to powermail forms for fields and pages",
+  "keywords": ["typo3", "form", "mailform", "spamprevention"],
+  "homepage": "https://github.com/einpraegsam/powermail_cond",
+  "authors": [
+    {
+      "name": "Alex Kellner",
+      "email": "alexander.kellner@in2code.de"
+    },
+    {
+      "name": "Oliver Eglseder",
+      "email": "oliver.eglseder@in2code.de"
+    }
+  ],
+  "type": "typo3-cms-extension",
+  "license": "GPL-3.0",
+  "require": {
+    "in2code/powermail": ">=3.0.0 <4.0.0"
+  },
+  "replace": {
+    "powermail-cond": "self.version",
+    "typo3-ter/powermail-cond": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "In2code\\PowermailCond\\": "Classes/"
+    }
+  }
+}
