@@ -16,6 +16,14 @@ Changelog
       Release Description
 
  - :Version:
+      3.3.1
+   :Date:
+      2017-04-25
+   :Changes:
+
+      * Fix package name in composer.json
+
+ - :Version:
       3.3.0
    :Date:
       2017-04-23

@@ -14,3 +14,8 @@ Q: What can I do if it does not work?
 * Deactivate all other JavaScript on the page for testing
 * Note: Never deactivate any field or fieldset in the backend – this will do powermail_cond
 * Note: Use jQuery 1.11, 2.x or newer
+
+Q: What about multistep in powermail?
+-------------------------------------
+
+Powermail multistep does not work together with powermail_cond at the moment.

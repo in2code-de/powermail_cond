@@ -1,5 +1,5 @@
 {
-  "name": "in2code/powermail-cond",
+  "name": "in2code/powermail_cond",
   "description": "Add conditions (via AJAX) to powermail forms for fields and pages",
   "keywords": ["typo3", "form", "mailform", "spamprevention"],
   "homepage": "https://github.com/einpraegsam/powermail_cond",
@@ -19,7 +19,7 @@
     "in2code/powermail": ">=3.0.0 <4.0.0"
   },
   "replace": {
-    "powermail-cond": "self.version",
+    "powermail_cond": "self.version",
     "typo3-ter/powermail-cond": "self.version"
   },
   "autoload": {
