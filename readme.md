@@ -7,10 +7,10 @@ You can
 
 ## Quick installation
 
-Please look at the manual for a big documentation at https://docs.typo3.org/typo3cms/extensions/powermail_cond/
+Please look at the manual for an advanded documentation at https://docs.typo3.org/typo3cms/extensions/powermail_cond/
 
 Quick guide:
-- Just install this extension - e.g. `composer require in2code/powermail-cond` or download it or install it with the classic way (Extension Manager)
+- Just install this extension - e.g. `composer require in2code/powermail_cond` or download it or install it with the classic way (Extension Manager)
 - Clear caches
 - Add a powermail form to any page
 - Add a new record from type "condition container" to a sysfolder and configure it
@@ -21,6 +21,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 3.3.1      | 2017-04-25 | Bugfix     | Fix package name in composer.json                                            |
 | 3.3.0      | 2017-04-23 | Task       | Move ext to github, make it fit for TYPO3 8.7 LTS                            |
 
 ## More to come soon
