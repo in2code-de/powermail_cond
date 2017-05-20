@@ -3,6 +3,7 @@ namespace In2code\PowermailCond\Utility;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -31,11 +32,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  ***************************************************************/
 
 /**
- * ConfigurationUtility class
- *
- * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html
- *          GNU Lesser General Public License, version 3 or later
+ * Class ConfigurationUtility
  */
 class ConfigurationUtility
 {
@@ -54,5 +51,15 @@ class ConfigurationUtility
         }
         $iconPath = $prefix . 'Resources/Public/Icons/' . $fileName;
         return $iconPath;
+    }
+
+    /**
+     * Check if TYPO3 smaller then 8.7 is running
+     *
+     * @return bool
+     */
+    public static function isOlderThan8Lts()
+    {
+        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8007000;
     }
 }

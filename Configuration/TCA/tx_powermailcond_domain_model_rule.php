@@ -1,7 +1,7 @@
 <?php
 use In2code\PowermailCond\Utility\ConfigurationUtility;
 
-return [
+$ruleConfiguration = [
     'ctrl' => [
         'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules',
         'label' => 'title',
@@ -13,7 +13,6 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'requestUpdate' => 'ops',
         'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_rules.gif')
     ],
     'interface' => [
@@ -69,6 +68,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.operator',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -191,7 +191,7 @@ return [
             'displayCond' => 'FIELD:ops:IN:8,9'
         ],
         'conditions' => [
-            'l10n_mode' => 'noCopy',
+            'l10n_mode' => 'exclude',
             'exclude' => 1,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.condition',
@@ -205,9 +205,16 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_powermailcond_domain_model_condition',
-                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID###
-					AND tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND
+					tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
             ],
         ],
     ],
 ];
+
+// Todo: Can be removed with 7.6 support drop
+if (ConfigurationUtility::isOlderThan8Lts()) {
+    $ruleConfiguration['ctrl']['requestUpdate'] = 'ops';
+}
+
+return $ruleConfiguration;
