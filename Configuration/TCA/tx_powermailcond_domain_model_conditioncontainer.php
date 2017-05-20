@@ -1,7 +1,7 @@
 <?php
 use In2code\PowermailCond\Utility\ConfigurationUtility;
 
-return [
+$ccConfiguration = [
     'ctrl' => [
         'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
             'tx_powermailcond_conditioncontainer',
@@ -17,7 +17,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'requestUpdate' => 'form',
         'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_conditions.gif')
     ],
     'interface' => [
@@ -83,13 +82,13 @@ return [
         ],
         'starttime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
             'config' => [
                 'type' => 'input',
-                'size' => 13,
-                'max' => 20,
+                'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
+                'size' => 13,
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -99,13 +98,13 @@ return [
         ],
         'endtime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
             'config' => [
                 'type' => 'input',
-                'size' => 13,
-                'max' => 20,
+                'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
+                'size' => 13,
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
@@ -133,6 +132,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditioncontainer.form',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -180,3 +180,10 @@ return [
         ],
     ],
 ];
+
+// Todo: Can be removed with 7.6 support drop
+if (ConfigurationUtility::isOlderThan8Lts()) {
+    $ccConfiguration['ctrl']['requestUpdate'] = 'form';
+}
+
+return $ccConfiguration;

@@ -21,6 +21,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 3.3.2      | 2017-05-20 | Bugfix     | TCA update for TYPO3 8.7                                                     |
 | 3.3.1      | 2017-04-25 | Bugfix     | Fix package name in composer.json                                            |
 | 3.3.0      | 2017-04-23 | Task       | Move ext to github, make it fit for TYPO3 8.7 LTS                            |
 
