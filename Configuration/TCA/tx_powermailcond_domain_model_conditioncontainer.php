@@ -48,6 +48,7 @@ $ccConfiguration = [
                         0
                     ]
                 ],
+                'default' => 0
             ],
         ],
         'l18n_parent' => [
