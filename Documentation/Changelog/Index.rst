@@ -4,6 +4,9 @@
 Changelog
 =========
 
+See readme.md or https://github.com/einpraegsam/powermail_cond for newer changes then 3.3.0
+
+Older changes:
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -14,14 +17,6 @@ Changelog
       Release Date
    :Changes:
       Release Description
-
- - :Version:
-      3.3.1
-   :Date:
-      2017-04-25
-   :Changes:
-
-      * Fix package name in composer.json
 
  - :Version:
       3.3.0
