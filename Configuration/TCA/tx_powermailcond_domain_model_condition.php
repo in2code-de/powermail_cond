@@ -64,9 +64,9 @@ return [
                         0
                     ],
                 ],
-                'foreign_table' => 'tx_powermailcond_conditions',
-                'foreign_table_where' => 'AND tx_powermailcond_conditions.pid=###CURRENT_PID### AND ' .
-                    'tx_powermailcond_conditions.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_powermailcond_domain_model_condition',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND ' .
+                    'tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,0)',
             ]
         ],
         'l18n_diffsource' => [
