@@ -67,7 +67,8 @@ class GetPowermailFields
         'textarea',
         'select',
         'radio',
-        'check'
+        'check',
+        'date'
     ];
 
     /**
