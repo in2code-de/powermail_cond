@@ -76,6 +76,8 @@
 						}
 					}
 				}
+				
+				reInitializeParsleyValidation();
 			}
 		};
 
@@ -116,7 +118,6 @@
 				$field.removeAttr('data-parsley-required');
 				$field.data('powermailcond-required', 'required');
 			}
-			reInitializeParsleyValidation();
 		};
 
 		/**
@@ -134,7 +135,6 @@
 				}
 			}
 			$field.removeData('powermailcond-required');
-			reInitializeParsleyValidation();
 		};
 
 		/**
