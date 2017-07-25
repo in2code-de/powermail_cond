@@ -26,6 +26,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 3.3.4      | 2017-07-25 | Bugfix     | Reduce unneeded calls in frontend                                            |
 | 3.3.3      | 2017-06-12 | Bugfix     | Small change for MySQL strict mode                                           |
 | 3.3.2      | 2017-05-20 | Bugfix     | TCA update for TYPO3 8.7                                                     |
 | 3.3.1      | 2017-04-25 | Bugfix     | Fix package name in composer.json                                            |
