@@ -107,7 +107,7 @@ class GetPowermailFields
         $from = Field::TABLE_NAME . ' f ' .
             'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
             'left join ' . Form::TABLE_NAME . ' fo on p.forms = fo.uid';
-        $where = 'f.hidden = 0 and f.deleted = 0';
+        $where = 'f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
         if ($this->getFormUid() > 0) {
             $where .= ' and fo.uid = ' . $this->getFormUid();
         }
@@ -179,7 +179,7 @@ class GetPowermailFields
     {
         $select = 'cc.form';
         $from = 'tx_powermailcond_domain_model_conditioncontainer cc';
-        $where = 'cc.uid = ' . (int)$conditionContainerUid . ' AND cc.deleted = 0';
+        $where = 'cc.uid = ' . (int) $conditionContainerUid . ' AND cc.deleted = 0';
         $groupBy = '';
         $orderBy = '';
         $limit = 1;
@@ -211,7 +211,7 @@ class GetPowermailFields
     {
         $this->databaseConnection = $GLOBALS['TYPO3_DB'];
         $this->params = &$params;
-        $this->setFormUid();
+        $this->setFormUid()->setDefaultFieldTypes();
     }
 
     /**
@@ -236,5 +236,34 @@ class GetPowermailFields
     public function getFormUid()
     {
         return $this->formUid;
+    }
+
+    /**
+     * @return GetPowermailFields
+     */
+    public function setDefaultFieldTypes()
+    {
+        if (!empty($this->params['config']['itemsProcFuncValue'])) {
+            $this->defaultFieldTypes =
+                GeneralUtility::trimExplode(',', $this->params['config']['itemsProcFuncValue'], true);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultFieldTypes()
+    {
+        return $this->defaultFieldTypes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultFieldTypesForQuery()
+    {
+        $fieldTypes = $this->getDefaultFieldTypes();
+        return ArrayUtility::getQuotedList($fieldTypes);
     }
 }
