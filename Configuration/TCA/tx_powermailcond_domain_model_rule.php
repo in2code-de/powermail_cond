@@ -57,8 +57,6 @@ $ruleConfiguration = [
                     ],
                 ],
                 'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
-                // allow only this types of fields in selector
-                'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
                 'maxitems' => 1,
                 'eval' => 'required'
@@ -183,8 +181,6 @@ $ruleConfiguration = [
                     ],
                 ],
                 'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
-                // allow only this types of fields in selector
-                'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
                 'maxitems' => 1
             ],
