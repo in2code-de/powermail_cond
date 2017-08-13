@@ -113,6 +113,7 @@ return [
                 ],
             ],
         ],
+
         'title' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
@@ -183,6 +184,9 @@ return [
                 ],
                 'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
                 'itemsProcFunc_addFieldsets' => true,
+                // allow only this types of fields in selector
+                'itemsProcFuncValue' => 'input,textarea,select,check,radio,submit,captcha,reset,text,content,html,' .
+                    'password,file,date,country,location,typoscript',
                 'size' => 1,
                 'maxitems' => 1,
                 'eval' => 'required'
