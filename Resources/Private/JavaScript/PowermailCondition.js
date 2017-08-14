@@ -68,10 +68,10 @@
 						// do actions with single fields
 						for (var fieldMarker in data.todo[formUid][pageUid]) {
 							if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'hide') {
-								hideField(getFieldByMarker(fieldMarker, $form));
+								hideField(fieldMarker, $form);
 							}
 							if (data.todo[formUid][pageUid][fieldMarker]['#action'] === 'un_hide') {
-								showField(getFieldByMarker(fieldMarker, $form));
+								showField(fieldMarker, $form);
 							}
 						}
 					}
@@ -140,24 +140,30 @@
 		/**
 		 * Show a powermail field (private)
 		 *
-		 * @param {jQuery} $field
+		 * @param {string} fieldMarker
+		 * @param {jQuery} $form
 		 * @returns {void}
 		 */
-		var showField = function($field) {
+		var showField = function(fieldMarker, $form) {
+			var $wrappingContainer = $form.find('.powermail_fieldwrap_' + fieldMarker);
+			$wrappingContainer.show();
+			var $field = getFieldByMarker(fieldMarker, $form);
 			$field.prop('disabled', false);
-			$field.closest('.powermail_fieldwrap').show();
 			rerequireField($field);
 		};
 
 		/**
 		 * Hide a powermail field (private)
 		 *
-		 * @param {jQuery} $field
+		 * @param {string} fieldMarker
+		 * @param {jQuery} $form
 		 * @returns {void}
 		 */
-		var hideField = function($field) {
+		var hideField = function(fieldMarker, $form) {
+			var $wrappingContainer = $form.find('.powermail_fieldwrap_' + fieldMarker);
+			$wrappingContainer.hide();
+			var $field = getFieldByMarker(fieldMarker, $form);
 			$field.prop('disabled', true);
-			$field.closest('.powermail_fieldwrap').hide();
 			derequireField($field);
 		};
 

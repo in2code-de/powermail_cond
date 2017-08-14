@@ -33,6 +33,7 @@ $ruleConfiguration = [
                 'default' => '0'
             ]
         ],
+
         'title' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
