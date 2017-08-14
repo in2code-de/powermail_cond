@@ -10,13 +10,13 @@ powermail_cond
 .. only:: html
 
 	:Copyright:
-		2015
+		2017
 
 	:Classification:
 		powermail_cond
 
 	:Version:
-		3.3
+		3.4
 
 	:Language:
 		en
