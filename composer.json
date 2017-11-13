@@ -16,7 +16,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-3.0",
   "require": {
-    "in2code/powermail": ">=3.0.0 <4.0.0"
+    "in2code/powermail": ">=3.0.0 <5.0.0"
   },
   "replace": {
     "powermail_cond": "self.version",
