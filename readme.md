@@ -26,7 +26,8 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
-| 3.4.0      | 2017-11-13 | Task       | Update dependencies for powermail 4.x                                        |
+| 3.5.1      | 2017-12-05 | Bugfix     | Prevent exceptions in backend for MySQL strict mode                          |
+| 3.5.0      | 2017-11-13 | Task       | Update dependencies for powermail 4.x                                        |
 | 3.4.0      | 2017-08-14 | Feature    | Allow all fieldtypes for target, add JS compression                          |
 | 3.3.4      | 2017-07-25 | Bugfix     | Reduce unneeded calls in frontend                                            |
 | 3.3.3      | 2017-06-12 | Bugfix     | Small change for MySQL strict mode                                           |
