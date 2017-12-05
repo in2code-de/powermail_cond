@@ -165,6 +165,7 @@ $ruleConfiguration = [
                 'type' => 'text',
                 'cols' => '30',
                 'rows' => '2',
+                'default' => ''
             ],
             // show only if ops value is greater than 1
             'displayCond' => 'FIELD:ops:IN:2,3,4,5,6,7'
