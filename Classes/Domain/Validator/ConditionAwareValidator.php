@@ -51,7 +51,13 @@ class ConditionAwareValidator extends InputValidator
     {
         $arguments = $this->getArgumentsFromSession();
         $parentPage = $field->getPages();
+        if ($parentPage === null) {
+            return;
+        }
         $form = $parentPage->getForms();
+        if ($form === null) {
+            return;
+        }
         $formUid = $form->getUid();
         $pageUid = $parentPage->getUid();
         $marker = $field->getMarker();
