@@ -154,7 +154,7 @@ $ccConfiguration = [
                 'foreign_table' => \In2code\Powermail\Domain\Model\Form::TABLE_NAME,
                 'foreign_table_where' => 'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.deleted = 0 ' .
                     'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.hidden = 0 ' .
-                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.sys_language_uid = 0 ' .
+                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.sys_language_uid IN (-1,0) ' .
                     'order by ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.title'
             ]
         ],
