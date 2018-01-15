@@ -26,6 +26,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 4.0.0      | 2018-01-15 | Task       | Update dependencies for powermail 5.0                                        |
 | 3.5.2      | 2017-12-05 | Bugfix     | Turn of ConditionAwareValitor on fields without page relations               |
 | 3.5.1      | 2017-12-13 | Bugfix     | Prevent exceptions in backend for MySQL strict mode                          |
 | 3.5.0      | 2017-11-13 | Task       | Update dependencies for powermail 4.x                                        |
