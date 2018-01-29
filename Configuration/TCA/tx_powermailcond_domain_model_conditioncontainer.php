@@ -182,9 +182,4 @@ $ccConfiguration = [
     ],
 ];
 
-// Todo: Can be removed with 7.6 support drop
-if (ConfigurationUtility::isOlderThan8Lts()) {
-    $ccConfiguration['ctrl']['requestUpdate'] = 'form';
-}
-
 return $ccConfiguration;

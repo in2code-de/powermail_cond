@@ -29,11 +29,6 @@ powermailCondition {
 		metaCharset = UTF-8
 		no_cache = 1
 		debug = 0
-
-		# Syntax for TYPO3 7.6
-		additionalHeaders = Content-type: application/json
-
-		# Syntax for TYPO3 8.7
 		additionalHeaders.10.header = Content-type: application/json
 	}
 

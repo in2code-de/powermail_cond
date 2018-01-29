@@ -214,9 +214,4 @@ $ruleConfiguration = [
     ],
 ];
 
-// Todo: Can be removed with 7.6 support drop
-if (ConfigurationUtility::isOlderThan8Lts()) {
-    $ruleConfiguration['ctrl']['requestUpdate'] = 'ops';
-}
-
 return $ruleConfiguration;
