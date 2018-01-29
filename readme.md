@@ -41,3 +41,7 @@ Quick guide:
 
 - FAQ
 - Use vanilla JS instead of jQuery
+
+## Conflicts
+
+- It's not possible to use powermail multistep forms with powermail_cond
