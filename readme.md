@@ -26,6 +26,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 5.0.0      | 2018-05-24 | Task       | Support powermail 6.0                                                        |
 | 4.1.1      | 2018-03-28 | Bugfix     | Prevent exceptions in log                                                    |
 | 4.1.0      | 2018-01-29 | Task       | Remove dependencies for TYPO3 7.6                                            |
 | 4.0.0      | 2018-01-15 | Task       | Update dependencies for powermail 5.0                                        |
