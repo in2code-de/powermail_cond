@@ -76,8 +76,6 @@
 						}
 					}
 				}
-				
-				reInitializeParsleyValidation();
 			}
 		};
 
@@ -273,18 +271,6 @@
 		 */
 		var isHtml5ValidationActivated = function() {
 			return $formElement.data('validate') === 'html5';
-		};
-
-		/**
-		 * Turn off and on parsley validation for a reinitialization (private)
-		 *
-		 * @returns {void}
-		 */
-		var reInitializeParsleyValidation = function() {
-			if (isParsleyValidationActivated()) {
-				$formElement.parsley().destroy();
-				$formElement.parsley();
-			}
 		};
 
 		/**
