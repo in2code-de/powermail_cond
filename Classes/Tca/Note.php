@@ -1,23 +1,19 @@
 <?php
 namespace In2code\PowermailCond\Tca;
 
+use Doctrine\DBAL\DBALException;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
+use In2code\Powermail\Utility\DatabaseUtility;
 
 /**
  * Show a note if a form is chosen that has too much fields
- * 
+ *
  * Class Note
- * @package In2code\PowermailCond\Tca
  */
 class Note
 {
-
-    /**
-     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
-     */
-    protected $databaseConnection = null;
 
     /**
      * @var \TYPO3\CMS\Lang\LanguageService
@@ -39,6 +35,7 @@ class Note
     /**
      * @param array $params
      * @return string
+     * @throws DBALException
      */
     public function showNote(array $params)
     {
@@ -54,6 +51,7 @@ class Note
     /**
      * @param array $params
      * @return bool
+     * @throws DBALException
      */
     protected function formHasTooMuchFields(array $params)
     {
@@ -62,23 +60,20 @@ class Note
     }
 
     /**
-     * @param int $formUid
+     * @param $formUid
      * @return int
+     * @throws DBALException
      */
     protected function getNumberOfFieldsToForm($formUid)
     {
-        $select = 'count(f.uid) sum';
-        $from = Field::TABLE_NAME . ' f ' .
+        $connection = DatabaseUtility::getConnectionForTable(Field::TABLE_NAME);
+        $query = 'select count(f.uid) sum';
+        $query .= ' from ' . Field::TABLE_NAME . ' f ' .
             'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
             'left join ' . Form::TABLE_NAME . ' form on p.forms = form.uid';
-        $where = 'form.uid = ' . (int) $formUid . ' and f.hidden = 0 and f.deleted = 0 ' .
+        $query .=  ' where form.uid = ' . (int) $formUid . ' and f.hidden = 0 and f.deleted = 0 ' .
             'and p.hidden = 0 and p.deleted = 0';
-        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where);
-        if ($res) {
-            $row = $this->databaseConnection->sql_fetch_assoc($res);
-            return (int)$row['sum'];
-        }
-        return 0;
+        return (int)$connection->executeQuery($query)->fetchColumn(0);
     }
 
     /**
@@ -112,6 +107,5 @@ class Note
     protected function initialize()
     {
         $this->languageService = $GLOBALS['LANG'];
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
     }
 }
