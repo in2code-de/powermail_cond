@@ -9,6 +9,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class ConditionContainer extends AbstractEntity
 {
+    const TABLE_NAME = 'tx_powermailcond_domain_model_conditioncontainer';
 
     /**
      * @var int
