@@ -47,7 +47,7 @@ class ConditionAwareValidator extends InputValidator
      * @param mixed $value
      * @return void
      */
-    protected function isValidField(Field $field, $value)
+    protected function isValidFieldInMandatoryValidation(Field $field, $value)
     {
         $arguments = $this->getArgumentsFromSession();
         $parentPage = $field->getPages();
@@ -83,7 +83,7 @@ class ConditionAwareValidator extends InputValidator
                 }
             }
         }
-        parent::isValidField($field, $value);
+        parent::isValidFieldInMandatoryValidation($field, $value);
     }
 
     /**
