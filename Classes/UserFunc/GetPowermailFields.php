@@ -1,11 +1,15 @@
 <?php
 namespace In2code\PowermailCond\UserFunc;
 
+use Doctrine\DBAL\DBALException;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
+use In2code\Powermail\Utility\DatabaseUtility;
+use In2code\PowermailCond\Domain\Model\Condition;
+use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use In2code\PowermailCond\Utility\ArrayUtility;
-use TYPO3\CMS\Backend\Form\FormEngine;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -13,11 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class GetPowermailFields
 {
-
-    /**
-     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
-     */
-    protected $databaseConnection = null;
 
     /**
      * @var array
@@ -41,10 +40,9 @@ class GetPowermailFields
     ];
 
     /**
-     * show all fields in the backend
-     *
      * @param array $params
      * @return void
+     * @throws DBALException
      */
     public function getFields(array &$params)
     {
@@ -54,9 +52,8 @@ class GetPowermailFields
     }
 
     /**
-     * Add fields to params array
-     *
      * @return void
+     * @throws DBALException
      */
     protected function addFieldsToParams()
     {
@@ -96,29 +93,25 @@ class GetPowermailFields
     }
 
     /**
-     * Get fields
-     *
      * @return array
+     * @throws DBALException
      */
     protected function getFieldsFromForm()
     {
-        $fields = [];
-        $select = 'f.uid, f.title, f.marker';
-        $from = Field::TABLE_NAME . ' f ' .
+        $query = 'select f.uid, f.title, f.marker';
+        $query .= ' from ' . Field::TABLE_NAME . ' f ' .
             'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
             'left join ' . Form::TABLE_NAME . ' fo on p.forms = fo.uid';
-        $where = 'f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
+        $query .= ' where f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
         if ($this->getFormUid() > 0) {
-            $where .= ' and fo.uid = ' . $this->getFormUid();
+            $query .= ' and fo.uid = ' . $this->getFormUid();
         }
-        $groupBy = '';
-        $orderBy = 'f.sorting';
-        $limit = 10000;
-        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-        if ($res) {
-            while (($row = $this->databaseConnection->sql_fetch_assoc($res))) {
-                $fields[] = $row;
-            }
+        $query .= ' order by f.sorting limit 10000';
+        $connection = DatabaseUtility::getConnectionForTable(Field::TABLE_NAME);
+        $rows = (array)$connection->executeQuery($query)->fetchAll();
+        $fields = [];
+        foreach ($rows as $row) {
+            $fields[] = $row;
         }
         return $fields;
     }
@@ -130,43 +123,34 @@ class GetPowermailFields
      */
     protected function getFieldsetsFromForm()
     {
+        $queryBuilder = DatabaseUtility::getQueryBuilderForTable(Page::TABLE_NAME);
+        $rows = (array)$queryBuilder
+            ->select('uid', 'title')
+            ->from(Page::TABLE_NAME)
+            ->where('forms = ' . $this->getFormUid())
+            ->addOrderBy('sorting')
+            ->execute()
+            ->fetchAll();
         $fieldsets = [];
-        $select = 'uid, title';
-        $from = Page::TABLE_NAME;
-        $where = 'forms = ' . $this->getFormUid() . ' AND hidden = 0 AND deleted = 0';
-        $groupBy = '';
-        $orderBy = 'sorting';
-        $limit = '';
-        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-        if ($res) {
-            while (($row = $this->databaseConnection->sql_fetch_assoc($res))) {
-                $fieldsets[] = $row;
-            }
+        foreach ($rows as $row) {
+            $fieldsets[] = $row;
         }
         return $fieldsets;
     }
 
     /**
-     * Get Form Uid from Rule
-     *
      * @param int $conditionUid
-     * @return int formUid
+     * @return int
+     * @throws DBALException
      */
-    protected function getFormUidFromCondition($conditionUid)
+    protected function getFormUidFromCondition(int $conditionUid): int
     {
-        $select = 'cc.form';
-        $from = 'tx_powermailcond_domain_model_conditioncontainer cc ' .
-            'left join tx_powermailcond_domain_model_condition c on cc.uid = c.conditioncontainer';
-        $where = 'c.uid = ' . (int) $conditionUid . ' AND c.hidden = 0 AND c.deleted = 0';
-        $groupBy = '';
-        $orderBy = '';
-        $limit = 1;
-        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-        if ($res) {
-            $row = $this->databaseConnection->sql_fetch_assoc($res);
-            return (int) $row['form'];
-        }
-        return 0;
+        $query = 'select cc.form';
+        $query .= ' from ' . ConditionContainer::TABLE_NAME . ' cc ' .
+            'left join ' . Condition::TABLE_NAME . ' c on cc.uid = c.conditioncontainer';
+        $query .= ' where c.uid = ' . (int)$conditionUid . ' AND c.hidden = 0 AND c.deleted = 0 limit 1';
+        $connection = DatabaseUtility::getConnectionForTable(ConditionContainer::TABLE_NAME);
+        return (int)$connection->executeQuery($query)->fetchColumn(0);
     }
 
     /**
@@ -175,20 +159,18 @@ class GetPowermailFields
      * @param int $conditionContainerUid
      * @return int formUid
      */
-    protected function getFormUidFromConditionContainer($conditionContainerUid)
+    protected function getFormUidFromConditionContainer(int $conditionContainerUid): int
     {
-        $select = 'cc.form';
-        $from = 'tx_powermailcond_domain_model_conditioncontainer cc';
-        $where = 'cc.uid = ' . (int) $conditionContainerUid . ' AND cc.deleted = 0';
-        $groupBy = '';
-        $orderBy = '';
-        $limit = 1;
-        $res = $this->databaseConnection->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-        if ($res) {
-            $row = $this->databaseConnection->sql_fetch_assoc($res);
-            return (int) $row['form'];
-        }
-        return 0;
+        $queryBuilder = DatabaseUtility::getQueryBuilderForTable(ConditionContainer::TABLE_NAME);
+        $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
+        return (int)$queryBuilder
+            ->select('form')
+            ->from(ConditionContainer::TABLE_NAME)
+            ->where('uid=' . (int)$conditionContainerUid)
+            ->addOrderBy('sorting')
+            ->setMaxResults(1)
+            ->execute()
+            ->fetchColumn(0);
     }
 
     /**
@@ -205,26 +187,26 @@ class GetPowermailFields
     /**
      * @param array $params
      * @return void
-     * @SuppressWarnings(PHPMD.Superglobals)
+     * @throws DBALException
      */
     protected function initialize(array &$params)
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
         $this->params = &$params;
         $this->setFormUid()->setDefaultFieldTypes();
     }
 
     /**
-     * @return GetPowermailFields
+     * @return $this
+     * @throws DBALException
      */
     public function setFormUid()
     {
         $formUid = (int) $this->params['row']['form'];
         if ($formUid === 0) {
-            $formUid = $this->getFormUidFromConditionContainer((int) $this->params['row']['conditioncontainer']);
+            $formUid = $this->getFormUidFromConditionContainer((int)$this->params['row']['conditioncontainer']);
         }
         if (!empty($this->params['row']['conditions'])) {
-            $formUid = $this->getFormUidFromCondition($this->params['row']['conditions']);
+            $formUid = $this->getFormUidFromCondition((int)$this->params['row']['conditions']);
         }
         $this->formUid = $formUid;
         return $this;
