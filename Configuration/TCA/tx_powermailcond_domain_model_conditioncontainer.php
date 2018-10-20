@@ -126,7 +126,7 @@ $ccConfiguration = [
                 'tx_powermailcond_conditioncontainer.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
             ]
         ],
         'form' => [
