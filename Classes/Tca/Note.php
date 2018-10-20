@@ -81,10 +81,7 @@ class Note
      */
     protected function getTitle()
     {
-        return $this->languageService->sL(
-            $this->locallangPath . 'tx_powermailcond_conditioncontainer.note.title',
-            true
-        );
+        return $this->languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.title');
     }
 
     /**
@@ -92,10 +89,7 @@ class Note
      */
     protected function getDescription()
     {
-        return $this->languageService->sL(
-            $this->locallangPath . 'tx_powermailcond_conditioncontainer.note.description',
-            true
-        );
+        return $this->languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.description');
     }
 
     /**
