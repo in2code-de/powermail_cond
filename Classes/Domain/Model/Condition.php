@@ -4,6 +4,9 @@ namespace In2code\PowermailCond\Domain\Model;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
+use In2code\Powermail\Domain\Repository\FieldRepository;
+use In2code\Powermail\Domain\Repository\PageRepository;
+use In2code\Powermail\Utility\ObjectUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -23,18 +26,6 @@ class Condition extends AbstractEntity
     const INDEX_ACTION = '#action';
     const INDEX_BACKUP = 'backup';
     const INDEX_MATCHING_CONDITION = 'matching_condition';
-
-    /**
-     * @var \In2code\Powermail\Domain\Repository\FieldRepository
-     * @inject
-     */
-    protected $fieldRepository;
-
-    /**
-     * @var \In2code\Powermail\Domain\Repository\PageRepository
-     * @inject
-     */
-    protected $pageRepository;
 
     /**
      * @var string
@@ -120,10 +111,12 @@ class Condition extends AbstractEntity
     {
         $targetField = $this->targetField;
         if (is_numeric($targetField)) {
-            return $this->fieldRepository->findByUid((int) $targetField);
+            $fieldRepository = ObjectUtility::getObjectManager()->get(FieldRepository::class);
+            return $fieldRepository->findByUid((int) $targetField);
         }
         if (stristr($targetField, 'fieldset:')) {
-            return $this->pageRepository->findByUid((int) trim($targetField, 'fieldset:'));
+            $pageRepository = ObjectUtility::getObjectManager()->get(PageRepository::class);
+            return $pageRepository->findByUid((int) trim($targetField, 'fieldset:'));
         }
         return null;
     }
