@@ -26,6 +26,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 7.0.0      | 2018-11-16 | Task       | Update dependencies for powermail 7                                          |
 | 6.1.0      | 2018-10-21 | Task       | Remove deprecation warnings in TYPO3 9.5                                     |
 | 6.0.0      | 2018-10-16 | Task       | Support powermail 6.1                                                        |
 | 5.0.0      | 2018-05-24 | Task       | Support powermail 6.0                                                        |

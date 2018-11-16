@@ -16,7 +16,7 @@ powermail_cond
 		powermail_cond
 
 	:Version:
-		6.1
+		7.0
 
 	:Language:
 		en
