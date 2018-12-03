@@ -4,29 +4,19 @@ namespace In2code\PowermailCond\Controller;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
-use In2code\PowermailCond\Domain\Model\ConditionContainer;
+use In2code\Powermail\Domain\Repository\FormRepository;
+use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
 use In2code\PowermailCond\Utility\ArrayUtility;
 use In2code\PowermailCond\Utility\SessionUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Generic\Exception\UnsupportedMethodException;
 
 /**
  * Class ConditionController
  */
 class ConditionController extends ActionController
 {
-
-    /**
-     * @var \In2code\Powermail\Domain\Repository\FormRepository
-     * @inject
-     */
-    protected $formRepository;
-
-    /**
-     * @var \In2code\PowermailCond\Domain\Repository\ConditionContainerRepository
-     * @inject
-     */
-    protected $containerRepository;
 
     /**
      * @var array
@@ -52,22 +42,24 @@ class ConditionController extends ActionController
      * Build Condition for AJAX call
      *
      * @return string
+     * @throws UnsupportedMethodException
      */
-    public function buildConditionAction()
+    public function buildConditionAction(): string
     {
+        $arguments = [];
+        $formRepository = $this->objectManager->get(FormRepository::class);
         /** @var Form $form */
-        $form = $this->formRepository->findByIdentifier($this->powermailArguments['mail']['form']);
+        $form = $formRepository->findByIdentifier($this->powermailArguments['mail']['form']);
         $this->setTextFields($form);
 
-        /** @var ConditionContainer $conditionContainer */
-        $conditionContainer = $this->containerRepository->findOneByForm($form);
+        $containerRepository = $this->objectManager->get(ConditionContainerRepository::class);
+        $conditionContainer = $containerRepository->findOneByForm($form);
         if ($conditionContainer !== null) {
             $arguments = $conditionContainer->applyConditions($form, $this->powermailArguments);
             SessionUtility::setSession($arguments);
             ArrayUtility::unsetByKeys($arguments, ['backup', 'field']);
-            return json_encode($arguments);
         }
-        return null;
+        return json_encode($arguments);
     }
 
     /**

@@ -1,12 +1,10 @@
 <?php
 namespace In2code\PowermailCond\Utility;
 
-use TYPO3\CMS\Extbase\Utility\ArrayUtility as ArrayUtilityExtbase;
-
 /**
  * Class ArrayUtility
  */
-class ArrayUtility extends ArrayUtilityExtbase
+class ArrayUtility
 {
 
     /**

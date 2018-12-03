@@ -1,0 +1,8 @@
+mod.web_list.tableDisplayOrder {
+  tx_powermailcond_domain_model_condition {
+    after = tx_powermailcond_domain_model_conditioncontainer
+  }
+  tx_powermailcond_domain_model_rule {
+    after = tx_powermailcond_domain_model_condition
+  }
+}
