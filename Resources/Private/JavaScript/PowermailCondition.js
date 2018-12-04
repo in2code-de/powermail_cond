@@ -90,6 +90,9 @@
 			var formToSend = $($formElement.get(0));
 			var tempEnabledFields = formToSend.find(':disabled').prop('disabled', false);
 			var dataToSend = new FormData($formElement.get(0));
+			dataToSend.find('input[type="file"]').map(function(i,input){
+				dataToSend.delete && dataToSend.delete(input.name)
+			})
 			tempEnabledFields.prop('disabled', true);
 			$.ajax({
 				type: 'POST',
