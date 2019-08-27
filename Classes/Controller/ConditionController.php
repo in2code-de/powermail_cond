@@ -53,7 +53,7 @@ class ConditionController extends ActionController
         $this->setTextFields($form);
 
         $containerRepository = $this->objectManager->get(ConditionContainerRepository::class);
-        $conditionContainer = $containerRepository->findOneByForm($form);
+        $conditionContainer = $containerRepository->findOneByForm($form->getUid());
         if ($conditionContainer !== null) {
             $arguments = $conditionContainer->applyConditions($form, $this->powermailArguments);
             SessionUtility::setSession($arguments);
