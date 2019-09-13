@@ -5,6 +5,7 @@ use Doctrine\DBAL\DBALException;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
+use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\Powermail\Utility\DatabaseUtility;
 use In2code\PowermailCond\Domain\Model\Condition;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
@@ -98,17 +99,28 @@ class GetPowermailFields
      */
     protected function getFieldsFromForm()
     {
-        $query = 'select f.uid, f.title, f.marker';
-        $query .= ' from ' . Field::TABLE_NAME . ' f ' .
-            'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
-            'left join ' . Form::TABLE_NAME . ' fo on p.forms = fo.uid';
-        $query .= ' where f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
-        if ($this->getFormUid() > 0) {
-            $query .= ' and fo.uid = ' . $this->getFormUid();
+        $fieldsets = [];
+        foreach ($this->getFieldsetsFromForm() as $row) {
+            $fieldsets[] = $row['uid'];
         }
-        $query .= ' order by f.sorting limit 10000';
-        $connection = DatabaseUtility::getConnectionForTable(Field::TABLE_NAME);
-        $rows = (array)$connection->executeQuery($query)->fetchAll();
+
+        if (count($fieldsets) == 0) {
+            return [];
+        }
+
+        $queryBuilder = DatabaseUtility::getQueryBuilderForTable(Field::TABLE_NAME);
+        $rows = (array)$queryBuilder
+            ->select('uid', 'title', 'marker')
+            ->from(Field::TABLE_NAME)
+            ->where(
+                $queryBuilder->expr()->in('type', explode(',', $this->getDefaultFieldTypesForQuery())),
+                $queryBuilder->expr()->in('pages', $fieldsets)
+            )
+            ->orderBy('sorting')
+            ->setMaxResults(10000)
+            ->execute()
+            ->fetchAll();
+
         $fields = [];
         foreach ($rows as $row) {
             $fields[] = $row;
@@ -124,13 +136,33 @@ class GetPowermailFields
     protected function getFieldsetsFromForm()
     {
         $queryBuilder = DatabaseUtility::getQueryBuilderForTable(Page::TABLE_NAME);
+        if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive() === true) {
+            $queryBuilderForms = DatabaseUtility::getQueryBuilderForTable(Form::TABLE_NAME);
+            $formRow = (array)$queryBuilderForms
+            ->select('pages')
+            ->from(Form::TABLE_NAME)
+            ->where('uid = ' . $this->getFormUid())
+            ->execute()
+            ->fetchAll();
+
+            if (count($formRow) > 0 && !empty($formRow[0]['pages'])) {
+                $whereClause = $queryBuilder->expr()->in('uid', explode(',', $formRow[0]['pages']));
+            } else {
+                return [];
+            }
+        } else {
+            $whereClause = 'forms = ' . $this->getFormUid();
+        }
+
+        $queryBuilder = DatabaseUtility::getQueryBuilderForTable(Page::TABLE_NAME);
         $rows = (array)$queryBuilder
             ->select('uid', 'title')
             ->from(Page::TABLE_NAME)
-            ->where('forms = ' . $this->getFormUid())
             ->addOrderBy('sorting')
+            ->where($whereClause)
             ->execute()
             ->fetchAll();
+
         $fieldsets = [];
         foreach ($rows as $row) {
             $fieldsets[] = $row;

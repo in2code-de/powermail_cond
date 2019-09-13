@@ -182,7 +182,7 @@ return [
                         '0'
                     ],
                 ],
-                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
+                'itemsProcFunc' => \In2code\PowermailCond\UserFunc\GetPowermailFields::class . '->getFields',
                 'itemsProcFunc_addFieldsets' => true,
                 // allow only this types of fields in selector
                 'itemsProcFuncValue' => 'input,textarea,select,check,radio,submit,captcha,reset,text,content,html,' .
