@@ -155,7 +155,7 @@ class GetPowermailFields
         }
 
         $queryBuilder = DatabaseUtility::getQueryBuilderForTable(Page::TABLE_NAME);
-        $rows = (array)$queryBuilder
+        $rows =  (array)$queryBuilder
             ->select('uid', 'title')
             ->from(Page::TABLE_NAME)
             ->addOrderBy('sorting')
@@ -233,13 +233,18 @@ class GetPowermailFields
      */
     public function setFormUid()
     {
-        $formUid = (int) $this->params['row']['form'];
+        $formUid = (int)$this->params['row']['form'];
         if ($formUid === 0) {
             $formUid = $this->getFormUidFromConditionContainer((int)$this->params['row']['conditioncontainer']);
         }
         if (!empty($this->params['row']['conditions'])) {
             $formUid = $this->getFormUidFromCondition((int)$this->params['row']['conditions']);
         }
+
+        if ($formUid === 0) {
+            $formUid = $this->getFormUidFromAjaxRequest();
+        }
+
         $this->formUid = $formUid;
         return $this;
     }
@@ -279,5 +284,13 @@ class GetPowermailFields
     {
         $fieldTypes = $this->getDefaultFieldTypes();
         return ArrayUtility::getQuotedList($fieldTypes);
+    }
+
+    protected function getFormUidFromAjaxRequest() {
+        if (isset(GeneralUtility::_GP('ajax')[0])) {
+            preg_match('/data-[0-9]*-' . ConditionContainer::TABLE_NAME . '-([0-9]*)/', GeneralUtility::_GP('ajax')[0], $matches);
+            $conditionContainer = (int)$matches[1];
+            return $this->getFormUidFromConditionContainer($conditionContainer);
+        }
     }
 }
