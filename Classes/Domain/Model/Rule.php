@@ -5,7 +5,10 @@ use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Comparator\Comparison;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Object\Exception;
 
 /**
  * Class Rule
@@ -75,7 +78,7 @@ class Rule extends AbstractEntity
 
     /**
      * @param string $title
-     * @return Condition
+     * @return Rule
      */
     public function setTitle($title)
     {
@@ -158,6 +161,9 @@ class Rule extends AbstractEntity
     /**
      * @param Form $form
      * @return bool
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws Exception
      */
     public function applies(Form $form)
     {

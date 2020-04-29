@@ -6,7 +6,6 @@ namespace In2code\PowermailCond\Utility;
  */
 class ArrayUtility
 {
-
     /**
      * Get quoted list from array
      *

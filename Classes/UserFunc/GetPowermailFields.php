@@ -100,8 +100,8 @@ class GetPowermailFields
     {
         $query = 'select f.uid, f.title, f.marker';
         $query .= ' from ' . Field::TABLE_NAME . ' f ' .
-            'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
-            'left join ' . Form::TABLE_NAME . ' fo on p.forms = fo.uid';
+            'left join ' . Page::TABLE_NAME . ' p on f.page = p.uid ' .
+            'left join ' . Form::TABLE_NAME . ' fo on p.form = fo.uid';
         $query .= ' where f.hidden = 0 and f.deleted = 0 and f.type in (' . $this->getDefaultFieldTypesForQuery() . ')';
         if ($this->getFormUid() > 0) {
             $query .= ' and fo.uid = ' . $this->getFormUid();
@@ -127,7 +127,7 @@ class GetPowermailFields
         $rows = (array)$queryBuilder
             ->select('uid', 'title')
             ->from(Page::TABLE_NAME)
-            ->where('forms = ' . $this->getFormUid())
+            ->where('form = ' . $this->getFormUid())
             ->addOrderBy('sorting')
             ->execute()
             ->fetchAll();
@@ -150,7 +150,7 @@ class GetPowermailFields
             'left join ' . Condition::TABLE_NAME . ' c on cc.uid = c.conditioncontainer';
         $query .= ' where c.uid = ' . (int)$conditionUid . ' AND c.hidden = 0 AND c.deleted = 0 limit 1';
         $connection = DatabaseUtility::getConnectionForTable(ConditionContainer::TABLE_NAME);
-        return (int)$connection->executeQuery($query)->fetchColumn(0);
+        return (int)$connection->executeQuery($query)->fetchColumn();
     }
 
     /**
@@ -170,12 +170,10 @@ class GetPowermailFields
             ->addOrderBy('sorting')
             ->setMaxResults(1)
             ->execute()
-            ->fetchColumn(0);
+            ->fetchColumn();
     }
 
     /**
-     * Build a label
-     *
      * @param array $properties
      * @return string
      */
