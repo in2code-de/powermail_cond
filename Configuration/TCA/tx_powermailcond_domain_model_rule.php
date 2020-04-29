@@ -26,7 +26,7 @@ $ruleConfiguration = [
     ],
     'columns' => [
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -35,7 +35,7 @@ $ruleConfiguration = [
         ],
 
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.title',
             'config' => [
@@ -44,7 +44,7 @@ $ruleConfiguration = [
             ]
         ],
         'start_field' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.startField',
             'config' => [
@@ -66,7 +66,7 @@ $ruleConfiguration = [
             ]
         ],
         'ops' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.operator',
             'onChange' => 'reload',
@@ -158,7 +158,7 @@ $ruleConfiguration = [
             ]
         ],
         'cond_string' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.condstring',
             'config' => [
@@ -171,7 +171,7 @@ $ruleConfiguration = [
             'displayCond' => 'FIELD:ops:IN:2,3,4,5,6,7'
         ],
         'equal_field' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.equalField',
             'config' => [
@@ -194,7 +194,7 @@ $ruleConfiguration = [
         ],
         'conditions' => [
             'l10n_mode' => 'exclude',
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_rules.condition',
             'config' => [
@@ -207,8 +207,8 @@ $ruleConfiguration = [
                     ],
                 ],
                 'foreign_table' => 'tx_powermailcond_domain_model_condition',
-                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND
-					tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND 
+                    tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
             ],
         ],
     ],

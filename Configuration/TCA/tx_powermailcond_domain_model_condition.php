@@ -31,7 +31,7 @@ return [
     ],
     'columns' => [
         'sys_language_uid' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
             'config' => [
                 'type' => 'select',
@@ -53,7 +53,7 @@ return [
         ],
         'l18n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
@@ -75,14 +75,14 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
             'config' => [
@@ -98,7 +98,7 @@ return [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
             'config' => [
@@ -115,7 +115,7 @@ return [
         ],
 
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.title',
             'config' => [
@@ -124,7 +124,7 @@ return [
             ]
         ],
         'rules' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.rules',
             'config' => [
@@ -144,7 +144,7 @@ return [
             ],
         ],
         'conjunction' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.conjunction',
             'config' => [
@@ -169,7 +169,7 @@ return [
             ],
         ],
         'target_field' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.targetField',
             'config' => [
@@ -193,7 +193,7 @@ return [
             ],
         ],
         'actions' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.action',
             'config' => [
@@ -231,7 +231,7 @@ return [
         ],
         'conditioncontainer' => [
             'l10n_mode' => 'exclude',
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditions.conditioncontainer',
             'config' => [

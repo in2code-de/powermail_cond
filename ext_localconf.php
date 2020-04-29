@@ -26,7 +26,7 @@ call_user_func(function () {
         ]
     );
 
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['In2code\\Powermail\\Domain\\Validator\\InputValidator'] = [
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\In2code\Powermail\Domain\Validator\InputValidator::class] = [
         'className' => \In2code\PowermailCond\Domain\Validator\ConditionAwareValidator::class
     ];
 });

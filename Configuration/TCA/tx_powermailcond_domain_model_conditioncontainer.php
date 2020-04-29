@@ -31,7 +31,7 @@ $ccConfiguration = [
     ],
     'columns' => [
         'sys_language_uid' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
             'config' => [
                 'type' => 'select',
@@ -53,7 +53,7 @@ $ccConfiguration = [
         ],
         'l18n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
@@ -75,14 +75,14 @@ $ccConfiguration = [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
             'config' => [
@@ -98,7 +98,7 @@ $ccConfiguration = [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
             'config' => [
@@ -114,14 +114,14 @@ $ccConfiguration = [
             ],
         ],
         'note' => [
-            'exclude' => 1,
+            'exclude' => true,
             'config' => [
                 'type' => 'user',
                 'userFunc' => 'In2code\PowermailCond\Tca\Note->showNote'
             ],
         ],
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditioncontainer.title',
             'config' => [
@@ -130,7 +130,7 @@ $ccConfiguration = [
             ]
         ],
         'form' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditioncontainer.form',
             'onChange' => 'reload',
@@ -159,7 +159,7 @@ $ccConfiguration = [
             ]
         ],
         'conditions' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                 'tx_powermailcond_conditioncontainer.conditions',
             'config' => [
