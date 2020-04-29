@@ -1,7 +1,7 @@
 <?php
 use In2code\PowermailCond\Utility\ConfigurationUtility;
 
-$ruleConfiguration = [
+return [
     'ctrl' => [
         'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:tx_powermailcond_rules',
         'label' => 'title',
@@ -13,7 +13,9 @@ $ruleConfiguration = [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => ConfigurationUtility::getIconPath('icon_tx_powermailcond_rules.gif')
+        'iconfile' => ConfigurationUtility::getIconPath(
+            \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME . '.gif'
+        )
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',
@@ -27,10 +29,10 @@ $ruleConfiguration = [
     'columns' => [
         'hidden' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0'
+                'default' => 0
             ]
         ],
 
@@ -41,6 +43,7 @@ $ruleConfiguration = [
             'config' => [
                 'type' => 'input',
                 'size' => '30',
+                'default' => ''
             ]
         ],
         'start_field' => [
@@ -62,7 +65,8 @@ $ruleConfiguration = [
                 'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
                 'maxitems' => 1,
-                'eval' => 'required'
+                'eval' => 'required',
+                'default' => 0
             ]
         ],
         'ops' => [
@@ -154,7 +158,8 @@ $ruleConfiguration = [
                     ],
                 ],
                 'size' => 1,
-                'maxitems' => 1
+                'maxitems' => 1,
+                'default' => 0
             ]
         ],
         'cond_string' => [
@@ -188,7 +193,8 @@ $ruleConfiguration = [
                 // allow only this types of fields in selector
                 'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
-                'maxitems' => 1
+                'maxitems' => 1,
+                'default' => ''
             ],
             'displayCond' => 'FIELD:ops:IN:8,9'
         ],
@@ -201,17 +207,15 @@ $ruleConfiguration = [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [
-                        '',
-                        0
-                    ],
+                    ['', 0],
                 ],
-                'foreign_table' => 'tx_powermailcond_domain_model_condition',
-                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND 
-                    tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
-            ],
-        ],
-    ],
+                'foreign_table' => \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME,
+                'foreign_table_where' =>
+                    'AND ' . \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.pid=###CURRENT_PID### AND 
+                    ' . \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.sys_language_uid IN 
+                    (-1,###REC_FIELD_sys_language_uid###)',
+                'default' => 0
+            ]
+        ]
+    ]
 ];
-
-return $ruleConfiguration;
