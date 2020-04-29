@@ -117,7 +117,8 @@ $ccConfiguration = [
             'exclude' => true,
             'config' => [
                 'type' => 'user',
-                'userFunc' => 'In2code\PowermailCond\Tca\Note->showNote'
+                'renderType' => 'powermailCondShowNote',
+                'parameters' => []
             ],
         ],
         'title' => [

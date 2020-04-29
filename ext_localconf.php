@@ -26,6 +26,18 @@ call_user_func(function () {
         ]
     );
 
+    /**
+     * User field registrations in TCA/FlexForm
+     */
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1588153418] = [
+        'nodeName' => 'powermailCondShowNote',
+        'priority' => 50,
+        'class' => \In2code\PowermailCond\Tca\Note::class,
+    ];
+
+    /**
+     * Xclassing
+     */
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\In2code\Powermail\Domain\Validator\InputValidator::class] = [
         'className' => \In2code\PowermailCond\Domain\Validator\ConditionAwareValidator::class
     ];

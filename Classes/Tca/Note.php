@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\PowermailCond\Tca;
 
 use Doctrine\DBAL\DBALException;
@@ -6,20 +7,15 @@ use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Utility\DatabaseUtility;
+use In2code\Powermail\Utility\ObjectUtility;
+use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 
 /**
- * Show a note if a form is chosen that has too much fields
- *
  * Class Note
+ * to show a note if a form is chosen that has too much fields
  */
-class Note
+class Note extends AbstractFormElement
 {
-
-    /**
-     * @var \TYPO3\CMS\Lang\LanguageService
-     */
-    protected $languageService = null;
-
     /**
      * Path to locallang file (with : as postfix)
      *
@@ -33,29 +29,26 @@ class Note
     protected $fieldLimit = 30;
 
     /**
-     * @param array $params
-     * @return string
+     * @return array
      * @throws DBALException
      */
-    public function showNote(array $params)
+    public function render()
     {
-        $this->initialize();
         $content = '';
-        if ($this->formHasTooMuchFields($params)) {
+        if ($this->formHasTooMuchFields()) {
             $content = '<div class="alert alert-warning"><strong>' . $this->getTitle() . '</strong> ' .
                 $this->getDescription() . '</div>';
         }
-        return $content;
+        return ['html' => $content];
     }
 
     /**
-     * @param array $params
      * @return bool
      * @throws DBALException
      */
-    protected function formHasTooMuchFields(array $params)
+    protected function formHasTooMuchFields()
     {
-        $formUid = (int)$params['row']['form'][0];
+        $formUid = (int)$this->data['databaseRow']['form'][0];
         return $formUid > 0 && $this->getNumberOfFieldsToForm($formUid) > $this->fieldLimit;
     }
 
@@ -69,11 +62,11 @@ class Note
         $connection = DatabaseUtility::getConnectionForTable(Field::TABLE_NAME);
         $query = 'select count(f.uid) sum';
         $query .= ' from ' . Field::TABLE_NAME . ' f ' .
-            'left join ' . Page::TABLE_NAME . ' p on f.pages = p.uid ' .
-            'left join ' . Form::TABLE_NAME . ' form on p.forms = form.uid';
+            'left join ' . Page::TABLE_NAME . ' p on f.page = p.uid ' .
+            'left join ' . Form::TABLE_NAME . ' form on p.form = form.uid';
         $query .=  ' where form.uid = ' . (int) $formUid . ' and f.hidden = 0 and f.deleted = 0 ' .
             'and p.hidden = 0 and p.deleted = 0';
-        return (int)$connection->executeQuery($query)->fetchColumn(0);
+        return (int)$connection->executeQuery($query)->fetchColumn();
     }
 
     /**
@@ -81,7 +74,8 @@ class Note
      */
     protected function getTitle()
     {
-        return $this->languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.title');
+        $languageService = ObjectUtility::getLanguageService();
+        return $languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.title');
     }
 
     /**
@@ -89,17 +83,7 @@ class Note
      */
     protected function getDescription()
     {
-        return $this->languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.description');
-    }
-
-    /**
-     * Initialize some variables
-     *
-     * @return void
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function initialize()
-    {
-        $this->languageService = $GLOBALS['LANG'];
+        $languageService = ObjectUtility::getLanguageService();
+        return $languageService->sL($this->locallangPath . 'tx_powermailcond_conditioncontainer.note.description');
     }
 }
