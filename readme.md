@@ -6,16 +6,17 @@ others should be visible.
 
 ## Screenshots
 
-<img src="https://box.everhelper.me/attachment/960963/84725fb7-0b3e-4c40-b52e-29d7620777bb/262407-avsUb6HB0e7pfLxX/screen.png" width="500" />
+![Example form with conditions](Documentation/Images/screenshot_powermail_cond_frontend.png "Example form with conditions")
 
-<img src="https://box.everhelper.me/attachment/960958/84725fb7-0b3e-4c40-b52e-29d7620777bb/262407-TS99F55fzyD1GlaN/screen.png" width="500" />
+![Backend view to records](Documentation/Images/screenshot_powermail_cond_backend_records.png "Backend view to records")
+
+![Backend view to records with rule](Documentation/Images/screenshot_powermail_cond_backend_records_conditionrule.png "Backend view to records with rule")
+
 
 ## Quick installation
 
-Please look at the manual for an advanded documentation at https://docs.typo3.org/typo3cms/extensions/powermail_cond/
-
 Quick guide:
-- Just install this extension - e.g. `composer require in2code/powermail_cond` or download it or install it with the classic way (Extension Manager)
+- Just install this extension - e.g. `composer require in2code/powermail_cond`
 - Clear caches
 - Add a powermail form to any page
 - Add a new record from type "condition container" to a sysfolder and configure it
@@ -26,6 +27,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 8.0.0      | 2020-04-29 | Task       | Update extension for powermail 8 and TYPO3 10.4                              |
 | 7.0.0      | 2018-11-16 | Task       | Update dependencies for powermail 7                                          |
 | 6.1.0      | 2018-10-21 | Task       | Remove deprecation warnings in TYPO3 9.5                                     |
 | 6.0.0      | 2018-10-16 | Task       | Support powermail 6.1                                                        |
@@ -43,9 +45,8 @@ Quick guide:
 | 3.3.1      | 2017-04-25 | Bugfix     | Fix package name in composer.json                                            |
 | 3.3.0      | 2017-04-23 | Task       | Move ext to github, make it fit for TYPO3 8.7 LTS                            |
 
-## More to come soon
+## More to come soon?
 
-- FAQ
 - Use vanilla JS instead of jQuery
 
 ## Conflicts

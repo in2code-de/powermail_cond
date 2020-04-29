@@ -1,15 +1,5 @@
 <?php
 
-########################################################################
-# Extension Manager/Repository config file for ext "powermail_cond".
-#
-# Auto generated 29-10-2012 13:53
-#
-# Manual updates:
-# Only the data in the array - everything else is removed by next
-# writing. "version" and "dependencies" must not be touched!
-########################################################################
-
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Powermail Conditions',
     'description' => 'Add conditions (via AJAX) to powermail forms for fields and pages',
