@@ -27,6 +27,7 @@ Quick guide:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 8.0.1      | 2020-04-29 | Task       | Add useless dependency to TYPO3 for TER upload                               |
 | 8.0.0      | 2020-04-29 | Task       | Update extension for powermail 8 and TYPO3 10.4                              |
 | 7.0.0      | 2018-11-16 | Task       | Update dependencies for powermail 7                                          |
 | 6.1.0      | 2018-10-21 | Task       | Remove deprecation warnings in TYPO3 9.5                                     |
