@@ -6,7 +6,6 @@ namespace In2code\PowermailCond\Utility;
  */
 class ConfigurationUtility
 {
-
     /**
      * Get path to an icon for TCA configuration
      *

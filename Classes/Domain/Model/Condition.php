@@ -7,7 +7,10 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FieldRepository;
 use In2code\Powermail\Domain\Repository\PageRepository;
 use In2code\Powermail\Utility\ObjectUtility;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Object\Exception;
 
 /**
  * Class Condition
@@ -106,17 +109,22 @@ class Condition extends AbstractEntity
 
     /**
      * @return Field|Page|NULL
+     * @throws Exception
      */
     public function getTargetField()
     {
         $targetField = $this->targetField;
         if (is_numeric($targetField)) {
             $fieldRepository = ObjectUtility::getObjectManager()->get(FieldRepository::class);
-            return $fieldRepository->findByUid((int) $targetField);
+            /** @var Field $field */
+            $field = $fieldRepository->findByUid((int)$targetField);
+            return $field;
         }
         if (stristr($targetField, 'fieldset:')) {
             $pageRepository = ObjectUtility::getObjectManager()->get(PageRepository::class);
-            return $pageRepository->findByUid((int) trim($targetField, 'fieldset:'));
+            /** @var Page $page */
+            $page = $pageRepository->findByUid((int)trim($targetField, 'fieldset:'));
+            return $page;
         }
         return null;
     }
@@ -233,6 +241,9 @@ class Condition extends AbstractEntity
      * @param Form $form
      * @param array $arguments
      * @return array
+     * @throws Exception
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     public function apply(Form $form, array $arguments)
     {
@@ -250,6 +261,9 @@ class Condition extends AbstractEntity
      * @param Form $form
      * @param array $arguments
      * @return array
+     * @throws Exception
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     public function negate(Form $form, array $arguments)
     {
@@ -268,6 +282,9 @@ class Condition extends AbstractEntity
      * @param array $arguments
      * @param string $action
      * @return array
+     * @throws Exception
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     protected function process(Form $form, array $arguments, $action)
     {
@@ -307,6 +324,7 @@ class Condition extends AbstractEntity
      * @param bool $weakRule A weak rule can not overrule a strong rule
      *        (e.g. a page get's shown [=weak] but another rule hides the field [=strong])
      * @return array
+     * @throws Exception
      */
     protected function applyOnField($formUid, $pageUid, Field $field, array $arguments, $action, $weakRule = false)
     {
@@ -354,6 +372,7 @@ class Condition extends AbstractEntity
      * @param array $arguments
      * @param string $action
      * @return array
+     * @throws Exception
      */
     protected function applyOnPage($formUid, Page $page, array $arguments, $action)
     {

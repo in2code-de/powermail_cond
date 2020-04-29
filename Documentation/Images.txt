@@ -1,5 +1,0 @@
-.. |powermail_logo|      image:: Images/powermail_logo.png
-.. :align: left
-.. :border: 0
-.. :name: powermail logo
-.. :vspace: 57

@@ -2,7 +2,10 @@
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Form;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Object\Exception;
 
 /**
  * Class ConditionContainer
@@ -30,6 +33,9 @@ class ConditionContainer extends AbstractEntity
      * @param Form $form
      * @param array $arguments
      * @return array
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws Exception
      */
     public function applyConditions(Form $form, array $arguments)
     {

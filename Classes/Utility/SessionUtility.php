@@ -8,7 +8,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class SessionUtility
 {
-
     /**
      * Get quoted list from array
      *
@@ -18,7 +17,6 @@ class SessionUtility
     public static function setSession(array $array)
     {
         $typoScriptFrontend = self::getTyposcriptFrontendController();
-        $typoScriptFrontend->initFEuser();
         $typoScriptFrontend->fe_user->setAndSaveSessionData('tx_powermail_cond', $array);
     }
 

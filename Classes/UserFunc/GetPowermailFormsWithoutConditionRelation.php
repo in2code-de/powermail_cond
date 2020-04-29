@@ -50,7 +50,7 @@ class GetPowermailFormsWithoutConditionRelation
         $connection = DatabaseUtility::getConnectionForTable(ConditionContainer::TABLE_NAME);
         $query
             = 'select uid from ' . ConditionContainer::TABLE_NAME . ' where form=' . (int)$formUid . ' and deleted=0';
-        return $connection->executeQuery($query)->fetchColumn(0) !== false;
+        return $connection->executeQuery($query)->fetchColumn() !== false;
     }
 
     /**
