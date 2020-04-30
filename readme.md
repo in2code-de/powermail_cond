@@ -23,10 +23,32 @@ Quick guide:
 - Don't forget to include the static template from powermail_cond
 - Don't forget to add jQuery to your frontend (if not yet installed)
 
+Example routing configuration for TypeNum 3132:
+
+```
+...
+rootPageId: 1
+routes:
+  -
+    route: robots.txt
+    type: staticText
+    content: "Disallow: /typo3/\r\n"
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    default: /
+    index: ''
+    suffix: /
+    map:
+      condition.json: 3132
+...
+```
+
 ## Changelog
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 8.0.3      | 2020-04-30 | Bugfix     | Enforce content-type in TypoScript                                           |
 | 8.0.2      | 2020-04-30 | Bugfix     | Also support checkboxes (array values) in powermail 8                        |
 | 8.0.1      | 2020-04-29 | Task       | Add useless dependency to TYPO3 for TER upload                               |
 | 8.0.0      | 2020-04-29 | Task       | Update extension for powermail 8 and TYPO3 10.4                              |
