@@ -7,6 +7,8 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FieldRepository;
 use In2code\Powermail\Domain\Repository\PageRepository;
 use In2code\Powermail\Utility\ObjectUtility;
+use In2code\PowermailCond\Utility\FieldValueUtility;
+use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -214,6 +216,9 @@ class Condition extends AbstractEntity
     /**
      * @param Form $form
      * @return bool
+     * @throws Exception
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     public function applies(Form $form)
     {
@@ -244,6 +249,7 @@ class Condition extends AbstractEntity
      * @throws Exception
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws UnsupportedVariableTypeException
      */
     public function apply(Form $form, array $arguments)
     {
@@ -264,6 +270,7 @@ class Condition extends AbstractEntity
      * @throws Exception
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws UnsupportedVariableTypeException
      */
     public function negate(Form $form, array $arguments)
     {
@@ -285,6 +292,7 @@ class Condition extends AbstractEntity
      * @throws Exception
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
+     * @throws UnsupportedVariableTypeException
      */
     protected function process(Form $form, array $arguments, $action)
     {
@@ -325,6 +333,7 @@ class Condition extends AbstractEntity
      *        (e.g. a page get's shown [=weak] but another rule hides the field [=strong])
      * @return array
      * @throws Exception
+     * @throws UnsupportedVariableTypeException
      */
     protected function applyOnField($formUid, $pageUid, Field $field, array $arguments, $action, $weakRule = false)
     {
@@ -353,13 +362,16 @@ class Condition extends AbstractEntity
 
         // Backup field value if field gets hidden
         if ($action === self::ACTION_HIDE_STRING) {
-            $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = $field->getText();
-            $field->setText('');
+            $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = FieldValueUtility::getValue($field);
+            FieldValueUtility::setValue($field, '');
         } else {
             // fill field with backup'd value if field gets enabled again
             if ($action === self::ACTION_UN_HIDE_STRING) {
                 if (isset($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker])) {
-                    $field->setText($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker]);
+                    FieldValueUtility::setValue(
+                        $field,
+                        $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker]
+                    );
                 }
             }
         }
@@ -373,6 +385,7 @@ class Condition extends AbstractEntity
      * @param string $action
      * @return array
      * @throws Exception
+     * @throws UnsupportedVariableTypeException
      */
     protected function applyOnPage($formUid, Page $page, array $arguments, $action)
     {
