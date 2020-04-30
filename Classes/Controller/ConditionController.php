@@ -7,6 +7,8 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FormRepository;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
+use In2code\PowermailCond\Utility\FieldValueUtility;
+use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
 use In2code\PowermailCond\Utility\ArrayUtility;
 use In2code\PowermailCond\Utility\SessionUtility;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
@@ -48,6 +50,7 @@ class ConditionController extends ActionController
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
      * @throws Exception
+     * @throws UnsupportedVariableTypeException
      */
     public function buildConditionAction(): string
     {
@@ -74,6 +77,7 @@ class ConditionController extends ActionController
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
      * @throws Exception
+     * @throws UnsupportedVariableTypeException
      */
     protected function setTextFields(Form $form)
     {
@@ -84,7 +88,7 @@ class ConditionController extends ActionController
                 foreach ($page->getFields() as $field) {
                     foreach ($this->powermailArguments['field'] as $fieldName => $fieldValue) {
                         if ($field->getMarker() === $fieldName) {
-                            $field->setText($fieldValue);
+                            FieldValueUtility::setValue($field, $fieldValue);
                         }
                     }
                 }
