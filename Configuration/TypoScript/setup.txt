@@ -29,6 +29,7 @@ powermailCondition {
 		no_cache = 1
 		debug = 0
 		additionalHeaders.10.header = Content-type: application/json
+		additionalHeaders.10.replace = 1
 	}
 
 	10 = USER
