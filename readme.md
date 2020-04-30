@@ -23,6 +23,27 @@ Quick guide:
 - Don't forget to include the static template from powermail_cond
 - Don't forget to add jQuery to your frontend (if not yet installed)
 
+Example routing configuration for TypeNum 3132:
+
+```
+...
+rootPageId: 1
+routes:
+  -
+    route: robots.txt
+    type: staticText
+    content: "Disallow: /typo3/\r\n"
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    default: /
+    index: ''
+    suffix: /
+    map:
+      condition.json: 3132
+...
+```
+
 ## Changelog
 
 | Version    | Date       | State      | Description                                                                  |
