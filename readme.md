@@ -1,7 +1,7 @@
 # TYPO3 Extension powermail_cond
 
 Conditions for TYPO3 extension powermail.
-While a user fills out a form, some fields should be disappear, while
+While a user fills out a form, some fields should disappear, while
 others should be visible.
 
 ## Screenshots
