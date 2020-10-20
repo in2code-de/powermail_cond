@@ -309,4 +309,11 @@
 		});
 	});
 
+	// trigger also for back from overview page
+	$('.tx-powermail').on('submitted.powermail.form', function () {
+		$('form.powermail_form').each(function () {
+			(new PowermailCondition(this)).ajaxListener();
+		});
+	});
+
 })(jQuery);
