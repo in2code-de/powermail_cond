@@ -18,19 +18,21 @@ gulp.task('css', function() {
 		config.outputStyle = 'compressed';
 	}
 	return gulp.src('Sass/*.scss')
-			.pipe(plumber())
-			.pipe(sass(config))
-			.pipe(gulp.dest('../Public/Css'));
+		.pipe(plumber())
+		.pipe(sass(config))
+		.pipe(gulp.dest('../Public/Css'));
 });
 
-gulp.task('js', function() {
+gulp.task('js', function (done) {
 	gulp.src('JavaScript/**/*.js')
-			.pipe(plumber())
-			.pipe(uglify())
-			.pipe(rename({
-				suffix: '.min'
-			}))
-			.pipe(gulp.dest('../Public/JavaScript'));
+		.pipe(plumber())
+		.pipe(uglify())
+		.pipe(rename({
+			suffix: '.min'
+		}))
+		.pipe(gulp.dest('../Public/JavaScript'));
+
+	done();
 });
 
 /*********************************
@@ -40,11 +42,11 @@ gulp.task('js', function() {
  *********************************/
 
 gulp.task('watch', function() {
-	gulp.watch('Sass/**/*.scss', ['css']);
-	gulp.watch('JavaScript/**/*.js', ['js']);
+	gulp.watch('Sass/**/*.scss', gulp.series('css'));
+	gulp.watch('JavaScript/**/*.js', gulp.series('js'));
 });
 
-gulp.task('default', ['css', 'js', 'watch']);
+gulp.task('default', gulp.parallel('css', 'js', 'watch'));
 
 /**
  * Get arguments from commandline
