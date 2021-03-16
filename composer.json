@@ -26,5 +26,10 @@
     "psr-4": {
       "In2code\\PowermailCond\\": "Classes/"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "powermail_cond"
+    }
   }
 }
