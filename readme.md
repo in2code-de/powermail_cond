@@ -1,7 +1,7 @@
 # TYPO3 Extension powermail_cond
 
 Conditions for TYPO3 extension powermail.
-While a user fills out a form, some fields should be disappear, while
+While a user fills out a form, some fields should disappear, while
 others should be visible.
 
 ## Screenshots
@@ -48,6 +48,7 @@ routeEnhancers:
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 8.1.0      | 2021-03-18 | Feature    | Add TER autodeployment, add extension key to composer.json, small doc fix    |
 | 8.0.3      | 2020-04-30 | Bugfix     | Enforce content-type in TypoScript                                           |
 | 8.0.2      | 2020-04-30 | Bugfix     | Also support checkboxes (array values) in powermail 8                        |
 | 8.0.1      | 2020-04-29 | Task       | Add useless dependency to TYPO3 for TER upload                               |
