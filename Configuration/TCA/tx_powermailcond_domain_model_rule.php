@@ -194,7 +194,8 @@ return [
                 'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
                 'maxitems' => 1,
-                'default' => ''
+                'default' => 0,
+                'eval' => 'int'
             ],
             'displayCond' => 'FIELD:ops:IN:8,9'
         ],
