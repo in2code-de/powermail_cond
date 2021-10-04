@@ -17,9 +17,6 @@ return [
             \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME . '.gif'
         )
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',
-    ],
     'types' => [
         '0' => ['showitem' => 'conditions,title,start_field,ops,cond_string,equal_field']
     ],

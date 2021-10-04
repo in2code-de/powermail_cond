@@ -20,10 +20,6 @@ return [
             \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.gif'
         )
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
-            endtime,conditioncontainer,title,target_field,actions,filter_select_field,rules,conjunction',
-    ],
     'types' => [
         '1' => [
             'showitem' => 'conditioncontainer, title, target_field, actions, filter_select_field, conjunction, rules'
