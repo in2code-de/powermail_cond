@@ -15,7 +15,8 @@ return [
         ],
         'iconfile' => ConfigurationUtility::getIconPath(
             \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME . '.gif'
-        )
+        ),
+        'hideTable' => 1
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden,conditions,title,start_field,ops,cond_string,equal_field',
