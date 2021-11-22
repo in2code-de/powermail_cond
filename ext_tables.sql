@@ -49,7 +49,7 @@ CREATE TABLE tx_powermailcond_domain_model_condition (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY conditioncontainer (conditioncontainer),
-	KEY target_field (target_field)
+	KEY target_field (target_field(20))
 );
 
 CREATE TABLE tx_powermailcond_domain_model_rule (
@@ -69,7 +69,7 @@ CREATE TABLE tx_powermailcond_domain_model_rule (
 	ops int(11) DEFAULT '0' NOT NULL,
 	cond_string text NOT NULL,
 	equal_field int(11) DEFAULT '0' NOT NULL,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY conditions (conditions),
