@@ -1,6 +1,3 @@
-#
-# Table structure for table 'tx_powermailcond_domain_model_conditioncontainer'
-#
 CREATE TABLE tx_powermailcond_domain_model_conditioncontainer (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -26,9 +23,6 @@ CREATE TABLE tx_powermailcond_domain_model_conditioncontainer (
 	KEY parent (pid)
 );
 
-#
-# Table structure for table 'tx_powermailcond_domain_model_condition'
-#
 CREATE TABLE tx_powermailcond_domain_model_condition (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -53,13 +47,11 @@ CREATE TABLE tx_powermailcond_domain_model_condition (
 	conjunction tinytext NOT NULL,
 
 	PRIMARY KEY (uid),
-	KEY parent (pid)
+	KEY parent (pid),
+	KEY conditioncontainer (conditioncontainer),
+	KEY target_field (target_field)
 );
 
-
-#
-# Table structure for table 'tx_powermailcond_domain_model_rule'
-#
 CREATE TABLE tx_powermailcond_domain_model_rule (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -79,5 +71,8 @@ CREATE TABLE tx_powermailcond_domain_model_rule (
 	equal_field int(11) DEFAULT '0' NOT NULL,
 	
 	PRIMARY KEY (uid),
-	KEY parent (pid)
+	KEY parent (pid),
+	KEY conditions (conditions),
+	KEY start_field (start_field),
+	KEY equal_field (equal_field)
 );
