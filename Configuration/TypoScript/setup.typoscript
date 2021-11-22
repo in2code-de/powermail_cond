@@ -1,0 +1,45 @@
+page {
+  includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.min.js
+
+  3132 = COA
+  3132 {
+    wrap = <script id="powermail_conditions_container"|></script>
+
+    # Uri to send AJAX request
+    10 = TEXT
+    10 {
+      noTrimWrap = | data-condition-uri="|"|
+      typolink {
+        parameter.data = TSFE:id
+        additionalParams = &type=3132
+        returnLast = url
+        forceAbsoluteUrl = 1
+      }
+    }
+  }
+}
+
+powermailCondition = PAGE
+powermailCondition {
+  typeNum = 3132
+  config {
+    disableAllHeaderCode = 1
+    xhtml_cleaning = 0
+    admPanel = 0
+    no_cache = 1
+    debug = 0
+    additionalHeaders.10 {
+      header = Content-type: application/json
+      replace = 1
+    }
+  }
+
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = PowermailCond
+    vendorName = In2code
+    controller = Condition
+    pluginName = Pi1
+  }
+}

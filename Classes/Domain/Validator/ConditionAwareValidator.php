@@ -41,7 +41,7 @@ class ConditionAwareValidator extends InputValidator
         $formUid = $form->getUid();
         $pageUid = $parentPage->getUid();
         $marker = $field->getMarker();
-        
+
         if (ConfigurationUtility::isReplaceIrreWithElementBrowserActive()) {
             /** @var Page $page */
             foreach ($form->getPages() as $page) {

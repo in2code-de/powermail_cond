@@ -7,8 +7,8 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FieldRepository;
 use In2code\Powermail\Domain\Repository\PageRepository;
 use In2code\Powermail\Utility\ObjectUtility;
-use In2code\PowermailCond\Utility\FieldValueUtility;
 use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
+use In2code\PowermailCond\Utility\FieldValueUtility;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -110,7 +110,7 @@ class Condition extends AbstractEntity
     }
 
     /**
-     * @return Field|Page|NULL
+     * @return Field|Page|null
      * @throws Exception
      */
     public function getTargetField()
@@ -239,7 +239,7 @@ class Condition extends AbstractEntity
         }
         // if OR and no field matched: return TRUE
         // if AND and no field matched NOT: return FALSE
-        return ($isOr !== true);
+        return $isOr !== true;
     }
 
     /**
@@ -297,9 +297,9 @@ class Condition extends AbstractEntity
     protected function process(Form $form, array $arguments, $action)
     {
         if (strpos($this->targetField, 'fieldset') !== false) {
-            $targetPageUid = (int) substr($this->targetField, 9);
+            $targetPageUid = (int)substr($this->targetField, 9);
         } else {
-            $this->targetField = (int) $this->targetField;
+            $this->targetField = (int)$this->targetField;
             $targetPageUid = false;
         }
 
@@ -309,12 +309,11 @@ class Condition extends AbstractEntity
             $pageUid = $page->getUid();
             if ($targetPageUid && $pageUid === $targetPageUid) {
                 return $this->applyOnPage($formUid, $page, $arguments, $action);
-            } else {
-                /** @var Field $field */
-                foreach ($page->getFields() as $field) {
-                    if ($field->getUid() === $this->targetField) {
-                        return $this->applyOnField($formUid, $pageUid, $field, $arguments, $action);
-                    }
+            }
+            /** @var Field $field */
+            foreach ($page->getFields() as $field) {
+                if ($field->getUid() === $this->targetField) {
+                    return $this->applyOnField($formUid, $pageUid, $field, $arguments, $action);
                 }
             }
         }

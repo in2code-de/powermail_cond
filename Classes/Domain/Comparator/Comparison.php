@@ -55,12 +55,12 @@ class Comparison
                 break;
             case Rule::OPERATOR_GREATER_THAN:
                 if ($valueToMatch !== '') {
-                    $result = (((int)FieldValueUtility::getValue($leftField)) > ((int) $valueToMatch));
+                    $result = (((int)FieldValueUtility::getValue($leftField)) > ((int)$valueToMatch));
                 }
                 break;
             case Rule::OPERATOR_LESS_THAN:
                 if ($valueToMatch !== '') {
-                    $result = (((int)FieldValueUtility::getValue($leftField)) < ((int) $valueToMatch));
+                    $result = (((int)FieldValueUtility::getValue($leftField)) < ((int)$valueToMatch));
                 }
                 break;
             case Rule::OPERATOR_CONTAINS_VALUE_FROM_FIELD:
@@ -118,6 +118,6 @@ class Comparison
         if (is_array($haystack)) {
             return in_array($needle, $haystack);
         }
-        return (strpos($haystack, $needle) !== false);
+        return strpos($haystack, $needle) !== false;
     }
 }
