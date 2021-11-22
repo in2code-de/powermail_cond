@@ -44,10 +44,20 @@ routeEnhancers:
 ...
 ```
 
+## Breaking changes
+
+
+### Update to 8.2.1
+
+If you update to 8.2.1 the database field tx_powermailcond_domain_model_condition.target_field is changed from text to
+integer. If you your database compare will fail, you could change empty values to integer values like:
+`update tx_powermailcond_domain_model_condition set target_field = 0 where target_field = "";`
+
 ## Changelog
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 8.2.1      | 2021-11-22 | Bugfix     | Use integer field for condition.target_field                                 |
 | 8.2.0      | 2021-11-22 | Task       | Add mysql indices, hide children tables in list view, add code linting tests |
 | 8.1.1      | 2021-08-04 | Task       | Simplify TCA to also fix the start/endtime bug in TYPO3 (last regression)    |
 | 8.1.0      | 2021-03-18 | Feature    | Add TER autodeployment, add extension key to composer.json, small doc fix    |
