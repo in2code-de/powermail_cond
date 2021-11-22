@@ -42,14 +42,14 @@ CREATE TABLE tx_powermailcond_domain_model_condition (
 	conditioncontainer int(11) DEFAULT '0' NOT NULL,
 
 	title tinytext NOT NULL,
-	target_field int(11) DEFAULT '0' NOT NULL,
+	target_field tinytext NOT NULL,
 	actions tinytext NOT NULL,
 	conjunction tinytext NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
 	KEY conditioncontainer (conditioncontainer),
-	KEY target_field (target_field)
+	KEY target_field (target_field(20))
 );
 
 CREATE TABLE tx_powermailcond_domain_model_rule (
