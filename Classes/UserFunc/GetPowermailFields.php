@@ -199,7 +199,7 @@ class GetPowermailFields
      */
     public function setFormUid()
     {
-        $formUid = (int) $this->params['row']['form'];
+        $formUid = (int)$this->params['row']['form'];
         if ($formUid === 0) {
             $formUid = $this->getFormUidFromConditionContainer((int)$this->params['row']['conditioncontainer']);
         }

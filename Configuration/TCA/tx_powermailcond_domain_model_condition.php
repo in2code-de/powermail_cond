@@ -18,7 +18,8 @@ return [
         ],
         'iconfile' => ConfigurationUtility::getIconPath(
             \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.gif'
-        )
+        ),
+        'hideTable' => 1
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,

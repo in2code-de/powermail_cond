@@ -169,11 +169,11 @@ class Rule extends AbstractEntity
     {
         $equalField = null;
         /** @var Page $page */
-        if (((int) $this->equalField) > 0) {
+        if (((int)$this->equalField) > 0) {
             foreach ($form->getPages() as $page) {
                 /** @var Field $field */
                 foreach ($page->getFields() as $field) {
-                    if ($field->getUid() === (int) $this->equalField) {
+                    if ($field->getUid() === (int)$this->equalField) {
                         $equalField = $field;
                         break;
                     }
