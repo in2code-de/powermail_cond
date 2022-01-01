@@ -30,6 +30,14 @@
 		];
 
 		/**
+		 * Selector for fields to be excluded from being sent to backend.
+		 * Might be useful for file upload fields.
+		 *
+		 * @type {string}
+		 */
+		var excludedFieldsSelector = $formElement.data('powermail-cond-excluded-fields-selector');
+
+		/**
 		 * Listening for changes
 		 *
 		 * @returns {void}
@@ -91,6 +99,18 @@
 			var tempEnabledFields = formToSend.find(':disabled').prop('disabled', false);
 			var dataToSend = new FormData($formElement.get(0));
 			tempEnabledFields.prop('disabled', true);
+
+			if (typeof excludedFieldsSelector !== 'undefined') {
+				// gather fields that should be excluded
+				var excludedFields = formToSend.find(excludedFieldsSelector);
+
+				// and remove them from the payload being sent to the backend
+				excludedFields.each(function() {
+					var excludedFieldName = $(this).attr('name');
+					dataToSend.delete(excludedFieldName);
+				});
+			}
+
 			$.ajax({
 				type: 'POST',
 				url: getAjaxUri(),

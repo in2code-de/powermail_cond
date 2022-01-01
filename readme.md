@@ -44,6 +44,22 @@ routeEnhancers:
 ...
 ```
 
+## Trouble shoot: upload fields
+
+For being able to evaluate the conditions on the backend the form data gets sent as payload to the `conditions.json` route. In case of upload files (a.k.a `[type=file]`) the entire set of selected files are being uploaded with every change of basically every input field. This is resource and time consuming.
+
+In case you don't rely on upload field within your set of conditions you can exclude them from being sent to the backend. To do so just specify add a parameter `data-powermail-cond-excluded-fields-selector` to the form template, e.g.
+
+```xml
+                <f:form
+                        action="{action}"
+                        section="c{ttContentData.uid}"
+                        name="field"
+                        enctype="multipart/form-data"
+                        additionalAttributes="{vh:validation.enableParsleyAndAjax(form:form,additionalAttributes:{data-powermail-cond-excluded-fields-selector:'.powermail_file'})}"
+                    >
+```
+
 ## Changelog
 
 | Version    | Date       | State      | Description                                                                                                                          |
