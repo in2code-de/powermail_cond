@@ -23,7 +23,7 @@ class Note extends AbstractFormElement
      *
      * @var string
      */
-    protected $locallangPath = 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:';
+    protected $locallangPath = 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:';
 
     /**
      * @var int

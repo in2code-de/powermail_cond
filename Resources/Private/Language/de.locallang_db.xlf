@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xml:space="preserve">
+	<file source-language="en" datatype="plaintext" product-name="powermail_cond">
+		<header/>
+		<body>
+			<trans-unit id="tx_powermailcond_conditioncontainer">
+				<source>Condition container</source>
+				<target>Bedingungssammlung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.title">
+				<source>Title</source>
+				<target>Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.form">
+				<source>Form</source>
+				<target>Formular</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.form.pleaseChoose">
+				<source>Please choose...</source>
+				<target>Bitte wählen...</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.conditions">
+				<source>Conditions</source>
+				<target>Bedingungen</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.note.title">
+				<source>Warning</source>
+				<target>Warnung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditioncontainer.note.description">
+				<source>The linked form contains more then 30 fields. That could cause performance issues in the frontend.</source>
+				<target>Das verlinkte Formular beinhalted mehr als 30 Felder. Hierbei kann es zu Performance-Problemen im Frontend kommen.</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions">
+				<source>Condition</source>
+				<target>Bedingung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.title">
+				<source>Title</source>
+				<target>Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.targetField">
+				<source>Which field is affected (target field)?</source>
+				<target>Welches Feld ist betroffen (Zielfeld)?</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.targetField.I.0">
+				<source>Please choose...</source>
+				<target>Bitte wählen...</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.action">
+				<source>What should happen to the chosen field?</source>
+				<target>Was soll mit dem gewählten Feld passieren?</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.action.I.main">
+				<source>Main actions</source>
+				<target>Hauptaktionen</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.action.I.additional">
+				<source>Additional Actions</source>
+				<target>Zusätzliche Aktionen</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.action.I.0">
+				<source>hide</source>
+				<target>verberge</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.action.I.1">
+				<source>unhide</source>
+				<target>zeige</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.rules">
+				<source>Rules</source>
+				<target>Regeln</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.conjunction">
+				<source>Conjunction of the rules (if more than only 1)</source>
+				<target>Logische Verknüpfung der Regeln (wenn mehr als 1 Regel)</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.conjunction.I.0">
+				<source>AND</source>
+				<target>UND</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.conjunction.I.1">
+				<source>OR</source>
+				<target>ODER</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_conditions.conditioncontainer">
+				<source>Condition container</source>
+				<target>Bedingungssammlung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules">
+				<source>Rule</source>
+				<target>Regel</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.title">
+				<source>Title</source>
+				<target>Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.startField">
+				<source>Which field starts the condition (start field)?</source>
+				<target>Welches Feld löst die Bedingung aus (Startfeld)?</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.startField.I.0">
+				<source>Please choose...</source>
+				<target>Bitte wählen...</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator">
+				<source>Operator</source>
+				<target>Operator</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.operators">
+				<source>Simple Operators</source>
+				<target>Einfache Operatoren</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.operatorsComparisonValue">
+				<source>Operators with comparison value</source>
+				<target>Operatoren mit Vergleichswert</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.operatorsComparisonField">
+				<source>Operators with comparison field</source>
+				<target>Operatoren mit Vergleichsfeld</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.0">
+				<source>is set</source>
+				<target>nicht leer</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.1">
+				<source>is not set</source>
+				<target>leer</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.2">
+				<source>contains value</source>
+				<target>beinhaltet Wert</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.3">
+				<source>contains value not</source>
+				<target>beinhaltet Wert nichttex</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.4">
+				<source>is</source>
+				<target>ist</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.5">
+				<source>is not</source>
+				<target>ist nicht</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.6">
+				<source>is greater than (numbers only)</source>
+				<target>ist größer als (nur Zahlen)</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.7">
+				<source>is less than (numbers only)</source>
+				<target>ist kleiner als (nur Zahlen)</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.8">
+				<source>contains value from field</source>
+				<target>beinhaltet Wert von Feld</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.operator.I.9">
+				<source>contains not value from field</source>
+				<target>beinhaltet nicht Wert von Feld</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.condstring">
+				<source>Value</source>
+				<target>Wert</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.equalField">
+				<source>Field for comparison</source>
+				<target>Vergleichsfeld</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.equalField.I.0">
+				<source>Please choose...</source>
+				<target>Bitte wählen...</target>
+			</trans-unit>
+			<trans-unit id="tx_powermailcond_rules.condition">
+				<source>Condition</source>
+				<target>Bedingung</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

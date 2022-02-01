@@ -7,7 +7,7 @@ use In2code\PowermailCond\Utility\ConfigurationUtility;
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+        'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
             'tx_powermailcond_conditioncontainer',
         'label' => 'title',
         'tstamp' => 'tstamp',
@@ -119,7 +119,7 @@ return [
         ],
         'title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_powermailcond_conditioncontainer.title',
             'config' => [
                 'type' => 'input',
@@ -129,7 +129,7 @@ return [
         ],
         'form' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_powermailcond_conditioncontainer.form',
             'onChange' => 'reload',
             'config' => [
@@ -137,7 +137,7 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_powermailcond_conditioncontainer.form.pleaseChoose',
                         '',
                     ],
@@ -160,7 +160,7 @@ return [
         'conditions' => [
             'displayCond' => 'FIELD:form:>:0',
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_powermailcond_conditioncontainer.conditions',
             'config' => [
                 'type' => 'inline',
