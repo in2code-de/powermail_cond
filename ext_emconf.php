@@ -11,8 +11,8 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'in2code.de',
     'constraints' => [
         'depends' => [
-            'powermail' => '8.0.0-9.99.99',
-            'typo3' => '10.4.0-11.45.99'
+            'powermail' => '8.3.2-9.99.99',
+            'typo3' => '11.5.0-11.99.99'
         ],
         'conflicts' => [
         ],
