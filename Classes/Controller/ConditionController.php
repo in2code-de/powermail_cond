@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Controller;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -22,7 +23,6 @@ use TYPO3\CMS\Extbase\Object\Exception;
  */
 class ConditionController extends ActionController
 {
-
     /**
      * @var array
      */

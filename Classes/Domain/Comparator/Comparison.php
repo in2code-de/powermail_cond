@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Domain\Comparator;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -11,7 +12,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Comparison
 {
-
     /**
      * @var int
      */

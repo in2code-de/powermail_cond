@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Utility;
 
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;

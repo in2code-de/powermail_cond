@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -16,7 +17,6 @@ use TYPO3\CMS\Extbase\Object\Exception;
 class Rule extends AbstractEntity
 {
     const TABLE_NAME = 'tx_powermailcond_domain_model_rule';
-
     const OPERATOR_IS_SET = 0;
     const OPERATOR_NOT_IS_SET = 1;
     const OPERATOR_CONTAINS_VALUE = 2;

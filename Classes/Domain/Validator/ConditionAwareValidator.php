@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Domain\Validator;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -16,7 +17,6 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
  */
 class ConditionAwareValidator extends InputValidator
 {
-
     /**
      * Validate a single field
      *

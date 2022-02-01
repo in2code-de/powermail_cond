@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\UserFunc;
 
 use Doctrine\DBAL\DBALException;
@@ -12,7 +13,6 @@ use In2code\PowermailCond\Domain\Model\ConditionContainer;
  */
 class GetPowermailFormsWithoutConditionRelation
 {
-
     /**
      * @var array
      */

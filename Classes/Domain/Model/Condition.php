@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -13,6 +14,7 @@ use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotCon
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Object\Exception;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class Condition
@@ -20,7 +22,6 @@ use TYPO3\CMS\Extbase\Object\Exception;
 class Condition extends AbstractEntity
 {
     const TABLE_NAME = 'tx_powermailcond_domain_model_condition';
-
     const CONJUNCTION_OR = 'OR';
     const CONJUNCTION_AND = 'AND';
     const ACTION_HIDE = 0;

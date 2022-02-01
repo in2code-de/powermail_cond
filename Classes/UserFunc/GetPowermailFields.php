@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\UserFunc;
 
 use Doctrine\DBAL\DBALException;
@@ -17,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class GetPowermailFields
 {
-
     /**
      * @var array
      */
@@ -36,7 +36,7 @@ class GetPowermailFields
         'textarea',
         'select',
         'radio',
-        'check'
+        'check',
     ];
 
     /**
@@ -60,12 +60,12 @@ class GetPowermailFields
         $fields = $this->getFieldsFromForm();
         $this->params['items'][] = [
             'powermail Fields',
-            '--div--'
+            '--div--',
         ];
         foreach ($fields as $properties) {
             $this->params['items'][] = [
                 $this->getLabelFromFieldProperties($properties),
-                $properties['uid']
+                $properties['uid'],
             ];
         }
     }
@@ -81,12 +81,12 @@ class GetPowermailFields
             $fieldsets = $this->getFieldsetsFromForm();
             $this->params['items'][] = [
                 'powermail Fieldsets',
-                '--div--'
+                '--div--',
             ];
             foreach ($fieldsets as $properties) {
                 $this->params['items'][] = [
                     $properties['title'] . ' (' . $properties['uid'] . ')',
-                    'fieldset:' . $properties['uid']
+                    'fieldset:' . $properties['uid'],
                 ];
             }
         }

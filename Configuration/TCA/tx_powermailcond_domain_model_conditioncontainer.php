@@ -1,4 +1,8 @@
 <?php
+
+use In2code\Powermail\Domain\Model\Form;
+use In2code\PowermailCond\Domain\Model\Condition;
+use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use In2code\PowermailCond\Utility\ConfigurationUtility;
 
 return [
@@ -18,8 +22,8 @@ return [
             'endtime' => 'endtime',
         ],
         'iconfile' => ConfigurationUtility::getIconPath(
-            \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.gif'
-        )
+            Condition::TABLE_NAME . '.gif'
+        ),
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,' .
@@ -29,7 +33,7 @@ return [
         '1' => ['showitem' => 'title, form, conditions, note'],
     ],
     'palettes' => [
-        '1' => []
+        '1' => [],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -46,10 +50,10 @@ return [
                     [
                         'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
                         -1,
-                        'flags-multiple'
-                    ]
+                        'flags-multiple',
+                    ],
                 ],
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'l18n_parent' => [
@@ -62,18 +66,18 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME,
+                'foreign_table' => ConditionContainer::TABLE_NAME,
                 'foreign_table_where' =>
-                    'AND ' . \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME
+                    'AND ' . ConditionContainer::TABLE_NAME
                     . '.pid=###CURRENT_PID### AND ' .
-                    \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME . '.sys_language_uid IN (-1,0)',
-                'default' => 0
-            ]
+                    ConditionContainer::TABLE_NAME . '.sys_language_uid IN (-1,0)',
+                'default' => 0,
+            ],
         ],
         'l18n_diffsource' => [
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -81,7 +85,7 @@ return [
             'config' => [
                 'type' => 'check',
             ],
-            'default' => 0
+            'default' => 0,
         ],
         'starttime' => [
             'exclude' => true,
@@ -91,7 +95,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime,int',
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'endtime' => [
@@ -102,7 +106,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime,int',
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'note' => [
@@ -110,7 +114,7 @@ return [
             'config' => [
                 'type' => 'user',
                 'renderType' => 'powermailCondShowNote',
-                'parameters' => []
+                'parameters' => [],
             ],
         ],
         'title' => [
@@ -121,7 +125,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'default' => '',
-            ]
+            ],
         ],
         'form' => [
             'exclude' => true,
@@ -135,8 +139,8 @@ return [
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditioncontainer.form.pleaseChoose',
-                        ''
-                    ]
+                        '',
+                    ],
                 ],
                 'itemsProcFunc' =>
                     'In2code\PowermailCond\UserFunc\GetPowermailFormsWithoutConditionRelation->filterForms',
@@ -145,13 +149,13 @@ return [
                 'size' => 1,
                 'minitems' => 1,
                 'requestUpdate' => 1,
-                'foreign_table' => \In2code\Powermail\Domain\Model\Form::TABLE_NAME,
-                'foreign_table_where' => 'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.deleted = 0 ' .
-                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.hidden = 0 ' .
-                    'AND ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.sys_language_uid IN (-1,0) ' .
-                    'order by ' . \In2code\Powermail\Domain\Model\Form::TABLE_NAME . '.title',
-                'default' => 0
-            ]
+                'foreign_table' => Form::TABLE_NAME,
+                'foreign_table_where' => 'AND ' . Form::TABLE_NAME . '.deleted = 0 ' .
+                    'AND ' . Form::TABLE_NAME . '.hidden = 0 ' .
+                    'AND ' . Form::TABLE_NAME . '.sys_language_uid IN (-1,0) ' .
+                    'order by ' . Form::TABLE_NAME . '.title',
+                'default' => 0,
+            ],
         ],
         'conditions' => [
             'displayCond' => 'FIELD:form:>:0',
@@ -160,10 +164,10 @@ return [
                 'tx_powermailcond_conditioncontainer.conditions',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME,
+                'foreign_table' => Condition::TABLE_NAME,
                 'foreign_table_where' =>
-                    'AND ' . \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.pid=###CURRENT_PID### '
-                    . 'ORDER BY ' . \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.sorting',
+                    'AND ' . Condition::TABLE_NAME . '.pid=###CURRENT_PID### '
+                    . 'ORDER BY ' . Condition::TABLE_NAME . '.sorting',
                 'foreign_field' => 'conditioncontainer',
                 'maxitems' => 99,
                 'appearance' => [
@@ -173,8 +177,8 @@ return [
                     'newRecordLinkAddTitle' => 1,
                     'newRecordLinkPosition' => 'both',
                 ],
-                'default' => 0
-            ]
-        ]
-    ]
+                'default' => 0,
+            ],
+        ],
+    ],
 ];

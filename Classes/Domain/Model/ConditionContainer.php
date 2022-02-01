@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Form;
@@ -39,7 +40,6 @@ class ConditionContainer extends AbstractEntity
      */
     public function applyConditions(Form $form, array $arguments)
     {
-
         // run this loop if any condition changed something
         // but stop after 100 rounds to prevent infinite loops (built by editors)
         while ($this->somethingChanged && $this->loopCount < 100) {

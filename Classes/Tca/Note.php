@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Tca;
 
 use Doctrine\DBAL\DBALException;
@@ -64,7 +66,7 @@ class Note extends AbstractFormElement
         $query .= ' from ' . Field::TABLE_NAME . ' f ' .
             'left join ' . Page::TABLE_NAME . ' p on f.page = p.uid ' .
             'left join ' . Form::TABLE_NAME . ' form on p.form = form.uid';
-        $query .=  ' where form.uid = ' . (int)$formUid . ' and f.hidden = 0 and f.deleted = 0 ' .
+        $query .= ' where form.uid = ' . (int)$formUid . ' and f.hidden = 0 and f.deleted = 0 ' .
             'and p.hidden = 0 and p.deleted = 0';
         return (int)$connection->executeQuery($query)->fetchColumn();
     }

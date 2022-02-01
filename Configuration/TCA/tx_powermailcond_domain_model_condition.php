@@ -1,4 +1,8 @@
 <?php
+
+use In2code\PowermailCond\Domain\Model\Condition;
+use In2code\PowermailCond\Domain\Model\ConditionContainer;
+use In2code\PowermailCond\Domain\Model\Rule;
 use In2code\PowermailCond\Utility\ConfigurationUtility;
 
 return [
@@ -17,9 +21,9 @@ return [
             'endtime' => 'endtime',
         ],
         'iconfile' => ConfigurationUtility::getIconPath(
-            \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.gif'
+            Condition::TABLE_NAME . '.gif'
         ),
-        'hideTable' => 1
+        'hideTable' => 1,
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
@@ -27,7 +31,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'conditioncontainer, title, target_field, actions, filter_select_field, conjunction, rules'
+            'showitem' => 'conditioncontainer, title, target_field, actions, filter_select_field, conjunction, rules',
         ],
     ],
     'palettes' => [
@@ -48,10 +52,10 @@ return [
                     [
                         'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
                         -1,
-                        'flags-multiple'
-                    ]
+                        'flags-multiple',
+                    ],
                 ],
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'l18n_parent' => [
@@ -64,17 +68,17 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME,
+                'foreign_table' => Condition::TABLE_NAME,
                 'foreign_table_where' =>
-                    'AND ' . \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.pid=###CURRENT_PID### AND ' .
-                    \In2code\PowermailCond\Domain\Model\Condition::TABLE_NAME . '.sys_language_uid IN (-1,0)',
-                'default' => 0
-            ]
+                    'AND ' . Condition::TABLE_NAME . '.pid=###CURRENT_PID### AND ' .
+                    Condition::TABLE_NAME . '.sys_language_uid IN (-1,0)',
+                'default' => 0,
+            ],
         ],
         'l18n_diffsource' => [
             'config' => [
-                'type' => 'passthrough'
-            ]
+                'type' => 'passthrough',
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -82,7 +86,7 @@ return [
             'config' => [
                 'type' => 'check',
             ],
-            'default' => 0
+            'default' => 0,
         ],
         'starttime' => [
             'exclude' => true,
@@ -92,7 +96,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime,int',
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'endtime' => [
@@ -104,7 +108,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime,int',
                 'size' => 13,
-                'default' => 0
+                'default' => 0,
             ],
         ],
 
@@ -116,7 +120,7 @@ return [
                 'type' => 'input',
                 'size' => '30',
                 'default' => '',
-            ]
+            ],
         ],
         'rules' => [
             'exclude' => true,
@@ -124,10 +128,10 @@ return [
                 'tx_powermailcond_conditions.rules',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME,
+                'foreign_table' => Rule::TABLE_NAME,
                 'foreign_table_where' =>
-                    'AND ' . \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME . '.pid=###CURRENT_PID### ' .
-                    'ORDER BY ' . \In2code\PowermailCond\Domain\Model\Rule::TABLE_NAME . '.sorting',
+                    'AND ' . Rule::TABLE_NAME . '.pid=###CURRENT_PID### ' .
+                    'ORDER BY ' . Rule::TABLE_NAME . '.sorting',
                 'foreign_field' => 'conditions',
                 'maxitems' => 99,
                 'appearance' => [
@@ -152,18 +156,18 @@ return [
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.conjunction.I.1',
-                        \In2code\PowermailCond\Domain\Model\Condition::CONJUNCTION_OR
+                        Condition::CONJUNCTION_OR,
                     ],
                     // AND
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.conjunction.I.0',
-                        \In2code\PowermailCond\Domain\Model\Condition::CONJUNCTION_AND
+                        Condition::CONJUNCTION_AND,
                     ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
-                'default' => ''
+                'default' => '',
             ],
         ],
         'target_field' => [
@@ -177,7 +181,7 @@ return [
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.targetField.I.0',
-                        '0'
+                        '0',
                     ],
                 ],
                 'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
@@ -203,30 +207,30 @@ return [
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.action.I.main',
-                        '--div--'
+                        '--div--',
                     ],
                     // hide
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.action.I.0',
-                        \In2code\PowermailCond\Domain\Model\Condition::ACTION_HIDE
+                        Condition::ACTION_HIDE,
                     ],
                     // unhide
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.action.I.1',
-                        \In2code\PowermailCond\Domain\Model\Condition::ACTION_UN_HIDE
+                        Condition::ACTION_UN_HIDE,
                     ],
                     // title additional
                     [
                         'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xml:' .
                         'tx_powermailcond_conditions.action.I.additional',
-                        '--div--'
+                        '--div--',
                     ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
-                'default' => ''
+                'default' => '',
             ],
         ],
         'conditioncontainer' => [
@@ -240,15 +244,15 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME,
+                'foreign_table' => ConditionContainer::TABLE_NAME,
                 'foreign_table_where' =>
-                    'AND ' . \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME
+                    'AND ' . ConditionContainer::TABLE_NAME
                     . '.pid=###CURRENT_PID### '
-                    . 'AND ' . \In2code\PowermailCond\Domain\Model\ConditionContainer::TABLE_NAME
+                    . 'AND ' . ConditionContainer::TABLE_NAME
                     . '.sys_language_uid IN '
                     . '(-1,###REC_FIELD_sys_language_uid###)',
-                'default' => 0
-            ]
-        ]
-    ]
+                'default' => 0,
+            ],
+        ],
+    ],
 ];
