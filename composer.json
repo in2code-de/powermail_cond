@@ -47,8 +47,8 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "mkdir -p .Build/public/typo3conf/ext/",
-      "[ -L .Build/public/typo3conf/ext/powermail_cond ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/powermail_cond"
+      "mkdir -p .Build/Web/typo3conf/ext/",
+      "[ -L .Build/Web/typo3conf/ext/powermail_cond ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/powermail_cond"
     ],
     "test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
     "test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
@@ -56,7 +56,7 @@
   },
   "extra": {
     "typo3/cms": {
-      "web-dir": ".Build/public",
+      "web-dir": ".Build/Web",
       "extension-key": "powermail_cond"
     }
   }
