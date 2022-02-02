@@ -1,65 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\UserFunc;
 
-use Doctrine\DBAL\DBALException;
-use In2code\Powermail\Utility\DatabaseUtility;
-use In2code\PowermailCond\Domain\Model\ConditionContainer;
+use Throwable;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
+
+use function array_keys;
+use function in_array;
 
 /**
- * Get powermail forms that have no related condition containers
- *
- * Class GetPowermailFormsWithoutConditionRelation
+ * Remove all forms from the selectable items that are already selected in another condition container.
  */
 class GetPowermailFormsWithoutConditionRelation
 {
-    /**
-     * @var array
-     */
-    protected $params = [];
+    protected ConnectionPool $connectionPool;
 
-    /**
-     * @var int
-     */
-    protected $currentFormUid = 0;
-
-    /**
-     * remove forms that are already related to a condition container
-     *
-     * @param array $params
-     * @return void
-     * @throws DBALException
-     */
-    public function filterForms(array &$params)
+    public function __construct(ConnectionPool $connectionPool)
     {
-        $this->initialize($params);
-        foreach ((array)$this->params['items'] as $key => $form) {
-            if ($this->hasFormRelatedConditionContainers((int)$form[1]) && (int)$form[1] !== $this->currentFormUid) {
-                unset($this->params['items'][$key]);
+        $this->connectionPool = $connectionPool;
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function filterForms(array &$params): void
+    {
+        $currentForm = (int)$params['row']['form'];
+        $formsToSkip = [0, $currentForm];
+
+        $availableForms = [];
+        $items = (array)$params['items'];
+        foreach ($items as $key => $form) {
+            $formUid = (int)$form[1];
+            if (!in_array($formUid, $formsToSkip)) {
+                $availableForms[$formUid] = $key;
             }
         }
-    }
 
-    /**
-     * @param int $formUid
-     * @return bool
-     * @throws DBALException
-     */
-    protected function hasFormRelatedConditionContainers(int $formUid): bool
-    {
-        $connection = DatabaseUtility::getConnectionForTable(ConditionContainer::TABLE_NAME);
-        $query
-            = 'select uid from ' . ConditionContainer::TABLE_NAME . ' where form=' . (int)$formUid . ' and deleted=0';
-        return $connection->executeQuery($query)->fetchColumn() !== false;
-    }
+        $query = $this->connectionPool->getQueryBuilderForTable('tx_powermailcond_domain_model_conditioncontainer');
+        $query->getRestrictions()->removeAll()->add(new DeletedRestriction());
+        $query->select('form')
+              ->distinct()
+              ->from('tx_powermailcond_domain_model_conditioncontainer')
+              ->where($query->expr()->in('form', array_keys($availableForms)));
+        $existingForms = $query->execute()->fetchFirstColumn();
 
-    /**
-     * @param array $params
-     * @return void
-     */
-    protected function initialize(array &$params)
-    {
-        $this->params = &$params;
-        $this->currentFormUid = (int)$this->params['row']['form'];
+        foreach ($existingForms as $uid) {
+            $key = $availableForms[$uid];
+            unset($params['items'][$key]);
+        }
     }
 }

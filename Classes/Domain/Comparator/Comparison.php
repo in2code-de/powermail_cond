@@ -1,122 +1,111 @@
 <?php
 
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Domain\Comparator;
 
 use In2code\Powermail\Domain\Model\Field;
 use In2code\PowermailCond\Domain\Model\Rule;
-use In2code\PowermailCond\Utility\FieldValueUtility;
+use JsonException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class Comparison
- */
+use function in_array;
+use function is_array;
+use function json_decode;
+use function strpos;
+
+use const JSON_THROW_ON_ERROR;
+use const PHP_EOL;
+
 class Comparison
 {
-    /**
-     * @var int
-     */
-    protected $operation = 0;
+    protected int $operation = 0;
 
-    /**
-     * @param int $operation
-     */
-    public function __construct($operation)
+    public function __construct(int $operation)
     {
         $this->operation = $operation;
     }
 
-    /**
-     * @param Field $leftField
-     * @param string $valueToMatch
-     * @param Field $rightField
-     * @return bool
-     */
-    public function evaluate(Field $leftField, $valueToMatch = '', Field $rightField = null)
+    public function evaluate(Field $leftField, string $valueToMatch, ?Field $rightField): bool
     {
-        $result = false;
+        $leftFieldValue = $this->getFieldValue($leftField);
         switch ($this->operation) {
             case Rule::OPERATOR_IS_SET:
-                $result = $this->operationIsNotEmpty(FieldValueUtility::getValue($leftField));
-                break;
+                return !empty($leftFieldValue);
             case Rule::OPERATOR_NOT_IS_SET:
-                $result = !$this->operationIsNotEmpty(FieldValueUtility::getValue($leftField));
-                break;
+                return empty($leftFieldValue);
             case Rule::OPERATOR_CONTAINS_VALUE:
-                $result = $this->operationContains(FieldValueUtility::getValue($leftField), $valueToMatch);
-                break;
+                return $this->operationContains($leftFieldValue, $valueToMatch);
             case Rule::OPERATOR_NOT_CONTAINS_VALUE:
-                $result = !$this->operationContains(FieldValueUtility::getValue($leftField), $valueToMatch);
-                break;
+                return !$this->operationContains($leftFieldValue, $valueToMatch);
             case Rule::OPERATOR_IS:
-                $result = (FieldValueUtility::getValue($leftField) === $valueToMatch);
-                break;
+                return $leftFieldValue === $valueToMatch;
             case Rule::OPERATOR_NOT_IS:
-                $result = (FieldValueUtility::getValue($leftField) !== $valueToMatch);
-                break;
+                return $leftFieldValue !== $valueToMatch;
             case Rule::OPERATOR_GREATER_THAN:
                 if ($valueToMatch !== '') {
-                    $result = (((int)FieldValueUtility::getValue($leftField)) > ((int)$valueToMatch));
+                    return (int)$leftFieldValue > (int)$valueToMatch;
                 }
-                break;
+                return false;
             case Rule::OPERATOR_LESS_THAN:
                 if ($valueToMatch !== '') {
-                    $result = (((int)FieldValueUtility::getValue($leftField)) < ((int)$valueToMatch));
+                    return (int)$leftFieldValue < (int)$valueToMatch;
                 }
-                break;
+                return false;
             case Rule::OPERATOR_CONTAINS_VALUE_FROM_FIELD:
-                if ($rightField instanceof Field) {
-                    $result = $this->operationContains(
-                        FieldValueUtility::getValue($rightField),
-                        FieldValueUtility::getValue($leftField)
-                    );
+                if (!$rightField instanceof Field) {
+                    return false;
                 }
-                break;
+                $rightFieldValue = $this->getFieldValue($rightField);
+                return $this->operationContains($rightFieldValue, $leftFieldValue);
             case Rule::OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD:
-                if ($rightField instanceof Field) {
-                    $result = !$this->operationContains(
-                        FieldValueUtility::getValue($rightField),
-                        FieldValueUtility::getValue($leftField)
-                    );
+                if (!$rightField instanceof Field) {
+                    return false;
                 }
-                break;
+                $rightFieldValue = $this->getFieldValue($rightField);
+                return !$this->operationContains($rightFieldValue, $leftFieldValue);
         }
-        return $result;
+        return false;
     }
 
     /**
-     * @param $value
-     * @return bool
+     * @return string|array
      */
-    protected function operationIsNotEmpty($value)
+    public function getFieldValue(Field $field)
     {
-        return !empty($value);
+        $value = $field->getText();
+        if (($value[0] ?? '') === '{') {
+            try {
+                return json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+            } catch (JsonException $exception) {
+                // No JSON, no problem.
+            }
+        }
+        return $value;
     }
 
     /**
      * @param string|array $haystack
-     * @param string|array $needle If array, all elements must be contained in $haystack (OR)
-     * @return bool
+     * @param string|array $needle If it is an array, all elements must be contained in $haystack (OR)
      */
-    protected function operationContains($haystack, $needle)
+    protected function operationContains($haystack, $needle): bool
     {
-        if (!$this->operationIsNotEmpty($needle) || !$this->operationIsNotEmpty($haystack)) {
+        if (empty($needle) || empty($haystack)) {
             return false;
         }
-        if (strpos($needle, PHP_EOL)) {
+        if (strpos((string)$needle, PHP_EOL)) {
             $needle = GeneralUtility::trimExplode(PHP_EOL, $needle);
         }
         if (is_array($needle)) {
             foreach ($needle as $needleString) {
-                if ($this->operationIsNotEmpty($needleString)) {
-                    if (strpos($haystack, $needleString) !== false) {
-                        return true;
-                    }
+                if (!empty($needleString) && strpos($haystack, $needleString) !== false) {
+                    return true;
                 }
             }
             return false;
         }
         if (is_array($haystack)) {
-            return in_array($needle, $haystack);
+            return in_array($needle, $haystack, false);
         }
         return strpos($haystack, $needle) !== false;
     }

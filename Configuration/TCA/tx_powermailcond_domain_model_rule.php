@@ -1,8 +1,8 @@
 <?php
 
-use In2code\PowermailCond\Domain\Model\Condition;
+declare(strict_types=1);
+
 use In2code\PowermailCond\Domain\Model\Rule;
-use In2code\PowermailCond\Utility\ConfigurationUtility;
 
 return [
     'ctrl' => [
@@ -16,9 +16,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => ConfigurationUtility::getIconPath(
-            Rule::TABLE_NAME . '.gif'
-        ),
+        'iconfile' => 'EXT:powermail_cond/Resources/Public/Icons/tx_powermailcond_domain_model_rule.gif',
         'hideTable' => 1,
     ],
     'interface' => [
@@ -39,11 +37,9 @@ return [
                 'default' => 0,
             ],
         ],
-
         'title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.title',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.title',
             'config' => [
                 'type' => 'input',
                 'size' => '30',
@@ -52,19 +48,17 @@ return [
         ],
         'start_field' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.startField',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.startField',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.startField.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.startField.I.0',
                         '0',
                     ],
                 ],
-                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
+                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFormFieldsForRule',
                 // allow only this types of fields in selector
                 'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
@@ -75,8 +69,7 @@ return [
         ],
         'ops' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.operator',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator',
             'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
@@ -84,80 +77,67 @@ return [
                 'items' => [
                     // title operators
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.operators',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.operators',
                         '--div--',
                     ],
                     // is set
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.0',
                         Rule::OPERATOR_IS_SET,
                     ],
                     // is not set
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.1',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.1',
                         Rule::OPERATOR_NOT_IS_SET,
                     ],
                     // title operatorsComparisonValue
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.operatorsComparisonValue',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.operatorsComparisonValue',
                         '--div--',
                     ],
                     // contains
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.2',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.2',
                         Rule::OPERATOR_CONTAINS_VALUE,
                     ],
                     // contains not
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.3',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.3',
                         Rule::OPERATOR_NOT_CONTAINS_VALUE,
                     ],
                     // is
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.4',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.4',
                         Rule::OPERATOR_IS,
                     ],
                     // is not
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.5',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.5',
                         Rule::OPERATOR_NOT_IS,
                     ],
                     // is greater than
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.6',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.6',
                         Rule::OPERATOR_GREATER_THAN,
                     ],
                     // is less than
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.7',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.7',
                         Rule::OPERATOR_LESS_THAN,
                     ],
                     // title operatorsComparisonField
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.operatorsComparisonField',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.operatorsComparisonField',
                         '--div--',
                     ],
                     // contains value from field
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.8',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.8',
                         Rule::OPERATOR_CONTAINS_VALUE_FROM_FIELD,
                     ],
                     // contains not value from field
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.operator.I.9',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.operator.I.9',
                         Rule::OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD,
                     ],
                 ],
@@ -168,8 +148,7 @@ return [
         ],
         'cond_string' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.condstring',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.condstring',
             'config' => [
                 'type' => 'text',
                 'cols' => '30',
@@ -181,19 +160,17 @@ return [
         ],
         'equal_field' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.equalField',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.equalField',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_rules.equalField.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.equalField.I.0',
                         '0',
                     ],
                 ],
-                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
+                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFormFieldsForRule',
                 // allow only this types of fields in selector
                 'itemsProcFuncValue' => 'input,textarea,select,radio,check',
                 'size' => 1,
@@ -206,19 +183,15 @@ return [
         'conditions' => [
             'l10n_mode' => 'exclude',
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_rules.condition',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_rules.condition',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => Condition::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . Condition::TABLE_NAME . '.pid=###CURRENT_PID### AND
-                    ' . Condition::TABLE_NAME . '.sys_language_uid IN
-                    (-1,###REC_FIELD_sys_language_uid###)',
+                'foreign_table' => 'tx_powermailcond_domain_model_condition',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
                 'default' => 0,
             ],
         ],

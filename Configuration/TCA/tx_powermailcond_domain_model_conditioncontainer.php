@@ -1,14 +1,10 @@
 <?php
 
-use In2code\Powermail\Domain\Model\Form;
-use In2code\PowermailCond\Domain\Model\Condition;
-use In2code\PowermailCond\Domain\Model\ConditionContainer;
-use In2code\PowermailCond\Utility\ConfigurationUtility;
+declare(strict_types=1);
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-            'tx_powermailcond_conditioncontainer',
+        'title' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditioncontainer',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -21,13 +17,10 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'iconfile' => ConfigurationUtility::getIconPath(
-            Condition::TABLE_NAME . '.gif'
-        ),
+        'iconfile' => 'EXT:powermail_cond/Resources/Public/Icons/tx_powermailcond_domain_model_condition.gif',
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,' .
-            'endtime,title,form,conditions',
+        'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,title,form,conditions',
     ],
     'types' => [
         '1' => ['showitem' => 'title, form, conditions, note'],
@@ -43,7 +36,6 @@ return [
                 'type' => 'select',
                 'special' => 'languages',
                 'renderType' => 'selectSingle',
-
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
@@ -66,11 +58,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => ConditionContainer::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . ConditionContainer::TABLE_NAME
-                    . '.pid=###CURRENT_PID### AND ' .
-                    ConditionContainer::TABLE_NAME . '.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_powermailcond_domain_model_conditioncontainer',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_conditioncontainer.pid=###CURRENT_PID### AND tx_powermailcond_domain_model_conditioncontainer.sys_language_uid IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -119,8 +108,7 @@ return [
         ],
         'title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditioncontainer.title',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditioncontainer.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -129,45 +117,36 @@ return [
         ],
         'form' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditioncontainer.form',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditioncontainer.form',
             'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditioncontainer.form.pleaseChoose',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditioncontainer.form.pleaseChoose',
                         '',
                     ],
                 ],
-                'itemsProcFunc' =>
-                    'In2code\PowermailCond\UserFunc\GetPowermailFormsWithoutConditionRelation->filterForms',
+                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFormsWithoutConditionRelation->filterForms',
                 'itemsProcFunc_addFieldsets' => true,
                 'maxitems' => 1,
                 'size' => 1,
                 'minitems' => 1,
                 'requestUpdate' => 1,
-                'foreign_table' => Form::TABLE_NAME,
-                'foreign_table_where' => 'AND ' . Form::TABLE_NAME . '.deleted = 0 ' .
-                    'AND ' . Form::TABLE_NAME . '.hidden = 0 ' .
-                    'AND ' . Form::TABLE_NAME . '.sys_language_uid IN (-1,0) ' .
-                    'order by ' . Form::TABLE_NAME . '.title',
+                'foreign_table' => 'tx_powermail_domain_model_form',
+                'foreign_table_where' => 'AND tx_powermail_domain_model_form.deleted = 0 AND tx_powermail_domain_model_form.hidden = 0 AND tx_powermail_domain_model_form.sys_language_uid IN (-1,0) order by tx_powermail_domain_model_form.title',
                 'default' => 0,
             ],
         ],
         'conditions' => [
             'displayCond' => 'FIELD:form:>:0',
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditioncontainer.conditions',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditioncontainer.conditions',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => Condition::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . Condition::TABLE_NAME . '.pid=###CURRENT_PID### '
-                    . 'ORDER BY ' . Condition::TABLE_NAME . '.sorting',
+                'foreign_table' => 'tx_powermailcond_domain_model_condition',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### ORDER BY tx_powermailcond_domain_model_condition.sorting',
                 'foreign_field' => 'conditioncontainer',
                 'maxitems' => 99,
                 'appearance' => [

@@ -7,10 +7,10 @@ namespace In2code\PowermailCond\Exception;
 use Exception;
 use Throwable;
 
-class UnsupportedVariableTypeException extends Exception
+class MissingPowermailParameterException extends Exception
 {
-    private const MESSAGE = 'A value for a field can only be array or string';
-    public const CODE = 1588236757;
+    private const MESSAGE = 'No powermail parameters are given - e.g. &tx_powermail_pi1[mail][form]=123';
+    public const CODE = 1643809128416;
 
     public function __construct(Throwable $previous = null)
     {

@@ -1,9 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
 use In2code\PowermailCond\Domain\Model\Condition;
-use In2code\PowermailCond\Domain\Model\ConditionContainer;
-use In2code\PowermailCond\Domain\Model\Rule;
-use In2code\PowermailCond\Utility\ConfigurationUtility;
 
 return [
     'ctrl' => [
@@ -20,14 +19,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'iconfile' => ConfigurationUtility::getIconPath(
-            Condition::TABLE_NAME . '.gif'
-        ),
+        'iconfile' => 'EXT:powermail_cond/Resources/Public/Icons/tx_powermailcond_domain_model_condition.gif',
         'hideTable' => 1,
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,
-            endtime,conditioncontainer,title,target_field,actions,filter_select_field,rules,conjunction',
+        'showRecordFieldList' => 'sys_language_uid,l18n_parent,l18n_diffsource,hidden,starttime,endtime,conditioncontainer,title,target_field,actions,filter_select_field,rules,conjunction',
     ],
     'types' => [
         '1' => [
@@ -68,10 +64,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => Condition::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . Condition::TABLE_NAME . '.pid=###CURRENT_PID### AND ' .
-                    Condition::TABLE_NAME . '.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_powermailcond_domain_model_condition',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_condition.pid=###CURRENT_PID### AND tx_powermailcond_domain_model_condition.sys_language_uid IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -114,8 +108,7 @@ return [
 
         'title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.title',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.title',
             'config' => [
                 'type' => 'input',
                 'size' => '30',
@@ -124,14 +117,11 @@ return [
         ],
         'rules' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.rules',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.rules',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => Rule::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . Rule::TABLE_NAME . '.pid=###CURRENT_PID### ' .
-                    'ORDER BY ' . Rule::TABLE_NAME . '.sorting',
+                'foreign_table' => 'tx_powermailcond_domain_model_rule',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_rule.pid=###CURRENT_PID### ORDER BY tx_powermailcond_domain_model_rule.sorting',
                 'foreign_field' => 'conditions',
                 'maxitems' => 99,
                 'appearance' => [
@@ -146,22 +136,19 @@ return [
         ],
         'conjunction' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.conjunction',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.conjunction',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     // OR
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.conjunction.I.1',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.conjunction.I.1',
                         Condition::CONJUNCTION_OR,
                     ],
                     // AND
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.conjunction.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.conjunction.I.0',
                         Condition::CONJUNCTION_AND,
                     ],
                 ],
@@ -172,23 +159,20 @@ return [
         ],
         'target_field' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.targetField',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.targetField',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.targetField.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.targetField.I.0',
                         '0',
                     ],
                 ],
-                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFields',
+                'itemsProcFunc' => 'In2code\PowermailCond\UserFunc\GetPowermailFields->getFormFieldsForCondition',
                 'itemsProcFunc_addFieldsets' => true,
                 // allow only this types of fields in selector
-                'itemsProcFuncValue' => 'input,textarea,select,check,radio,submit,captcha,reset,text,content,html,' .
-                    'password,file,date,country,location,typoscript',
+                'itemsProcFuncValue' => 'input,textarea,select,check,radio,submit,captcha,reset,text,content,html,password,file,date,country,location,typoscript',
                 'size' => 1,
                 'maxitems' => 1,
                 'eval' => 'required',
@@ -197,34 +181,29 @@ return [
         ],
         'actions' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.action',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.action',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     // title main
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.action.I.main',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.action.I.main',
                         '--div--',
                     ],
                     // hide
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.action.I.0',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.action.I.0',
                         Condition::ACTION_HIDE,
                     ],
                     // unhide
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.action.I.1',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.action.I.1',
                         Condition::ACTION_UN_HIDE,
                     ],
                     // title additional
                     [
-                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                        'tx_powermailcond_conditions.action.I.additional',
+                        'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.action.I.additional',
                         '--div--',
                     ],
                 ],
@@ -236,21 +215,15 @@ return [
         'conditioncontainer' => [
             'l10n_mode' => 'exclude',
             'exclude' => true,
-            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:' .
-                'tx_powermailcond_conditions.conditioncontainer',
+            'label' => 'LLL:EXT:powermail_cond/Resources/Private/Language/locallang_db.xlf:tx_powermailcond_conditions.conditioncontainer',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => ConditionContainer::TABLE_NAME,
-                'foreign_table_where' =>
-                    'AND ' . ConditionContainer::TABLE_NAME
-                    . '.pid=###CURRENT_PID### '
-                    . 'AND ' . ConditionContainer::TABLE_NAME
-                    . '.sys_language_uid IN '
-                    . '(-1,###REC_FIELD_sys_language_uid###)',
+                'foreign_table' => 'tx_powermailcond_domain_model_conditioncontainer',
+                'foreign_table_where' => 'AND tx_powermailcond_domain_model_conditioncontainer.pid=###CURRENT_PID### AND tx_powermailcond_domain_model_conditioncontainer.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
                 'default' => 0,
             ],
         ],
