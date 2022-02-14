@@ -39,6 +39,9 @@ class GetPowermailFormsWithoutConditionRelation
                 $availableForms[$formUid] = $key;
             }
         }
+        if (empty($availableForms)) {
+            return;
+        }
 
         $query = $this->connectionPool->getQueryBuilderForTable('tx_powermailcond_domain_model_conditioncontainer');
         $query->getRestrictions()->removeAll()->add(new DeletedRestriction());
