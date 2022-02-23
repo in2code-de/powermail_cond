@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Domain\Validator;
 
 use In2code\Powermail\Domain\Model\Field;
@@ -6,38 +9,33 @@ use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Validator\InputValidator;
 use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\PowermailCond\Domain\Model\Condition;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
-use TYPO3\CMS\Extbase\Object\Exception;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use Throwable;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * Class ConditionAwareValidator
- */
 class ConditionAwareValidator extends InputValidator
 {
+    protected TypoScriptFrontendController $typoscriptFrontendController;
+
+    public function __construct(array $options = [])
+    {
+        parent::__construct($options);
+        $this->typoscriptFrontendController = $GLOBALS['TSFE'];
+    }
 
     /**
      * Validate a single field
      *
-     * @param Field $field
      * @param mixed $value
-     * @return void
-     * @throws ExtensionConfigurationExtensionNotConfiguredException
-     * @throws ExtensionConfigurationPathDoesNotExistException
-     * @throws Exception
+     * @throws Throwable
      */
     protected function isValidFieldInMandatoryValidation(Field $field, $value): void
     {
-        $arguments = $this->getArgumentsFromSession();
+        $arguments = $this->typoscriptFrontendController->fe_user->getSessionData('tx_powermail_cond');
         $parentPage = $field->getPage();
         if ($parentPage === null) {
             return;
         }
         $form = $parentPage->getForm();
-        if ($form === null) {
-            return;
-        }
         $formUid = $form->getUid();
         $pageUid = $parentPage->getUid();
         $marker = $field->getMarker();
@@ -64,16 +62,5 @@ class ConditionAwareValidator extends InputValidator
             }
         }
         parent::isValidFieldInMandatoryValidation($field, $value);
-    }
-
-    /**
-     * @return array
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function getArgumentsFromSession()
-    {
-        /** @var FrontendUserAuthentication $feUser */
-        $feUser = $GLOBALS['TSFE']->fe_user;
-        return $feUser->getSessionData('tx_powermail_cond');
     }
 }

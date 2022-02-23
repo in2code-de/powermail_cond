@@ -1,45 +1,30 @@
 <?php
+
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Form;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
+use Throwable;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Object\Exception;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-/**
- * Class ConditionContainer
- */
 class ConditionContainer extends AbstractEntity
 {
-    const TABLE_NAME = 'tx_powermailcond_domain_model_conditioncontainer';
+    protected int $loopCount = 0;
 
     /**
-     * @var int
+     * @var ObjectStorage<Condition>|null
      */
-    protected $loopCount = 0;
+    protected ?ObjectStorage $conditions = null;
+
+    protected bool $somethingChanged = true;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\PowermailCond\Domain\Model\Condition>
+     * @throws Throwable
      */
-    protected $conditions = null;
-
-    /**
-     * @var bool
-     */
-    protected $somethingChanged = true;
-
-    /**
-     * @param Form $form
-     * @param array $arguments
-     * @return array
-     * @throws ExtensionConfigurationExtensionNotConfiguredException
-     * @throws ExtensionConfigurationPathDoesNotExistException
-     * @throws Exception
-     */
-    public function applyConditions(Form $form, array $arguments)
+    public function applyConditions(Form $form, array $arguments): array
     {
-
         // run this loop if any condition changed something
         // but stop after 100 rounds to prevent infinite loops (built by editors)
         while ($this->somethingChanged && $this->loopCount < 100) {

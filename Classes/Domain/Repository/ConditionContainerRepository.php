@@ -1,18 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Domain\Repository;
 
+use In2code\Powermail\Domain\Model\Form;
+use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * ConditionContainerRepository
+ * @method ConditionContainer|null findOneByForm(Form $form)
  */
 class ConditionContainerRepository extends Repository
 {
-    /**
-     * @return void
-     */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);

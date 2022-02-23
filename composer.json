@@ -1,63 +1,81 @@
 {
-  "name": "in2code/powermail_cond",
-  "description": "Add conditions (via AJAX) to powermail forms for fields and pages",
-  "keywords": ["typo3", "form", "mailform", "spamprevention"],
-  "homepage": "https://github.com/einpraegsam/powermail_cond",
-  "authors": [
-    {
-      "name": "Alex Kellner",
-      "email": "alexander.kellner@in2code.de",
-      "role": "Product owner",
-      "homepage": "https://www.in2code.de"
-    },
-    {
-      "name": "Oliver Eglseder",
-      "email": "oliver.eglseder@in2code.de",
-      "role": "Developer",
-      "homepage": "https://www.in2code.de"
-    }
-  ],
-  "type": "typo3-cms-extension",
-  "license": "GPL-2.0-or-later",
-  "require": {
-    "in2code/powermail": ">=8.0.0 < 9.0.0",
-    "ext-json": "*"
-  },
-  "require-dev": {
-    "typo3/cms-core": "^10.4",
-    "nimut/testing-framework": "^5.0",
-    "mikey179/vfsstream": "^1.6",
-    "phpunit/phpunit": "^6.0",
-    "squizlabs/php_codesniffer": "^3.5",
-    "phpmd/phpmd": "^2.8",
-    "friendsofphp/php-cs-fixer": "^3.3",
-    "helmich/typo3-typoscript-lint": "^2.5"
-  },
-  "replace": {
-    "typo3-ter/powermail-cond": "self.version"
-  },
-  "autoload": {
-    "psr-4": {
-      "In2code\\PowermailCond\\": "Classes/"
-    }
-  },
-  "config": {
-    "vendor-dir": ".Build/vendor",
-    "bin-dir": ".Build/bin"
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "mkdir -p .Build/public/typo3conf/ext/",
-      "[ -L .Build/public/typo3conf/ext/powermail_cond ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/powermail_cond"
-    ],
-    "test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
-    "test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-    "test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings"
-  },
-  "extra": {
-    "typo3/cms": {
-      "web-dir": ".Build/public",
-      "extension-key": "powermail_cond"
-    }
-  }
+	"name": "in2code/powermail_cond",
+	"description": "Add conditions (via AJAX) to powermail forms for fields and pages",
+	"license": "GPL-2.0-or-later",
+	"type": "typo3-cms-extension",
+	"keywords": [
+		"typo3",
+		"form",
+		"mailform",
+		"spamprevention"
+	],
+	"authors": [
+		{
+			"name": "Alex Kellner",
+			"email": "alexander.kellner@in2code.de",
+			"homepage": "https://www.in2code.de",
+			"role": "Product owner"
+		},
+		{
+			"name": "Oliver Eglseder",
+			"email": "oliver.eglseder@in2code.de",
+			"homepage": "https://www.in2code.de",
+			"role": "Developer"
+		}
+	],
+	"homepage": "https://github.com/einpraegsam/powermail_cond",
+	"require": {
+		"php": "^7.4 || ~8.0",
+		"ext-json": "*",
+		"ext-pdo": "*",
+		"in2code/powermail": "^9.0",
+		"typo3/cms-core": "^11.5"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^3.3",
+		"helmich/typo3-typoscript-lint": "^2.5",
+		"mikey179/vfsstream": "^1.6",
+		"nimut/testing-framework": "^6.0",
+		"phpmd/phpmd": "^2.8",
+		"phpunit/phpunit": "^9.5",
+		"squizlabs/php_codesniffer": "^3.5",
+		"typo3/cms-extensionmanager": "^11.5",
+		"typo3/cms-fluid-styled-content": "^11.5",
+		"typo3/cms-lowlevel": "^11.5",
+		"typo3/cms-tstemplate": "^11.5",
+		"typo3/cms-info": "^11.5",
+		"typo3/coding-standards": "^0.5.0"
+	},
+	"replace": {
+		"typo3-ter/powermail-cond": "self.version"
+	},
+	"autoload": {
+		"psr-4": {
+			"In2code\\PowermailCond\\": "Classes/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"typo3/cms-composer-installers": true,
+			"typo3/class-alias-loader": true,
+			"ergebnis/composer-normalize": false
+		},
+		"bin-dir": ".Build/bin",
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "powermail_cond",
+			"web-dir": ".Build/Web"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"mkdir -p .Build/Web/typo3conf/ext/",
+			"[ -L .Build/Web/typo3conf/ext/powermail_cond ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/powermail_cond"
+		],
+		"test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
+		"test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings"
+	}
 }

@@ -1,195 +1,104 @@
 <?php
+
+declare(strict_types=1);
+
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\PowermailCond\Domain\Comparator\Comparison;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
+use Throwable;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Object\Exception;
 
-/**
- * Class Rule
- */
 class Rule extends AbstractEntity
 {
-    const TABLE_NAME = 'tx_powermailcond_domain_model_rule';
+    public const OPERATOR_IS_SET = 0;
+    public const OPERATOR_NOT_IS_SET = 1;
+    public const OPERATOR_CONTAINS_VALUE = 2;
+    public const OPERATOR_NOT_CONTAINS_VALUE = 3;
+    public const OPERATOR_IS = 4;
+    public const OPERATOR_NOT_IS = 5;
+    public const OPERATOR_GREATER_THAN = 6;
+    public const OPERATOR_LESS_THAN = 7;
+    public const OPERATOR_CONTAINS_VALUE_FROM_FIELD = 8;
+    public const OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD = 9;
 
-    const OPERATOR_IS_SET = 0;
-    const OPERATOR_NOT_IS_SET = 1;
-    const OPERATOR_CONTAINS_VALUE = 2;
-    const OPERATOR_NOT_CONTAINS_VALUE = 3;
-    const OPERATOR_IS = 4;
-    const OPERATOR_NOT_IS = 5;
-    const OPERATOR_GREATER_THAN = 6;
-    const OPERATOR_LESS_THAN = 7;
-    const OPERATOR_CONTAINS_VALUE_FROM_FIELD = 8;
-    const OPERATOR_NOT_CONTAINS_VALUE_FROM_FIELD = 9;
+    protected string $title = '';
 
-    /**
-     * Internal title
-     *
-     * @var string
-     */
-    protected $title = '';
+    protected ?Field $startField = null;
 
-    /**
-     * relation to start field
-     *
-     * @var \In2code\Powermail\Domain\Model\Field
-     */
-    protected $startField = '';
+    protected int $ops = self::OPERATOR_IS_SET;
 
-    /**
-     * 0 is set
-     * 1 is not set
-     * 2 contains
-     * 3 contains not
-     * 4 is
-     * 5 is not
-     * 6 greater than
-     * 7 less than
-     * 8 contains value from field
-     * 9 contains not value from field
-     *
-     * @var int
-     */
-    protected $ops = 0;
+    protected string $condString = '';
 
-    /**
-     * @var string
-     */
-    protected $condString = '';
+    protected ?Field $equalField = null;
 
-    /**
-     * @var string
-     */
-    protected $equalField = '';
-
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return Rule
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-        return $this;
     }
 
-    /**
-     * @return Field
-     */
-    public function getStartField()
+    public function getStartField(): Field
     {
         return $this->startField;
     }
 
-    /**
-     * @param Field $startField
-     * @return Rule
-     */
-    public function setStartField($startField)
+    public function setStartField(Field $startField): void
     {
         $this->startField = $startField;
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getOps()
+    public function getOps(): int
     {
         return $this->ops;
     }
 
-    /**
-     * @param int $ops
-     * @return Rule
-     */
-    public function setOps($ops)
+    public function setOps(int $ops): void
     {
         $this->ops = $ops;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCondString()
+    public function getCondString(): string
     {
         return $this->condString;
     }
 
-    /**
-     * @param string $condString
-     * @return Rule
-     */
-    public function setCondString($condString)
+    public function setCondString(string $condString): void
     {
         $this->condString = $condString;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEqualField()
+    public function getEqualField(): Field
     {
         return $this->equalField;
     }
 
-    /**
-     * @param string $equalField
-     * @return Rule
-     */
-    public function setEqualField($equalField)
+    public function setEqualField(Field $equalField): void
     {
         $this->equalField = $equalField;
-        return $this;
     }
 
     /**
-     * @param Form $form
-     * @return bool
-     * @throws ExtensionConfigurationExtensionNotConfiguredException
-     * @throws ExtensionConfigurationPathDoesNotExistException
-     * @throws Exception
+     * @throws Throwable
      */
-    public function applies(Form $form)
+    public function applies(Form $form): bool
     {
-        $equalField = null;
-        /** @var Page $page */
-        if (((int)$this->equalField) > 0) {
-            foreach ($form->getPages() as $page) {
-                /** @var Field $field */
-                foreach ($page->getFields() as $field) {
-                    if ($field->getUid() === (int)$this->equalField) {
-                        $equalField = $field;
-                        break;
-                    }
-                }
-                if ($equalField !== null) {
-                    break;
-                }
-            }
-        }
         /** @var Page $page */
         foreach ($form->getPages() as $page) {
             /** @var Field $field */
             foreach ($page->getFields() as $field) {
-                if ($field !== null && $this->startField !== '' && $field->getUid() === $this->startField->getUid()) {
+                if (
+                    isset($field, $this->startField)
+                    && $field->getUid() === $this->startField->getUid()
+                ) {
                     $comparison = new Comparison($this->ops);
-                    if ($comparison->evaluate($field, $this->condString, $equalField)) {
+                    if ($comparison->evaluate($field, $this->condString, $this->equalField)) {
                         return true;
                     }
                 }
