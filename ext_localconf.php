@@ -19,10 +19,10 @@ call_user_func(function () {
         'In2code.powermail_cond',
         'Pi1',
         [
-            'Condition' => 'buildCondition'
+            \In2code\PowermailCond\Controller\ConditionController::class => 'buildCondition'
         ],
         [
-            'Condition' => 'buildCondition'
+            \In2code\PowermailCond\Controller\ConditionController::class => 'buildCondition'
         ]
     );
 
