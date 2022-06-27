@@ -303,6 +303,7 @@ class Condition extends AbstractEntity
             );
         }
         $conditionUid = $this->getUid();
+        $arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_ACTION] = $action;
         $arguments[self::INDEX_TODO][$formUid][$pageUid][self::INDEX_MATCHING_CONDITION][$conditionUid] = $conditionUid;
         return $arguments;
     }
