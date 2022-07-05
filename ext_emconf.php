@@ -1,9 +1,4 @@
 <?php
-
-/**
- * @var array $EM_CONF
- * @var string $_EXTKEY
- */
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Powermail Conditions',
     'description' => 'Add conditions (via AJAX) to powermail forms for fields and pages',
