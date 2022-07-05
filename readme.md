@@ -48,8 +48,10 @@ routeEnhancers:
 
 | Version | Date       | State   | Description                                                                                                          |
 |---------|------------|---------|----------------------------------------------------------------------------------------------------------------------|
-| 9.0.1   | 2022-07-04 | Bugfix  | Fix page fieldset conditions not being applied correctly-------------------------------------------------------------|
-| 9.0.0   | 2022-02-23 | Feature | Support for TYPO3 11 and Powermail 9|
+| 9.0.3   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API (another change)                                                      |
+| 9.0.2   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API                                                                       |
+| 9.0.1   | 2022-07-04 | Bugfix  | Fix page fieldset conditions not being applied correctly                                                             |
+| 9.0.0   | 2022-02-23 | Feature | Support for TYPO3 11 and Powermail 9                                                                                 |
 | 8.2.2   | 2021-11-22 | Bugfix  | Reverted type change for field condition.target_field and updated index configuration for this field                 |
 | 8.2.1   | 2021-11-22 | Bugfix  | Use integer field for condition.target_field                                                                         |
 | 8.2.0   | 2021-11-22 | Task    | Add mysql indices, hide children tables in list view, add code linting tests                                         |
