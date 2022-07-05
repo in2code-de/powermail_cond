@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * @var array $EM_CONF
  * @var string $_EXTKEY
@@ -25,5 +23,4 @@ $EM_CONF[$_EXTKEY] = [
         'suggests' => [
         ],
     ],
-    '_md5_values_when_last_written' => '',
 ];
