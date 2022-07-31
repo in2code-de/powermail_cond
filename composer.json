@@ -28,7 +28,7 @@
 		"php": "^7.4 || ~8.0",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"in2code/powermail": "^9.0",
+		"in2code/powermail": "^10.0",
 		"typo3/cms-core": "^11.5"
 	},
 	"require-dev": {
