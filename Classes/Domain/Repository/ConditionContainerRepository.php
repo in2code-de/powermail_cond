@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace In2code\PowermailCond\Domain\Repository;
 
-use In2code\Powermail\Domain\Model\Form;
 use In2code\PowermailCond\Domain\Model\ConditionContainer;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * @method ConditionContainer|null findOneByForm(Form $form)
+ * @method ConditionContainer|null findOneByForm(int $form)
  */
 class ConditionContainerRepository extends Repository
 {
