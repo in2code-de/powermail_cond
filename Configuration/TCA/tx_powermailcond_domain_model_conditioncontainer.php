@@ -158,7 +158,7 @@ return [
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 0,
                     'showAllLocalizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1
+                    'showPossibleLocalizationRecords' => 1,
                 ],
             ],
         ],

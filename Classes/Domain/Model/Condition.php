@@ -109,7 +109,7 @@ class Condition extends AbstractEntity
             /** @var Field $field */
             return $fieldRepository->findByUid((int)$targetField);
         }
-        if (false !== stripos($targetField, 'fieldset:')) {
+        if (stripos($targetField, 'fieldset:') !== false) {
             $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
             /** @var Page $page */
             $uid = substr($targetField, 9);
@@ -271,13 +271,13 @@ class Condition extends AbstractEntity
             $conditionUid;
 
         // Backup field value if field gets hidden
-        if (self::ACTION_HIDE_STRING === $action) {
+        if ($action === self::ACTION_HIDE_STRING) {
             $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = $field->getText();
             $field->setText('');
         }
 
         if (
-            self::ACTION_UN_HIDE_STRING === $action
+            $action === self::ACTION_UN_HIDE_STRING
             && isset($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker])
         ) {
             // fill field with backup'd value if field gets enabled again
@@ -314,7 +314,7 @@ class Condition extends AbstractEntity
     public function applies(Form $form): bool
     {
         // If conjunction is or set $isOr to TRUE
-        $isOr = self::CONJUNCTION_OR === $this->conjunction;
+        $isOr = $this->conjunction === self::CONJUNCTION_OR;
 
         /** @var Rule $rule */
         foreach ($this->rules as $rule) {
