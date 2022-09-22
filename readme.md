@@ -48,7 +48,7 @@ routeEnhancers:
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
-| 9.0.4   | 2022-nn-nn | Bugfix  | Allow multilanguage conditions                                                                       |
+| 9.0.4   | 2022-10-10 | Bugfix  | Allow multilanguage conditions                                                                       |
 | 9.0.3   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API (another change)                                      |
 | 9.0.2   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API                                                       |
 | 9.0.1   | 2022-07-04 | Bugfix  | Fix page fieldset conditions not being applied correctly                                             |
