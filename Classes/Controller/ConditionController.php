@@ -88,8 +88,9 @@ class ConditionController extends ActionController
         }
 
         $arguments = [];
-        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form);
-        if (null !== $conditionContainer) {
+        // Use the forms non-localized UID, because the field is l10n_mode exclude
+        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form->getUid());
+        if ($conditionContainer !== null) {
             $arguments = $conditionContainer->applyConditions($form, $powermailArguments);
             $this->typoscriptFrontendController->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
             unset($arguments['backup'], $arguments['field']);
