@@ -43,12 +43,25 @@ routeEnhancers:
       condition.json: 3132
 ...
 ```
+## Early Access Programm (EAP)
+
+You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
+Also official (fee-based) support is possible within the EAP.
+
+This is the current status of the EAP features:
+
+| Version | TYPO3  | PHP              | Support/Development                   | Status    |
+|---------|--------|------------------|---------------------------------------|-----------|
+| 10      | 11 LTS | 7.4, 8.0, 8.1    | Support for TYPO3 11 and Powermail 10 | available |
+| 11      | 12 LTS | 8.0, 0.1         | Support for TYPO3 12 and Powermail 11 | planned   |
+
 
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
-| 9.0.4   | 2022-nn-nn | Bugfix  | Allow multilanguage conditions                                                                       |
+| 10.0.0  | 2022-10-10 | Feature | Support for Powermail 10 and remove of jquery support                                                |
+| 9.0.4   | 2022-10-10 | Bugfix  | Allow multilanguage conditions                                                                       |
 | 9.0.3   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API (another change)                                      |
 | 9.0.2   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API                                                       |
 | 9.0.1   | 2022-07-04 | Bugfix  | Fix page fieldset conditions not being applied correctly                                             |
