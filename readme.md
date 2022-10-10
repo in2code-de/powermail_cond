@@ -44,6 +44,18 @@ routeEnhancers:
 ...
 ```
 
+## Early Access Programm (EAP)
+
+You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
+Also official (fee-based) support is possible within the EAP.
+
+This is the current status of the EAP features:
+
+| Version | TYPO3  | PHP              | Support/Development                   | Status    |
+|---------|--------|------------------|---------------------------------------|-----------|
+| 10      | 11 LTS | 7.4, 8.0, 8.1    | Support for TYPO3 11 and Powermail 10 | available |
+| 11      | 12 LTS | 8.0, 0.1         | Support for TYPO3 12 and Powermail 11 | planned   |
+
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
