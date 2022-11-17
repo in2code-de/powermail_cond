@@ -8,6 +8,7 @@ use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FormRepository;
+use In2code\Powermail\Utility\FrontendUtility;
 use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
 use In2code\PowermailCond\Exception\MissingPowermailParameterException;
 use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
@@ -54,10 +55,11 @@ class ConditionController extends ActionController
     public function buildConditionAction(): ResponseInterface
     {
         $requestBody = $this->request->getParsedBody();
-        if (empty($requestBody['tx_powermail_pi1']['mail']['form'])) {
+        $pluginName = FrontendUtility::getPluginName();
+        if (empty($requestBody[$pluginName]['mail']['form'])) {
             throw new MissingPowermailParameterException();
         }
-        $powermailArguments = $requestBody['tx_powermail_pi1'];
+        $powermailArguments = $requestBody[$pluginName];
         unset($powermailArguments['__referrer'], $powermailArguments['__trustedProperties']);
 
         /** @var Form $form */

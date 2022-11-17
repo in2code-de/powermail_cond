@@ -211,7 +211,7 @@
      * @returns {jQuery}
      */
     var getFieldByMarker = function (fieldMarker, $form) {
-      return $form.find('[name^="tx_powermail_pi1[field][' + fieldMarker + ']"]').not('[type="hidden"]');
+      return $form.find('[name^="tx_powermail_pi1[field][' + fieldMarker + '],[name^="tx_powermail_pi2[field]['+e+']"]"]').not('[type="hidden"]');
     };
 
     /**
