@@ -1,5 +1,8 @@
 page {
-  includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.min.js
+  includeJSFooter {
+    powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.min.js
+    powermailCond.defer = 1
+  }
 
   3132 = COA
   3132 {
