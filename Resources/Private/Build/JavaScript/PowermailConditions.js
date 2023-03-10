@@ -99,18 +99,42 @@ class PowermailConditions {
 
   #showField(fieldMarker) {
     let field = this.#getFieldByMarker(fieldMarker);
-    let wrappingContainer = field.closest('.powermail_fieldwrap');
-    Utility.showElement(wrappingContainer);
-    field.removeAttribute('disabled');
-    this.#rerequireField(field);
+    let isHidden = false;
+    if (field) {
+      let wrappingContainer = field.closest('.powermail_fieldwrap');
+      isHidden = field.getAttribute('type') === 'hidden';
+      Utility.showElement(wrappingContainer);
+      field.removeAttribute('disabled');
+      this.#rerequireField(field);
+    }
+
+    if (field && isHidden) {
+      let fields = this.#getMultiValueFieldsByMarker(fieldMarker);
+      fields.forEach(field => {
+        field.removeAttribute('disabled');
+        this.#rerequireField(field);
+      });
+    }
   };
 
   #hideField(fieldMarker) {
     let field = this.#getFieldByMarker(fieldMarker);
-    let wrappingContainer = field.closest('.powermail_fieldwrap');
-    Utility.hideElement(wrappingContainer);
-    field.setAttribute('disabled', 'disabled');
-    this.#derequireField(field);
+    let isHidden = false;
+    if (field) {
+      let wrappingContainer = field.closest('.powermail_fieldwrap');
+      isHidden = field.getAttribute('type') === 'hidden';
+      Utility.hideElement(wrappingContainer);
+      field.setAttribute('disabled', 'disabled');
+      this.#derequireField(field);
+    }
+
+    if (field && isHidden) {
+      let fields = this.#getMultiValueFieldsByMarker(fieldMarker);
+      fields.forEach(field => {
+        field.setAttribute('disabled', 'disabled');
+        this.#derequireField(field);
+      });
+    }
   };
 
   #showPage(page) {
@@ -147,7 +171,11 @@ class PowermailConditions {
   };
 
   #getFieldByMarker(fieldMarker) {
-    return this.#form.querySelector('[name="tx_powermail_pi1[field][' + fieldMarker + ']"]:not([type="hidden"])');
+    return this.#form.querySelector('[name="tx_powermail_pi1[field][' + fieldMarker + ']"]');
+  };
+
+  #getMultiValueFieldsByMarker(fieldMarker) {
+    return this.#form.querySelectorAll('[name="tx_powermail_pi1[field][' + fieldMarker + '][]"]');
   };
 
   #getFieldsetByUid(pageUid) {
