@@ -98,19 +98,27 @@ class PowermailConditions {
   };
 
   #showField(fieldMarker) {
+    let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
+    if (wrappingContainer !== null) {
+      Utility.showElement(wrappingContainer);
+    }
     let field = this.#getFieldByMarker(fieldMarker);
-    let wrappingContainer = field.closest('.powermail_fieldwrap');
-    Utility.showElement(wrappingContainer);
-    field.removeAttribute('disabled');
-    this.#rerequireField(field);
+    if (field !== null) {
+      field.removeAttribute('disabled');
+      this.#rerequireField(field);
+    }
   };
 
   #hideField(fieldMarker) {
+    let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
+    if (wrappingContainer !== null) {
+      Utility.hideElement(wrappingContainer);
+    }
     let field = this.#getFieldByMarker(fieldMarker);
-    let wrappingContainer = field.closest('.powermail_fieldwrap');
-    Utility.hideElement(wrappingContainer);
-    field.setAttribute('disabled', 'disabled');
-    this.#derequireField(field);
+    if (field !== null) {
+      field.setAttribute('disabled', 'disabled');
+      this.#derequireField(field);
+    }
   };
 
   #showPage(page) {
@@ -146,12 +154,36 @@ class PowermailConditions {
     return this.#form.getAttribute('data-validate') === 'html5';
   };
 
+  #getWrappingContainerByMarkerName(fieldMarker) {
+    let wrappingContainer = this.#getFieldwrappingContainerByMarker(fieldMarker);
+    if (wrappingContainer !== null) {
+      return wrappingContainer;
+    }
+
+    let field = this.#getFieldByMarker(fieldMarker);
+    if (field !== null) {
+      let wrappingContainer = field.closest('.powermail_fieldwrap');
+      if (wrappingContainer !== null) {
+        return wrappingContainer;
+      }
+    }
+
+    console.log('Error: Could not find field by fieldMarker "' + fieldMarker + '"');
+    return null;
+  };
+
   #getFieldByMarker(fieldMarker) {
-    return this.#form.querySelector('[name="tx_powermail_pi1[field][' + fieldMarker + ']"]:not([type="hidden"])');
+    let fieldName = 'tx_powermail_pi1[field][' + fieldMarker + ']';
+    return this.#form.querySelector('[name="' + fieldName +  '"]:not([type="hidden"])') ||
+      this.#form.querySelector('[name="' + fieldName +  '[]"]');
   };
 
   #getFieldsetByUid(pageUid) {
     return this.#form.querySelector('.powermail_fieldset_' + pageUid);
+  };
+
+  #getFieldwrappingContainerByMarker(fieldMarker) {
+    return this.#form.querySelector('.powermail_fieldwrap_' + fieldMarker);
   };
 }
 
