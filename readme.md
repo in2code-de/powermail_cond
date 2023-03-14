@@ -60,7 +60,8 @@ This is the current status of the EAP features:
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
-| 10.0.0  | 2022-10-10 | Feature | Support for Powermail 10 and remove of jquery support                                                |
+| 10.1.0  | 2023-03-14 | Task    | Support all kind of powermail fields as with jQuery before (e.g. submit, text, etc...)               |
+| 10.0.0  | 2022-10-10 | Feature | Support for Powermail 10 and remove of jQuery support                                                |
 | 9.0.4   | 2022-10-10 | Bugfix  | Allow multilanguage conditions                                                                       |
 | 9.0.3   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API (another change)                                      |
 | 9.0.2   | 2022-07-05 | Bugfix  | Fix ext_emconf.php for TER upload via REST API                                                       |
