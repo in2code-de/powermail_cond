@@ -99,7 +99,9 @@ class PowermailConditions {
 
   #showField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
-    Utility.showElement(wrappingContainer);
+    if (wrappingContainer !== null) {
+      Utility.showElement(wrappingContainer);
+    }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
       field.removeAttribute('disabled');
@@ -109,7 +111,9 @@ class PowermailConditions {
 
   #hideField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
-    Utility.hideElement(wrappingContainer);
+    if (wrappingContainer !== null) {
+      Utility.hideElement(wrappingContainer);
+    }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
       field.setAttribute('disabled', 'disabled');
@@ -165,6 +169,7 @@ class PowermailConditions {
     }
 
     console.log('Error: Could not find field by fieldMarker "' + fieldMarker + '"');
+    return null;
   };
 
   #getFieldByMarker(fieldMarker) {
