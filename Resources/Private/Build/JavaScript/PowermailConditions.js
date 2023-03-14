@@ -100,6 +100,7 @@ class PowermailConditions {
   #showField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     Utility.showElement(wrappingContainer);
+    let field = this.#getFieldByMarker(fieldMarker);
     field.removeAttribute('disabled');
     this.#rerequireField(field);
   };
@@ -107,6 +108,7 @@ class PowermailConditions {
   #hideField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     Utility.hideElement(wrappingContainer);
+    let field = this.#getFieldByMarker(fieldMarker);
     field.setAttribute('disabled', 'disabled');
     this.#derequireField(field);
   };
@@ -162,7 +164,9 @@ class PowermailConditions {
   };
 
   #getFieldByMarker(fieldMarker) {
-    return this.#form.querySelector('[name="tx_powermail_pi1[field][' + fieldMarker + ']"]:not([type="hidden"])');
+    let fieldName = 'tx_powermail_pi1[field][' + fieldMarker + ']';
+    return this.#form.querySelector('[name="' + fieldName +  '"]:not([type="hidden"])') ||
+      this.#form.querySelector('[name="' + fieldName +  '[]"]');
   };
 
   #getFieldsetByUid(pageUid) {
