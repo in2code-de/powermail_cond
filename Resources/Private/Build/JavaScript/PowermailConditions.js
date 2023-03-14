@@ -101,16 +101,20 @@ class PowermailConditions {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     Utility.showElement(wrappingContainer);
     let field = this.#getFieldByMarker(fieldMarker);
-    field.removeAttribute('disabled');
-    this.#rerequireField(field);
+    if (field !== null) {
+      field.removeAttribute('disabled');
+      this.#rerequireField(field);
+    }
   };
 
   #hideField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     Utility.hideElement(wrappingContainer);
     let field = this.#getFieldByMarker(fieldMarker);
-    field.setAttribute('disabled', 'disabled');
-    this.#derequireField(field);
+    if (field !== null) {
+      field.setAttribute('disabled', 'disabled');
+      this.#derequireField(field);
+    }
   };
 
   #showPage(page) {
