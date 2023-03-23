@@ -54,7 +54,7 @@ class Note extends AbstractFormElement
      */
     protected function formHasTooManyFields(): bool
     {
-        $formUid = (int)$this->data['databaseRow']['form'][0];
+        $formUid = (int)($this->data['databaseRow']['form'][0] ?? 0);
         return $formUid > 0 && $this->getNumberOfFormFields($formUid) > self::FIELD_LIMIT;
     }
 
