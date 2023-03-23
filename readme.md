@@ -60,6 +60,7 @@ This is the current status of the EAP features:
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 10.1.1  | 2023-03-23 | Bugfix  | Fix possible undefined array key error                                                               |
 | 10.1.0  | 2023-03-14 | Task    | Support all kind of powermail fields as with jQuery before (e.g. submit, text, etc...)               |
 | 10.0.0  | 2022-10-10 | Feature | Support for Powermail 10 and remove of jQuery support                                                |
 | 9.0.4   | 2022-10-10 | Bugfix  | Allow multilanguage conditions                                                                       |
