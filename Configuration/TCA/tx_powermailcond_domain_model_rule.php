@@ -234,7 +234,7 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'value' => 0
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_powermailcond_domain_model_condition',

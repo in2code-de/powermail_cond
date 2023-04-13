@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\PowermailCond\Controller;
 
+use function array_key_exists;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
@@ -11,17 +12,14 @@ use In2code\Powermail\Domain\Repository\FormRepository;
 use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
 use In2code\PowermailCond\Exception\MissingPowermailParameterException;
 use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
+use function is_array;
+use function is_string;
+use function json_encode;
+use const JSON_THROW_ON_ERROR;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-
-use function array_key_exists;
-use function is_array;
-use function is_string;
-use function json_encode;
-
-use const JSON_THROW_ON_ERROR;
 
 class ConditionController extends ActionController
 {

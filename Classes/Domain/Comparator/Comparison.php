@@ -6,16 +6,14 @@ namespace In2code\PowermailCond\Domain\Comparator;
 
 use In2code\Powermail\Domain\Model\Field;
 use In2code\PowermailCond\Domain\Model\Rule;
-use JsonException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 use function in_array;
 use function is_array;
 use function json_decode;
-use function strpos;
-
 use const JSON_THROW_ON_ERROR;
+use JsonException;
 use const PHP_EOL;
+use function strpos;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Comparison
 {
@@ -98,7 +96,7 @@ class Comparison
         }
         if (is_array($needle)) {
             foreach ($needle as $needleString) {
-                if (!empty($needleString) && strpos($haystack, $needleString) !== false) {
+                if (!empty($needleString) && str_contains($haystack, $needleString)) {
                     return true;
                 }
             }
@@ -107,6 +105,6 @@ class Comparison
         if (is_array($haystack)) {
             return in_array($needle, $haystack, false);
         }
-        return strpos($haystack, $needle) !== false;
+        return str_contains($haystack, $needle);
     }
 }
