@@ -54,7 +54,7 @@ class Note extends AbstractFormElement
      */
     protected function formHasTooManyFields(): bool
     {
-        $formUid = (int)$this->data['databaseRow']['form'][0];
+        $formUid = isset($this->data['databaseRow']['form'][0]) ? (int)$this->data['databaseRow']['form'][0] : 0;
         return $formUid > 0 && $this->getNumberOfFormFields($formUid) > self::FIELD_LIMIT;
     }
 
@@ -74,6 +74,6 @@ class Note extends AbstractFormElement
               ->andWhere($query->expr()->eq('f.deleted', $query->createNamedParameter(0)))
               ->andWhere($query->expr()->eq('p.hidden', $query->createNamedParameter(0)))
               ->andWhere($query->expr()->eq('p.deleted', $query->createNamedParameter(0)));
-        return $query->execute()->fetchOne();
+        return $query->executeQuery()->fetchOne();
     }
 }

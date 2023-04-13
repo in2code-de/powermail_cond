@@ -45,7 +45,7 @@ class GetPowermailFields
               ->from('tx_powermailcond_domain_model_conditioncontainer')
               ->where($query->expr()->eq('uid', $query->createNamedParameter($conditionContainer, PDO::PARAM_INT)))
               ->setMaxResults(1);
-        $formUid = $query->execute()->fetchOne();
+        $formUid = $query->executeQuery()->fetchOne();
 
         $params = $this->getParamsForForm($params, $formUid);
     }
@@ -69,7 +69,7 @@ class GetPowermailFields
               ->andWhere($query->expr()->eq('c.hidden', $query->createNamedParameter(0)))
               ->andWhere($query->expr()->eq('c.deleted', $query->createNamedParameter(0)))
               ->setMaxResults(1);
-        $formUid = $query->execute()->fetchOne();
+        $formUid = $query->executeQuery()->fetchOne();
 
         $params = $this->getParamsForForm($params, $formUid);
     }
@@ -101,16 +101,16 @@ class GetPowermailFields
         if ($formUid > 0) {
             $query->andWhere($query->expr()->eq('form.uid', $formUid));
         }
-        $fields = $query->execute()->fetchAllAssociative();
+        $fields = $query->executeQuery()->fetchAllAssociative();
 
         $params['items'][] = [
-            'powermail Fields',
-            '--div--',
+            'label' => 'powermail Fields',
+            'value' => '--div--',
         ];
         foreach ($fields as $field) {
             $params['items'][] = [
-                $field['title'] . ', {' . $field['marker'] . '}, uid' . $field['uid'],
-                $field['uid'],
+                'label' => $field['title'] . ', {' . $field['marker'] . '}, uid' . $field['uid'],
+                'value' => $field['uid'],
             ];
         }
 
@@ -120,15 +120,15 @@ class GetPowermailFields
                   ->from(Page::TABLE_NAME)
                   ->where($query->expr()->eq('form', $query->createNamedParameter($formUid, PDO::PARAM_INT)))
                   ->addOrderBy('sorting');
-            $pages = $query->execute()->fetchAllAssociative();
+            $pages = $query->executeQuery()->fetchAllAssociative();
             $params['items'][] = [
-                'powermail Fieldsets',
-                '--div--',
+                'label' => 'powermail Fieldsets',
+                'value' => '--div--',
             ];
             foreach ($pages as $page) {
                 $params['items'][] = [
-                    $page['title'] . ' (' . $page['uid'] . ')',
-                    'fieldset:' . $page['uid'],
+                    'label' => $page['title'] . ' (' . $page['uid'] . ')',
+                    'value' => 'fieldset:' . $page['uid'],
                 ];
             }
         }

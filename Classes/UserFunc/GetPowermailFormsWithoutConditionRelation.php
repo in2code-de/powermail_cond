@@ -49,7 +49,7 @@ class GetPowermailFormsWithoutConditionRelation
               ->distinct()
               ->from('tx_powermailcond_domain_model_conditioncontainer')
               ->where($query->expr()->in('form', array_keys($availableForms)));
-        $existingForms = $query->execute()->fetchFirstColumn();
+        $existingForms = $query->executeQuery()->fetchFirstColumn();
 
         foreach ($existingForms as $uid) {
             $key = $availableForms[$uid];
