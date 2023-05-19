@@ -74,7 +74,7 @@ class Comparison
     public function getFieldValue(Field $field)
     {
         $value = $field->getText();
-        if (($value[0] ?? '') === '{') {
+        if (($value[0] ?? '') === '{' || ($value[0] ?? '') === '[') {
             try {
                 return json_decode($value, true, 512, JSON_THROW_ON_ERROR);
             } catch (JsonException $exception) {
