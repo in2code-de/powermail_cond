@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace In2code\PowermailCond\UserFunc;
 
+use function array_keys;
+use function in_array;
 use Throwable;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
-
-use function array_keys;
-use function in_array;
 
 /**
  * Remove all forms from the selectable items that are already selected in another condition container.
@@ -49,7 +48,7 @@ class GetPowermailFormsWithoutConditionRelation
               ->distinct()
               ->from('tx_powermailcond_domain_model_conditioncontainer')
               ->where($query->expr()->in('form', array_keys($availableForms)));
-        $existingForms = $query->execute()->fetchFirstColumn();
+        $existingForms = $query->executeQuery()->fetchFirstColumn();
 
         foreach ($existingForms as $uid) {
             $key = $availableForms[$uid];

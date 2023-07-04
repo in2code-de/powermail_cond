@@ -24,27 +24,32 @@
 		}
 	],
 	"homepage": "https://github.com/einpraegsam/powermail_cond",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url":  "git@github.com:in2code-pro/powermail.git"
+		}
+	],
 	"require": {
-		"php": "^7.4 || ~8.0",
+		"php": "^8.1",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"in2code/powermail": "^10.0",
-		"typo3/cms-core": "^11.5.15 || ^11.5 <11.5.14"
+		"in2code/powermail": "dev-eap",
+		"typo3/cms-core": "^12.4"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^3.3",
-		"helmich/typo3-typoscript-lint": "^2.5",
+		"friendsofphp/php-cs-fixer": "^3.10",
+		"helmich/typo3-typoscript-lint": "^3.1",
 		"mikey179/vfsstream": "^1.6",
-		"nimut/testing-framework": "^6.0",
+		"typo3/testing-framework": "dev-main",
 		"phpmd/phpmd": "^2.8",
-		"phpunit/phpunit": "^9.5",
 		"squizlabs/php_codesniffer": "^3.5",
-		"typo3/cms-extensionmanager": "^11.5",
-		"typo3/cms-fluid-styled-content": "^11.5",
-		"typo3/cms-lowlevel": "^11.5",
-		"typo3/cms-tstemplate": "^11.5",
-		"typo3/cms-info": "^11.5",
-		"typo3/coding-standards": "^0.5.0"
+		"typo3/cms-extensionmanager": "^12.4",
+		"typo3/cms-fluid-styled-content": "^12.4",
+		"typo3/cms-lowlevel": "^12.4",
+		"typo3/cms-tstemplate": "^12.4",
+		"typo3/cms-info": "^12.4",
+		"typo3/coding-standards": "^0.7"
 	},
 	"replace": {
 		"typo3-ter/powermail-cond": "self.version"
@@ -66,17 +71,13 @@
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "powermail_cond",
-			"web-dir": ".Build/Web"
+			"web-dir": ".Build/public"
 		}
 	},
 	"scripts": {
-		"post-autoload-dump": [
-			"mkdir -p .Build/Web/typo3conf/ext/",
-			"[ -L .Build/Web/typo3conf/ext/powermail_cond ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/powermail_cond"
-		],
 		"test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
 		"test:php:csfix": "php-cs-fixer fix --config=.project/tests/.php-cs-fixer.php --diff",
-		"test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"test:php:lint": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
 		"test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings"
 	}
 }

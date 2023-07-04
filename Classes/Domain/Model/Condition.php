@@ -9,15 +9,13 @@ use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FieldRepository;
 use In2code\Powermail\Domain\Repository\PageRepository;
+use function is_numeric;
+use function stripos;
+use function substr;
 use Throwable;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-
-use function is_numeric;
-use function stripos;
-use function strpos;
-use function substr;
 
 class Condition extends AbstractEntity
 {
@@ -198,7 +196,7 @@ class Condition extends AbstractEntity
      */
     protected function process(Form $form, array $arguments, string $action): array
     {
-        if (strpos($this->targetField, 'fieldset') !== false) {
+        if (str_contains($this->targetField, 'fieldset')) {
             return $this->processPage($form, $arguments, $action);
         }
 
