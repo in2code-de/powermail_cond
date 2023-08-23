@@ -59,7 +59,7 @@ Hide textarea if "Red" in Selectfield (page 224)
 
 Show list of checkboxes only if second option is chosen in radio button
 
-#### Use case 6: Hide all other fields if there is an input in another field (page 182)
+#### Use case 6: Hide all other fields if there is an input in another field (page 253)
 
 Hide all other fields on page `Target: All fields` if a date is filled in field `Start date`
 
