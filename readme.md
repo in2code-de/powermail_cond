@@ -15,6 +15,17 @@ others should be visible.
 
 ![Backend view to records with rule](Documentation/Images/screenshot_powermail_cond_backend_records_conditionrule.png "Backend view to records with rule")
 
+## List of Conditions you can apply on the powermail form fields
+* `is set`
+* `is not set`
+* `contains value`
+* `contains value not`
+* `is`
+* `is not`
+* `is greater than (numbers only)`
+* `is less than (numbers only)`
+* `contains value from field`
+* `contains not value from field`
 
 ## Quick installation
 
@@ -46,6 +57,10 @@ routeEnhancers:
       condition.json: 3132
 ...
 ```
+
+## Local Development and Contribution
+There is a docker based local development environment available.
+See [Readme.md](Documentation/ForDevelopers/Readme.md) for more information.
 
 ## Early Access Programm (EAP)
 
