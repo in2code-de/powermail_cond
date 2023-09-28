@@ -8,7 +8,7 @@ export default class Utility {
 
   static showElement(element) {
     if (element !== null) {
-      element.style.display = 'block';
+      element.style.display = '';
     }
   }
 }
