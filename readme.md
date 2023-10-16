@@ -69,15 +69,17 @@ Also official (fee-based) support is possible within the EAP.
 
 This is the current status of the EAP features:
 
-| Version | TYPO3  | PHP              | Support/Development                   | Status    |
-|---------|--------|------------------|---------------------------------------|-----------|
-| 10      | 11 LTS | 7.4, 8.0, 8.1    | Support for TYPO3 11 and Powermail 10 | available |
-| 11      | 12 LTS | 8.0, 0.1         | Support for TYPO3 12 and Powermail 11 | planned   |
+| Version | TYPO3  | PHP           | Support/Development                        | Status    |
+|---------|--------|---------------|--------------------------------------------|-----------|
+| 10      | 11 LTS | 7.4, 8.0, 8.1 | Support for TYPO3 11 and Powermail 10      | available |
+| 11      | 12 LTS | 8.0, 8.1      | Support for TYPO3 12 and Powermail 11 / 12 | available |
 
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 11.1.0  | 2023-10-16 | Feature | Support Powermail 11 & 12                                                                            |
+| 11.0.0  | 2023-07-05 | Feature | Support Powermail 11                                                                                 |
 | 10.1.1  | 2023-03-23 | Bugfix  | Fix possible undefined array key error                                                               |
 | 10.1.0  | 2023-03-14 | Task    | Support all kind of powermail fields as with jQuery before (e.g. submit, text, etc...)               |
 | 10.0.0  | 2022-10-10 | Feature | Support for Powermail 10 and remove of jQuery support                                                |
