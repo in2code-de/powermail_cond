@@ -7,6 +7,7 @@ on:
 
 jobs:
   ter-release:
+    if: github.repository == 'einpraegsam/powermail_cond'
     name: TER release
     runs-on: ubuntu-latest
     env:
