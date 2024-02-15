@@ -133,7 +133,7 @@
 			</trans-unit>
 			<trans-unit id="tx_powermailcond_rules.operator.I.3">
 				<source>contains value not</source>
-				<target>beinhaltet Wert nichttex</target>
+				<target>beinhaltet Wert nicht</target>
 			</trans-unit>
 			<trans-unit id="tx_powermailcond_rules.operator.I.4">
 				<source>is</source>
