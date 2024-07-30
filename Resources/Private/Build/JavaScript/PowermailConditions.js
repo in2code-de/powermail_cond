@@ -23,7 +23,19 @@ class PowermailConditions {
 
   initialize = function () {
     const that = this;
-    that.#sendFormValuesToPowermailCond();
+
+    let formUid = this.#form.querySelector('input.powermail_form_uid').value;
+    let formActionSelector = '#form-' + formUid + '-actions';
+
+    if (document.querySelector(formActionSelector) === null) {
+      // Loading conditions via AJAX
+      that.#sendFormValuesToPowermailCond();
+    } else {
+      // Using prerendered conditions
+      let actions = JSON.parse(document.querySelector(formActionSelector).textContent);
+      that.#processActions(actions);
+    }
+
     that.#fieldListener();
   }
 
@@ -93,6 +105,14 @@ class PowermailConditions {
         }
       }
     }
+    let fieldsets = this.#form.querySelectorAll('.powermail_fieldset');
+    fieldsets.forEach(function(fieldset) {
+      if (window.getComputedStyle(fieldset).visibility === 'hidden') {
+        // Making initially invisible fieldset visible
+        fieldset.style.visibility = 'visible';
+        fieldset.style.opacity = 1;
+      }
+    });
   };
 
   #enableAllFields() {
