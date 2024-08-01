@@ -8,6 +8,14 @@ class PowermailConditions {
    */
   #form;
 
+  /**
+   * Selector for fields to be excluded from being sent to backend.
+   * Might be useful for file upload fields.
+   *
+   * @type {string}
+   */
+  #excludedFieldsSelector = 'data-powermail-cond-excluded-fields';
+
   constructor(form) {
     this.#form = form;
     this.#form.powermailConditions = this;
@@ -32,7 +40,20 @@ class PowermailConditions {
   #sendFormValuesToPowermailCond () {
     const that = this;
     that.#enableAllFields();
-    fetch(this.#getAjaxUri(), {body: new FormData(this.#form), method: 'post'})
+    const dataToSend = new FormData(this.#form);
+
+    if (this.#form.hasAttribute(this.#excludedFieldsSelector)) {
+      // gather fields that should be excluded
+      const excludedFields = this.#form.querySelectorAll(this.#form.getAttribute(this.#excludedFieldsSelector));
+      excludedFields.forEach(e => {
+        // and remove them from the payload being sent to the backend
+        if (e.hasAttribute('name')) {
+          dataToSend.delete(e.getAttribute('name'));
+        }
+      });
+    }
+
+    fetch(this.#getAjaxUri(), {body: dataToSend, method: 'post'})
       .then((resp) => resp.json())
       .then(function(data) {
         if (data.loops > 99) {
