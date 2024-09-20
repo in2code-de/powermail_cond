@@ -78,6 +78,7 @@ This is the current status of the EAP features:
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
 | 11.1.0  | 2023-10-16 | Feature | Support Powermail 11 & 12                                                                            |
 | 11.0.0  | 2023-07-05 | Feature | Support Powermail 11                                                                                 |
 | 10.1.1  | 2023-03-23 | Bugfix  | Fix possible undefined array key error                                                               |
