@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace In2code\PowermailCond\Controller;
 
 use In2code\PowermailCond\Service\ConditionService;
+use function json_encode;
+use const JSON_THROW_ON_ERROR;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-
-use const JSON_THROW_ON_ERROR;
-use function json_encode;
 
 class ConditionController extends ActionController
 {
