@@ -62,6 +62,24 @@ routeEnhancers:
 There is a docker based local development environment available.
 See [Readme.md](Documentation/ForDevelopers/Readme.md) for more information.
 
+## Less flickering
+
+To prevent the flickering that occurs when loading a form with conditions the usually asynchronously loaded "condition JSON" can be rendered directly into the HTML source code via this viewhelper in your copy of `EXT:powermail/Resources/Private/Templates/Form/Form.html`
+
+```xml
+{namespace pc=In2code\PowermailCond\ViewHelpers}
+<script type="application/json" id="form-{form.uid}-actions">{pc:conditions(form:form) -> f:format.raw()}</script>
+<style type="text/css">
+    .powermail_fieldset {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s, visibility 0.5s;
+    }
+</style>
+```
+
+This way the initial asynchronous call will be skipped which reduces the flickering to a minimum.
+
 ## Early Access Programm (EAP)
 
 You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
