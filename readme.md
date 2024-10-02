@@ -4,8 +4,8 @@ Conditions for TYPO3 extension powermail.
 While a user fills out a form, some fields should disappear, while
 others should be visible.
 
-> :warning: **TYPO3 12 compatibility**\
-> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
+> :warning: **TYPO3 13 compatibility**\
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 13 version
 
 ## Screenshots
 
@@ -80,22 +80,20 @@ To prevent the flickering that occurs when loading a form with conditions the us
 
 This way the initial asynchronous call will be skipped which reduces the flickering to a minimum.
 
-## Early Access Programm (EAP)
+## Early Access Programm for TYPO3 13 support
 
-You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
-Also official (fee-based) support is possible within the EAP.
+:information_source: **TYPO3 13 compatibility**
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or
+> [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how
+> to get access to a TYPO3 13 version
 
-This is the current status of the EAP features:
-
-| Version | TYPO3  | PHP           | Support/Development                        | Status    |
-|---------|--------|---------------|--------------------------------------------|-----------|
-| 10      | 11 LTS | 7.4, 8.0, 8.1 | Support for TYPO3 11 and Powermail 10      | available |
-| 11      | 12 LTS | 8.0, 8.1      | Support for TYPO3 12 and Powermail 11 / 12 | available |
 
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 13.0.0  | tbs        | Feature | Support Powermail 13 - planned                                                                       |
+| 11.2.4  | 2024-11-28 | Bugfix  | Prevent the flickering that occurs when loading a form with conditions                               |
 | 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
 | 11.2.2  | 2024-10-16 | TASK    | Adjust autodeployment                                                                                |
 | 11.2.1  | 2024-10-16 | Bugfix  | Fix autodeployment                                                                                   |
