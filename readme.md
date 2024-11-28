@@ -4,8 +4,8 @@ Conditions for TYPO3 extension powermail.
 While a user fills out a form, some fields should disappear, while
 others should be visible.
 
-> :warning: **TYPO3 12 compatibility**\
-> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
+> :warning: **TYPO3 13 compatibility**\
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 13 version
 
 ## Screenshots
 
@@ -62,22 +62,38 @@ routeEnhancers:
 There is a docker based local development environment available.
 See [Readme.md](Documentation/ForDevelopers/Readme.md) for more information.
 
-## Early Access Programm (EAP)
+## Less flickering
 
-You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
-Also official (fee-based) support is possible within the EAP.
+To prevent the flickering that occurs when loading a form with conditions the usually asynchronously loaded "condition JSON" can be rendered directly into the HTML source code via this viewhelper in your copy of `EXT:powermail/Resources/Private/Templates/Form/Form.html`
 
-This is the current status of the EAP features:
+```xml
+{namespace pc=In2code\PowermailCond\ViewHelpers}
+<script type="application/json" id="form-{form.uid}-actions">{pc:conditions(form:form) -> f:format.raw()}</script>
+<style type="text/css">
+    .powermail_fieldset {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s, visibility 0.5s;
+    }
+</style>
+```
 
-| Version | TYPO3  | PHP           | Support/Development                        | Status    |
-|---------|--------|---------------|--------------------------------------------|-----------|
-| 10      | 11 LTS | 7.4, 8.0, 8.1 | Support for TYPO3 11 and Powermail 10      | available |
-| 11      | 12 LTS | 8.0, 8.1      | Support for TYPO3 12 and Powermail 11 / 12 | available |
+This way the initial asynchronous call will be skipped which reduces the flickering to a minimum.
+
+## Early Access Programm for TYPO3 13 support
+
+:information_source: **TYPO3 13 compatibility**
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or
+> [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how
+> to get access to a TYPO3 13 version
+
 
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 13.0.0  | tbs        | Feature | Support Powermail 13 - planned                                                                       |
+| 11.2.4  | 2024-11-28 | Bugfix  | Prevent the flickering that occurs when loading a form with conditions                               |
 | 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
 | 11.2.2  | 2024-10-16 | TASK    | Adjust autodeployment                                                                                |
 | 11.2.1  | 2024-10-16 | Bugfix  | Fix autodeployment                                                                                   |
