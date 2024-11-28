@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace In2code\PowermailCond\Service;
 
+use In2code\Powermail\Domain\Model\Field;
+use In2code\Powermail\Domain\Model\Form;
+use In2code\Powermail\Domain\Model\Page;
 use In2code\Powermail\Domain\Repository\FormRepository;
 use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
 use In2code\PowermailCond\Exception\MissingPowermailParameterException;
+use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class ConditionService
@@ -14,13 +18,6 @@ class ConditionService
     protected FormRepository $formRepository;
 
     protected ConditionContainerRepository $conditionContainerRepository;
-
-    protected TypoScriptFrontendController $typoscriptFrontendController;
-
-    public function __construct()
-    {
-        $this->typoscriptFrontendController = $GLOBALS['TSFE'];
-    }
 
     public function injectFormRepository(FormRepository $formRepository): void
     {
@@ -72,7 +69,7 @@ class ConditionService
         $conditionContainer = $this->conditionContainerRepository->findOneByForm($form->getUid());
         if ($conditionContainer !== null) {
             $arguments = $conditionContainer->applyConditions($form, $powermailArguments);
-            $this->typoscriptFrontendController->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
+            $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user')->setKey('ses', 'tx_powermail_cond', $arguments);
             unset($arguments['backup'], $arguments['field']);
         }
 
