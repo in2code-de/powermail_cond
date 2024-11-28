@@ -1,4 +1,4 @@
-name: powermailcond
+name: powermailcond-v12
 type: php
 docroot: .Build/public
 php_version: "8.1"

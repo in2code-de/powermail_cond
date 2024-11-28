@@ -27,7 +27,10 @@ class GetPowermailFormsWithoutConditionRelation
      */
     public function filterForms(array &$params): void
     {
-        $currentForm = (int)$params['row']['form'];
+        $currentForm = (int)($params['row']['form'] ?? 0);
+        if ($currentForm === 0) {
+            return;
+        }
         $formsToSkip = [0, $currentForm];
 
         $availableForms = [];

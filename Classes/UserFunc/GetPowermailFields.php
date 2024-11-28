@@ -34,7 +34,7 @@ class GetPowermailFields
      */
     public function getFormFieldsForCondition(array &$params): void
     {
-        $conditionContainer = $params['row']['conditioncontainer'];
+        $conditionContainer = $params['row']['conditioncontainer'] ?? '';
         if (!MathUtility::canBeInterpretedAsInteger($conditionContainer)) {
             return;
         }
@@ -55,7 +55,7 @@ class GetPowermailFields
      */
     public function getFormFieldsForRule(array &$params): void
     {
-        $conditions = $params['row']['conditions'];
+        $conditions = $params['row']['conditions'] ?? '';
         if (!MathUtility::canBeInterpretedAsInteger($conditions)) {
             return;
         }

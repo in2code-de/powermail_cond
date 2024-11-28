@@ -78,6 +78,7 @@ This is the current status of the EAP features:
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
 | 11.2.2  | 2024-10-16 | TASK    | Adjust autodeployment                                                                                |
 | 11.2.1  | 2024-10-16 | Bugfix  | Fix autodeployment                                                                                   |
 | 11.2.0  | 2024-02-15 | Feature | Move public repository, adjust deployment, fix error in multivalue checkboxes                        |
