@@ -22,3 +22,5 @@ package-lock.json
 /.php-cs-fixer.cache
 /var
 /config
+/packages
+/packages/powermail

@@ -5,6 +5,16 @@
 ## Example: "ddev initialize"
 
 ddev import-db --src=.project/data/db.sql.gz
+mkdir -p packages
+cd packages
+if [ ! -d "powermail" ]; then
+    echo "Cloning powermail"
+    git clone -b "master" git@github.com:in2code-pro/powermail.git
+else
+    echo "Powermail directory already exists, skipping git clone"
+fi
+
+cd ..
 ddev composer install
 cp .Build/vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess .Build/public/.htaccess
 mkdir -p config/sites/main && cp .ddev/typo3/config.yaml config/sites/main/

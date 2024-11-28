@@ -2,7 +2,7 @@
 return [
     'BE' => [
         'debug' => true,
-        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$M2Rma0QvWDhuZWlubjNmaw$GNQhyTx+WUwjV0EuzRII4KuIf9l6mI8aRR5L7ec7xas',
+        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$dVhDaTlhalpPaXFSVEdiTw$xHoL00PkalQzVkTxcYotwFuu19qSML2xFd7raNguXC4',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
