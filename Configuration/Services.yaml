@@ -13,3 +13,7 @@ services:
 
   In2code\PowermailCond\UserFunc\GetPowermailFormsWithoutConditionRelation:
     public: true
+
+  In2code\PowermailCond\Backend\Form\Element\Note:
+    arguments:
+      $data: []
