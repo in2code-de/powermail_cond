@@ -14,12 +14,10 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class ConditionAwareValidator extends InputValidator
 {
-    protected TypoScriptFrontendController $typoscriptFrontendController;
 
     public function __construct(array $options = [])
     {
         parent::__construct($options);
-        $this->typoscriptFrontendController = $GLOBALS['TSFE'];
     }
 
     /**
@@ -30,7 +28,7 @@ class ConditionAwareValidator extends InputValidator
      */
     protected function isValidFieldInMandatoryValidation(Field $field, $value): void
     {
-        $arguments = $this->typoscriptFrontendController->fe_user->getSessionData('tx_powermail_cond');
+        $arguments = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user')->getSessionData('tx_powermail_cond');
         $parentPage = $field->getPage();
         if ($parentPage === null) {
             return;
