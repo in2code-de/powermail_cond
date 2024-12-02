@@ -108,7 +108,7 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
-| 13.0.0  | tbs        | Feature | Support Powermail 13 - planned                                                                       |
+| 13.0.0  | 2024-12-02 | Feature | Support for Powermail 13 / TYPO3 13                                                                  |
 | 11.2.4  | 2024-11-28 | Bugfix  | Prevent the flickering that occurs when loading a form with conditions                               |
 | 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
 | 11.2.2  | 2024-10-16 | TASK    | Adjust autodeployment                                                                                |
