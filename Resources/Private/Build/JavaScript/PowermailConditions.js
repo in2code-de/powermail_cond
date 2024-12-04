@@ -228,8 +228,15 @@ class PowermailConditions {
   };
 }
 
-const forms = document.querySelectorAll('.powermail_form');
-forms.forEach(function(form) {
-  let powermailConditions = new PowermailConditions(form);
-  powermailConditions.initialize();
+// We use "pageshow" instead of ready/DOMContentLoaded because this event
+// specifically handles the backward/forward-navigation cache (bfcache)
+// of browsers, so when someone returns to a already filled out form,
+// the values get checked properly instead of sendFormValuesToPowermailCond
+// receiving a practically empty initial form state.
+window.addEventListener('pageshow', () => {
+  const forms = document.querySelectorAll('.powermail_form');
+  forms.forEach(function(form) {
+    let powermailConditions = new PowermailConditions(form);
+    powermailConditions.initialize();
+  });
 });
