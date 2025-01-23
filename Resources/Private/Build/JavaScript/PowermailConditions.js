@@ -9,6 +9,11 @@ class PowermailConditions {
   #form;
 
   /**
+   * Is the form a morestep form?
+   */
+  #isMoreStepForm;
+
+  /**
    * Selector for fields to be excluded from being sent to backend.
    * Might be useful for file upload fields.
    *
@@ -19,6 +24,7 @@ class PowermailConditions {
   constructor(form) {
     this.#form = form;
     this.#form.powermailConditions = this;
+    this.#isMoreStepForm = this.#form.classList.contains('powermail_morestep');
   }
 
   initialize = function () {
@@ -86,9 +92,16 @@ class PowermailConditions {
 
           // do actions with whole pages
           if (data.todo[formUid][pageUid]['#action'] === 'hide') {
+            if (this.#isMoreStepForm) {
+              Utility.hideElement(this.#getMoreStepToggleByUid(pageUid));
+            }
+
             this.#hidePage(this.#getFieldsetByUid(pageUid));
           }
           if (data.todo[formUid][pageUid]['#action'] === 'un_hide') {
+            if (this.#isMoreStepForm) {
+              Utility.showElement(this.#getMoreStepToggleByUid(pageUid));
+            }
             this.#showPage(this.#getFieldsetByUid(pageUid));
           }
 
@@ -163,11 +176,18 @@ class PowermailConditions {
   };
 
   #showPage(page) {
-    Utility.showElement(page);
+    page.classList.remove('powermail-cond-hidden');
+    if (!this.#isMoreStepForm) {
+      Utility.showElement(page);
+    }
   };
 
   #hidePage(page) {
-    Utility.hideElement(page);
+    if (this.#isMoreStepForm) {
+      page.classList.add('powermail-cond-hidden');
+    } else {
+      Utility.hideElement(page);
+    }
   };
 
   #derequireField(field) {
@@ -222,6 +242,10 @@ class PowermailConditions {
   #getFieldsetByUid(pageUid) {
     return this.#form.querySelector('.powermail_fieldset_' + pageUid);
   };
+
+  #getMoreStepToggleByUid(pageUid) {
+    return this.#form.querySelector(`.btn[data-powermail-fieldset="${pageUid}"]`)
+  }
 
   #getFieldwrappingContainerByMarker(fieldMarker) {
     return this.#form.querySelector('.powermail_fieldwrap_' + fieldMarker);
