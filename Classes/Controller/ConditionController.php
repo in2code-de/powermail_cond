@@ -29,7 +29,7 @@ class ConditionController extends ActionController
     {
         $requestBody = $this->request->getParsedBody();
 
-        $arguments = $this->conditionService->getArguments($requestBody['tx_powermail_pi1']);
+        $arguments = $this->conditionService->getArguments($requestBody['tx_powermail_pi1'] ?? []);
 
         return $this->jsonResponse(json_encode($arguments, JSON_THROW_ON_ERROR));
     }
