@@ -26,7 +26,6 @@ class Note extends AbstractFormElement
 
     public function __construct(NodeFactory $nodeFactory, array $data)
     {
-        parent::__construct($nodeFactory, $data);
         $this->languageService = $GLOBALS['LANG'];
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
