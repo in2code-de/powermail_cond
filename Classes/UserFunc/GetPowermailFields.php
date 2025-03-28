@@ -5,8 +5,8 @@ namespace In2code\PowermailCond\UserFunc;
 use In2code\Powermail\Domain\Model\Field;
 use In2code\Powermail\Domain\Model\Form;
 use In2code\Powermail\Domain\Model\Page;
-use PDO;
 use Throwable;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -43,7 +43,7 @@ class GetPowermailFields
         $query->getRestrictions()->removeByType(HiddenRestriction::class);
         $query->select('form')
               ->from('tx_powermailcond_domain_model_conditioncontainer')
-              ->where($query->expr()->eq('uid', $query->createNamedParameter($conditionContainer, PDO::PARAM_INT)))
+              ->where($query->expr()->eq('uid', $query->createNamedParameter($conditionContainer, Connection::PARAM_INT)))
               ->setMaxResults(1);
         $formUid = $query->executeQuery()->fetchOne();
 
@@ -65,7 +65,7 @@ class GetPowermailFields
         $query->select('cc.form')
               ->from('tx_powermailcond_domain_model_conditioncontainer', 'cc')
               ->leftJoin('cc', 'tx_powermailcond_domain_model_condition', 'c', 'cc.uid = c.conditioncontainer')
-              ->where($query->expr()->eq('c.uid', $query->createNamedParameter($conditions, PDO::PARAM_INT)))
+              ->where($query->expr()->eq('c.uid', $query->createNamedParameter($conditions, Connection::PARAM_INT)))
               ->andWhere($query->expr()->eq('c.hidden', $query->createNamedParameter(0)))
               ->andWhere($query->expr()->eq('c.deleted', $query->createNamedParameter(0)))
               ->setMaxResults(1);
@@ -118,7 +118,7 @@ class GetPowermailFields
             $query = $this->connectionPool->getQueryBuilderForTable(Page::TABLE_NAME);
             $query->select('uid', 'title')
                   ->from(Page::TABLE_NAME)
-                  ->where($query->expr()->eq('form', $query->createNamedParameter($formUid, PDO::PARAM_INT)))
+                  ->where($query->expr()->eq('form', $query->createNamedParameter($formUid, Connection::PARAM_INT)))
                   ->addOrderBy('sorting');
             $pages = $query->executeQuery()->fetchAllAssociative();
             $params['items'][] = [
