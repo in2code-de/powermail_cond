@@ -4,9 +4,6 @@ Conditions for TYPO3 extension powermail.
 While a user fills out a form, some fields should disappear, while
 others should be visible.
 
-> :warning: **TYPO3 13 compatibility**\
-> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 13 version
-
 ## Screenshots
 
 ![Example form with conditions](Documentation/Images/screenshot_powermail_cond_frontend.png "Example form with conditions")
