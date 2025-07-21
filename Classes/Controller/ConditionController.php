@@ -29,6 +29,12 @@ class ConditionController extends ActionController
     {
         $requestBody = $this->request->getParsedBody();
 
+        if (!isset($requestBody['tx_powermail_pi1'])) {
+            $response = $this->jsonResponse(json_encode([ 'error' => 'Bad Request' ], JSON_THROW_ON_ERROR));
+            $response = $response->withStatus(400);
+            return $response;
+        }
+
         $arguments = $this->conditionService->getArguments($requestBody['tx_powermail_pi1']);
 
         return $this->jsonResponse(json_encode($arguments, JSON_THROW_ON_ERROR));
