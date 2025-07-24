@@ -93,18 +93,19 @@ To prevent the flickering that occurs when loading a form with conditions the us
 
 This way the initial asynchronous call will be skipped which reduces the flickering to a minimum.
 
-## Early Access Programm for TYPO3 13 support
+## Early Access Programm for TYPO3 14 support
 
-:information_source: **TYPO3 13 compatibility**
+:information_source: **TYPO3 14 compatibility**
 > See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or
 > [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how
-> to get access to a TYPO3 13 version
+> to get access to a TYPO3 14 version
 
 
 ## Changelog
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 13.0.1  | 2025-XX-XX | Bugfix  | Some small bugfixes                                                                                  |                                                                  |
 | 13.0.0  | 2024-12-02 | Feature | Support for Powermail 13 / TYPO3 13                                                                  |
 | 11.2.4  | 2024-11-28 | Bugfix  | Prevent the flickering that occurs when loading a form with conditions                               |
 | 11.2.3  | 2024-09-20 | Bugfix  | Some small bugfixes                                                                                  |
