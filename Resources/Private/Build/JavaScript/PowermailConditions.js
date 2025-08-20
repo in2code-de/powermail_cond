@@ -37,6 +37,46 @@ class PowermailConditions {
     }
 
     that.#fieldListener();
+    that.#submitListener();
+  }
+
+  /**
+   * Prevents a specific race condition when submitting forms
+   *
+   * Technical background:
+   * When a user's first action is to focus a field, enter a value, and immediately
+   * click submit, it can cause problems. This sequence triggers #sendFormValuesToPowermailCond
+   * and #enableAllFields, but the form submission cancels the network request to the
+   * condition endpoint. As a result, all fields get enabled and transmitted for processing.
+   *
+   * How it works:
+   * This listener checks if any form element is currently focused. If so, it:
+   * 1. Blurs the focused input first
+   * 2. Waits a brief moment (50ms)
+   * 3. Then submits the form
+   *
+   * This ensures field processing completes properly before submission, avoiding the race condition.
+   */
+  #submitListener() {
+    this.#form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      if (document.activeElement && document.activeElement.tagName) {
+        const activeElement = document.activeElement;
+        const tagName = activeElement.tagName.toLowerCase();
+        if ((tagName === 'input' || tagName === 'textarea' || tagName === 'select') &&
+          this.#form.contains(activeElement)) {
+          activeElement.blur();
+
+          setTimeout(() => {
+            this.#form.submit();
+          }, 50);
+          return;
+        }
+      }
+
+      this.#form.submit();
+    });
   }
 
   #fieldListener() {
@@ -101,7 +141,6 @@ class PowermailConditions {
               this.#showField(fieldMarker);
             }
           }
-
         }
       }
     }
