@@ -67,18 +67,8 @@ class PowermailConditions {
     this.#form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      if (document.activeElement && document.activeElement.tagName) {
-        const activeElement = document.activeElement;
-        const tagName = activeElement.tagName.toLowerCase();
-        if ((tagName === 'input' || tagName === 'textarea' || tagName === 'select') &&
-          this.#form.contains(activeElement)) {
-          activeElement.blur();
-
-          setTimeout(() => {
-            this.#form.submit();
-          }, 50);
-          return;
-        }
+      if (this.#form.classList.contains('powermail_form_error')) {
+        return;
       }
 
       this.#form.submit();
