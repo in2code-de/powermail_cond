@@ -58,6 +58,11 @@ class PowermailConditions {
    * This ensures field processing completes properly before submission, avoiding the race condition.
    */
   #submitListener() {
+    // don't setup race-condition listener for AJAX forms
+    if (this.#form.getAttribute("data-powermail-ajax") === "true") {
+      return;
+    }
+
     this.#form.addEventListener('submit', (event) => {
       event.preventDefault();
 
