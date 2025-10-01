@@ -10,11 +10,9 @@ use In2code\Powermail\Domain\Validator\InputValidator;
 use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\PowermailCond\Domain\Model\Condition;
 use Throwable;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class ConditionAwareValidator extends InputValidator
 {
-
     public function __construct(array $options = [])
     {
         parent::__construct($options);

@@ -11,7 +11,6 @@ use In2code\Powermail\Domain\Repository\FormRepository;
 use In2code\PowermailCond\Domain\Repository\ConditionContainerRepository;
 use In2code\PowermailCond\Exception\MissingPowermailParameterException;
 use In2code\PowermailCond\Exception\UnsupportedVariableTypeException;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class ConditionService
 {
