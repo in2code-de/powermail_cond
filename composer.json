@@ -23,12 +23,6 @@
 			"role": "Developer"
 		}
 	],
-	"repositories": [
-		{
-			"type": "path",
-			"url": "packages/*"
-		}
-	],
 	"homepage": "https://github.com/in2code-de/powermail_cond",
 	"require": {
 		"php": "^8.2",
