@@ -43,7 +43,8 @@ class PowermailConditions {
     }
 
     that.#fieldListener();
-    that.#submitListener();
+    // Wait until https://github.com/in2code-de/powermail_cond/issues/111 is fixed
+    // that.#submitListener();
   }
 
   /**
