@@ -11,6 +11,7 @@ additional_fqdns: []
 database:
     type: mariadb
     version: "10.4"
+host_db_port: "49189"
 nfs_mount_enabled: false
 mutagen_enabled: false
 use_dns_when_possible: true

@@ -1,0 +1,2 @@
+# cat=basic/enable/010; type=integer; label=Condition container loop count: WARNING! Changing this setting can lead to breaking the front end for powermail cond forms. Only adjust this setting if you know what you are doing. Defines the number of loops that are run through when parsing the conditions. This is a safety measure to prevent infinite loops in the event of incorrect conditions.
+conditionLoopCount = 100

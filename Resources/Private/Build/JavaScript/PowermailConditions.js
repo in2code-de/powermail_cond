@@ -119,7 +119,7 @@ class PowermailConditions {
     fetch(this.#getAjaxUri(), {body: dataToSend, method: 'post'})
       .then((resp) => resp.json())
       .then(function(data) {
-        if (data.loops > 99) {
+        if (data.loops > data.loopLimit) {
           console.log('Too much loops reached by parsing conditions and rules. Check for conflicting conditions.');
         } else {
           that.#processActions(data);

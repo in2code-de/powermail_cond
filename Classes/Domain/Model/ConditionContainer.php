@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace In2code\PowermailCond\Domain\Model;
 
 use In2code\Powermail\Domain\Model\Form;
+use In2code\PowermailCond\Utility\ConfigurationUtility;
 use Throwable;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -25,9 +26,11 @@ class ConditionContainer extends AbstractEntity
      */
     public function applyConditions(Form $form, array $arguments): array
     {
+        $loopLimit = ConfigurationUtility::getConditionLoopCount();
+
         // run this loop if any condition changed something
         // but stop after 100 rounds to prevent infinite loops (built by editors)
-        while ($this->somethingChanged && $this->loopCount < 100) {
+        while ($this->somethingChanged && $this->loopCount < $loopLimit) {
             $this->somethingChanged = false;
             $this->loopCount++;
 
@@ -55,6 +58,7 @@ class ConditionContainer extends AbstractEntity
 
         // return the arguments with instructions for the JS in the frontend
         $arguments['loops'] = $this->loopCount;
+        $arguments['loopLimit'] = $loopLimit;
         return $arguments;
     }
 }
