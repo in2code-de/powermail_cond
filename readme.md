@@ -54,6 +54,11 @@ routeEnhancers:
       condition.json: 3132
 ...
 ```
+### Extension Settings
+
+**Condition container loop count**
+WARNING! Changing this setting can lead to breaking the front end for powermail cond forms. Only adjust this setting if you know what you are doing. Defines the number of loops that are run through when parsing the conditions. This is a safety measure to prevent infinite loops in the event of incorrect conditions.
+Default value conditionLoopCount = 100
 
 ## Trouble shoot: upload fields
 
@@ -105,6 +110,7 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 13.1.0  | 2025-10-24 | Feature | Introduce Condition container loop count                                                                                           |                                                                  |
 | 13.0.3  | 2025-10-01 | Bugfix  | Fix race condition for ajax forms                                                                    |                                                                  |
 | 13.0.1  | 2025-XX-XX | Bugfix  | Some small bugfixes                                                                                  |                                                                  |
 | 13.0.0  | 2024-12-02 | Feature | Support for Powermail 13 / TYPO3 13                                                                  |
