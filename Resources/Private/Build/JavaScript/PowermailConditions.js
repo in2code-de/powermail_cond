@@ -74,6 +74,11 @@ class PowermailConditions {
           activeElement.blur();
 
           setTimeout(() => {
+            // don't submit if HTML validations fail
+            if (!this.#form.reportValidity()) {
+              return;
+            }
+
             this.#form.submit();
           }, 50);
           return;
