@@ -12,7 +12,6 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 
 class ConfigurationUtility
 {
-
     public static function getConditionLoopCount(): int
     {
         $extConfigTemplatesSettings = self::getExtConfTemplateSettings();
@@ -28,7 +27,7 @@ class ConfigurationUtility
     {
         try {
             $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('powermail_cond');
-            return ($configuration ?? []);
+            return $configuration ?? [];
         } catch (ExtensionConfigurationExtensionNotConfiguredException | ExtensionConfigurationPathDoesNotExistException $e) {
             return [];
         }
