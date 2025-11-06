@@ -29,7 +29,7 @@
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"typo3/cms-core": "^13.4",
-		"in2code/powermail": "^13.0"
+		"in2code/powermail": "^13.0 || @dev"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-latest",
