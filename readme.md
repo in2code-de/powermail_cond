@@ -108,6 +108,7 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 11.2.8  | 2025-14-11 | Bugfix  | Mitigate regression from last bugfix                                                                 |
 | 11.2.7  | 2025-10-01 | Bugfix  | Prevent race condition in powermail ajax forms                                                       |
 | 11.2.5  | 2024-08-08 | Bugfix  | Handle missing arguments in ConditionController requests                                             |
 | 11.2.4  | 2024-11-28 | Bugfix  | Prevent the flickering that occurs when loading a form with conditions                               |
