@@ -110,7 +110,8 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
-| 13.1.0  | 2025-10-24 | Feature | Introduce Condition container loop count                                                                                           |                                                                  |
+| 13.1.1  | 2025-11-14 | Bugfix  | Mitigate a regression introduced in 13.0.3                                                           |                                                                  |
+| 13.1.0  | 2025-10-24 | Feature | Introduce Condition container loop count                                                             |                                                                  |
 | 13.0.3  | 2025-10-01 | Bugfix  | Fix race condition for ajax forms                                                                    |                                                                  |
 | 13.0.1  | 2025-XX-XX | Bugfix  | Some small bugfixes                                                                                  |                                                                  |
 | 13.0.0  | 2024-12-02 | Feature | Support for Powermail 13 / TYPO3 13                                                                  |
