@@ -43,6 +43,14 @@ class ConditionService
         /** @var Form $form */
         $form = $this->formRepository->findByIdentifier($powermailArguments['mail']['form']);
 
+        // Use the forms non-localized UID, because the field is l10n_mode exclude
+        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form->getUid());
+        
+        // Return early if there are no conditions for this form
+        if ($conditionContainer === null) {
+            return [];
+        }
+
         /** @var array<string, Field> $fields */
         $fields = [];
 
@@ -67,14 +75,9 @@ class ConditionService
             $fields[$fieldName]->setText($fieldValue);
         }
 
-        $arguments = [];
-        // Use the forms non-localized UID, because the field is l10n_mode exclude
-        $conditionContainer = $this->conditionContainerRepository->findOneByForm($form->getUid());
-        if ($conditionContainer !== null) {
-            $arguments = $conditionContainer->applyConditions($form, $powermailArguments);
-            $this->typoscriptFrontendController->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
-            unset($arguments['backup'], $arguments['field']);
-        }
+        $arguments = $conditionContainer->applyConditions($form, $powermailArguments);
+        $this->typoscriptFrontendController->fe_user->setAndSaveSessionData('tx_powermail_cond', $arguments);
+        unset($arguments['backup'], $arguments['field']);
 
         return $arguments;
     }
