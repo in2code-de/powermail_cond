@@ -80,8 +80,7 @@ class PowermailConditions {
           activeElement.blur();
 
           setTimeout(() => {
-            // don't submit if HTML validations fail
-            if (!this.#form.reportValidity()) {
+            if (this.#hasValidationErrors()) {
               return;
             }
 
@@ -91,8 +90,30 @@ class PowermailConditions {
         }
       }
 
+      if (this.#hasValidationErrors()) {
+        return;
+      }
+
       this.#form.submit();
     });
+  }
+
+  /**
+   * Check if the form has any validation errors, covering both native HTML5
+   * validation and powermail's JavaScript validation.
+   *
+   * Note: reportValidity() alone is not sufficient because it always returns
+   * true when the form has a "novalidate" attribute (i.e. when native
+   * validation is disabled via TypoScript validation.native = 0).
+   */
+  #hasValidationErrors() {
+    if (!this.#form.reportValidity()) {
+      return true;
+    }
+    if (this.#form.classList.contains('powermail_form_error')) {
+      return true;
+    }
+    return false;
   }
 
   #fieldListener() {
