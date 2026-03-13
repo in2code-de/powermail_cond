@@ -32,7 +32,6 @@ Quick guide:
 - Add a powermail form to any page
 - Add a new record from type "condition container" to a sysfolder and configure it
 - Don't forget to include the static template from powermail_cond
-- Don't forget to add jQuery to your frontend (if not yet installed)
 
 Example routing configuration for TypeNum 3132:
 
@@ -155,10 +154,6 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 | 3.3.2   | 2017-05-20 | Bugfix  | TCA update for TYPO3 8.7                                                                             |
 | 3.3.1   | 2017-04-25 | Bugfix  | Fix package name in composer.json                                                                    |
 | 3.3.0   | 2017-04-23 | Task    | Move ext to github, make it fit for TYPO3 8.7 LTS                                                    |
-
-## More to come soon?
-
-- Use vanilla JS instead of jQuery
 
 ## Conflicts
 
