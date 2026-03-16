@@ -268,19 +268,6 @@ class Condition extends AbstractEntity
         $arguments[self::INDEX_TODO][$formUid][$pageUid][$fieldMarker][self::INDEX_MATCHING_CONDITION][$conditionUid] =
             $conditionUid;
 
-        // Backup field value if field gets hidden
-        if ($action === self::ACTION_HIDE_STRING) {
-            $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = $field->getText();
-            $field->setText('');
-        }
-
-        if (
-            $action === self::ACTION_UN_HIDE_STRING
-            && isset($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker])
-        ) {
-            // fill field with backup'd value if field gets enabled again
-            $field->setText($arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker]);
-        }
         return $arguments;
     }
 
