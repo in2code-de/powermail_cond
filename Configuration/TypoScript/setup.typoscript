@@ -1,6 +1,6 @@
 page {
   includeJSFooter {
-    powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.min.js
+    powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.js
     powermailCond.defer = 1
   }
 

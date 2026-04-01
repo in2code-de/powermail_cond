@@ -1,6 +1,4 @@
-import Utility from './Utility';
-
-class PowermailConditions {
+class PowermailCondition {
   'use strict';
 
   /**
@@ -164,14 +162,14 @@ class PowermailConditions {
           // do actions with whole pages
           if (data.todo[formUid][pageUid]['#action'] === 'hide') {
             if (this.#isMoreStepForm) {
-              Utility.hideElement(this.#getMoreStepToggleByUid(pageUid));
+              PowermailCondition.hideElement(this.#getMoreStepToggleByUid(pageUid));
             }
 
             this.#hidePage(this.#getFieldsetByUid(pageUid));
           }
           if (data.todo[formUid][pageUid]['#action'] === 'un_hide') {
             if (this.#isMoreStepForm) {
-              Utility.showElement(this.#getMoreStepToggleByUid(pageUid));
+              PowermailCondition.showElement(this.#getMoreStepToggleByUid(pageUid));
             }
             this.#showPage(this.#getFieldsetByUid(pageUid));
           }
@@ -224,7 +222,7 @@ class PowermailConditions {
   #showField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
-      Utility.showElement(wrappingContainer);
+      PowermailCondition.showElement(wrappingContainer);
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -236,7 +234,7 @@ class PowermailConditions {
   #hideField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
-      Utility.hideElement(wrappingContainer);
+      PowermailCondition.hideElement(wrappingContainer);
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -248,7 +246,7 @@ class PowermailConditions {
   #showPage(page) {
     page.classList.remove('powermail-cond-hidden');
     if (!this.#isMoreStepForm) {
-      Utility.showElement(page);
+      PowermailCondition.showElement(page);
     }
   };
 
@@ -256,7 +254,7 @@ class PowermailConditions {
     if (this.#isMoreStepForm) {
       page.classList.add('powermail-cond-hidden');
     } else {
-      Utility.hideElement(page);
+      PowermailCondition.hideElement(page);
     }
   };
 
@@ -320,6 +318,20 @@ class PowermailConditions {
   #getFieldwrappingContainerByMarker(fieldMarker) {
     return this.#form.querySelector('.powermail_fieldwrap_' + fieldMarker);
   };
+
+  static hideElement(element) {
+    if (element !== null) {
+      element.classList.add('powermail-cond-hidden');
+      element.style.display = 'none';
+    }
+  }
+
+  static showElement(element) {
+    if (element !== null) {
+      element.classList.remove('powermail-cond-hidden');
+      element.style.display = '';
+    }
+  }
 }
 
 // We use "pageshow" instead of ready/DOMContentLoaded because this event
@@ -330,7 +342,7 @@ class PowermailConditions {
 window.addEventListener('pageshow', () => {
   const forms = document.querySelectorAll('.powermail_form');
   forms.forEach(function(form) {
-    let powermailConditions = new PowermailConditions(form);
+    let powermailConditions = new PowermailCondition(form);
     powermailConditions.initialize();
   });
 });
