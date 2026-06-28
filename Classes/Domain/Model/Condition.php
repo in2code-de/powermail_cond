@@ -271,7 +271,13 @@ class Condition extends AbstractEntity
         // Backup field value if field gets hidden
         if ($action === self::ACTION_HIDE_STRING) {
             $arguments[self::INDEX_BACKUP][$formUid][$pageUid][$fieldMarker] = $field->getText();
-            $field->setText('');
+            // Only clear the value for fields that carry user-submitted input.
+            // Display-only fields (text, html) store their rendered HTML in $text,
+            // not a form value, so clearing it would corrupt the in-memory object
+            // and cause blank output in the template.
+            if (!in_array($field->getType(), ['text', 'html'])) {
+                $field->setText('');
+            }
         }
 
         if (
