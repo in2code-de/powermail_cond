@@ -225,6 +225,11 @@ class PowermailConditions {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
       Utility.showElement(wrappingContainer);
+      wrappingContainer.querySelectorAll('input, select, textarea').forEach((field) => {
+        field.removeAttribute('disabled');
+        this.#rerequireField(field);
+      });
+      return;
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -237,6 +242,11 @@ class PowermailConditions {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
       Utility.hideElement(wrappingContainer);
+      wrappingContainer.querySelectorAll('input, select, textarea').forEach((field) => {
+        field.setAttribute('disabled', 'disabled');
+        this.#derequireField(field);
+      });
+      return;
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -261,17 +271,24 @@ class PowermailConditions {
   };
 
   #derequireField(field) {
-    if (field.hasAttribute('required') || field.hasAttribute('data-powermail-required')) {
+    if (field.hasAttribute('required')) {
       field.removeAttribute('required');
-      field.removeAttribute('data-powermail-required');
       field.setAttribute('data-powermailcond-required', 'required');
+    } else if (field.hasAttribute('data-powermail-required')) {
+      field.removeAttribute('data-powermail-required');
+      field.setAttribute('data-powermailcond-required', 'data-powermail-required');
     }
   };
 
   #rerequireField(field) {
-    if (field.getAttribute('data-powermailcond-required') === 'required') {
+    const bookmark = field.getAttribute('data-powermailcond-required');
+    if (bookmark === 'required') {
       if (this.#isHtml5ValidationActivated() || this.#isPowermailValidationActivated()) {
-        field.setAttribute('required', 'required')
+        field.setAttribute('required', 'required');
+      }
+    } else if (bookmark === 'data-powermail-required') {
+      if (this.#isPowermailValidationActivated()) {
+        field.setAttribute('data-powermail-required', 'true');
       }
     }
     field.removeAttribute('data-powermailcond-required');
