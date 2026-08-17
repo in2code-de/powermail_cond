@@ -1,4 +1,6 @@
-class PowermailCondition {
+import Utility from './Utility';
+
+class PowermailConditions {
   'use strict';
 
   /**
@@ -162,14 +164,14 @@ class PowermailCondition {
           // do actions with whole pages
           if (data.todo[formUid][pageUid]['#action'] === 'hide') {
             if (this.#isMoreStepForm) {
-              PowermailCondition.hideElement(this.#getMoreStepToggleByUid(pageUid));
+              Utility.hideElement(this.#getMoreStepToggleByUid(pageUid));
             }
 
             this.#hidePage(this.#getFieldsetByUid(pageUid));
           }
           if (data.todo[formUid][pageUid]['#action'] === 'un_hide') {
             if (this.#isMoreStepForm) {
-              PowermailCondition.showElement(this.#getMoreStepToggleByUid(pageUid));
+              Utility.showElement(this.#getMoreStepToggleByUid(pageUid));
             }
             this.#showPage(this.#getFieldsetByUid(pageUid));
           }
@@ -222,7 +224,12 @@ class PowermailCondition {
   #showField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
-      PowermailCondition.showElement(wrappingContainer);
+      Utility.showElement(wrappingContainer);
+      wrappingContainer.querySelectorAll('input, select, textarea').forEach((field) => {
+        field.removeAttribute('disabled');
+        this.#rerequireField(field);
+      });
+      return;
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -234,7 +241,12 @@ class PowermailCondition {
   #hideField(fieldMarker) {
     let wrappingContainer = this.#getWrappingContainerByMarkerName(fieldMarker);
     if (wrappingContainer !== null) {
-      PowermailCondition.hideElement(wrappingContainer);
+      Utility.hideElement(wrappingContainer);
+      wrappingContainer.querySelectorAll('input, select, textarea').forEach((field) => {
+        field.setAttribute('disabled', 'disabled');
+        this.#derequireField(field);
+      });
+      return;
     }
     let field = this.#getFieldByMarker(fieldMarker);
     if (field !== null) {
@@ -246,7 +258,7 @@ class PowermailCondition {
   #showPage(page) {
     page.classList.remove('powermail-cond-hidden');
     if (!this.#isMoreStepForm) {
-      PowermailCondition.showElement(page);
+      Utility.showElement(page);
     }
   };
 
@@ -254,22 +266,29 @@ class PowermailCondition {
     if (this.#isMoreStepForm) {
       page.classList.add('powermail-cond-hidden');
     } else {
-      PowermailCondition.hideElement(page);
+      Utility.hideElement(page);
     }
   };
 
   #derequireField(field) {
-    if (field.hasAttribute('required') || field.hasAttribute('data-powermail-required')) {
+    if (field.hasAttribute('required')) {
       field.removeAttribute('required');
-      field.removeAttribute('data-powermail-required');
       field.setAttribute('data-powermailcond-required', 'required');
+    } else if (field.hasAttribute('data-powermail-required')) {
+      field.removeAttribute('data-powermail-required');
+      field.setAttribute('data-powermailcond-required', 'data-powermail-required');
     }
   };
 
   #rerequireField(field) {
-    if (field.getAttribute('data-powermailcond-required') === 'required') {
+    const bookmark = field.getAttribute('data-powermailcond-required');
+    if (bookmark === 'required') {
       if (this.#isHtml5ValidationActivated() || this.#isPowermailValidationActivated()) {
-        field.setAttribute('required', 'required')
+        field.setAttribute('required', 'required');
+      }
+    } else if (bookmark === 'data-powermail-required') {
+      if (this.#isPowermailValidationActivated()) {
+        field.setAttribute('data-powermail-required', 'true');
       }
     }
     field.removeAttribute('data-powermailcond-required');
@@ -318,20 +337,6 @@ class PowermailCondition {
   #getFieldwrappingContainerByMarker(fieldMarker) {
     return this.#form.querySelector('.powermail_fieldwrap_' + fieldMarker);
   };
-
-  static hideElement(element) {
-    if (element !== null) {
-      element.classList.add('powermail-cond-hidden');
-      element.style.display = 'none';
-    }
-  }
-
-  static showElement(element) {
-    if (element !== null) {
-      element.classList.remove('powermail-cond-hidden');
-      element.style.display = '';
-    }
-  }
 }
 
 // We use "pageshow" instead of ready/DOMContentLoaded because this event
@@ -342,7 +347,7 @@ class PowermailCondition {
 window.addEventListener('pageshow', () => {
   const forms = document.querySelectorAll('.powermail_form');
   forms.forEach(function(form) {
-    let powermailConditions = new PowermailCondition(form);
+    let powermailConditions = new PowermailConditions(form);
     powermailConditions.initialize();
   });
 });
