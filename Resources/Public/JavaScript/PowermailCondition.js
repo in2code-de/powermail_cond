@@ -340,7 +340,7 @@ class PowermailCondition {
 // the values get checked properly instead of sendFormValuesToPowermailCond
 // receiving a practically empty initial form state.
 window.addEventListener('pageshow', () => {
-  const forms = document.querySelectorAll('.powermail_form');
+  const forms = document.querySelectorAll('.powermail_form.withConditions');
   forms.forEach(function(form) {
     let powermailConditions = new PowermailCondition(form);
     powermailConditions.initialize();
