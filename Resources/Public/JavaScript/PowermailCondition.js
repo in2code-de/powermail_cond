@@ -60,6 +60,12 @@ class PowermailCondition {
    * 3. Then submits the form
    *
    * This ensures field processing completes properly before submission, avoiding the race condition.
+   *
+   * Other scripts may take over the submit as well (e.g. LUX form identification prevents the
+   * native submit and calls form.submit() after its tracking request). If both called form.submit(),
+   * the form would be sent twice. That's why the listener is bound to the document: in the bubbling
+   * phase it runs after every listener on the form itself (independent of their registration order)
+   * and steps back if the native submit was already prevented.
    */
   #submitListener() {
     // don't setup race-condition listener for AJAX forms
@@ -67,25 +73,28 @@ class PowermailCondition {
       return;
     }
 
-    this.#form.addEventListener('submit', (event) => {
+    document.addEventListener('submit', (event) => {
+      if (event.target !== this.#form) {
+        return;
+      }
+
+      // Another script takes care of submitting the form, only make sure the conditions are processed
+      if (event.defaultPrevented) {
+        this.#blurActiveField();
+        return;
+      }
+
       event.preventDefault();
 
-      if (document.activeElement && document.activeElement.tagName) {
-        const activeElement = document.activeElement;
-        const tagName = activeElement.tagName.toLowerCase();
-        if ((tagName === 'input' || tagName === 'textarea' || tagName === 'select') &&
-          this.#form.contains(activeElement)) {
-          activeElement.blur();
+      if (this.#blurActiveField()) {
+        setTimeout(() => {
+          if (this.#hasValidationErrors()) {
+            return;
+          }
 
-          setTimeout(() => {
-            if (this.#hasValidationErrors()) {
-              return;
-            }
-
-            this.#form.submit();
-          }, 50);
-          return;
-        }
+          this.#form.submit();
+        }, 50);
+        return;
       }
 
       if (this.#hasValidationErrors()) {
@@ -94,6 +103,24 @@ class PowermailCondition {
 
       this.#form.submit();
     });
+  }
+
+  /**
+   * Blur a focused field of this form, so its change triggers the condition request
+   *
+   * @returns {boolean} true if a field was blurred
+   */
+  #blurActiveField() {
+    if (document.activeElement && document.activeElement.tagName) {
+      const activeElement = document.activeElement;
+      const tagName = activeElement.tagName.toLowerCase();
+      if ((tagName === 'input' || tagName === 'textarea' || tagName === 'select') &&
+        this.#form.contains(activeElement)) {
+        activeElement.blur();
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
