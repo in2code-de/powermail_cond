@@ -4,6 +4,9 @@
 ## Usage: initialize
 ## Example: "ddev initialize"
 
+# Stop at the first failing step
+set -e
+
 ddev import-db --src=.project/data/db.sql.gz
 mkdir -p packages
 cd packages
