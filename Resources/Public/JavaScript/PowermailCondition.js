@@ -285,29 +285,36 @@ class PowermailCondition {
     }
   };
 
+  /**
+   * Remove the mandatory attributes of a hidden field and remember which of them were set.
+   *
+   * powermail sets "required" (native validation) and/or "data-powermail-required" (JS validation),
+   * depending on the validation settings and the field type. A checkbox group e.g. only gets
+   * "data-powermail-required" on its first checkbox, as a native "required" would demand exactly this one.
+   */
   #derequireField(field) {
-    if (field.hasAttribute('required') || field.hasAttribute('data-powermail-required')) {
+    if (field.hasAttribute('required')) {
       field.removeAttribute('required');
-      field.removeAttribute('data-powermail-required');
       field.setAttribute('data-powermailcond-required', 'required');
     }
+    if (field.hasAttribute('data-powermail-required')) {
+      field.setAttribute('data-powermailcond-powermail-required', field.getAttribute('data-powermail-required'));
+      field.removeAttribute('data-powermail-required');
+    }
   };
 
+  /**
+   * Restore exactly the mandatory attributes that #derequireField() removed
+   */
   #rerequireField(field) {
     if (field.getAttribute('data-powermailcond-required') === 'required') {
-      if (this.#isHtml5ValidationActivated() || this.#isPowermailValidationActivated()) {
-        field.setAttribute('required', 'required')
-      }
+      field.setAttribute('required', 'required');
+    }
+    if (field.hasAttribute('data-powermailcond-powermail-required')) {
+      field.setAttribute('data-powermail-required', field.getAttribute('data-powermailcond-powermail-required'));
     }
     field.removeAttribute('data-powermailcond-required');
-  };
-
-  #isPowermailValidationActivated() {
-    return this.#form.getAttribute('data-powermail-validate') === 'data-powermail-validate';
-  };
-
-  #isHtml5ValidationActivated() {
-    return this.#form.getAttribute('data-validate') === 'html5';
+    field.removeAttribute('data-powermailcond-powermail-required');
   };
 
   #getWrappingContainerByMarkerName(fieldMarker) {
