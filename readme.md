@@ -109,6 +109,8 @@ This way the initial asynchronous call will be skipped which reduces the flicker
 
 | Version | Date       | State   | Description                                                                                          |
 |---------|------------|---------|------------------------------------------------------------------------------------------------------|
+| 13.1.3  | 2026-11-04 | Bugfix  | Prevent double submit with other submit handlers, fix unhiding static text fields, restore only mandatory attributes of hidden fields, ship JS as static resource |
+| 13.1.2  | 2026-03-14 | Bugfix  | Check powermail JS validation in submit race-condition handler                                       |
 | 13.1.1  | 2025-11-14 | Bugfix  | Mitigate a regression introduced in 13.0.3                                                           |                                                                  |
 | 13.1.0  | 2025-10-24 | Feature | Introduce Condition container loop count                                                             |                                                                  |
 | 13.0.3  | 2025-10-01 | Bugfix  | Fix race condition for ajax forms                                                                    |                                                                  |
