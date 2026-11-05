@@ -10,9 +10,12 @@ use In2code\Powermail\Domain\Validator\InputValidator;
 use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\PowermailCond\Domain\Model\Condition;
 use Throwable;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 class ConditionAwareValidator extends InputValidator
 {
+    private const ACTION_OPTIN_CONFIRM = 'optinConfirm';
+
     public function __construct(array $options = [])
     {
         parent::__construct($options);
@@ -26,6 +29,12 @@ class ConditionAwareValidator extends InputValidator
      */
     protected function isValidFieldInMandatoryValidation(Field $field, $value): void
     {
+        // do not revalidate again - the form has already been validated on submit
+        // without valid frontend session (click doi-link later) there will be validation errors
+        if ($this->getActionName() === self::ACTION_OPTIN_CONFIRM) {
+            return;
+        }
+
         $arguments = $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user')->getSessionData('tx_powermail_cond');
         $parentPage = $field->getPage();
         if ($parentPage === null) {
@@ -58,5 +67,18 @@ class ConditionAwareValidator extends InputValidator
             }
         }
         parent::isValidFieldInMandatoryValidation($field, $value);
+    }
+
+    /**
+     * Returns the action of the original request, not the one after forwarding.
+     */
+    protected function getActionName(): string
+    {
+        $pluginVariables = $GLOBALS['TYPO3_REQUEST']->getQueryParams()['tx_powermail_pi1'] ?? [];
+        $postParams = $GLOBALS['TYPO3_REQUEST']->getParsedBody()['tx_powermail_pi1'] ?? [];
+
+        ArrayUtility::mergeRecursiveWithOverrule($pluginVariables, $postParams);
+
+        return (string)($pluginVariables['action'] ?? '');
     }
 }
